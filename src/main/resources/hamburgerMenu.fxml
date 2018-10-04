@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="100.0" style="-fx-background-color: #34495e;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="saleSystem.ToolBarController">
+   <children>
+      <JFXButton fx:id="homeWindow" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onAction="#loadHomeWindow" prefHeight="85.0" prefWidth="100.0" styleClass="toolbar-button" stylesheets="@style.css" text="Home">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8-home2.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="11.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="reserveWindow" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onAction="#loadReserveWindow" prefHeight="85.0" prefWidth="100.0" styleClass="toolbar-button" stylesheets="@style.css" text="Reservation">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_Profile_24px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="11.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="memberWindow" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onAction="#loadMemberWindow" prefHeight="85.0" prefWidth="100.0" styleClass="toolbar-button" stylesheets="@style.css" text="Member">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_Add_User_Group_Man_Man_24px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="11.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="tourCheckWindow" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onAction="#loadTourCheckWindow" prefHeight="85.0" prefWidth="100.0" styleClass="toolbar-button" stylesheets="@style.css" text="Tour Checking">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_To_Do_24px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="11.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="invoiceWindow" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onAction="#loadInvoiceWindow" prefHeight="85.0" prefWidth="100.0" styleClass="toolbar-button" stylesheets="@style.css" text="Invoice">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_Invoice_24px_1.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="11.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="receiptWindow" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onAction="#loadReceiptWindow" prefHeight="85.0" prefWidth="100.0" styleClass="toolbar-button" stylesheets="@style.css" text="Receipt">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_Receipt_24px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="11.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="logoutWindow" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" onAction="#loadLoginWindow" prefHeight="85.0" prefWidth="100.0" styleClass="toolbar-button" stylesheets="@style.css" text="Logout">
+         <graphic>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/icons8_Export_24px.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <font>
+            <Font size="11.0" />
+         </font>
+      </JFXButton>
+   </children>
+</VBox>

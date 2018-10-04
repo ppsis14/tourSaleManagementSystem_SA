@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="saleSystem.LoginPageController">
+   <children>
+      <Label alignment="TOP_CENTER" layoutX="190.0" layoutY="53.0" minWidth="-Infinity" prefHeight="51.0" prefWidth="260.0" text="nVacation" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+         <graphic>
+            <FontAwesomeIconView fill="#f4d03f" glyphName="MAP_MARKER" size="50" />
+         </graphic>
+         <effect>
+            <DropShadow color="#000000e3" height="28.41" radius="17.7825" width="44.72" />
+         </effect>
+      </Label>
+      <FontAwesomeIconView fill="#a0a2ab" glyphName="USER" layoutX="167.0" layoutY="169.0" size="25" text="" />
+      <FontAwesomeIconView fill="#a0a2ab" glyphName="KEY" layoutX="167.0" layoutY="223.0" size="25" text="" />
+      <Label fx:id="showErrorLogin" alignment="CENTER" contentDisplay="CENTER" layoutX="202.0" layoutY="260.0" prefHeight="17.0" prefWidth="237.0" textAlignment="CENTER" textFill="#ffffff" />
+      <JFXButton fx:id="cancelButton" buttonType="RAISED" layoutX="341.0" layoutY="302.0" onAction="#handleCancelButton" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #566573; -fx-background-radius: 5;" text="Cancel" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="loginButton" buttonType="RAISED" layoutX="213.0" layoutY="302.0" onAction="#handleLoginButton" prefHeight="30.0" prefWidth="86.0" style="-fx-background-color: #F4D03F; -fx-background-radius: 5;" text="Login" textFill="#2c3e50">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <TextField fx:id="username" layoutX="214.0" layoutY="147.0" prefHeight="27.0" prefWidth="214.0" promptText="Username" style="-fx-background-color: #2C3E50; -fx-border-color: #F4D03F; -fx-border-radius: 5; -fx-text-fill: #a0a2ab;" />
+      <PasswordField fx:id="password" layoutX="213.0" layoutY="201.0" prefHeight="27.0" prefWidth="214.0" promptText="Password" style="-fx-background-color: #2C3E50; -fx-border-color: #F4D03F; -fx-border-radius: 5; -fx-text-fill: #a0a2ab;" />
+   </children>
+</AnchorPane>

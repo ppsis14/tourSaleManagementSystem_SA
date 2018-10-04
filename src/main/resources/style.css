@@ -1,0 +1,31 @@
+.jfx-tab-pane .headers-region {
+    -fx-background-color: #1b75bc;
+}
+.jfx-tab-pane .tab-header-background {
+    -fx-background-color:  #2C3E50;
+}
+.jfx-tab-pane .tab-selected-line {
+    -fx-stroke: #ecf0f1;
+    -fx-stroke-width: 3;
+}
+.jfx-tab-pane .tab-label {
+    -fx-text-fill: #000;
+    -fx-font-weight: normal;
+    -fx-font-size: 14;
+}
+
+.jfx-hamburger-icon StackPane{
+    -fx-pref-width: 20px;
+    -fx-pref-height: 3px;
+    -fx-background-color : #FFFFFF;
+    -fx-background-radius : 5px;
+}
+.toolbar-button{
+    -fx-background-color: #34495e;
+    -fx-text-fill: #FFFFFF;
+}
+
+.toolbar-button:hover{
+    -fx-background-color: #2980b9;
+
+}
