@@ -52,10 +52,10 @@ public class LoginPageController implements Initializable {
             loginButton.getScene().getWindow().hide();
             SaleManagementUtil.loadWindow(getClass().getResource("/homePage.fxml"), "Onvacation - Home", null);
 
-            //passing name login
+         /*   //passing name login
             HomePageController homePageController = new HomePageController();
             //homePageController = loader.getController();
-            homePageController.setLoginName(username.getText());
+            homePageController.setLoginName(username.getText());*/
         }
         else{
             showErrorLogin.setText("Username or Password is not correct");

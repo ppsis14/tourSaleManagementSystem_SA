@@ -24,7 +24,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void handleInvoiceBtn(ActionEvent event) throws IOException {
         invoiceBtn.getScene().getWindow().hide();
-        SaleManagementUtil.loadWindow(getClass().getResource("/homePage.fxml"), "Onvacation - Home", null);
+        SaleManagementUtil.loadWindow(getClass().getResource("/invoicePage.fxml"), "Onvacation - Home", null);
     }
 
     @FXML
