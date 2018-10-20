@@ -1,13 +1,20 @@
 .jfx-tab-pane .headers-region {
     -fx-background-color: #2C3E50;
 }
+
 .jfx-tab-pane .tab-header-background {
     -fx-background-color:  #2C3E50;
 }
+
 .jfx-tab-pane .tab-selected-line {
     -fx-stroke: #FFFFFF;
     -fx-stroke-width: 2;
 }
+
+.tab-selected-line {
+    -fx-background-color: #FFFFFF;
+}
+
 .jfx-tab-pane .tab-header-area .jfx-rippler {
     -jfx-rippler-fill: #2C3E50;
 }
@@ -45,5 +52,26 @@
 
 .toolbar-button:hover{
     -fx-background-color: #2980b9;
+
+}
+
+.member-button{
+    -fx-pref-width: 65px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #34495e;
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 5px;
+    -fx-text-fill: #34495e;
+}
+
+.member-button:pressed{
+    -fx-background-color: #34495e;
+    -fx-text-fill: #FFFFFF;
+}
+
+.show-label
+{
+    -fx-border-color: #34495e;
+    -fx-background-color: #FFFFFF;
 
 }
