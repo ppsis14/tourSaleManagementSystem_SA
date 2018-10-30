@@ -1,38 +1,87 @@
 package saleSystem;
 
 import com.jfoenix.controls.*;
-import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
-
-import java.io.IOException;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ReservePageController implements Initializable {
 
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
-    @FXML private JFXTextField th_Firstname;
-    @FXML private JFXTextField th_Lastname;
-    @FXML private JFXTextField en_Firstname;
-    @FXML private JFXTextField en_Lastname;
-    @FXML private JFXTextField passpotNumber;
-    @FXML private JFXDatePicker expireDate;
-    @FXML private JFXTextField mobileNumber;
-    @FXML private JFXCheckBox showMember;
-    @FXML private JFXTextArea address;
-
-
+    @FXML private ChoiceBox<?> tourCodeChioce;
+    @FXML private TextField tourName;
+    @FXML private DatePicker departureDate;
+    @FXML private ChoiceBox<String> nameTitleTHClient;
+    @FXML private TextField firstNameTHClient;
+    @FXML private TextField lastNameTHClient;
+    @FXML private ChoiceBox<String> nameTitleENClient;
+    @FXML private TextField firstNameENClient;
+    @FXML private ChoiceBox<String> oldNameTitleTHClient;
+    @FXML private TextField oldFirstNameClient;
+    @FXML private TextField oldLastNameClient;
+    @FXML private ChoiceBox<String> genderChoice;
+    @FXML private TextField age;
+    @FXML private DatePicker dateOfBirthCilent;
+    @FXML private TextField passportClient;
+    @FXML private DatePicker expPassportDate;
+    @FXML private TextField homeAddrCilent;
+    @FXML private TextField countryClient;
+    @FXML private TextField homeZipCodeCilent;
+    @FXML private TextField cellphoneClient;
+    @FXML private TextField homeTelClient;
+    @FXML private TextField homeFaxClient;
+    @FXML private TextField emailClient;
+    @FXML private TextField careerClient;
+    @FXML private TextField compNameClient;
+    @FXML private TextField compAddrClient;
+    @FXML private TextField compCountryClient;
+    @FXML private TextField workTelClient;
+    @FXML private TextField compZipCodeClirnt;
+    @FXML private JFXCheckBox notMemberChioce;
+    @FXML private JFXCheckBox memberChioce;
+    @FXML private TextField foodAllergy;
+    @FXML private TextField underlyingDisease;
+    @FXML private JFXCheckBox eatBeefY;
+    @FXML private JFXCheckBox eatBeefN;
+    @FXML private TextField moreDetail;
+    @FXML private JFXCheckBox Bangkokbizsnews;
+    @FXML private JFXCheckBox Dailynews;
+    @FXML private JFXCheckBox Komchadluek;
+    @FXML private JFXCheckBox website;
+    @FXML private JFXCheckBox eNews;
+    @FXML private JFXCheckBox others;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SaleManagementUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
+
+        ObservableList<String> genderChoices = FXCollections.observableArrayList("Male", "Female");
+        genderChoice.getSelectionModel().selectFirst();
+        genderChoice.setValue("Male");
+        genderChoice.getItems().addAll(genderChoices);
+
+        ObservableList<String> nameENTitleChoices = FXCollections.observableArrayList("Miss", "Mrs.", "Mr.", "Master", "Professor", "Assistant Professor", "Associate Professor");
+        nameTitleENClient.getSelectionModel().selectFirst();
+        nameTitleENClient.setValue("Miss");
+        nameTitleENClient.getItems().addAll(nameENTitleChoices);
+
+        ObservableList<String> nameTHTitleChoices = FXCollections.observableArrayList("นางสาว", "นาง", "นาย", "เด็กหญิง", "เด็กชาย", "ศาตราจารย์", "ผู้ช่วยศาสตราจารย์", "รองศาสตราจารย์");
+        nameTitleTHClient.getSelectionModel().selectFirst();
+        nameTitleTHClient.setValue("นางสาว");
+        nameTitleTHClient.getItems().addAll(nameTHTitleChoices);
+
+        ObservableList<String> oldNameTHTitleChoices = FXCollections.observableArrayList("นางสาว", "นาง", "นาย", "เด็กหญิง", "เด็กชาย", "ศาตราจารย์", "ผู้ช่วยศาสตราจารย์", "รองศาสตราจารย์");
+        oldNameTitleTHClient.getSelectionModel().selectFirst();
+        oldNameTitleTHClient.setValue("นางสาว");
+        oldNameTitleTHClient.getItems().addAll(oldNameTHTitleChoices);
 
         // set user login by call from database
         //showUserLogin.setText("Thikamporn Simud");
@@ -74,4 +123,10 @@ public class ReservePageController implements Initializable {
     /*public void setLoginName(String name){
         showUserLogin.setText(name);
     }*/
+
+    @FXML
+    void handleAddClientBtn(ActionEvent event) {
+
+    }
+
 }

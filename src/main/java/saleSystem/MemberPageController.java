@@ -1,19 +1,108 @@
 package saleSystem;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MemberPageController implements Initializable {
-    @FXML
-    private JFXHamburger menu;
+    @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
+    @FXML private TextField memberId;
+    @FXML private JFXCheckBox diamondCheck;
+    @FXML private JFXCheckBox goldCheck;
+    @FXML private ChoiceBox<String> nameTitleTH;
+    @FXML private TextField firstNameTH;
+    @FXML private TextField lastNameTH;
+    @FXML private ChoiceBox<String> nameTitleEN;
+    @FXML private TextField firstNameEN;
+    @FXML private TextField lastNameEN;
+    @FXML private TextField idnumber;
+    @FXML private TextField passportNumber;
+    @FXML private DatePicker dateMember;
+    @FXML private DatePicker dateApplyMember;
+    @FXML private TextField timeToGoTravel;
+    @FXML private TextField favoritePlace;
+    @FXML private ComboBox<String> travelServiceChoice;
+    @FXML private ComboBox<String> travelFocusingChoice;
+    @FXML private TextField fullHomeAddr;
+    @FXML private TextField homeCountry;
+    @FXML private TextField homeZipCode;
+    @FXML private TextField cellphone;
+    @FXML private TextField homeTel;
+    @FXML private TextField homeFax;
+    @FXML private TextField emailAddr;
+    @FXML private TextField career;
+    @FXML private TextField compName;
+    @FXML private TextField compAddr;
+    @FXML private TextField compCountry;
+    @FXML private TextField compZipCode;
+    @FXML private TextField workTel;
+    @FXML private TextField workFax;
+    @FXML private JFXButton addMemberBtn;
+    @FXML private TextField searchName;
+    @FXML private TextField searchMemberId;
+    @FXML private JFXButton searchBtnMember;
+    @FXML private TableView<?> tableMember;
+    @FXML private Button editBtnMember;
+    @FXML private Button deleteBtnMember;
+    @FXML private Button updateBtnMember;
+    @FXML private Label showMemberDetail;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SaleManagementUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
+
+        ObservableList<String> nameENTitleChoices = FXCollections.observableArrayList("Miss", "Mrs.", "Mr.", "Master", "Professor", "Assistant Professor", "Associate Professor");
+        nameTitleEN.getSelectionModel().selectFirst();
+        nameTitleEN.setValue("Miss");
+        nameTitleEN.getItems().addAll(nameENTitleChoices);
+
+        ObservableList<String> nameTHTitleChoices = FXCollections.observableArrayList("นางสาว", "นาง", "นาย", "เด็กหญิง", "เด็กชาย", "ศาตราจารย์", "ผู้ช่วยศาสตราจารย์", "รองศาสตราจารย์");
+        nameTitleTH.getSelectionModel().selectFirst();
+        nameTitleTH.setValue("นางสาว");
+        nameTitleTH.getItems().addAll(nameTHTitleChoices);
+
+        ObservableList<String> travelServices = FXCollections.observableArrayList("ชื่อเสียงของบริษัท", "โปรแกรมทัวร์", "ราคา", "การบริการของพนักงานขาย", "วันเวลาเดินทาง");
+        travelServiceChoice.setValue("ชื่อเสียงของบริษัท");
+        travelServiceChoice.setItems(travelServices);
+
+        ObservableList<String> travelFocus = FXCollections.observableArrayList("ที่พัก", "ร้านอาหาร", "ยานพาหนะ", "ระยะเวลาชมสถานที่ท่องเที่ยว", "ไกด์/มัคคุเทศน์");
+        travelFocusingChoice.setValue("ที่พัก");
+        travelFocusingChoice.setItems(travelFocus);
+    }
+
+    @FXML
+    void handleAddMember(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleDeleteBtnMember(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleEditBtnMember(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleSearchBtnMember(ActionEvent event) {
+
+    }
+
+    @FXML
+    void handleUpdateBtnMember(ActionEvent event) {
+
     }
 }

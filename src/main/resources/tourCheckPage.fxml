@@ -38,8 +38,8 @@
             <HBox prefHeight="29.0" prefWidth="676.0" spacing="20.0">
                <children>
                   <Label maxHeight="1.7976931348623157E308" text="Tour ID :" />
-                  <TextField prefHeight="29.0" prefWidth="319.0" promptText="Search by Tour ID" style="-fx-border-color: #2C3E50;" />
-                  <JFXButton buttonType="RAISED" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #F4D03F; -fx-background-radius: 5;" text="Search" textFill="#2c3e50">
+                  <TextField fx:id="searchIdTour" prefHeight="29.0" prefWidth="319.0" promptText="Search by Tour ID" style="-fx-border-color: #2C3E50;" />
+                  <JFXButton fx:id="searchBtnTour" buttonType="RAISED" onAction="#handleSearchBtnTour" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #F4D03F; -fx-background-radius: 5;" text="Search" textFill="#2c3e50">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -54,8 +54,8 @@
                </children>
             </HBox>
             <Label text="Show tour detail :" />
-            <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="107.0" prefWidth="772.0" styleClass="show-label" stylesheets="@style.css" />
-            <TableView fixedCellSize="0.0" prefHeight="239.0" prefWidth="772.0">
+            <Label fx:id="showTourDetail" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="107.0" prefWidth="772.0" styleClass="show-label" stylesheets="@style.css" />
+            <TableView fx:id="tabletourCheck" fixedCellSize="0.0" prefHeight="239.0" prefWidth="772.0">
               <columns>
                 <TableColumn prefWidth="208.71088790893555" text="First Name TH" />
                 <TableColumn prefWidth="224.342529296875" text="Last Name TH" />
@@ -69,9 +69,9 @@
             </TableView>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                <children>
-                  <Button mnemonicParsing="false" styleClass="member-button" stylesheets="@style.css" text="Edit" />
-                  <Button mnemonicParsing="false" styleClass="member-button" stylesheets="@style.css" text="Delete" />
-                  <Button mnemonicParsing="false" styleClass="member-button" stylesheets="@style.css" text="Update" />
+                  <Button fx:id="editBtnTour" mnemonicParsing="false" onAction="#handleEditBtnTour" styleClass="member-button" stylesheets="@style.css" text="Edit" />
+                  <Button fx:id="deleteBtnTour" mnemonicParsing="false" onAction="#handleDeleteBtnTour" styleClass="member-button" stylesheets="@style.css" text="Delete" />
+                  <Button fx:id="updateBtnTour" mnemonicParsing="false" onAction="#handleUpdateBtnTour" styleClass="member-button" stylesheets="@style.css" text="Update" />
                </children>
             </HBox>
          </children>
