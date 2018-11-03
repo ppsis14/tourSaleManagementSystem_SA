@@ -4,30 +4,23 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-
 public class DbConnect {
-    public DbConnect() {
-    }
-    public static DbConnect getInstance(){
-        return new DbConnect();
-    }
-
-    public Connection getConnection() {
+    public static Connection getConnection() {
+        Connection connection;
         String connect_string = "jdbc:sqlite::resource:sale_system_database.db";
-
         try {
             Class.forName("org.sqlite.JDBC");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        Connection connection = null;
-        try {
             connection = DriverManager.getConnection(connect_string);
-        } catch (SQLException e) {
+            System.out.println("Opened database successfully");
+        } catch (Exception e) {
+
             e.printStackTrace();
+            System.out.println(e.getMessage());
+            System.out.println("Can not open database");
+            return null;
         }
         return connection;
+
     }
 
 }

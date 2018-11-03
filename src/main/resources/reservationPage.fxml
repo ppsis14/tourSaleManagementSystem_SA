@@ -48,8 +48,8 @@
       <JFXTabPane layoutX="32.0" layoutY="146.0" prefHeight="496.0" prefWidth="837.0" styleClass="tab-selected-line" stylesheets="@style.css" AnchorPane.topAnchor="130.0">
          <tabs>
             <Tab text="Client Profile">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <VBox layoutX="60.0" layoutY="32.0" prefHeight="394.0" prefWidth="664.0" spacing="10.0">
                            <children>
@@ -121,11 +121,11 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-              </content>
+               </content>
             </Tab>
             <Tab text="Client Contact">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <VBox layoutX="60.0" layoutY="32.0" prefHeight="416.0" prefWidth="664.0" spacing="10.0">
                            <children>
@@ -207,11 +207,11 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-              </content>
+               </content>
             </Tab>
             <Tab text="More Info">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <VBox layoutX="60.0" layoutY="32.0" prefHeight="416.0" prefWidth="664.0" spacing="10.0">
                            <children>
@@ -288,7 +288,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-              </content>
+               </content>
             </Tab>
          </tabs>
       </JFXTabPane>

@@ -4,6 +4,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+
+import com.mongodb.*;
+import databaseConnection.MongoDBConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -12,7 +15,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import static databaseConnection.MongoDBConnect.member;
 
 public class MemberPageController implements Initializable {
     @FXML private JFXHamburger menu;
@@ -26,7 +32,7 @@ public class MemberPageController implements Initializable {
     @FXML private ChoiceBox<String> nameTitleEN;
     @FXML private TextField firstNameEN;
     @FXML private TextField lastNameEN;
-    @FXML private TextField idnumber;
+    @FXML private TextField idNumber;
     @FXML private TextField passportNumber;
     @FXML private DatePicker dateMember;
     @FXML private DatePicker dateApplyMember;
@@ -84,8 +90,57 @@ public class MemberPageController implements Initializable {
     @FXML
     void handleAddMember(ActionEvent event) {
 
-    }
+        MongoDBConnect.getMongoClient();
 
+        BasicDBObject doc = new BasicDBObject()
+                .append("Member_ID",memberId.getText())
+                .append("Name_titleTH",nameTitleTH.getSelectionModel().getSelectedItem())
+                .append("FirstNameTH",firstNameTH.getText())
+                .append("LastNameTH",lastNameTH.getText())
+                .append("Name_titleENG",nameTitleEN.getSelectionModel().getSelectedItem())
+                .append("FirstNameENG",firstNameEN.getText())
+                .append("LastNameENG",lastNameEN.getText())
+                .append("ID_number",idNumber.getText())
+                .append("Passport_no",passportNumber.getText())
+                .append("Date_of_birth",dateMember.getEditor().getText())
+                .append("Date_of_apply",dateApplyMember.getEditor().getText());
+        member.insert(doc);
+        System.out.println(member);
+
+        Cursor cursor = member.find();
+        while (cursor.hasNext())
+            System.out.println(cursor.next());
+        System.out.println("inserted");
+
+        /*
+        Connection connection = DbConnect.getConnection();
+        PreparedStatement preparedStatement;
+
+        String sql = "INSERT INTO mem (a, b, c, d) values(?, ?, ?, ?)";
+
+        try {
+
+            System.out.println(firstNameTH.getText());
+            System.out.println(lastNameTH.getText());
+            System.out.println(firstNameEN.getText());
+            System.out.println(lastNameEN.getText());
+
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1,firstNameTH.getText());
+            preparedStatement.setString(2,lastNameTH.getText());
+            preparedStatement.setString(3,firstNameEN.getText());
+            preparedStatement.setString(4,lastNameEN.getText());
+            preparedStatement.executeUpdate();
+            System.out.println("saved!");
+            preparedStatement.close();
+            connection.close();
+
+        } catch (SQLException e) {
+            System.err.println("Got an exception! ");
+            System.out.println(e.getMessage());
+        } finally {
+        }*/
+    }
     @FXML
     void handleDeleteBtnMember(ActionEvent event) {
 

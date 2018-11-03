@@ -16,15 +16,24 @@ import java.util.ResourceBundle;
 
 
 public class TourCheckPageController implements Initializable {
-    @FXML private JFXHamburger menu;
-    @FXML private JFXDrawer drawerMenu;
-    @FXML private TextField searchIdTour;
-    @FXML private JFXButton searchBtnTour;
-    @FXML private Label showTourDetail;
-    @FXML private TableView<?> tabletourCheck;
-    @FXML private Button editBtnTour;
-    @FXML private Button deleteBtnTour;
-    @FXML private Button updateBtnTour;
+    @FXML
+    private JFXHamburger menu;
+    @FXML
+    private JFXDrawer drawerMenu;
+    @FXML
+    private TextField searchIdTour;
+    @FXML
+    private JFXButton searchBtnTour;
+    @FXML
+    private Label showTourDetail;
+    @FXML
+    private TableView<?> tabletourCheck;
+    @FXML
+    private Button editBtnTour;
+    @FXML
+    private Button deleteBtnTour;
+    @FXML
+    private Button updateBtnTour;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

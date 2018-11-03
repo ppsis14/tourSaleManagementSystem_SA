@@ -12,13 +12,20 @@ import java.util.ResourceBundle;
 
 public class HomePageController implements Initializable {
 
-    @FXML private JFXButton reserveBtn;
-    @FXML private JFXButton memberBtn;
-    @FXML private JFXButton tourCheckBtn;
-    @FXML private JFXButton invoiceBtn;
-    @FXML private JFXButton receiptBtn;
-    @FXML private JFXButton logoutBtn;
-    @FXML private Label loginNameLabel;
+    @FXML
+    private JFXButton reserveBtn;
+    @FXML
+    private JFXButton memberBtn;
+    @FXML
+    private JFXButton tourCheckBtn;
+    @FXML
+    private JFXButton invoiceBtn;
+    @FXML
+    private JFXButton receiptBtn;
+    @FXML
+    private JFXButton logoutBtn;
+    @FXML
+    private Label loginNameLabel;
 
 
     @FXML

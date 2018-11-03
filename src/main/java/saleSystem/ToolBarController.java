@@ -5,13 +5,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 public class ToolBarController {
-    @FXML private JFXButton homeWindow;
-    @FXML private JFXButton reserveWindow;
-    @FXML private JFXButton memberWindow;
-    @FXML private JFXButton tourCheckWindow;
-    @FXML private JFXButton invoiceWindow;
-    @FXML private JFXButton receiptWindow;
-    @FXML private JFXButton logoutWindow;
+    @FXML
+    private JFXButton homeWindow;
+    @FXML
+    private JFXButton reserveWindow;
+    @FXML
+    private JFXButton memberWindow;
+    @FXML
+    private JFXButton tourCheckWindow;
+    @FXML
+    private JFXButton invoiceWindow;
+    @FXML
+    private JFXButton receiptWindow;
+    @FXML
+    private JFXButton logoutWindow;
 
     @FXML
     private void loadHomeWindow(ActionEvent event) {
