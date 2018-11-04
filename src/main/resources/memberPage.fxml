@@ -76,16 +76,24 @@
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="199.0" text="* Identification Number:" />
                                     <Label prefHeight="17.0" prefWidth="199.0" text="* Passport Number:" />
-                                    <Label prefHeight="17.0" prefWidth="157.0" text="* Date of Birth:" />
-                                    <Label prefHeight="17.0" prefWidth="157.0" text="* Date of Apply:" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
                                     <TextField fx:id="idNumber" prefHeight="29.0" prefWidth="206.0" promptText="Identification Number" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="passportNumber" prefHeight="29.0" prefWidth="206.0" promptText="Passport Number" style="-fx-border-color: #2C3E50;" />
-                                    <DatePicker fx:id="dateMember" prefHeight="29.0" prefWidth="161.0" promptText="Date of Birth" style="-fx-border-color: #2C3E50;" />
-                                    <DatePicker fx:id="dateApplyMember" prefHeight="29.0" prefWidth="161.0" promptText="Date of Apply" style="-fx-border-color: #2C3E50;" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="189.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="157.0" text="* Date of Birth:" />
+                                    <Label prefHeight="17.0" prefWidth="157.0" text="* Date of Apply:" />
+                                 </children>
+                              </HBox>
+                              <HBox layoutX="10.0" layoutY="218.0" prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                 <children>
+                                    <DatePicker fx:id="dateMember1" prefHeight="29.0" prefWidth="161.0" promptText="Date of Birth" style="-fx-border-color: #2C3E50;" />
+                                    <DatePicker fx:id="dateApplyMember1" prefHeight="27.0" prefWidth="163.0" promptText="Date of Apply" style="-fx-border-color: #2C3E50;" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
