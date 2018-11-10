@@ -1,34 +1,22 @@
 package saleSystem;
-import com.mongodb.Cursor;
-import databaseConnection.MongoDBConnect;
 import com.jfoenix.controls.*;
-import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 import com.mongodb.BasicDBObject;
-import com.sun.net.httpserver.Authenticator;
+import com.mongodb.Cursor;
 import databaseConnection.DbConnect;
 import databaseConnection.MongoDBConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static databaseConnection.MongoDBConnect.employee;
-import static databaseConnection.MongoDBConnect.member;
 import static databaseConnection.MongoDBConnect.reserve_card;
 
 public class ReservePageController implements Initializable {
@@ -65,7 +53,7 @@ public class ReservePageController implements Initializable {
     @FXML private TextField compAddrClient;
     @FXML private TextField compCountryClient;
     @FXML private TextField workTelClient;
-    @FXML private TextField compZipCodeClirnt;
+    @FXML private TextField compZipCodeClient;
     @FXML private JFXCheckBox notMemberChioce;
     @FXML private JFXCheckBox memberChioce;
     @FXML private TextField foodAllergy;
@@ -84,9 +72,9 @@ public class ReservePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         SaleManagementUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
 
-        ObservableList<String> genderChoices = FXCollections.observableArrayList("Male", "Female");
+        ObservableList<String> genderChoices = FXCollections.observableArrayList("Female","Male");
         genderChoice.getSelectionModel().selectFirst();
-        genderChoice.setValue("Male");
+        genderChoice.setValue("Female");
         genderChoice.getItems().addAll(genderChoices);
 
         ObservableList<String> nameENTitleChoices = FXCollections.observableArrayList("Miss", "Mrs.", "Mr.", "Master", "Professor", "Assistant Professor", "Associate Professor");
@@ -113,90 +101,99 @@ public class ReservePageController implements Initializable {
     @FXML
     public void handleAddClientBtn(ActionEvent event) throws SQLException {
         //record reservation
+
+        /*
+        // insert data by MongoDB
         MongoDBConnect.getMongoClient();
 
-        BasicDBObject doc = new BasicDBObject()
-                .append("Name_titleTH",nameTitleTHClient.getSelectionModel().getSelectedItem())
+        BasicDBObject clientProfile = new BasicDBObject()
+                //.append("Tour_ID",)
+                .append("Reservation_code",ReservCode.getText())
+                .append("Departure_date",departureDate.getEditor().getText())
+                .append("TitlenameTH",nameTitleTHClient.getSelectionModel().getSelectedItem())
                 .append("FirstNameTH",firstNameTHClient.getText())
                 .append("LastNameTH",lastNameTHClient.getText())
-                .append("Name_titleENG",nameTitleENClient.getSelectionModel().getSelectedItem())
+                .append("TitlenameENG",nameTitleENClient.getSelectionModel().getSelectedItem())
                 .append("FirstNameENG",firstNameENClient.getText())
                 .append("LastNameENG",lastNameENClient.getText())
-                .append("Old_name",oldNameTitleTHClient.getSelectionModel().getSelectedItem())
-                .append("Old_FirstnameTH",oldFirstNameClient.getText())
-                .append("Old_LastnameTH",oldLastNameClient.getText())
+                .append("TitlenameOld",oldNameTitleTHClient.getSelectionModel().getSelectedItem())
+                .append("FirstnameOld",oldFirstNameClient.getText())
+                .append("LastnameOld",oldLastNameClient.getText())
                 .append("Gender",genderChoice.getSelectionModel().getSelectedItem())
                 .append("Age",age.getText())
                 .append("Date_of_birth",dateOfBirthClient.getEditor().getText())
-                .append("Expire_passport_date",expPassportDate.getEditor().getText())
-                .append("Passport_no",passportClient.getText());
+                .append("Passport_no",passportClient.getText())
+                .append("Expire_passport_date",expPassportDate.getEditor().getText());
 
-        reserve_card.insert(doc);
+        BasicDBObject clientContact = new BasicDBObject()
+                .append("Full_home_address",homeAddrCilent.getText())
+                .append("Home_country",countryClient.getText())
+                .append("Home_zip_code",homeZipCodeCilent.getText())
+                .append("Cell_phone",cellphoneClient.getText())
+                .append("Home_Tel",homeTelClient.getText())
+                .append("Fax",homeFaxClient.getText())
+                .append("Email_address",emailClient.getText())
+                .append("Career",careerClient.getText())
+                .append("Company_name",compNameClient.getText())
+                .append("Company_address",compAddrClient.getText())
+                .append("Company_country",compCountryClient.getText())
+                .append("Company_zip_code", compZipCodeClient.getText())
+                .append("Work_Tel",workTelClient.getText());
+
+        BasicDBObject moreInfo = new BasicDBObject()
+                .append("Member_status",memberChioce.getTypeSelector())
+                .append("Disease",underlyingDisease.getText())
+                //.append("Food_allergy".foodAllergy.getText())
+                //.append("Eat_beef",eatBeefN.getTypeSelector())
+                .append("More_detail",moreDetail.getText());
+                //.append("Channel",)
+
+        reserve_card.insert(clientProfile);
         System.out.println(reserve_card);
 
+        //show list inserted on display
         Cursor cursor = reserve_card.find();
         while (cursor.hasNext())
             System.out.println(cursor.next());
-        System.out.println("Reserve card inserted");
+        System.out.println("MongoDB: Reservation saved!");
 
-
-        /*Connection c = null;
-        Statement stmt = null;
-
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection("jdbc:sqlite::resource:sale_system_database.db");
-            c.setAutoCommit(false);
-            System.out.println("Opened database successfully");
-
-            stmt = c.createStatement();
-            String sql = "INSERT INTO test (fth, lth, fen, len, pass)" +
-                    "VALUES ('"+firstNameTHClient.getText()+"','"+lastNameTHClient.getText()+"','"+firstNameENClient.getText()+"','"+lastNameENClient.getText()+"'," +
-                    "'"+passportClient.getText()+"')";
-            stmt.executeUpdate(sql);
-
-            stmt.close();
-            c.commit();
-            c.close();
-        } catch ( Exception e ) {
-            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
-            System.exit(0);
-        }
-        System.out.println("Records created successfully");
         */
-        /*
-        Connection connection = DbConnect.getInstance().getConnection();
-        PreparedStatement preparedStatement;
-//        String sql = "insert into test (fth, lth, fen, len, pass)"+
-//                "values ('"+firstNameTHClient.getText()+"','"+lastNameTHClient.getText()+"','"+firstNameENClient.getText()+"','"+lastNameENClient.getText()+"'," +
-//                "'"+passportClient.getText()+"')";
 
-        String sql = "insert into test (fth, lth, fen, len, pass) values(?, ?, ?, ?, ?)";
+        //insert data by SQLite
+        Connection connection = DbConnect.getConnection();
+        String sql = "insert into reserve_card_database (Reservation_code, Departure_date, TitlenameTH, FirstNameTH, LastNameTH, TitlenameENG, FirstNameENG, LastNameENG ," +
+                "TitlenameOld, FirstnameOld, LastnameOld, Gender, Age, Date_of_birth, Passport_no,Expire_passport_date" +
+                ") values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
+        PreparedStatement pst;
 
         try {
 
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1,firstNameTHClient.getText());
-            preparedStatement.setString(2,lastNameTHClient.getText());
-            preparedStatement.setString(3,firstNameENClient.getText());
-            preparedStatement.setString(4,lastNameENClient.getText());
-            preparedStatement.setString(5,passportClient.getText());
-            //preparedStatement.setString(6,expireDate.getEditor().getText());
+            pst = connection.prepareStatement(sql);
+            pst.setString(1,ReservCode.getText());
+            pst.setString(2,departureDate.getEditor().getText());
+            pst.setString(3,nameTitleTHClient.getSelectionModel().getSelectedItem());
+            pst.setString(4,firstNameTHClient.getText());
+            pst.setString(5,lastNameTHClient.getText());
+            pst.setString(6,nameTitleENClient.getSelectionModel().getSelectedItem());
+            pst.setString(7,firstNameENClient.getText());
+            pst.setString(8,lastNameENClient.getText());
+            pst.setString(9,oldNameTitleTHClient.getSelectionModel().getSelectedItem());
+            pst.setString(10,oldFirstNameClient.getText());
+            pst.setString(11,oldLastNameClient.getText());
+            pst.setString(12,genderChoice.getSelectionModel().getSelectedItem());
+            pst.setString(13,age.getText());
+            pst.setString(14,dateOfBirthClient.getEditor().getText());
+            pst.setString(15,passportClient.getText());
+            pst.setString(16,expPassportDate.getEditor().getText());
+            pst.executeUpdate();
 
-            preparedStatement.executeUpdate();
-            System.out.println("saved!");
+            System.out.println("SQLite: Reservation data saved!");
         } catch (SQLException e) {
-            System.err.println("Got an exception! ");
+            System.err.println("SQLite: Got an exception! ");
             System.out.println(e.getMessage());
         }finally {
             connection.close();
         }
-
-        //        ResultSet resultSet = statement.executeQuery("insert into reserve_card_database (FirstnameTH,LastnameTH,FirstnameENG,LastnameENG,Passport_no)"+
-//                "values ('"+firstNameTHClient.getText()+"','"+lastNameTHClient.getText()+"','"+firstNameENClient.getText()+"','"+lastNameENClient.getText()+"'," +
-//                "'"+passportClient.getText()+"')");
-
-*/
 
     }
 

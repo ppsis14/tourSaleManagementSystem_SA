@@ -200,7 +200,7 @@
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
                                     <TextField fx:id="workTelClient" prefHeight="29.0" prefWidth="232.0" promptText="Work Tel" style="-fx-border-color: #2C3E50;" />
-                                    <TextField fx:id="compZipCodeClirnt" prefHeight="29.0" prefWidth="181.0" promptText="Zip Code" style="-fx-border-color: #2C3E50;" />
+                                    <TextField fx:id="compZipCodeClient" prefHeight="29.0" prefWidth="181.0" promptText="Zip Code" style="-fx-border-color: #2C3E50;" />
                                  </children>
                               </HBox>
                            </children>
