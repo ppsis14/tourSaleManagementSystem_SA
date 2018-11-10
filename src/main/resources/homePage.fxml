@@ -14,7 +14,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <StackPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="saleSystem.HomePageController">
    <children>
       <AnchorPane prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #ffffff;">
@@ -54,7 +53,19 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXButton fx:id="reserveBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleReserveBtn" prefHeight="130.0" prefWidth="201.0" ripplerFill="#95a5a6" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Reservation" textFill="WHITE">
+                  <JFXButton fx:id="tourCheckBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleTourCheckBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Tour Checking" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8_To_Do_24px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="reserveBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleReserveBtn" prefHeight="130.0" prefWidth="201.0" ripplerFill="#95a5a6" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Reservation" textFill="WHITE" GridPane.columnIndex="1">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -66,23 +77,11 @@
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="memberBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleMemberBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Member" textFill="WHITE" GridPane.columnIndex="1">
+                  <JFXButton fx:id="memberBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleMemberBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Member" textFill="WHITE" GridPane.columnIndex="2">
                      <graphic>
                         <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@images/icons8_Add_User_Group_Man_Man_24px.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="tourCheckBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleTourCheckBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Tour Checking" textFill="WHITE" GridPane.columnIndex="2">
-                     <graphic>
-                        <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@images/icons8_To_Do_24px.png" />
                            </image>
                         </ImageView>
                      </graphic>

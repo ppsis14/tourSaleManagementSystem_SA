@@ -55,22 +55,22 @@
                            <children>
                               <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                                  <children>
-                                    <Label prefHeight="17.0" prefWidth="168.0" text="* Tour Code:" />
-                                    <Label prefHeight="17.0" prefWidth="233.0" text="* Tour Name:" />
+                                    <Label prefHeight="17.0" prefWidth="200.0" text="* Reservation Code:" />
+                                    <Label prefHeight="17.0" prefWidth="168.0" text="* Tour ID:" />
                                     <Label text="* Departure Date:" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ChoiceBox fx:id="tourCodeChioce" prefHeight="29.0" prefWidth="170.0" style="-fx-border-color: #2C3E50;" />
-                                    <TextField fx:id="tourName" prefHeight="29.0" prefWidth="232.0" promptText="Tour Name" style="-fx-border-color: #2C3E50;" />
+                                    <TextField fx:id="ReservCode" prefHeight="29.0" prefWidth="200.0" promptText="Reservation Code" style="-fx-border-color: #2C3E50;" />
+                                    <ChoiceBox fx:id="tourCodeChioce" prefHeight="29.0" prefWidth="202.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <DatePicker fx:id="departureDate" prefHeight="29.0" prefWidth="233.0" promptText="Departure Date" style="-fx-border-color: #2C3E50;" />
                                  </children>
                               </HBox>
                               <Label text="* Name (TH)" />
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ChoiceBox fx:id="nameTitleTHClient" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50;" />
+                                    <ChoiceBox fx:id="nameTitleTHClient" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <TextField fx:id="firstNameTHClient" prefHeight="27.0" prefWidth="253.0" promptText="First Name" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="lastNameTHClient" prefHeight="27.0" prefWidth="253.0" promptText="Last name" style="-fx-border-color: #2C3E50;" />
                                  </children>
@@ -78,7 +78,7 @@
                               <Label text="* Name (EN)" />
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ChoiceBox fx:id="nameTitleENClient" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50;" />
+                                    <ChoiceBox fx:id="nameTitleENClient" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <TextField fx:id="firstNameENClient" prefHeight="27.0" prefWidth="253.0" promptText="First Name" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="lastNameENClient" prefHeight="27.0" prefWidth="253.0" promptText="Last Name" style="-fx-border-color: #2C3E50;" />
                                  </children>
@@ -86,7 +86,7 @@
                               <Label text="Old Name" />
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ChoiceBox fx:id="oldNameTitleTHClient" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50;" />
+                                    <ChoiceBox fx:id="oldNameTitleTHClient" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <TextField fx:id="oldFirstNameClient" prefHeight="27.0" prefWidth="253.0" promptText="First Name" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="oldLastNameClient" prefHeight="27.0" prefWidth="253.0" promptText="Last Name" style="-fx-border-color: #2C3E50;" />
                                  </children>
@@ -100,9 +100,9 @@
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ChoiceBox fx:id="genderChoice" prefHeight="29.0" prefWidth="170.0" style="-fx-border-color: #2C3E50;" />
+                                    <ChoiceBox fx:id="genderChoice" prefHeight="29.0" prefWidth="170.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <TextField fx:id="age" prefHeight="29.0" prefWidth="232.0" promptText="Age" style="-fx-border-color: #2C3E50;" />
-                                    <DatePicker fx:id="dateOfBirthCilent" prefHeight="27.0" prefWidth="233.0" promptText="Date of birth" style="-fx-border-color: #2C3E50;" />
+                                    <DatePicker fx:id="dateOfBirthClient" prefHeight="27.0" prefWidth="233.0" promptText="Date of birth" style="-fx-border-color: #2C3E50;" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">

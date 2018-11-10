@@ -59,7 +59,7 @@
                               <Label text="* Name (TH)" />
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ChoiceBox fx:id="nameTitleTH" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50;" />
+                                    <ChoiceBox fx:id="nameTitleTH" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <TextField fx:id="firstNameTH" prefHeight="27.0" prefWidth="253.0" promptText="First Name" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="lastNameTH" prefHeight="27.0" prefWidth="253.0" promptText="Last name" style="-fx-border-color: #2C3E50;" />
                                  </children>
@@ -67,7 +67,7 @@
                               <Label text="* Name (EN)" />
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ChoiceBox fx:id="nameTitleEN" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50;" />
+                                    <ChoiceBox fx:id="nameTitleEN" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <TextField fx:id="firstNameEN" prefHeight="27.0" prefWidth="253.0" promptText="First Name" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="lastNameEN" prefHeight="27.0" prefWidth="253.0" promptText="Last Name" style="-fx-border-color: #2C3E50;" />
                                  </children>
@@ -116,8 +116,8 @@
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <ComboBox fx:id="travelServiceChoice" prefHeight="29.0" prefWidth="293.0" style="-fx-border-color: #2C3E50;" />
-                                    <ComboBox fx:id="travelFocusingChoice" prefHeight="29.0" prefWidth="354.0" style="-fx-border-color: #2C3E50;" />
+                                    <ComboBox fx:id="travelServiceChoice" prefHeight="29.0" prefWidth="293.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
+                                    <ComboBox fx:id="travelFocusingChoice" prefHeight="29.0" prefWidth="354.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                  </children>
                               </HBox>
                            </children>

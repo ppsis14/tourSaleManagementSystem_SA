@@ -37,7 +37,7 @@ public class ReservePageController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
     @FXML private ChoiceBox<?> tourCodeChioce;
-    @FXML private TextField tourName;
+    @FXML private TextField ReservCode;
     @FXML private DatePicker departureDate;
     @FXML private ChoiceBox<String> nameTitleTHClient;
     @FXML private TextField firstNameTHClient;
@@ -50,7 +50,7 @@ public class ReservePageController implements Initializable {
     @FXML private TextField oldLastNameClient;
     @FXML private ChoiceBox<String> genderChoice;
     @FXML private TextField age;
-    @FXML private DatePicker dateOfBirthCilent;
+    @FXML private DatePicker dateOfBirthClient;
     @FXML private TextField passportClient;
     @FXML private DatePicker expPassportDate;
     @FXML private TextField homeAddrCilent;
@@ -127,7 +127,7 @@ public class ReservePageController implements Initializable {
                 .append("Old_LastnameTH",oldLastNameClient.getText())
                 .append("Gender",genderChoice.getSelectionModel().getSelectedItem())
                 .append("Age",age.getText())
-                .append("Date_of_birth",dateOfBirthCilent.getEditor().getText())
+                .append("Date_of_birth",dateOfBirthClient.getEditor().getText())
                 .append("Expire_passport_date",expPassportDate.getEditor().getText())
                 .append("Passport_no",passportClient.getText());
 
