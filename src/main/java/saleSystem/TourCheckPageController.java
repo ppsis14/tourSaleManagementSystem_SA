@@ -65,32 +65,8 @@ public class TourCheckPageController implements Initializable {
 
     @FXML
     void handleDeleteBtnTour(ActionEvent event) throws SQLException {
-        //MongoDB : Delete data
-        String reserv_codeDelete = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
-
-        BasicDBObject delete = new BasicDBObject("Reservation_code",reserv_codeDelete);
-        reserve_card.remove(delete);    //delete from MongoDB
-
-        Cursor cursor = reserve_card.find();
-        while (cursor.hasNext())
-            System.out.println(cursor.next());
-
-        //SQLite : Delete data
-        Connection connection = DbConnect.getConnection();
-        PreparedStatement pst ;
-        String sql = "Delete from reserve_card_database where Reservation_code = ?";
-        try {
-            pst = connection.prepareStatement(sql);
-            pst.setString(1,reserv_codeDelete);
-            pst.execute();
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        finally {
-                connection.close();
-                System.out.println("Close database");
-        }
+        deleteDataByMongoDB();
+        deleteDataBySqlite();
 
         //ObservableList (Table View) : Delete data
         obListTour.remove(tableTourCheck.getSelectionModel().getSelectedItem());
@@ -197,6 +173,37 @@ public class TourCheckPageController implements Initializable {
         public String getArrearsStatus() {
             return arrearsStatus;
         }
+    }
+
+    public void deleteDataByMongoDB(){
+        //MongoDB : Delete data
+        String reserv_codeDelete = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
+
+        BasicDBObject delete = new BasicDBObject("Reservation_code",reserv_codeDelete);
+        reserve_card.remove(delete);    //delete from MongoDB
+
+        Cursor cursor = reserve_card.find();
+        while (cursor.hasNext())
+            System.out.println(cursor.next());
+    }
+
+    public void deleteDataBySqlite(){
+        //SQLite : Delete data
+
+        Connection connection = DbConnect.getConnection();
+        PreparedStatement pst ;
+        String reserv_codeDelete = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
+        String sql = "Delete from reserve_card_database where Reservation_code = ?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1,reserv_codeDelete);
+            pst.execute();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
 }
 
