@@ -83,8 +83,8 @@ public class TourCheckPageController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationForEditPage.fxml"));
             Parent parent = (Parent) loader.load();
-            ReservePageController reservePageController = loader.getController();
-            reservePageController.setText("TAIWAN");
+            ReserveEditPageController reserveEditPageController = loader.getController();
+            reserveEditPageController.setText("TAIWAN");
             Stage stage = new Stage(StageStyle.DECORATED);
             stage.show();
             stage.setScene(new Scene(parent));
