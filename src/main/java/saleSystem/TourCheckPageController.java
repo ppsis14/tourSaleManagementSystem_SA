@@ -3,12 +3,21 @@ package saleSystem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import databaseConnection.DbConnect;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
@@ -24,21 +33,34 @@ public class TourCheckPageController implements Initializable {
     @FXML
     private Label showTourDetail;
     @FXML
-    private TableView<?> tabletourCheck;
-    @FXML
-    private Button editBtnTour;
-    @FXML
-    private Button deleteBtnTour;
-    @FXML
-    private Button updateBtnTour;
+    private TableView<TourChecking> tableTourCheck;
+    @FXML private TableColumn<TourChecking, String> reservCodeColumn;
+    @FXML private TableColumn<TourChecking, String> firstnameColumn;
+    @FXML private TableColumn<TourChecking, String> lastnameColumn;
+    @FXML private TableColumn<TourChecking, String> memberStatusColumn;
+    @FXML private TableColumn<TourChecking, String> depositStatusColumn;
+    @FXML private TableColumn<TourChecking, String> arrearsStatusColumn;
+    @FXML private Button editBtnTour;
+    @FXML private Button deleteBtnTour;
+    @FXML private Button updateBtnTour;
+
+    ObservableList<TourChecking> obListTour= FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SaleManagementUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
+
+        try {
+            showTableView();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @FXML
     void handleDeleteBtnTour(ActionEvent event) {
+
 
     }
 
@@ -57,4 +79,83 @@ public class TourCheckPageController implements Initializable {
 
     }
 
+
+    public void showTableView() throws SQLException {
+
+        //find data base for show on table view.
+        Connection connection = DbConnect.getConnection();
+        try {
+
+            String sql = "select * from reserve_card_database";
+            ResultSet rs = connection.createStatement().executeQuery(sql);
+            while (rs.next()) {
+                obListTour.add(new TourChecking(rs.getString("Reservation_code"), rs.getString("FirstnameTH"), rs.getString("LastnameTH")));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            connection.close();
+        }
+
+        reservCodeColumn.setCellValueFactory(new PropertyValueFactory<TourChecking, String>("reservCode"));
+        firstnameColumn.setCellValueFactory(new PropertyValueFactory<TourChecking, String>("firstName"));
+        lastnameColumn.setCellValueFactory(new PropertyValueFactory<TourChecking, String>("lastName"));
+
+        reservCodeColumn.setCellFactory(TextFieldTableCell.<TourChecking>forTableColumn());
+        firstnameColumn.setCellFactory(TextFieldTableCell.<TourChecking>forTableColumn());
+        lastnameColumn.setCellFactory(TextFieldTableCell.<TourChecking>forTableColumn());
+        tableTourCheck.setItems(obListTour);
+
+
+    }
+
+    public class TourChecking{
+        private String reservCode;
+        private String firstName;
+        private String lastName;
+        private String memberStatus;
+        private String depositStatus;
+        private String arrearsStatus;
+
+        public TourChecking(String reservCode, String firstName, String lastName, String memberStatus, String depositStatus, String arrearsStatus) {
+            this.reservCode = reservCode;
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.memberStatus = memberStatus;
+            this.depositStatus = depositStatus;
+            this.arrearsStatus = arrearsStatus;
+        }
+
+        public TourChecking(String reservCode, String firstName, String lastName) {
+            this.reservCode = reservCode;
+            this.firstName = firstName;
+            this.lastName = lastName;
+        }
+
+        public String getReservCode() {
+            return reservCode;
+        }
+
+        public String getFirstName() {
+            return firstName;
+        }
+
+        public String getLastName() {
+            return lastName;
+        }
+
+        public String getMemberStatus() {
+            return memberStatus;
+        }
+
+        public String getDepositStatus() {
+            return depositStatus;
+        }
+
+        public String getArrearsStatus() {
+            return arrearsStatus;
+        }
+    }
 }
+

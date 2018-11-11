@@ -55,15 +55,15 @@
             </HBox>
             <Label text="Show tour detail :" />
             <Label fx:id="showTourDetail" alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="107.0" prefWidth="772.0" styleClass="show-label" stylesheets="@style.css" />
-            <TableView fx:id="tabletourCheck" fixedCellSize="0.0" prefHeight="239.0" prefWidth="772.0">
-              <columns>
-                <TableColumn prefWidth="208.71088790893555" text="Reserve Code" />
-                  <TableColumn prefWidth="208.71088790893555" text="First Name TH" />
-                <TableColumn prefWidth="224.342529296875" text="Last Name TH" />
-                  <TableColumn prefWidth="82.657470703125" text="Member Status" />
-                  <TableColumn prefWidth="75.0" text="Deposit Status" />
-                  <TableColumn prefWidth="75.0" text="Arrears Status" />
-              </columns>
+            <TableView fx:id="tableTourCheck" fixedCellSize="0.0" prefHeight="239.0" prefWidth="772.0">
+               <columns>
+                  <TableColumn fx:id="reservCodeColumn" prefWidth="208.71088790893555" text="Reserve Code" />
+                  <TableColumn fx:id="firstnameColumn" prefWidth="208.71088790893555" text="First Name TH" />
+                  <TableColumn fx:id="lastnameColumn" prefWidth="224.342529296875" text="Last Name TH" />
+                  <TableColumn fx:id="memberStatusColumn" prefWidth="82.657470703125" text="Member Status" />
+                  <TableColumn fx:id="depositStatusColumn" prefWidth="75.0" text="Deposit Status" />
+                  <TableColumn fx:id="arrearsStatusColumn" prefWidth="75.0" text="Arrears Status" />
+               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
