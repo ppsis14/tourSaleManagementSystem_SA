@@ -25,7 +25,7 @@ public class ReservePageController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
     @FXML private ChoiceBox<?> tourCodeChioce;
-    @FXML private TextField ReservCode;
+    @FXML private TextField ReserveCode;
     @FXML private DatePicker departureDate;
     @FXML private ChoiceBox<String> nameTitleTHClient;
     @FXML private TextField firstNameTHClient;
@@ -41,16 +41,16 @@ public class ReservePageController implements Initializable {
     @FXML private DatePicker dateOfBirthClient;
     @FXML private TextField passportClient;
     @FXML private DatePicker expPassportDate;
-    @FXML private TextField homeAddrCilent;
+    @FXML private TextField homeAddClient;
     @FXML private TextField countryClient;
-    @FXML private TextField homeZipCodeCilent;
+    @FXML private TextField homeZipCodeClient;
     @FXML private TextField cellphoneClient;
     @FXML private TextField homeTelClient;
     @FXML private TextField homeFaxClient;
     @FXML private TextField emailClient;
     @FXML private TextField careerClient;
     @FXML private TextField compNameClient;
-    @FXML private TextField compAddrClient;
+    @FXML private TextField compAddClient;
     @FXML private TextField compCountryClient;
     @FXML private TextField workTelClient;
     @FXML private TextField compZipCodeClient;
@@ -67,6 +67,8 @@ public class ReservePageController implements Initializable {
     @FXML private JFXCheckBox website;
     @FXML private JFXCheckBox eNews;
     @FXML private JFXCheckBox others;
+    @FXML private JFXCheckBox sms;
+    @FXML private JFXCheckBox tvAds;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,7 +110,7 @@ public class ReservePageController implements Initializable {
 
         BasicDBObject clientProfile = new BasicDBObject()
                 //.append("Tour_ID",)
-                .append("Reservation_code",ReservCode.getText())
+                .append("Reservation_code",ReserveCode.getText())
                 .append("Departure_date",departureDate.getEditor().getText())
                 .append("TitlenameTH",nameTitleTHClient.getSelectionModel().getSelectedItem())
                 .append("FirstNameTH",firstNameTHClient.getText())
@@ -126,16 +128,16 @@ public class ReservePageController implements Initializable {
                 .append("Expire_passport_date",expPassportDate.getEditor().getText());
 
         BasicDBObject clientContact = new BasicDBObject()
-                .append("Full_home_address",homeAddrCilent.getText())
+                .append("Full_home_address",homeAddClient.getText())
                 .append("Home_country",countryClient.getText())
-                .append("Home_zip_code",homeZipCodeCilent.getText())
+                .append("Home_zip_code",homeZipCodeClient.getText())
                 .append("Cell_phone",cellphoneClient.getText())
                 .append("Home_Tel",homeTelClient.getText())
                 .append("Fax",homeFaxClient.getText())
                 .append("Email_address",emailClient.getText())
                 .append("Career",careerClient.getText())
                 .append("Company_name",compNameClient.getText())
-                .append("Company_address",compAddrClient.getText())
+                .append("Company_address",compAddClient.getText())
                 .append("Company_country",compCountryClient.getText())
                 .append("Company_zip_code", compZipCodeClient.getText())
                 .append("Work_Tel",workTelClient.getText());
@@ -169,7 +171,7 @@ public class ReservePageController implements Initializable {
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setString(1,ReservCode.getText());
+            pst.setString(1,ReserveCode.getText());
             pst.setString(2,departureDate.getEditor().getText());
             pst.setString(3,nameTitleTHClient.getSelectionModel().getSelectedItem());
             pst.setString(4,firstNameTHClient.getText());

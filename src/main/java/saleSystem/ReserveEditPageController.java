@@ -1,5 +1,6 @@
 package saleSystem;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -25,77 +26,80 @@ import java.util.ResourceBundle;
 import static databaseConnection.MongoDBConnect.reserve_card;
 
 public class ReserveEditPageController implements Initializable {
-
-
+    @FXML private TextField ReserveCodeED;
+    @FXML private ChoiceBox<?> tourCodeChioceED;
+    @FXML private DatePicker departureDateED;
+    @FXML private ChoiceBox<?> nameTitleTHClientED;
+    @FXML private TextField firstNameTHClientED;
+    @FXML private TextField lastNameTHClientED;
+    @FXML private ChoiceBox<?> nameTitleENClientED;
+    @FXML private TextField firstNameENClientED;
+    @FXML private TextField lastNameENClientED;
+    @FXML private ChoiceBox<?> oldNameTitleTHClientED;
+    @FXML private TextField oldFirstNameClientED;
+    @FXML private TextField oldLastNameClientED;
+    @FXML private ChoiceBox<?> genderChoiceED;
+    @FXML private TextField ageED;
+    @FXML private DatePicker dateOfBirthClientED;
+    @FXML private TextField passportClientED;
+    @FXML private DatePicker expPassportDateED;
+    @FXML private TextField homeAddClientED;
+    @FXML private TextField countryClientED;
+    @FXML private TextField homeZipCodeClientED;
+    @FXML private TextField cellphoneClientED;
+    @FXML private TextField homeTelClientED;
+    @FXML private TextField homeFaxClientED;
+    @FXML private TextField emailClientED;
+    @FXML private TextField careerClientED;
+    @FXML private TextField compNameClientED;
+    @FXML private TextField compAddClientED;
+    @FXML private TextField compCountryClientED;
+    @FXML private TextField workTelClientED;
+    @FXML private TextField compZipCodeClientED;
+    @FXML private JFXCheckBox notMemberChioceED;
+    @FXML private JFXCheckBox memberChioceED;
+    @FXML private TextField underlyingDiseaseED;
+    @FXML private TextField foodAllergyED;
+    @FXML private JFXCheckBox eatBeefYED;
+    @FXML private JFXCheckBox eatBeefNED;
+    @FXML private TextField moreDetailED;
+    @FXML private JFXCheckBox BangkokbizsnewsED;
+    @FXML private JFXCheckBox DailynewsED;
+    @FXML private JFXCheckBox KomchadluekED;
+    @FXML private JFXCheckBox websiteED;
+    @FXML private JFXCheckBox eNewsED;
+    @FXML private JFXCheckBox smsED;
+    @FXML private JFXCheckBox tvAdsED;
+    @FXML private JFXCheckBox others;
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
-    @FXML private ChoiceBox<?> tourCodeChioce;
-    @FXML private TextField ReservCode;
-    @FXML private DatePicker departureDate;
-    @FXML private ChoiceBox<String> nameTitleTHClient;
-    @FXML private TextField firstNameTHClient;
-    @FXML private TextField lastNameTHClient;
-    @FXML private ChoiceBox<String> nameTitleENClient;
-    @FXML private TextField firstNameENClient;
-    @FXML private TextField lastNameENClient;
-    @FXML private ChoiceBox<String> oldNameTitleTHClient;
-    @FXML private TextField oldFirstNameClient;
-    @FXML private TextField oldLastNameClient;
-    @FXML private ChoiceBox<String> genderChoice;
-    @FXML private TextField age;
-    @FXML private DatePicker dateOfBirthClient;
-    @FXML private TextField passportClient;
-    @FXML private DatePicker expPassportDate;
-    @FXML private TextField homeAddrCilent;
-    @FXML private TextField countryClient;
-    @FXML private TextField homeZipCodeCilent;
-    @FXML private TextField cellphoneClient;
-    @FXML private TextField homeTelClient;
-    @FXML private TextField homeFaxClient;
-    @FXML private TextField emailClient;
-    @FXML private TextField careerClient;
-    @FXML private TextField compNameClient;
-    @FXML private TextField compAddrClient;
-    @FXML private TextField compCountryClient;
-    @FXML private TextField workTelClient;
-    @FXML private TextField compZipCodeClient;
-    @FXML private JFXCheckBox notMemberChioce;
-    @FXML private JFXCheckBox memberChioce;
-    @FXML private TextField foodAllergy;
-    @FXML private TextField underlyingDisease;
-    @FXML private JFXCheckBox eatBeefY;
-    @FXML private JFXCheckBox eatBeefN;
-    @FXML private TextField moreDetail;
-    @FXML private JFXCheckBox Bangkokbizsnews;
-    @FXML private JFXCheckBox Dailynews;
-    @FXML private JFXCheckBox Komchadluek;
-    @FXML private JFXCheckBox website;
-    @FXML private JFXCheckBox eNews;
-    @FXML private JFXCheckBox others;
+    @FXML private JFXButton addClientBtnED;
+
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SaleManagementUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
 
-        ObservableList<String> genderChoices = FXCollections.observableArrayList("Female","Male");
-        genderChoice.getSelectionModel().selectFirst();
-        genderChoice.setValue("Female");
-        genderChoice.getItems().addAll(genderChoices);
+        ObservableList<String> genderChoicesED = FXCollections.observableArrayList("Female","Male");
+        genderChoiceED.getSelectionModel().selectFirst();
+        genderChoiceED.setValue("Female");
+        genderChoiceED.getItems().addAll(genderChoicesED);
 
-        ObservableList<String> nameENTitleChoices = FXCollections.observableArrayList("Miss", "Mrs.", "Mr.", "Master", "Professor", "Assistant Professor", "Associate Professor");
-        nameTitleENClient.getSelectionModel().selectFirst();
-        nameTitleENClient.setValue("Miss");
-        nameTitleENClient.getItems().addAll(nameENTitleChoices);
+        ObservableList<String> nameENTitleChoicesED = FXCollections.observableArrayList("Miss", "Mrs.", "Mr.", "Master", "Professor", "Assistant Professor", "Associate Professor");
+        nameTitleENClientED.getSelectionModel().selectFirst();
+        nameTitleENClientED.setValue("Miss");
+        nameTitleENClientED.getItems().addAll(nameENTitleChoicesED);
 
-        ObservableList<String> nameTHTitleChoices = FXCollections.observableArrayList("นางสาว", "นาง", "นาย", "เด็กหญิง", "เด็กชาย", "ศาตราจารย์", "ผู้ช่วยศาสตราจารย์", "รองศาสตราจารย์");
-        nameTitleTHClient.getSelectionModel().selectFirst();
-        nameTitleTHClient.setValue("นางสาว");
-        nameTitleTHClient.getItems().addAll(nameTHTitleChoices);
+        ObservableList<String> nameTHTitleChoicesED = FXCollections.observableArrayList("นางสาว", "นาง", "นาย", "เด็กหญิง", "เด็กชาย", "ศาตราจารย์", "ผู้ช่วยศาสตราจารย์", "รองศาสตราจารย์");
+        nameTitleTHClientED.getSelectionModel().selectFirst();
+        nameTitleTHClientED.setValue("นางสาว");
+        nameTitleTHClientED.getItems().addAll(nameTHTitleChoicesED);
 
-        ObservableList<String> oldNameTHTitleChoices = FXCollections.observableArrayList("นางสาว", "นาง", "นาย", "เด็กหญิง", "เด็กชาย", "ศาตราจารย์", "ผู้ช่วยศาสตราจารย์", "รองศาสตราจารย์");
-        oldNameTitleTHClient.getSelectionModel().selectFirst();
-        oldNameTitleTHClient.setValue("นางสาว");
-        oldNameTitleTHClient.getItems().addAll(oldNameTHTitleChoices);
+        ObservableList<String> oldNameTHTitleChoicesED = FXCollections.observableArrayList("นางสาว", "นาง", "นาย", "เด็กหญิง", "เด็กชาย", "ศาตราจารย์", "ผู้ช่วยศาสตราจารย์", "รองศาสตราจารย์");
+        oldNameTitleTHClientED.getSelectionModel().selectFirst();
+        oldNameTitleTHClientED.setValue("นางสาว");
+        oldNameTitleTHClientED.getItems().addAll(oldNameTHTitleChoicesED);
 
         // set user login by call from database
         //showUserLogin.setText("Thikamporn Simud");
@@ -103,8 +107,9 @@ public class ReserveEditPageController implements Initializable {
         //reservePane.setVisible(false);
 
     }
+
     @FXML
-    public void handleAddClientBtn(ActionEvent event) throws SQLException {
+    public void handleAddClientBtnED(ActionEvent event)  throws SQLException {
         //record reservation
 
 
@@ -113,44 +118,44 @@ public class ReserveEditPageController implements Initializable {
 
         BasicDBObject clientProfile = new BasicDBObject()
                 //.append("Tour_ID",)
-                .append("Reservation_code",ReservCode.getText())
-                .append("Departure_date",departureDate.getEditor().getText())
-                .append("TitlenameTH",nameTitleTHClient.getSelectionModel().getSelectedItem())
-                .append("FirstNameTH",firstNameTHClient.getText())
-                .append("LastNameTH",lastNameTHClient.getText())
-                .append("TitlenameENG",nameTitleENClient.getSelectionModel().getSelectedItem())
-                .append("FirstNameENG",firstNameENClient.getText())
-                .append("LastNameENG",lastNameENClient.getText())
-                .append("TitlenameOld",oldNameTitleTHClient.getSelectionModel().getSelectedItem())
-                .append("FirstnameOld",oldFirstNameClient.getText())
-                .append("LastnameOld",oldLastNameClient.getText())
-                .append("Gender",genderChoice.getSelectionModel().getSelectedItem())
-                .append("Age",age.getText())
-                .append("Date_of_birth",dateOfBirthClient.getEditor().getText())
-                .append("Passport_no",passportClient.getText())
-                .append("Expire_passport_date",expPassportDate.getEditor().getText());
+                .append("Reservation_code",ReserveCodeED.getText())
+                .append("Departure_date",departureDateED.getEditor().getText())
+                .append("TitlenameTH",nameTitleTHClientED.getSelectionModel().getSelectedItem())
+                .append("FirstNameTH",firstNameTHClientED.getText())
+                .append("LastNameTH",lastNameTHClientED.getText())
+                .append("TitlenameENG",nameTitleENClientED.getSelectionModel().getSelectedItem())
+                .append("FirstNameENG",firstNameENClientED.getText())
+                .append("LastNameENG",lastNameENClientED.getText())
+                .append("TitlenameOld",oldNameTitleTHClientED.getSelectionModel().getSelectedItem())
+                .append("FirstnameOld",oldFirstNameClientED.getText())
+                .append("LastnameOld",oldLastNameClientED.getText())
+                .append("Gender",genderChoiceED.getSelectionModel().getSelectedItem())
+                .append("Age",ageED.getText())
+                .append("Date_of_birth",dateOfBirthClientED.getEditor().getText())
+                .append("Passport_no",passportClientED.getText())
+                .append("Expire_passport_date",expPassportDateED.getEditor().getText());
 
         BasicDBObject clientContact = new BasicDBObject()
-                .append("Full_home_address",homeAddrCilent.getText())
-                .append("Home_country",countryClient.getText())
-                .append("Home_zip_code",homeZipCodeCilent.getText())
-                .append("Cell_phone",cellphoneClient.getText())
-                .append("Home_Tel",homeTelClient.getText())
-                .append("Fax",homeFaxClient.getText())
-                .append("Email_address",emailClient.getText())
-                .append("Career",careerClient.getText())
-                .append("Company_name",compNameClient.getText())
-                .append("Company_address",compAddrClient.getText())
-                .append("Company_country",compCountryClient.getText())
-                .append("Company_zip_code", compZipCodeClient.getText())
-                .append("Work_Tel",workTelClient.getText());
+                .append("Full_home_address",homeAddClientED.getText())
+                .append("Home_country",countryClientED.getText())
+                .append("Home_zip_code",homeZipCodeClientED.getText())
+                .append("Cell_phone",cellphoneClientED.getText())
+                .append("Home_Tel",homeTelClientED.getText())
+                .append("Fax",homeFaxClientED.getText())
+                .append("Email_address",emailClientED.getText())
+                .append("Career",careerClientED.getText())
+                .append("Company_name",compNameClientED.getText())
+                .append("Company_address",compAddClientED.getText())
+                .append("Company_country",compCountryClientED.getText())
+                .append("Company_zip_code", compZipCodeClientED.getText())
+                .append("Work_Tel",workTelClientED.getText());
 
         BasicDBObject moreInfo = new BasicDBObject()
-                .append("Member_status",memberChioce.getTypeSelector())
-                .append("Disease",underlyingDisease.getText())
+                .append("Member_status",memberChioceED.getTypeSelector())
+                .append("Disease",underlyingDiseaseED.getText())
                 //.append("Food_allergy".foodAllergy.getText())
                 //.append("Eat_beef",eatBeefN.getTypeSelector())
-                .append("More_detail",moreDetail.getText());
+                .append("More_detail",moreDetailED.getText());
                 //.append("Channel",)
 
         reserve_card.insert(clientProfile);
@@ -174,22 +179,22 @@ public class ReserveEditPageController implements Initializable {
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setString(1,ReservCode.getText());
-            pst.setString(2,departureDate.getEditor().getText());
-            pst.setString(3,nameTitleTHClient.getSelectionModel().getSelectedItem());
-            pst.setString(4,firstNameTHClient.getText());
-            pst.setString(5,lastNameTHClient.getText());
-            pst.setString(6,nameTitleENClient.getSelectionModel().getSelectedItem());
-            pst.setString(7,firstNameENClient.getText());
-            pst.setString(8,lastNameENClient.getText());
-            pst.setString(9,oldNameTitleTHClient.getSelectionModel().getSelectedItem());
-            pst.setString(10,oldFirstNameClient.getText());
-            pst.setString(11,oldLastNameClient.getText());
-            pst.setString(12,genderChoice.getSelectionModel().getSelectedItem());
-            pst.setString(13,age.getText());
-            pst.setString(14,dateOfBirthClient.getEditor().getText());
-            pst.setString(15,passportClient.getText());
-            pst.setString(16,expPassportDate.getEditor().getText());
+            pst.setString(1,ReserveCodeED.getText());
+            pst.setString(2,departureDateED.getEditor().getText());
+            pst.setString(3,nameTitleTHClientED.getSelectionModel().getSelectedItem());
+            pst.setString(4,firstNameTHClientED.getText());
+            pst.setString(5,lastNameTHClientED.getText());
+            pst.setString(6,nameTitleENClientED.getSelectionModel().getSelectedItem());
+            pst.setString(7,firstNameENClientED.getText());
+            pst.setString(8,lastNameENClientED.getText());
+            pst.setString(9,oldNameTitleTHClientED.getSelectionModel().getSelectedItem());
+            pst.setString(10,oldFirstNameClientED.getText());
+            pst.setString(11,oldLastNameClientED.getText());
+            pst.setString(12,genderChoiceED.getSelectionModel().getSelectedItem());
+            pst.setString(13,ageED.getText());
+            pst.setString(14,dateOfBirthClientED.getEditor().getText());
+            pst.setString(15,passportClientED.getText());
+            pst.setString(16,expPassportDateED.getEditor().getText());
             pst.executeUpdate();
 
             System.out.println("SQLite: Reservation data saved!");

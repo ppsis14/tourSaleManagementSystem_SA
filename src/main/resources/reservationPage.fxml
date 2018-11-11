@@ -62,7 +62,7 @@
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="ReservCode" prefHeight="29.0" prefWidth="200.0" promptText="Reservation Code" style="-fx-border-color: #2C3E50;" />
+                                    <TextField fx:id="ReserveCode" prefHeight="29.0" prefWidth="200.0" promptText="Reservation Code" style="-fx-border-color: #2C3E50;" />
                                     <ChoiceBox fx:id="tourCodeChioce" prefHeight="29.0" prefWidth="202.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                     <DatePicker fx:id="departureDate" prefHeight="29.0" prefWidth="233.0" promptText="Departure Date" style="-fx-border-color: #2C3E50;" />
                                  </children>
@@ -137,7 +137,7 @@
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="homeAddrCilent" prefHeight="29.0" prefWidth="474.0" promptText="Full Home Address" style="-fx-border-color: #2C3E50;" />
+                                    <TextField fx:id="homeAddClient" prefHeight="29.0" prefWidth="474.0" promptText="Full Home Address" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="countryClient" prefHeight="29.0" prefWidth="232.0" promptText="Country" style="-fx-border-color: #2C3E50;" />
                                  </children>
                               </HBox>
@@ -150,7 +150,7 @@
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="homeZipCodeCilent" prefHeight="29.0" prefWidth="181.0" promptText="Zip Code" style="-fx-border-color: #2C3E50;" />
+                                    <TextField fx:id="homeZipCodeClient" prefHeight="29.0" prefWidth="181.0" promptText="Zip Code" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="cellphoneClient" prefHeight="29.0" prefWidth="232.0" promptText="Cell Phone" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="homeTelClient" prefHeight="29.0" prefWidth="232.0" promptText="Home Tel" style="-fx-border-color: #2C3E50;" />
                                  </children>
@@ -187,7 +187,7 @@
                               </HBox>
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
-                                    <TextField fx:id="compAddrClient" prefHeight="29.0" prefWidth="474.0" promptText="Company Address / School Address" style="-fx-border-color: #2C3E50;" />
+                                    <TextField fx:id="compAddClient" prefHeight="29.0" prefWidth="474.0" promptText="Company Address / School Address" style="-fx-border-color: #2C3E50;" />
                                     <TextField fx:id="compCountryClient" prefHeight="29.0" prefWidth="232.0" promptText="Country" style="-fx-border-color: #2C3E50;" />
                                  </children>
                               </HBox>
@@ -276,8 +276,8 @@
                               <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                  <children>
                                     <JFXCheckBox fx:id="eNews" maxHeight="1.7976931348623157E308" prefHeight="21.0" prefWidth="165.0" text="E-News" />
-                                    <JFXCheckBox maxHeight="1.7976931348623157E308" prefWidth="165.0" text="SMS" />
-                                    <JFXCheckBox maxHeight="1.7976931348623157E308" prefWidth="165.0" text="TV Ads." />
+                                    <JFXCheckBox fx:id="sms" maxHeight="1.7976931348623157E308" prefWidth="165.0" text="SMS" />
+                                    <JFXCheckBox fx:id="tvAds" maxHeight="1.7976931348623157E308" prefWidth="165.0" text="TV Ads." />
                                     <JFXCheckBox fx:id="others" maxHeight="1.7976931348623157E308" prefWidth="165.0" text="Others" />
                                  </children>
                               </HBox>
