@@ -36,68 +36,9 @@ public class LoginPageController implements Initializable {
     @FXML private PasswordField password;
     @FXML private Label showErrorLogin;
 
-    @FXML
-    public void handleCancelButton(ActionEvent event) {
-        username.clear();
-        password.clear();
-        showErrorLogin.setText("");
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-
-    }
-
-    @FXML
-    public void handleLoginButton(ActionEvent event) throws IOException, SQLException {
-            //MongoDB
-            MongoDBConnect.getMongoClient();
-
-            BasicDBObject andQuery = new BasicDBObject();
-            List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
-            obj.add(new BasicDBObject("id",username.getText()));
-            obj.add(new BasicDBObject("password",password.getText()));
-            andQuery.put("$and", obj);
-
-            DBCursor cursor = employee.find(andQuery);
-
-            if (cursor.hasNext()) {
-
-                //if login success -> load home windows
-                loginButton.getScene().getWindow().hide();
-                SaleManagementUtil.loadWindow(getClass().getResource("/homePage.fxml"), "Onvacation - Home", null);
-            }
-            else{
-                showErrorLogin.setText("Username or Password is not correct");
-                username.clear();
-                password.clear();
-            }
-/*      //SQLite
-        Connection connection = DbConnect.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = null;
-
-
-        if (connection != null){
-
-            resultSet = statement.executeQuery("select * from employee_database where ID" + " = '" + username.getText() + "' and Password = '" + password.getText() +"'");
-
-            if(resultSet.next()) {
-                //if login success -> load home windows
-                loginButton.getScene().getWindow().hide();
-                SaleManagementUtil.loadWindow(getClass().getResource("/homePage.fxml"), "Onvacation - Home", null);
-                connection.close();
-            }
-        else{
-                showErrorLogin.setText("Username or Password is not correct");
-                username.clear();
-                password.clear();
-            }*/
-
-
-
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        /*
         //EX. setup id,password
 
         MongoDBConnect.getMongoClient();
@@ -114,8 +55,76 @@ public class LoginPageController implements Initializable {
         Cursor cursor = employee.find();
         while (cursor.hasNext())
             System.out.println(cursor.next());
+        */
         username.setVisible(true);
         password.setVisible(true);
+    }
+
+    @FXML
+    public void handleCancelButton(ActionEvent event) {
+        username.clear();
+        password.clear();
+        showErrorLogin.setText("");
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+
+    }
+
+    @FXML
+    public void handleLoginButton(ActionEvent event) throws IOException, SQLException {
+        checkLogInByMongoDB();
+    }
+
+
+
+    public void checkLogInByMongoDB(){
+
+        MongoDBConnect.getMongoClient();
+
+        BasicDBObject andQuery = new BasicDBObject();
+        List<BasicDBObject> obj = new ArrayList<BasicDBObject>();
+        obj.add(new BasicDBObject("id",username.getText()));
+        obj.add(new BasicDBObject("password",password.getText()));
+        andQuery.put("$and", obj);
+
+        DBCursor cursor = employee.find(andQuery);
+
+        if (cursor.hasNext()) {
+
+            //if login success -> load home windows
+            loginButton.getScene().getWindow().hide();
+            SaleManagementUtil.loadWindow(getClass().getResource("/homePage.fxml"), "Onvacation - Home", null);
+        }
+        else {
+            showErrorLogin.setText("Username or Password is not correct");
+            username.clear();
+            password.clear();
+        }
+
+    }
+
+    public void checkLogInBySqlite() throws SQLException {
+
+        Connection connection = DbConnect.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = null;
+
+
+        if (connection != null) {
+
+            resultSet = statement.executeQuery("select * from employee_database where ID" + " = '" + username.getText() + "' and Password = '" + password.getText() + "'");
+
+            if (resultSet.next()) {
+                //if login success -> load home windows
+                loginButton.getScene().getWindow().hide();
+                SaleManagementUtil.loadWindow(getClass().getResource("/homePage.fxml"), "Onvacation - Home", null);
+                connection.close();
+            } else {
+                showErrorLogin.setText("Username or Password is not correct");
+                username.clear();
+                password.clear();
+            }
+        }
     }
 }
 
