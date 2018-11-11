@@ -15,6 +15,7 @@ import javafx.scene.control.TextField;
 
 import java.net.URL;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static databaseConnection.MongoDBConnect.reserve_card;
@@ -25,7 +26,7 @@ public class ReservePageController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
     @FXML private ChoiceBox<?> tourCodeChioce;
-    @FXML private TextField ReserveCode;
+    @FXML private TextField reserveCode;
     @FXML private DatePicker departureDate;
     @FXML private ChoiceBox<String> nameTitleTHClient;
     @FXML private TextField firstNameTHClient;
@@ -103,14 +104,51 @@ public class ReservePageController implements Initializable {
     @FXML
     public void handleAddClientBtn(ActionEvent event) throws SQLException {
         //record reservation
+        insertDataByMongoDB();
+        insertDataBySQLite();
 
+
+    }
+
+    public void handleMemberCheckbox(ActionEvent event) { notMemberChioce.setSelected(false); }
+    public void handleNotMemberCheckbox(ActionEvent event) { memberChioce.setSelected(false); }
+    public void handleNotEatBeefCheckbox(ActionEvent event) { eatBeefY.setSelected(false); }
+    public void handleEatBeefCheckbox(ActionEvent event) { eatBeefN.setSelected(false); }
+
+    public ArrayList<String> getChannelList(){
+        ArrayList<String> channelList = new ArrayList<>();
+
+        if (Bangkokbizsnews.isSelected())
+            channelList.add(Bangkokbizsnews.getText());
+        if (Dailynews.isSelected())
+            channelList.add(Dailynews.getText());
+        if (Komchadluek.isSelected())
+            channelList.add(Komchadluek.getText());
+        if (website.isSelected())
+            channelList.add(website.getText());
+        if (eNews.isSelected())
+            channelList.add(eNews.getText());
+        if (sms.isSelected())
+            channelList.add(sms.getText());
+        if (tvAds.isSelected())
+            channelList.add(tvAds.getText());
+        if (channelList==null)
+            channelList.add(others.getText());
+
+        return channelList;
+
+    }
+
+    public void insertDataByMongoDB(){
 
         // insert data by MongoDB
-        MongoDBConnect.getMongoClient();
+
+        MongoDBConnect.getMongoClient();        //connect to MongoDB
 
         BasicDBObject clientProfile = new BasicDBObject()
+                //clientProfile
                 //.append("Tour_ID",)
-                .append("Reservation_code",ReserveCode.getText())
+                .append("Reservation_code",reserveCode.getText())
                 .append("Departure_date",departureDate.getEditor().getText())
                 .append("TitlenameTH",nameTitleTHClient.getSelectionModel().getSelectedItem())
                 .append("FirstNameTH",firstNameTHClient.getText())
@@ -125,9 +163,8 @@ public class ReservePageController implements Initializable {
                 .append("Age",age.getText())
                 .append("Date_of_birth",dateOfBirthClient.getEditor().getText())
                 .append("Passport_no",passportClient.getText())
-                .append("Expire_passport_date",expPassportDate.getEditor().getText());
-
-        BasicDBObject clientContact = new BasicDBObject()
+                .append("Expire_passport_date",expPassportDate.getEditor().getText())
+        //client contact
                 .append("Full_home_address",homeAddClient.getText())
                 .append("Home_country",countryClient.getText())
                 .append("Home_zip_code",homeZipCodeClient.getText())
@@ -140,15 +177,14 @@ public class ReservePageController implements Initializable {
                 .append("Company_address",compAddClient.getText())
                 .append("Company_country",compCountryClient.getText())
                 .append("Company_zip_code", compZipCodeClient.getText())
-                .append("Work_Tel",workTelClient.getText());
-
-        BasicDBObject moreInfo = new BasicDBObject()
-                .append("Member_status",memberChioce.getTypeSelector())
+                .append("Work_Tel",workTelClient.getText())
+        //moreInfo
+                .append("Member_status",memberChioce.isSelected() ? memberChioce.getText() : notMemberChioce.getText())
                 .append("Disease",underlyingDisease.getText())
-                //.append("Food_allergy".foodAllergy.getText())
-                //.append("Eat_beef",eatBeefN.getTypeSelector())
-                .append("More_detail",moreDetail.getText());
-                //.append("Channel",)
+                .append("Food_allergy",foodAllergy.getText())
+                .append("Eat_beef",eatBeefY.isSelected() ? eatBeefY.getText() : eatBeefN.getText())
+                .append("More_detail",moreDetail.getText())
+                .append("Channel",getChannelList().toString());
 
         reserve_card.insert(clientProfile);
         System.out.println(reserve_card);
@@ -160,18 +196,23 @@ public class ReservePageController implements Initializable {
         System.out.println("MongoDB: Reservation saved!");
 
 
-
+    }
+    public void insertDataBySQLite(){
         //insert data by SQLite
         Connection connection = DbConnect.getConnection();
         String sql = "insert into reserve_card_database (Reservation_code, Departure_date, TitlenameTH, FirstNameTH, LastNameTH, TitlenameENG, FirstNameENG, LastNameENG ," +
-                "TitlenameOld, FirstnameOld, LastnameOld, Gender, Age, Date_of_birth, Passport_no,Expire_passport_date" +
-                ") values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
+                "TitlenameOld, FirstnameOld, LastnameOld, Gender, Age, Date_of_birth, Passport_no, Expire_passport_date," +
+                "Full_home_address, Home_country , Home_zip_code,Cell_phone, Home_Tel,Fax,Email_address, Career, Company_name, Company_address,Company_country,Company_zip_code,Work_Tel," +
+                "Member_status, Disease, Food_allergy,Eat_beef,More_detail, Channel ) " +
+                "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
         PreparedStatement pst;
 
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setString(1,ReserveCode.getText());
+            //clientProfile
+            pst.setString(1,reserveCode.getText());
             pst.setString(2,departureDate.getEditor().getText());
             pst.setString(3,nameTitleTHClient.getSelectionModel().getSelectedItem());
             pst.setString(4,firstNameTHClient.getText());
@@ -187,19 +228,42 @@ public class ReservePageController implements Initializable {
             pst.setString(14,dateOfBirthClient.getEditor().getText());
             pst.setString(15,passportClient.getText());
             pst.setString(16,expPassportDate.getEditor().getText());
-            pst.executeUpdate();
 
+            //clientContact
+            pst.setString(17,homeAddClient.getText());
+            pst.setString(18,countryClient.getText());
+            pst.setString(19,homeZipCodeClient.getText());
+            pst.setString(20,cellphoneClient.getText());
+            pst.setString(21,homeTelClient.getText());
+            pst.setString(22,homeFaxClient.getText());
+            pst.setString(23,emailClient.getText());
+            pst.setString(24,careerClient.getText());
+            pst.setString(25,compNameClient.getText());
+            pst.setString(26,compAddClient.getText());
+            pst.setString(27,compCountryClient.getText());
+            pst.setString(28,compZipCodeClient.getText());
+            pst.setString(29,workTelClient.getText());
+
+            //moreInfo
+            pst.setString(30,memberChioce.isSelected() ? memberChioce.getText() : notMemberChioce.getText());
+            pst.setString(31,underlyingDisease.getText());
+            pst.setString(32,foodAllergy.getText());
+            pst.setString(33,eatBeefY.isSelected() ? eatBeefY.getText() : eatBeefN.getText());
+            pst.setString(34,moreDetail.getText());
+            pst.setString(35,getChannelList().toString());
+
+            pst.executeUpdate();
             System.out.println("SQLite: Reservation data saved!");
+
+            pst.close();
+            connection.close();
+            System.out.println("SQLite: closed!");
+
         } catch (SQLException e) {
             System.err.println("SQLite: Got an exception! ");
             System.out.println(e.getMessage());
-        }finally {
-            connection.close();
         }
-
     }
-
-
 
     /*private void initDrawerToolBar(){
         try {
@@ -225,4 +289,6 @@ public class ReservePageController implements Initializable {
     /*public void setLoginName(String name){
         showUserLogin.setText(name);
     }*/
+
+
 }
