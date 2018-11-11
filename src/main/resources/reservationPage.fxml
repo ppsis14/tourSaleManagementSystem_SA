@@ -56,7 +56,7 @@
                               <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                                  <children>
                                     <Label prefHeight="17.0" prefWidth="200.0" text="* Reservation Code:" />
-                                    <Label prefHeight="17.0" prefWidth="168.0" text="* Tour ID:" />
+                                    <Label prefHeight="17.0" prefWidth="201.0" text="* Tour ID:" />
                                     <Label text="* Departure Date:" />
                                  </children>
                               </HBox>
