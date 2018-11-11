@@ -11,12 +11,12 @@ public class DbConnect {
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(connect_string);
-            System.out.println("Opened database successfully");
+            System.out.println("SQLite: Opened database successfully");
         } catch (Exception e) {
 
             e.printStackTrace();
             System.out.println(e.getMessage());
-            System.out.println("Can not open database");
+            System.out.println("SQLite: Can not open database");
             return null;
         }
         return connection;
@@ -24,5 +24,3 @@ public class DbConnect {
     }
 
 }
-
-
