@@ -27,18 +27,18 @@ import static databaseConnection.MongoDBConnect.reserve_card;
 
 public class ReserveEditPageController implements Initializable {
     @FXML private TextField ReserveCodeED;
-    @FXML private ChoiceBox<?> tourCodeChioceED;
+    @FXML private ChoiceBox<String> tourCodeChioceED;
     @FXML private DatePicker departureDateED;
-    @FXML private ChoiceBox<?> nameTitleTHClientED;
+    @FXML private ChoiceBox<String> nameTitleTHClientED;
     @FXML private TextField firstNameTHClientED;
     @FXML private TextField lastNameTHClientED;
-    @FXML private ChoiceBox<?> nameTitleENClientED;
+    @FXML private ChoiceBox<String> nameTitleENClientED;
     @FXML private TextField firstNameENClientED;
     @FXML private TextField lastNameENClientED;
-    @FXML private ChoiceBox<?> oldNameTitleTHClientED;
+    @FXML private ChoiceBox<String> oldNameTitleTHClientED;
     @FXML private TextField oldFirstNameClientED;
     @FXML private TextField oldLastNameClientED;
-    @FXML private ChoiceBox<?> genderChoiceED;
+    @FXML private ChoiceBox<String> genderChoiceED;
     @FXML private TextField ageED;
     @FXML private DatePicker dateOfBirthClientED;
     @FXML private TextField passportClientED;
