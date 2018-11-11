@@ -73,7 +73,7 @@ public class ReserveEditPageController implements Initializable {
     @FXML private JFXCheckBox others;
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
-    @FXML private JFXButton addClientBtnED;
+    @FXML private JFXButton updateClientBtnED;
 
 
 

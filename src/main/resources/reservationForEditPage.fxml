@@ -294,7 +294,7 @@
       </JFXTabPane>
       <JFXHamburger fx:id="menu" styleClass="jfx-hamburger-icon" stylesheets="@style.css" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0" />
       <JFXDrawer fx:id="drawerMenu" direction="RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
-      <JFXButton fx:id="addClientBtnED" buttonType="RAISED" layoutX="377.0" layoutY="646.0" onAction="#handleAddClientBtnED" prefHeight="30.0" prefWidth="167.0" style="-fx-background-color: #F4D03F; -fx-background-radius: 5;" text="Update Client" textFill="#2c3e50">
+      <JFXButton fx:id="updateClientBtnED" buttonType="RAISED" layoutX="377.0" layoutY="646.0" onAction="#handleUpdateClientBtnED" prefHeight="30.0" prefWidth="167.0" style="-fx-background-color: #F4D03F; -fx-background-radius: 5;" text="Update Client" textFill="#2c3e50">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
