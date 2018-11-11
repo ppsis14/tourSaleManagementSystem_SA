@@ -107,7 +107,6 @@ public class ReservePageController implements Initializable {
         insertDataByMongoDB();
         insertDataBySQLite();
 
-
     }
 
     public void handleMemberCheckbox(ActionEvent event) { notMemberChioce.setSelected(false); }
@@ -195,8 +194,8 @@ public class ReservePageController implements Initializable {
             System.out.println(cursor.next());
         System.out.println("MongoDB: Reservation saved!");
 
-
     }
+
     public void insertDataBySQLite(){
         //insert data by SQLite
         Connection connection = DbConnect.getConnection();

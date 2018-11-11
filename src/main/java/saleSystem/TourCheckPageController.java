@@ -80,29 +80,19 @@ public class TourCheckPageController implements Initializable {
 
     @FXML
     void handleEditBtnTour(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationForEditPage.fxml"));
-            Parent parent = (Parent) loader.load();
-            ReserveEditPageController reserveEditPageController = loader.getController();
-            reserveEditPageController.setText("TAIWAN");
-            Stage stage = new Stage(StageStyle.DECORATED);
-            stage.show();
-            stage.setScene(new Scene(parent));
-        } catch (IOException e) {
-            e.printStackTrace();
+        if(!tableTourCheck.getSelectionModel().isEmpty()) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationForEditPage.fxml"));
+                Parent parent = (Parent) loader.load();
+                ReserveEditPageController reserveEditPageController = loader.getController();
+                reserveEditPageController.setReservCode(tableTourCheck.getSelectionModel().getSelectedItem().getReservCode());
+                Stage stage = new Stage(StageStyle.DECORATED);
+                stage.show();
+                stage.setScene(new Scene(parent));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
-
-        //MongoDB : Update database
-        String reserv_codeEdit = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
-        System.out.println(reserv_codeEdit);
-//        BasicDBObject searchQuery = new BasicDBObject().append("Reservation_code",reserv_codeEdit );
-//
-//        BasicDBObject newData = new BasicDBObject();
-//        newData.append("$set", new BasicDBObject().append("password", 22222222));
-//
-//        reserve_card.update(searchQuery, newData);
-
     }
 
     @FXML
@@ -127,11 +117,9 @@ public class TourCheckPageController implements Initializable {
             while (rs.next()) {
                 obListTour.add(new TourChecking(rs.getString("Reservation_code"), rs.getString("FirstnameTH"), rs.getString("LastnameTH")));
             }
-
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally {
-            connection.close();
         }
 
         reservCodeColumn.setCellValueFactory(new PropertyValueFactory<TourChecking, String>("reservCode"));
@@ -199,7 +187,7 @@ public class TourCheckPageController implements Initializable {
         String reserv_codeDelete = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
 
         BasicDBObject delete = new BasicDBObject("Reservation_code",reserv_codeDelete);
-        reserve_card.remove(delete);    //delete from MongoDB
+        reserve_card.remove(delete);
 
         Cursor cursor = reserve_card.find();
         while (cursor.hasNext())
@@ -222,7 +210,8 @@ public class TourCheckPageController implements Initializable {
             e.printStackTrace();
         }
 
-
     }
+
+
 }
 

@@ -20,7 +20,10 @@ import javafx.scene.control.TextField;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 import static databaseConnection.MongoDBConnect.reserve_card;
@@ -75,10 +78,8 @@ public class ReserveEditPageController implements Initializable {
     @FXML private JFXDrawer drawerMenu;
     @FXML private JFXButton updateClientBtnED;
 
+    private String reservCode;
 
-    public void setText(String txt){
-        reserveCodeED.setText(txt);
-    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SaleManagementUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
@@ -112,104 +113,35 @@ public class ReserveEditPageController implements Initializable {
 
     @FXML
     public void handleUpdateClientBtnED(ActionEvent event)  throws SQLException {
-        //record reservation
+        updateDataByMongoDB();
 
 
-        // insert data by MongoDB
-        MongoDBConnect.getMongoClient();
-
-        BasicDBObject clientProfile = new BasicDBObject()
-                //.append("Tour_ID",)
-                .append("Reservation_code",reserveCodeED.getText())
-                .append("Departure_date",departureDateED.getEditor().getText())
-                .append("TitlenameTH",nameTitleTHClientED.getSelectionModel().getSelectedItem())
-                .append("FirstNameTH",firstNameTHClientED.getText())
-                .append("LastNameTH",lastNameTHClientED.getText())
-                .append("TitlenameENG",nameTitleENClientED.getSelectionModel().getSelectedItem())
-                .append("FirstNameENG",firstNameENClientED.getText())
-                .append("LastNameENG",lastNameENClientED.getText())
-                .append("TitlenameOld",oldNameTitleTHClientED.getSelectionModel().getSelectedItem())
-                .append("FirstnameOld",oldFirstNameClientED.getText())
-                .append("LastnameOld",oldLastNameClientED.getText())
-                .append("Gender",genderChoiceED.getSelectionModel().getSelectedItem())
-                .append("Age",ageED.getText())
-                .append("Date_of_birth",dateOfBirthClientED.getEditor().getText())
-                .append("Passport_no",passportClientED.getText())
-                .append("Expire_passport_date",expPassportDateED.getEditor().getText());
-
-        BasicDBObject clientContact = new BasicDBObject()
-                .append("Full_home_address",homeAddClientED.getText())
-                .append("Home_country",countryClientED.getText())
-                .append("Home_zip_code",homeZipCodeClientED.getText())
-                .append("Cell_phone",cellphoneClientED.getText())
-                .append("Home_Tel",homeTelClientED.getText())
-                .append("Fax",homeFaxClientED.getText())
-                .append("Email_address",emailClientED.getText())
-                .append("Career",careerClientED.getText())
-                .append("Company_name",compNameClientED.getText())
-                .append("Company_address",compAddClientED.getText())
-                .append("Company_country",compCountryClientED.getText())
-                .append("Company_zip_code", compZipCodeClientED.getText())
-                .append("Work_Tel",workTelClientED.getText());
-
-        BasicDBObject moreInfo = new BasicDBObject()
-                .append("Member_status",memberChioceED.getTypeSelector())
-                .append("Disease",underlyingDiseaseED.getText())
-                //.append("Food_allergy".foodAllergy.getText())
-                //.append("Eat_beef",eatBeefN.getTypeSelector())
-                .append("More_detail",moreDetailED.getText());
-                //.append("Channel",)
-
-        reserve_card.insert(clientProfile);
-        System.out.println(reserve_card);
-
-        //show list inserted on display
-        Cursor cursor = reserve_card.find();
-        while (cursor.hasNext())
-            System.out.println(cursor.next());
-        System.out.println("MongoDB: Reservation saved!");
-
-
-
-        //insert data by SQLite
-        Connection connection = DbConnect.getConnection();
-        String sql = "insert into reserve_card_database (Reservation_code, Departure_date, TitlenameTH, FirstNameTH, LastNameTH, TitlenameENG, FirstNameENG, LastNameENG ," +
-                "TitlenameOld, FirstnameOld, LastnameOld, Gender, Age, Date_of_birth, Passport_no,Expire_passport_date" +
-                ") values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)";
-        PreparedStatement pst;
-
-        try {
-
-            pst = connection.prepareStatement(sql);
-            pst.setString(1,reserveCodeED.getText());
-            pst.setString(2,departureDateED.getEditor().getText());
-            pst.setString(3,nameTitleTHClientED.getSelectionModel().getSelectedItem());
-            pst.setString(4,firstNameTHClientED.getText());
-            pst.setString(5,lastNameTHClientED.getText());
-            pst.setString(6,nameTitleENClientED.getSelectionModel().getSelectedItem());
-            pst.setString(7,firstNameENClientED.getText());
-            pst.setString(8,lastNameENClientED.getText());
-            pst.setString(9,oldNameTitleTHClientED.getSelectionModel().getSelectedItem());
-            pst.setString(10,oldFirstNameClientED.getText());
-            pst.setString(11,oldLastNameClientED.getText());
-            pst.setString(12,genderChoiceED.getSelectionModel().getSelectedItem());
-            pst.setString(13,ageED.getText());
-            pst.setString(14,dateOfBirthClientED.getEditor().getText());
-            pst.setString(15,passportClientED.getText());
-            pst.setString(16,expPassportDateED.getEditor().getText());
-            pst.executeUpdate();
-
-            System.out.println("SQLite: Reservation data saved!");
-        } catch (SQLException e) {
-            System.err.println("SQLite: Got an exception! ");
-            System.out.println(e.getMessage());
-        }finally {
-            connection.close();
-        }
 
     }
 
+    public ArrayList<String> getChannelList(){
+        ArrayList<String> channelList = new ArrayList<>();
 
+        if (BangkokbizsnewsED.isSelected())
+            channelList.add(BangkokbizsnewsED.getText());
+        if (DailynewsED.isSelected())
+            channelList.add(DailynewsED.getText());
+        if (KomchadluekED.isSelected())
+            channelList.add(KomchadluekED.getText());
+        if (websiteED.isSelected())
+            channelList.add(websiteED.getText());
+        if (eNewsED.isSelected())
+            channelList.add(eNewsED.getText());
+        if (smsED.isSelected())
+            channelList.add(smsED.getText());
+        if (tvAdsED.isSelected())
+            channelList.add(tvAdsED.getText());
+        if (channelList==null)
+            channelList.add(others.getText());
+
+        return channelList;
+
+    }
 
     /*private void initDrawerToolBar(){
         try {
@@ -235,4 +167,160 @@ public class ReserveEditPageController implements Initializable {
     /*public void setLoginName(String name){
         showUserLogin.setText(name);
     }*/
+
+    public void setReservCode(String code){
+        this.reservCode = code;
+        System.out.println(reservCode);
+        setUpReservationPage();
+
+    }
+
+    public void setUpReservationPage(){
+        Connection connection = DbConnect.getConnection();
+        try {
+            System.out.println(reservCode);
+            String sql = "select * from reserve_card_database where Reservation_code = '"+ this.reservCode +"' ";
+            ResultSet rs = connection.createStatement().executeQuery(sql);
+
+            if(rs != null) {
+
+                reserveCodeED.setText(rs.getString("Reservation_code"));
+                departureDateED.setAccessibleText(rs.getString("Departure_date"));
+                nameTitleTHClientED.setValue(rs.getString("TitlenameTH"));
+                firstNameTHClientED.setText(rs.getString("FirstNameTH"));
+                lastNameTHClientED.setText(rs.getString("LastNameTH"));
+                nameTitleENClientED.setValue(rs.getString("TitlenameENG"));
+                firstNameENClientED.setText(rs.getString("FirstNameENG"));
+                lastNameENClientED.setText(rs.getString("LastNameENG"));
+                oldNameTitleTHClientED.setValue(rs.getString("TitlenameOld"));
+                oldFirstNameClientED.setText(rs.getString("FirstnameOld"));
+                oldLastNameClientED.setText(rs.getString("LastnameOld"));
+                genderChoiceED.setValue(rs.getString("Gender"));
+                ageED.setText(rs.getString("Age"));
+                dateOfBirthClientED.setAccessibleText(rs.getString("Date_of_birth"));
+                passportClientED.setText(rs.getString("Passport_no"));
+                expPassportDateED.getEditor().setAccessibleText(rs.getString("Expire_passport_date"));
+                //clientContact
+                homeAddClientED.setText(rs.getString("Full_home_address"));
+                countryClientED.setText(rs.getString("Home_country"));
+                homeZipCodeClientED.setText(rs.getString("Home_zip_code"));
+                cellphoneClientED.setText(rs.getString("Cell_phone"));
+                homeTelClientED.setText(rs.getString("Home_Tel"));
+                homeFaxClientED.setText(rs.getString("Fax"));
+                emailClientED.setText(rs.getString("Email_address"));
+                careerClientED.setText(rs.getString("Career"));
+                compNameClientED.setText(rs.getString("Company_name"));
+                compAddClientED.setText(rs.getString("Company_address"));
+                compCountryClientED.setText(rs.getString("Company_country"));
+                compZipCodeClientED.setText(rs.getString("Company_zip_code"));
+                workTelClientED.setText(rs.getString("Work_Tel"));
+                //moreInfo
+                if (rs.getString("Member_status") == "Not member") {
+                    notMemberChioceED.setSelected(true);
+                    memberChioceED.setSelected(false);
+                } else {
+                    memberChioceED.setSelected(true);
+                    notMemberChioceED.setSelected(false);
+                }
+                underlyingDiseaseED.setText("Disease");
+                foodAllergyED.setText(rs.getString("Food_allergy"));
+
+                if (rs.getString("Eat_beef") == "No") {
+                    eatBeefNED.setSelected(true);
+                    eatBeefYED.setSelected(false);
+                } else {
+                    eatBeefYED.setSelected(true);
+                    eatBeefNED.setSelected(false);
+                }
+
+                moreDetailED.setText(rs.getString("More_detail"));
+
+                ArrayList<String> channel = (ArrayList<String>) rs.getArray("Channel");
+                for (String c : channel) {
+
+                    if (c.equals("Bangkokbizsnews"))
+                        BangkokbizsnewsED.setSelected(true);
+                    if (c.equals("Dailynews"))
+                        DailynewsED.setSelected(true);
+                    if (c.equals("Komchadluek"))
+                        KomchadluekED.setSelected(true);
+                    if (c.equals("website"))
+                        websiteED.setSelected(true);
+                    if (c.equals("eNews"))
+                        eNewsED.setSelected(true);
+                    if (c.equals("sms"))
+                        smsED.setSelected(true);
+                    if (c.equals("tvAds"))
+                        tvAdsED.setSelected(true);
+                    if (c.equals("Others"))
+                        others.setSelected(true);
+                }
+
+            }connection.close();
+            } catch (SQLException e) {
+                System.err.println("SQLite: Got an exception! ");
+                System.out.println(e.getMessage());
+            }
+     }
+
+     public void updateDataByMongoDB(){
+         // update data by MongoDB
+         MongoDBConnect.getMongoClient();
+
+         BasicDBObject oldDoc = new BasicDBObject().append("Reservation_code",reservCode);
+         BasicDBObject newEdit = new BasicDBObject();
+
+         newEdit.append("$set" , new BasicDBObject()
+                 //.append("Tour_ID",)
+                 .append("Reservation_code",reserveCodeED.getText())
+                 .append("Departure_date",departureDateED.getEditor().getText())
+                 .append("TitlenameTH",nameTitleTHClientED.getSelectionModel().getSelectedItem())
+                 .append("FirstNameTH",firstNameTHClientED.getText())
+                 .append("LastNameTH",lastNameTHClientED.getText())
+                 .append("TitlenameENG",nameTitleENClientED.getSelectionModel().getSelectedItem())
+                 .append("FirstNameENG",firstNameENClientED.getText())
+                 .append("LastNameENG",lastNameENClientED.getText())
+                 .append("TitlenameOld",oldNameTitleTHClientED.getSelectionModel().getSelectedItem())
+                 .append("FirstnameOld",oldFirstNameClientED.getText())
+                 .append("LastnameOld",oldLastNameClientED.getText())
+                 .append("Gender",genderChoiceED.getSelectionModel().getSelectedItem())
+                 .append("Age",ageED.getText())
+                 .append("Date_of_birth",dateOfBirthClientED.getEditor().getText())
+                 .append("Passport_no",passportClientED.getText())
+                 .append("Expire_passport_date",expPassportDateED.getEditor().getText())
+                 //clientContact
+                 .append("Full_home_address",homeAddClientED.getText())
+                 .append("Home_country",countryClientED.getText())
+                 .append("Home_zip_code",homeZipCodeClientED.getText())
+                 .append("Cell_phone",cellphoneClientED.getText())
+                 .append("Home_Tel",homeTelClientED.getText())
+                 .append("Fax",homeFaxClientED.getText())
+                 .append("Email_address",emailClientED.getText())
+                 .append("Career",careerClientED.getText())
+                 .append("Company_name",compNameClientED.getText())
+                 .append("Company_address",compAddClientED.getText())
+                 .append("Company_country",compCountryClientED.getText())
+                 .append("Company_zip_code", compZipCodeClientED.getText())
+                 .append("Work_Tel",workTelClientED.getText())
+                 //moreInfo
+                 .append("Member_status",memberChioceED.isSelected() ? memberChioceED.getText() : notMemberChioceED.getText())
+                 .append("Disease",underlyingDiseaseED.getText())
+                 .append("Food_allergy",foodAllergyED.getText())
+                 .append("Eat_beef",eatBeefYED.isSelected() ? eatBeefYED.getText() : eatBeefNED.getText())
+                 .append("More_detail",moreDetailED.getText())
+                 .append("Channel",getChannelList().toString()));
+
+         reserve_card.update(oldDoc,newEdit);
+
+         //show list update on display
+         Cursor cursor = reserve_card.find();
+         while (cursor.hasNext())
+             System.out.println(cursor.next());
+         System.out.println("MongoDB: Reservation update!");
+
+     }
+
+     public void updateDataBySqlite(){
+
+     }
 }
