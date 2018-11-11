@@ -98,7 +98,6 @@ public class LoginPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /*
         //EX. setup id,password
 
         MongoDBConnect.getMongoClient();
@@ -115,7 +114,6 @@ public class LoginPageController implements Initializable {
         Cursor cursor = employee.find();
         while (cursor.hasNext())
             System.out.println(cursor.next());
-        */
         username.setVisible(true);
         password.setVisible(true);
     }
