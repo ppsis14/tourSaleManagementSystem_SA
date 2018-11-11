@@ -10,11 +10,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -98,6 +104,19 @@ public class TourCheckPageController implements Initializable {
 
     @FXML
     void handleEditBtnTour(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/reservationForEditPage.fxml"));
+            Parent parent = (Parent) loader.load();
+            ReservePageController reservePageController = loader.getController();
+            reservePageController.setText("TAIWAN");
+            Stage stage = new Stage(StageStyle.DECORATED);
+            stage.show();
+            stage.setScene(new Scene(parent));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
         //MongoDB : Update database
         String reserv_codeEdit = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
         System.out.println(reserv_codeEdit);
