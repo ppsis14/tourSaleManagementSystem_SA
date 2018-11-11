@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class DbConnect {
     public static Connection getConnection() {
         Connection connection;
-        String connect_string = "jdbc:sqlite::resource:sale_system_database.db";
+        String connect_string = "jdbc:sqlite:sale_system_database.db";
         try {
             Class.forName("org.sqlite.JDBC");
             connection = DriverManager.getConnection(connect_string);

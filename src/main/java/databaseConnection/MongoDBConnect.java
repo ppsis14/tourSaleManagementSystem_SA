@@ -34,20 +34,9 @@ public class MongoDBConnect {
         //(1)drop database
         //mongoClient.dropDatabase("testDrop");
 
-        //(2)delete document in collection
-        /*
-        BasicDBObject delete = new BasicDBObject("firstNameENG","wipa");
-        reserve_card.remove(delete);
-        */
 
-        //(3)Update database
-        /*BasicDBObject newDocument = new BasicDBObject();
-        newDocument.append("$set", new BasicDBObject().append("password", 22222222));
 
-        BasicDBObject searchQuery = new BasicDBObject().append("id", "5910406451");
 
-        collection.update(searchQuery, newDocument);
-        */
 
     }
 

@@ -3,6 +3,8 @@ package saleSystem;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import com.mongodb.BasicDBObject;
+import com.mongodb.Cursor;
 import databaseConnection.DbConnect;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +17,13 @@ import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static databaseConnection.MongoDBConnect.reserve_card;
 
 
 public class TourCheckPageController implements Initializable {
@@ -59,13 +64,49 @@ public class TourCheckPageController implements Initializable {
     }
 
     @FXML
-    void handleDeleteBtnTour(ActionEvent event) {
+    void handleDeleteBtnTour(ActionEvent event) throws SQLException {
+        //MongoDB : Delete data
+        String reserv_codeDelete = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
 
+        BasicDBObject delete = new BasicDBObject("Reservation_code",reserv_codeDelete);
+        reserve_card.remove(delete);    //delete from MongoDB
 
+        Cursor cursor = reserve_card.find();
+        while (cursor.hasNext())
+            System.out.println(cursor.next());
+
+        //SQLite : Delete data
+        Connection connection = DbConnect.getConnection();
+        PreparedStatement pst ;
+        String sql = "Delete from reserve_card_database where Reservation_code = ?";
+        try {
+            pst = connection.prepareStatement(sql);
+            pst.setString(1,reserv_codeDelete);
+            pst.execute();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+                connection.close();
+                System.out.println("Close database");
+        }
+
+        //ObservableList (Table View) : Delete data
+        obListTour.remove(tableTourCheck.getSelectionModel().getSelectedItem());
     }
 
     @FXML
     void handleEditBtnTour(ActionEvent event) {
+        //MongoDB : Update database
+        String reserv_codeEdit = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
+        System.out.println(reserv_codeEdit);
+//        BasicDBObject searchQuery = new BasicDBObject().append("Reservation_code",reserv_codeEdit );
+//
+//        BasicDBObject newData = new BasicDBObject();
+//        newData.append("$set", new BasicDBObject().append("password", 22222222));
+//
+//        reserve_card.update(searchQuery, newData);
 
     }
 

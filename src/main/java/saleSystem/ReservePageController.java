@@ -102,7 +102,7 @@ public class ReservePageController implements Initializable {
     public void handleAddClientBtn(ActionEvent event) throws SQLException {
         //record reservation
 
-        /*
+
         // insert data by MongoDB
         MongoDBConnect.getMongoClient();
 
@@ -157,7 +157,7 @@ public class ReservePageController implements Initializable {
             System.out.println(cursor.next());
         System.out.println("MongoDB: Reservation saved!");
 
-        */
+
 
         //insert data by SQLite
         Connection connection = DbConnect.getConnection();
