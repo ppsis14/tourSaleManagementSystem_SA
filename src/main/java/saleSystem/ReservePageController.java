@@ -24,8 +24,8 @@ public class ReservePageController implements Initializable {
 
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
-    @FXML private ChoiceBox<?> tourCodeChoice;
-    @FXML private TextField reserveCode;
+    @FXML private ChoiceBox<?> tourCodeChioce;
+    @FXML private TextField ReserveCode;
     @FXML private DatePicker departureDate;
     @FXML private ChoiceBox<String> nameTitleTHClient;
     @FXML private TextField firstNameTHClient;
@@ -70,10 +70,6 @@ public class ReservePageController implements Initializable {
     @FXML private JFXCheckBox sms;
     @FXML private JFXCheckBox tvAds;
 
-    public void setText(String txt){
-        reserveCode.setText(txt);
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         SaleManagementUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
@@ -104,7 +100,6 @@ public class ReservePageController implements Initializable {
         //reservePane.setVisible(false);
 
     }
-
     @FXML
     public void handleAddClientBtn(ActionEvent event) throws SQLException {
         //record reservation
@@ -115,7 +110,7 @@ public class ReservePageController implements Initializable {
 
         BasicDBObject clientProfile = new BasicDBObject()
                 //.append("Tour_ID",)
-                .append("Reservation_code",reserveCode.getText())
+                .append("Reservation_code",ReserveCode.getText())
                 .append("Departure_date",departureDate.getEditor().getText())
                 .append("TitlenameTH",nameTitleTHClient.getSelectionModel().getSelectedItem())
                 .append("FirstNameTH",firstNameTHClient.getText())
@@ -176,7 +171,7 @@ public class ReservePageController implements Initializable {
         try {
 
             pst = connection.prepareStatement(sql);
-            pst.setString(1,reserveCode.getText());
+            pst.setString(1,ReserveCode.getText());
             pst.setString(2,departureDate.getEditor().getText());
             pst.setString(3,nameTitleTHClient.getSelectionModel().getSelectedItem());
             pst.setString(4,firstNameTHClient.getText());
