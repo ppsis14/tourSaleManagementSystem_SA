@@ -1,4 +1,5 @@
 package saleSystem;
+import Table.Customer;
 import com.jfoenix.controls.*;
 import com.mongodb.BasicDBObject;
 import com.mongodb.Cursor;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static databaseConnection.MongoDBConnect.reserve_card;
+import static saleSystem.Controller.databaseManager;
 
 public class ReservePageController implements Initializable {
 
@@ -70,6 +72,7 @@ public class ReservePageController implements Initializable {
     @FXML private JFXCheckBox others;
     @FXML private JFXCheckBox sms;
     @FXML private JFXCheckBox tvAds;
+    Customer customer = new Customer();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -104,8 +107,9 @@ public class ReservePageController implements Initializable {
     @FXML
     public void handleAddClientBtn(ActionEvent event) throws SQLException {
         //record reservation
-        insertDataByMongoDB();
-        insertDataBySQLite();
+        addCustomer();
+        databaseManager.insertData(customer);
+
 
     }
 
@@ -138,156 +142,39 @@ public class ReservePageController implements Initializable {
 
     }
 
-    public void insertDataByMongoDB(){
+    public void addCustomer(){
 
-        // insert data by MongoDB
-
-        MongoDBConnect.getMongoClient();        //connect to MongoDB
-
-        BasicDBObject clientProfile = new BasicDBObject()
-                //clientProfile
-                //.append("Tour_ID",)
-                .append("Reservation_code",reserveCode.getText())
-                .append("Departure_date",departureDate.getEditor().getText())
-                .append("TitlenameTH",nameTitleTHClient.getSelectionModel().getSelectedItem())
-                .append("FirstNameTH",firstNameTHClient.getText())
-                .append("LastNameTH",lastNameTHClient.getText())
-                .append("TitlenameENG",nameTitleENClient.getSelectionModel().getSelectedItem())
-                .append("FirstNameENG",firstNameENClient.getText())
-                .append("LastNameENG",lastNameENClient.getText())
-                .append("TitlenameOld",oldNameTitleTHClient.getSelectionModel().getSelectedItem())
-                .append("FirstnameOld",oldFirstNameClient.getText())
-                .append("LastnameOld",oldLastNameClient.getText())
-                .append("Gender",genderChoice.getSelectionModel().getSelectedItem())
-                .append("Age",age.getText())
-                .append("Date_of_birth",dateOfBirthClient.getEditor().getText())
-                .append("Passport_no",passportClient.getText())
-                .append("Expire_passport_date",expPassportDate.getEditor().getText())
-        //client contact
-                .append("Full_home_address",homeAddClient.getText())
-                .append("Home_country",countryClient.getText())
-                .append("Home_zip_code",homeZipCodeClient.getText())
-                .append("Cell_phone",cellphoneClient.getText())
-                .append("Home_Tel",homeTelClient.getText())
-                .append("Fax",homeFaxClient.getText())
-                .append("Email_address",emailClient.getText())
-                .append("Career",careerClient.getText())
-                .append("Company_name",compNameClient.getText())
-                .append("Company_address",compAddClient.getText())
-                .append("Company_country",compCountryClient.getText())
-                .append("Company_zip_code", compZipCodeClient.getText())
-                .append("Work_Tel",workTelClient.getText())
+        customer.setTitleNameTH(nameTitleTHClient.getSelectionModel().getSelectedItem());
+        customer.setFirstNameTH(firstNameTHClient.getText());
+        customer.setLastNameTH(lastNameTHClient.getText());
+        customer.setTitleNameENG(nameTitleENClient.getSelectionModel().getSelectedItem());
+        customer.setFirstNameENG(firstNameENClient.getText());
+        customer.setLastNameENG(lastNameENClient.getText());
+        customer.setTitleNameOld(oldNameTitleTHClient.getSelectionModel().getSelectedItem());
+        customer.setFirstNameOld(oldFirstNameClient.getText());
+        customer.setLastNameOld(oldLastNameClient.getText());
+        customer.setGender(genderChoice.getSelectionModel().getSelectedItem());
+        customer.setAge(age.getText());
+        customer.setDateOfBirth(dateOfBirthClient.getEditor().getText());
+        customer.setPassport_no(passportClient.getText());
+        customer.setExp_passport(expPassportDate.getEditor().getText());
+        //clientContact
+        customer.setHomeAddress(homeAddClient.getText()+" "+countryClient.getText()+" "+homeZipCodeClient.getText());
+        customer.setCell_phone(cellphoneClient.getText());
+        customer.setHome_Tel(homeTelClient.getText());
+        customer.setFax(homeFaxClient.getText());
+        customer.setEmail(emailClient.getText());
+        customer.setCareer(careerClient.getText());
+        customer.setCompanyAddress(compNameClient.getText()+" "+compAddClient.getText()+" "+compCountryClient.getText()+" "+compZipCodeClient.getText());
+        customer.setWork_Tel(workTelClient.getText());
         //moreInfo
-                .append("Member_status",memberChioce.isSelected() ? memberChioce.getText() : notMemberChioce.getText())
-                .append("Disease",underlyingDisease.getText())
-                .append("Food_allergy",foodAllergy.getText())
-                .append("Eat_beef",eatBeefY.isSelected() ? eatBeefY.getText() : eatBeefN.getText())
-                .append("More_detail",moreDetail.getText())
-                .append("Channel",getChannelList().toString());
-
-        reserve_card.insert(clientProfile);
-        System.out.println(reserve_card);
-
-        //show list inserted on display
-        Cursor cursor = reserve_card.find();
-        while (cursor.hasNext())
-            System.out.println(cursor.next());
-        System.out.println("MongoDB: Reservation saved!");
-
+        customer.setMemberStatus(memberChioce.isSelected() ? memberChioce.getText() : notMemberChioce.getText());
+        customer.setDisease(underlyingDisease.getText());
+        customer.setFoodAllergy(foodAllergy.getText());
+        customer.setEatBeef(eatBeefY.isSelected() ? eatBeefY.getText() : eatBeefN.getText());
+        customer.setMoreDetail(moreDetail.getText());
+        customer.setChannel(getChannelList().toString());
     }
-
-    public void insertDataBySQLite(){
-        //insert data by SQLite
-        Connection connection = DbConnect.getConnection();
-        String sql = "insert into reserve_card_database (Reservation_code, Departure_date, TitlenameTH, FirstNameTH, LastNameTH, TitlenameENG, FirstNameENG, LastNameENG ," +
-                "TitlenameOld, FirstnameOld, LastnameOld, Gender, Age, Date_of_birth, Passport_no, Expire_passport_date," +
-                "Full_home_address, Home_country , Home_zip_code,Cell_phone, Home_Tel,Fax,Email_address, Career, Company_name, Company_address,Company_country,Company_zip_code,Work_Tel," +
-                "Member_status, Disease, Food_allergy,Eat_beef,More_detail, Channel ) " +
-                "values( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-        PreparedStatement pst;
-
-        try {
-
-            pst = connection.prepareStatement(sql);
-            //clientProfile
-            pst.setString(1,reserveCode.getText());
-            pst.setString(2,departureDate.getEditor().getText());
-            pst.setString(3,nameTitleTHClient.getSelectionModel().getSelectedItem());
-            pst.setString(4,firstNameTHClient.getText());
-            pst.setString(5,lastNameTHClient.getText());
-            pst.setString(6,nameTitleENClient.getSelectionModel().getSelectedItem());
-            pst.setString(7,firstNameENClient.getText());
-            pst.setString(8,lastNameENClient.getText());
-            pst.setString(9,oldNameTitleTHClient.getSelectionModel().getSelectedItem());
-            pst.setString(10,oldFirstNameClient.getText());
-            pst.setString(11,oldLastNameClient.getText());
-            pst.setString(12,genderChoice.getSelectionModel().getSelectedItem());
-            pst.setString(13,age.getText());
-            pst.setString(14,dateOfBirthClient.getEditor().getText());
-            pst.setString(15,passportClient.getText());
-            pst.setString(16,expPassportDate.getEditor().getText());
-
-            //clientContact
-            pst.setString(17,homeAddClient.getText());
-            pst.setString(18,countryClient.getText());
-            pst.setString(19,homeZipCodeClient.getText());
-            pst.setString(20,cellphoneClient.getText());
-            pst.setString(21,homeTelClient.getText());
-            pst.setString(22,homeFaxClient.getText());
-            pst.setString(23,emailClient.getText());
-            pst.setString(24,careerClient.getText());
-            pst.setString(25,compNameClient.getText());
-            pst.setString(26,compAddClient.getText());
-            pst.setString(27,compCountryClient.getText());
-            pst.setString(28,compZipCodeClient.getText());
-            pst.setString(29,workTelClient.getText());
-
-            //moreInfo
-            pst.setString(30,memberChioce.isSelected() ? memberChioce.getText() : notMemberChioce.getText());
-            pst.setString(31,underlyingDisease.getText());
-            pst.setString(32,foodAllergy.getText());
-            pst.setString(33,eatBeefY.isSelected() ? eatBeefY.getText() : eatBeefN.getText());
-            pst.setString(34,moreDetail.getText());
-            pst.setString(35,getChannelList().toString());
-
-            pst.executeUpdate();
-            System.out.println("SQLite: Reservation data saved!");
-
-            pst.close();
-            connection.close();
-            System.out.println("SQLite: closed!");
-
-        } catch (SQLException e) {
-            System.err.println("SQLite: Got an exception! ");
-            System.out.println(e.getMessage());
-        }
-    }
-
-    /*private void initDrawerToolBar(){
-        try {
-            VBox toolbar = FXMLLoader.load(getClass().getResource("/hamburgerMenu.fxml"));
-            drawerMenu.setSidePane(toolbar);
-            drawerMenu.setDefaultDrawerSize(100);
-        } catch (IOException e) {
-            Logger.getLogger(FXMLLoader.class.getName()).log(Level.SEVERE,null, e);
-        }
-
-        HamburgerNextArrowBasicTransition hamMenu = new HamburgerNextArrowBasicTransition(menu);
-        hamMenu.setRate(-1);
-        menu.addEventHandler(MouseEvent.MOUSE_CLICKED, (event) -> {
-            hamMenu.setRate(hamMenu.getRate()*-1);
-            hamMenu.play();
-            if (drawerMenu.isHidden()) drawerMenu.open();
-            else drawerMenu.close();
-
-        });
-    }*/
-
-
-    /*public void setLoginName(String name){
-        showUserLogin.setText(name);
-    }*/
 
 
 }

@@ -71,8 +71,6 @@ public class TourCheckPageController implements Initializable {
 
     @FXML
     void handleDeleteBtnTour(ActionEvent event) throws SQLException {
-        deleteDataByMongoDB();
-        deleteDataBySqlite();
 
         //ObservableList (Table View) : Delete data
         obListTour.remove(tableTourCheck.getSelectionModel().getSelectedItem());
@@ -108,7 +106,7 @@ public class TourCheckPageController implements Initializable {
 
     public void showTableView() throws SQLException {
 
-        //find data base for show on table view.
+        /*//find data base for show on table view.
         Connection connection = DbConnect.getConnection();
         try {
 
@@ -130,7 +128,7 @@ public class TourCheckPageController implements Initializable {
         firstnameColumn.setCellFactory(TextFieldTableCell.<TourChecking>forTableColumn());
         lastnameColumn.setCellFactory(TextFieldTableCell.<TourChecking>forTableColumn());
         tableTourCheck.setItems(obListTour);
-
+*/
 
     }
 
@@ -182,35 +180,6 @@ public class TourCheckPageController implements Initializable {
         }
     }
 
-    public void deleteDataByMongoDB(){
-        //MongoDB : Delete data
-        String reserv_codeDelete = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
-
-        BasicDBObject delete = new BasicDBObject("Reservation_code",reserv_codeDelete);
-        reserve_card.remove(delete);
-
-        Cursor cursor = reserve_card.find();
-        while (cursor.hasNext())
-            System.out.println(cursor.next());
-    }
-
-    public void deleteDataBySqlite(){
-        //SQLite : Delete data
-
-        Connection connection = DbConnect.getConnection();
-        PreparedStatement pst ;
-        String reserv_codeDelete = tableTourCheck.getSelectionModel().getSelectedItem().getReservCode();
-        String sql = "Delete from reserve_card_database where Reservation_code = ?";
-        try {
-            pst = connection.prepareStatement(sql);
-            pst.setString(1,reserv_codeDelete);
-            pst.execute();
-            connection.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
 
 
 }

@@ -72,7 +72,7 @@ public class LoginPageController implements Initializable {
 
     @FXML
     public void handleLoginButton(ActionEvent event) throws IOException, SQLException {
-        checkLogInByMongoDB();
+        checkLogInBySqlite();
     }
 
 

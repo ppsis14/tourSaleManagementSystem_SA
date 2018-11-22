@@ -14,26 +14,13 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PaymentReceiptPageController implements Initializable {
-    @FXML
-    private TextField ReserveCodeDPayment;
-
-    @FXML
-    private JFXButton searchBtnDPayment;
-
-    @FXML
-    private JFXButton createDPaymentBtn;
-
-    @FXML
-    private TableView<?> tableDepositPayment;
-
-    @FXML
-    private Button editBtnDPayment;
-
-    @FXML
-    private Button deleteBtnDPayment;
-
-    @FXML
-    private Button updateBtnDPayment;
+    @FXML private TextField ReserveCodeDPayment;
+    @FXML private JFXButton searchBtnDPayment;
+    @FXML private JFXButton createDPaymentBtn;
+    @FXML private TableView<?> tableDepositPayment;
+    @FXML private Button editBtnDPayment;
+    @FXML private Button deleteBtnDPayment;
+    @FXML private Button updateBtnDPayment;
 
     @FXML
     private TextField ReserveCodeAPayment;
