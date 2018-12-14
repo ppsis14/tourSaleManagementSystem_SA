@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.EditCustomerPageController">
+   <children>
+      <AnchorPane fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Pane layoutX="26.0" prefHeight="85.0" prefWidth="800.0" style="-fx-background-color: #2C3E50;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label graphicTextGap="10.0" layoutX="70.0" layoutY="30.0" text="Edit Customer Information" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-edit_file.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <JFXTabPane prefHeight="329.0" prefWidth="800.0" styleClass="tab-selected-line" stylesheets="@style.css" AnchorPane.topAnchor="100.0">
+               <tabs>
+                  <Tab text="Information">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="292.0" prefWidth="798.0">
+                           <children>
+                              <VBox layoutX="60.0" layoutY="14.0" prefHeight="282.0" prefWidth="664.0" spacing="10.0">
+                                 <children>
+                                    <Label text="* Name (TH)" />
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <ChoiceBox fx:id="titleNameTH" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
+                                          <TextField fx:id="firstNameTH" prefHeight="27.0" prefWidth="253.0" promptText="First Name" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="lastNameTH" prefHeight="27.0" prefWidth="253.0" promptText="Last name" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                    <Label text="* Name (EN)" />
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <ChoiceBox fx:id="titleNameEN" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
+                                          <TextField fx:id="firstNameEN" prefHeight="27.0" prefWidth="253.0" promptText="First Name" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="lastNameEN" prefHeight="27.0" prefWidth="253.0" promptText="Last Name" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="170.0" text="Gender:" />
+                                          <Label prefHeight="17.0" prefWidth="142.0" text="* Age:" />
+                                          <Label prefHeight="17.0" prefWidth="278.0" text="Occupation:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <ChoiceBox fx:id="genderChoice" prefHeight="29.0" prefWidth="171.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
+                                          <TextField fx:id="age" prefHeight="29.0" prefWidth="144.0" promptText="Age" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="occupation" prefHeight="29.0" prefWidth="277.0" promptText="Occupation" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="232.0" text="* Date of Birth:" />
+                                          <Label prefHeight="17.0" prefWidth="206.0" text="* Passport Number:" />
+                                          <Label prefHeight="17.0" prefWidth="232.0" text="* Expire Date:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <DatePicker fx:id="dateOfBirth" prefHeight="27.0" prefWidth="233.0" promptText="Date of birth" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="passportNo" prefHeight="29.0" prefWidth="206.0" promptText="Passport Number" style="-fx-border-color: #2C3E50;" />
+                                          <DatePicker fx:id="expPassportDate" prefHeight="27.0" prefWidth="232.0" promptText="Expire Date" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Contact">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="60.0" layoutY="14.0" prefHeight="253.0" prefWidth="664.0" spacing="10.0">
+                                 <children>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="448.0" text="* Contact Address:" />
+                                       </children>
+                                    </HBox>
+                                    <TextArea fx:id="address" prefHeight="65.0" prefWidth="664.0" style="-fx-border-color: #2C3E50;" />
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="216.0" text="* Cell Phone:" />
+                                          <Label prefHeight="17.0" prefWidth="215.0" text="* Home Tel:" />
+                                          <Label prefHeight="17.0" prefWidth="215.0" text="Fax:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="cellphoneClient" prefHeight="29.0" prefWidth="232.0" promptText="Cell Phone" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="homeTelClient" prefHeight="29.0" prefWidth="232.0" promptText="Home Tel" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="homeFaxClient" prefHeight="29.0" prefWidth="232.0" promptText="Fax" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="233.0" text="* Email Address:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="emailClient" prefHeight="29.0" prefWidth="232.0" promptText="Email Address" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="More Info">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="60.0" layoutY="14.0" prefHeight="271.0" prefWidth="664.0" spacing="10.0">
+                                 <children>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0" />
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="327.0" text="* Underlying disease:" />
+                                          <Label prefHeight="17.0" prefWidth="180.0" text="* Food allergy:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="underlyingDisease" prefHeight="29.0" prefWidth="332.0" promptText="Underlying disease" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="foodAllergy" prefHeight="29.0" prefWidth="332.0" promptText="Food allergy" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="214.0" text="* Do you eat beef?" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <JFXCheckBox fx:id="eatBeefY" maxHeight="1.7976931348623157E308" onAction="#handleEatBeefCheckbox" prefHeight="27.0" prefWidth="100.0" text="Yes" />
+                                          <JFXCheckBox fx:id="eatBeefN" maxHeight="1.7976931348623157E308" onAction="#handleNotEatBeefCheckbox" text="No" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="278.0" text="More Detail:" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <TextField fx:id="moreDetail" prefHeight="29.0" prefWidth="665.0" promptText="More Detail" style="-fx-border-color: #2C3E50;" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="448.0" text="* How did you hear about us?" />
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                                       <children>
+                                          <ComboBox fx:id="hearAboutUsChoices" prefHeight="27.0" prefWidth="186.0" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+            <JFXButton fx:id="saveDataBtn" alignment="CENTER" buttonType="RAISED" layoutX="343.0" layoutY="478.0" onAction="#handleSaveDataBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Save" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="145.0" layoutY="429.0" prefHeight="29.0" prefWidth="511.0" text="** Please check the accuracy and completeness of the information before saving." textFill="#c90000" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

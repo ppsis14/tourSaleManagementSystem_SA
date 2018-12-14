@@ -1,48 +1,59 @@
 package Table;
 
-import java.util.ArrayList;
-
 public class Customer {
-    private int customerID;
+    private String customerID;
     private String titleNameTH;
     private String firstNameTH;
     private String lastNameTH;
     private String titleNameENG;
     private String firstNameENG;
     private String lastNameENG;
-    private String titleNameOld;
-    private String firstNameOld;
-    private String lastNameOld;
     private String gender;
     private String age;
+    private String occupation;
     private String dateOfBirth;
     private String passport_no;
     private String exp_passport;
-    private String homeAddress;
+
+    private String contactAddress;
     private String cell_phone;
     private String home_Tel;
     private String fax;
     private String email;
-    private String career;
-    private String companyAddress;
-    private String work_Tel;
-    private String memberStatus;
+
     private String disease;
     private String foodAllergy;
     private String eatBeef;
     private String moreDetail;
-    private String channel;
+    private String hearAboutUs;
 
-    public Customer(){
-
+    public Customer() {
+        this.customerID = null;
+        this.titleNameTH = "นางสาว";
+        this.firstNameTH = null;
+        this.lastNameTH = null;
+        this.titleNameENG = "Miss";
+        this.firstNameENG = null;
+        this.lastNameENG = null;
+        this.gender = "Female";
+        this.age = null;
+        this.occupation = null;
+        this.dateOfBirth = "dd-mm-yyyy";
+        this.passport_no = null;
+        this.exp_passport = "dd-mm-yyyy";
+        this.contactAddress = null;
+        this.cell_phone = null;
+        this.home_Tel = null;
+        this.fax = null;
+        this.email = null;
+        this.disease = null;
+        this.foodAllergy = null;
+        this.eatBeef = null;
+        this.moreDetail = null;
+        this.hearAboutUs = "Bangkokbizs News";
     }
-    public Customer(int customerID , String titleNameTH, String firstNameTH, String lastNameTH, String titleNameENG,
-                    String firstNameENG, String lastNameENG, String titleNameOld, String firstNameOld, String lastNameOld,
-                    String gender, String age, String dateOfBirth, String passport_no, String exp_passport, String homeAddress,
-                    String cell_phone, String home_Tel, String fax, String email, String career, String companyAddress,
-                    String work_Tel, String memberStatus, String disease, String foodAllergy, String eatBeef, String moreDetail,
-                    String channel) {
 
+    public Customer(String customerID, String titleNameTH, String firstNameTH, String lastNameTH, String titleNameENG, String firstNameENG, String lastNameENG, String gender, String age, String occupation, String dateOfBirth, String passport_no, String exp_passport, String contactAddress, String cell_phone, String home_Tel, String fax, String email, String disease, String foodAllergy, String eatBeef, String moreDetail, String hearAboutUs) {
         this.customerID = customerID;
         this.titleNameTH = titleNameTH;
         this.firstNameTH = firstNameTH;
@@ -50,35 +61,29 @@ public class Customer {
         this.titleNameENG = titleNameENG;
         this.firstNameENG = firstNameENG;
         this.lastNameENG = lastNameENG;
-        this.titleNameOld = titleNameOld;
-        this.firstNameOld = firstNameOld;
-        this.lastNameOld = lastNameOld;
         this.gender = gender;
         this.age = age;
+        this.occupation = occupation;
         this.dateOfBirth = dateOfBirth;
         this.passport_no = passport_no;
         this.exp_passport = exp_passport;
-        this.homeAddress = homeAddress;
+        this.contactAddress = contactAddress;
         this.cell_phone = cell_phone;
         this.home_Tel = home_Tel;
         this.fax = fax;
         this.email = email;
-        this.career = career;
-        this.companyAddress = companyAddress;
-        this.work_Tel = work_Tel;
-        this.memberStatus = memberStatus;
         this.disease = disease;
         this.foodAllergy = foodAllergy;
         this.eatBeef = eatBeef;
         this.moreDetail = moreDetail;
-        this.channel = channel;
+        this.hearAboutUs = hearAboutUs;
     }
 
-    public int getCustomerID() {
+    public String getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(int customerID) {
+    public void setCustomerID(String customerID) {
         this.customerID = customerID;
     }
 
@@ -130,30 +135,6 @@ public class Customer {
         this.lastNameENG = lastNameENG;
     }
 
-    public String getTitleNameOld() {
-        return titleNameOld;
-    }
-
-    public void setTitleNameOld(String titleNameOld) {
-        this.titleNameOld = titleNameOld;
-    }
-
-    public String getFirstNameOld() {
-        return firstNameOld;
-    }
-
-    public void setFirstNameOld(String firstNameOld) {
-        this.firstNameOld = firstNameOld;
-    }
-
-    public String getLastNameOld() {
-        return lastNameOld;
-    }
-
-    public void setLastNameOld(String lastNameOld) {
-        this.lastNameOld = lastNameOld;
-    }
-
     public String getGender() {
         return gender;
     }
@@ -168,6 +149,14 @@ public class Customer {
 
     public void setAge(String age) {
         this.age = age;
+    }
+
+    public String getOccupation() {
+        return occupation;
+    }
+
+    public void setOccupation(String occupation) {
+        this.occupation = occupation;
     }
 
     public String getDateOfBirth() {
@@ -194,12 +183,12 @@ public class Customer {
         this.exp_passport = exp_passport;
     }
 
-    public String getHomeAddress() {
-        return homeAddress;
+    public String getContactAddress() {
+        return contactAddress;
     }
 
-    public void setHomeAddress(String homeAddress) {
-        this.homeAddress = homeAddress;
+    public void setContactAddress(String contactAddress) {
+        this.contactAddress = contactAddress;
     }
 
     public String getCell_phone() {
@@ -234,38 +223,6 @@ public class Customer {
         this.email = email;
     }
 
-    public String getCareer() {
-        return career;
-    }
-
-    public void setCareer(String career) {
-        this.career = career;
-    }
-
-    public String getCompanyAddress() {
-        return companyAddress;
-    }
-
-    public void setCompanyAddress(String companyAddress) {
-        this.companyAddress = companyAddress;
-    }
-
-    public String getWork_Tel() {
-        return work_Tel;
-    }
-
-    public void setWork_Tel(String work_Tel) {
-        this.work_Tel = work_Tel;
-    }
-
-    public String getMemberStatus() {
-        return memberStatus;
-    }
-
-    public void setMemberStatus(String memberStatus) {
-        this.memberStatus = memberStatus;
-    }
-
     public String getDisease() {
         return disease;
     }
@@ -298,13 +255,40 @@ public class Customer {
         this.moreDetail = moreDetail;
     }
 
-    public String getChannel() {
-        return channel;
+    public String getHearAboutUs() {
+        return hearAboutUs;
     }
 
-    public void setChannel(String channel) {
-        this.channel = channel;
+    public void setHearAboutUs(String hearAboutUs) {
+        this.hearAboutUs = hearAboutUs;
     }
 
-
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "customerID='" + customerID + '\'' +
+                ", titleNameTH='" + titleNameTH + '\'' +
+                ", firstNameTH='" + firstNameTH + '\'' +
+                ", lastNameTH='" + lastNameTH + '\'' +
+                ", titleNameENG='" + titleNameENG + '\'' +
+                ", firstNameENG='" + firstNameENG + '\'' +
+                ", lastNameENG='" + lastNameENG + '\'' +
+                ", gender='" + gender + '\'' +
+                ", age='" + age + '\'' +
+                ", occupation='" + occupation + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", passport_no='" + passport_no + '\'' +
+                ", exp_passport='" + exp_passport + '\'' +
+                ", contactAddress='" + contactAddress + '\'' +
+                ", cell_phone='" + cell_phone + '\'' +
+                ", home_Tel='" + home_Tel + '\'' +
+                ", fax='" + fax + '\'' +
+                ", email='" + email + '\'' +
+                ", disease='" + disease + '\'' +
+                ", foodAllergy='" + foodAllergy + '\'' +
+                ", eatBeef='" + eatBeef + '\'' +
+                ", moreDetail='" + moreDetail + '\'' +
+                ", hearAboutUs='" + hearAboutUs + '\'' +
+                '}';
+    }
 }

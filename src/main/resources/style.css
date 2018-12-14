@@ -34,7 +34,6 @@
 }
 
 .jfx-tab-pane{
-    -fx-border-color: #2C3E50;
     -fx-padding: 1px;
     -fx-background-insets: 0, 1;
 }
@@ -55,13 +54,10 @@
 
 }
 
-.member-button{
-    -fx-pref-width: 65px;
-    -fx-border-radius: 5px;
-    -fx-border-color: #34495e;
-    -fx-background-color: #FFFFFF;
-    -fx-background-radius: 5px;
-    -fx-text-fill: #34495e;
+.dialog-button{
+    -fx-background-color: #2980b9;
+    -fx-background-radius: 5;
+    -fx-text-fill: #FFFFFF;
 }
 
 .member-button:pressed{
@@ -74,4 +70,15 @@
     -fx-border-color: #34495e;
     -fx-background-color: #FFFFFF;
 
+}
+
+.combo-box {
+    -fx-pref-width: 300;
+    -fx-border-color: #34495e;
+    -fx-background-color: #FFFFFF;
+}
+
+/** Size the combo-box drop down list. */
+.combo-box-popup > .list-view {
+    -fx-pref-height: 100;
 }

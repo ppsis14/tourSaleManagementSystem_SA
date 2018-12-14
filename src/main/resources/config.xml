@@ -16,11 +16,14 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-
-
     <bean id="SpringJDBC_DB" class="databaseConnection.SpringJDBC_DB">
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
+
+    <bean id="ReportPDF" class="createReport.ReportPDF">
+    </bean>
+
+
 
 
 </beans>
