@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.*;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
 public class FormatConverter {
     // date

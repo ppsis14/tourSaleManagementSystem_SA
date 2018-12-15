@@ -36,7 +36,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="loginNameLabel" layoutX="577.0" layoutY="40.0" prefHeight="20.0" prefWidth="221.0" text="THIKAMPORN (SM))" textFill="WHITE">
+            <Label fx:id="loginNameLabel" layoutX="577.0" layoutY="40.0" prefHeight="20.0" prefWidth="221.0" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>

@@ -13,7 +13,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.*;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
 public class ReportPDF implements CreateReport {
     @Override

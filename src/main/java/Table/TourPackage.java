@@ -14,7 +14,7 @@ public class TourPackage {
 
     public TourPackage(){}
 
-    public TourPackage(String tourID, String tourName, int price, String departureDate, String returnDate, String depositDate, String arrearsDate, int amountOfCustomer, int available,String status) {
+    public TourPackage(String tourID, String tourName, int price, String departureDate, String returnDate, String depositDate, String arrearsDate, int amountOfCustomer, int available, String status) {
         this.tourID = tourID;
         this.tourName = tourName;
         this.price = price;

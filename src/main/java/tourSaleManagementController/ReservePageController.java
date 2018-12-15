@@ -14,16 +14,16 @@ import javafx.scene.control.*;
 import org.controlsfx.control.textfield.TextFields;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 import tourSaleManagementSystemUtil.FormatConverter;
-import tourSaleManagementSystemUtil.setTourSaleSystemDataUtil;
+import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.*;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.DEPOSIT_INVOICE;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.NOT_CREATED;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.NOT_PAID;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.DEPOSIT_INVOICE;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.NOT_CREATED;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.NOT_PAID;
 
 
 public class ReservePageController implements Initializable {
@@ -76,16 +76,16 @@ public class ReservePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
-        setTourSaleSystemDataUtil.setTitleNameTH(titleNameTH);
-        setTourSaleSystemDataUtil.setTitleNameEN(titleNameEN);
-        setTourSaleSystemDataUtil.setGender(genderChoice);
-        setTourSaleSystemDataUtil.setHearAboutUs(hearAboutUsChoices);
+        SetTourSaleSystemDataUtil.setTitleNameTH(titleNameTH);
+        SetTourSaleSystemDataUtil.setTitleNameEN(titleNameEN);
+        SetTourSaleSystemDataUtil.setGender(genderChoice);
+        SetTourSaleSystemDataUtil.setHearAboutUs(hearAboutUsChoices);
         newCustomer.setSelected(true);
         oldCustomer.setSelected(false);
         clearText();
-        setTourSaleSystemDataUtil.setTourProgram(tourIDComboBox);
-        setTourSaleSystemDataUtil.setDatePickerFormat(dateOfBirth);
-        setTourSaleSystemDataUtil.setDatePickerFormat(expPassportDate);
+        SetTourSaleSystemDataUtil.setTourProgram(tourIDComboBox);
+        SetTourSaleSystemDataUtil.setDatePickerFormat(dateOfBirth);
+        SetTourSaleSystemDataUtil.setDatePickerFormat(expPassportDate);
         searchByCustomerName.clear();
         searchByCustomerName.setDisable(true);
         searchCustomerBtn.setDisable(true);

@@ -54,6 +54,16 @@
 
 }
 
+.logout-button{
+    -fx-background-color:  #2C3E50;
+    -fx-text-fill: #FFFFFF;
+}
+
+.logout-button:hover{
+    -fx-background-color:  #212F3D;
+
+}
+
 .dialog-button{
     -fx-background-color: #2980b9;
     -fx-background-radius: 5;

@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.*;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
 public class SpringJDBC_DB implements ManageableDatabase {
 

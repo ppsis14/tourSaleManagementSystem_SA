@@ -50,12 +50,12 @@ public class EditCustomerPageController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        setTourSaleSystemDataUtil.setTitleNameTH(titleNameTH);
-        setTourSaleSystemDataUtil.setTitleNameEN(titleNameEN);
-        setTourSaleSystemDataUtil.setGender(genderChoice);
-        setTourSaleSystemDataUtil.setHearAboutUs(hearAboutUsChoices);
-        setTourSaleSystemDataUtil.setDatePickerFormat(dateOfBirth);
-        setTourSaleSystemDataUtil.setDatePickerFormat(expPassportDate);
+        SetTourSaleSystemDataUtil.setTitleNameTH(titleNameTH);
+        SetTourSaleSystemDataUtil.setTitleNameEN(titleNameEN);
+        SetTourSaleSystemDataUtil.setGender(genderChoice);
+        SetTourSaleSystemDataUtil.setHearAboutUs(hearAboutUsChoices);
+        SetTourSaleSystemDataUtil.setDatePickerFormat(dateOfBirth);
+        SetTourSaleSystemDataUtil.setDatePickerFormat(expPassportDate);
 
     }
     @FXML

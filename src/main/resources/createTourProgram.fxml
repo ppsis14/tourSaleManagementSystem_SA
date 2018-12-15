@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.CreateTourProgramController">
+   <children>
+      <AnchorPane fx:id="anchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="800.0" style="-fx-background-color: #ffffff;">
+         <children>
+            <Pane layoutX="26.0" prefHeight="85.0" prefWidth="800.0" style="-fx-background-color: #2C3E50;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label graphicTextGap="10.0" layoutX="70.0" layoutY="30.0" text="Create Tour Program" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/icons8-new_by_copy.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <VBox layoutX="130.0" layoutY="100.0" prefHeight="320.0" prefWidth="542.0" spacing="10.0">
+               <children>
+                  <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="117.0" text="Tour ID :" />
+                        <Label prefHeight="17.0" prefWidth="284.0" text="ex. JPN-4D3N-000004" textFill="WHITE" />
+                        <Label prefHeight="17.0" prefWidth="142.0" text="Status :" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="240.0" spacing="5.0">
+                     <children>
+                        <TextField fx:id="tourIDCountry" alignment="CENTER" prefHeight="29.0" prefWidth="85.0" promptText="ex. JPN" style="-fx-border-color: #2C3E50;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <Label alignment="CENTER" prefHeight="19.0" prefWidth="19.0" text="-">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tourIDDay" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="29.0" prefWidth="85.0" promptText="ex. 5D4N" style="-fx-border-color: #2C3E50;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <Label alignment="CENTER" prefHeight="19.0" prefWidth="19.0" text="-">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tourIDCode" alignment="CENTER" layoutX="93.0" layoutY="10.0" prefHeight="29.0" prefWidth="161.0" style="-fx-border-color: #2C3E50;">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <Label alignment="CENTER" prefHeight="19.0" prefWidth="19.0">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ComboBox fx:id="statusChoice" prefHeight="27.0" prefWidth="138.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="170.0" text="Tour Name :" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="39.0" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="240.0" spacing="5.0">
+                     <children>
+                        <TextField fx:id="tourName" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="542.0" promptText="Tour Name" style="-fx-border-color: #2C3E50;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                     <children>
+                        <Label fx:id="departureDate" prefHeight="17.0" prefWidth="271.0" text="Departure Date :" />
+                        <Label prefHeight="17.0" prefWidth="170.0" text="Return Date :" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="39.0" prefHeight="33.0" prefWidth="240.0" spacing="20.0">
+                     <children>
+                        <DatePicker fx:id="dateOfBirth1" prefHeight="27.0" prefWidth="260.0" promptText="Departure Date" style="-fx-border-color: #2C3E50;" />
+                        <DatePicker fx:id="returnDate" prefHeight="27.0" prefWidth="260.0" promptText="Return Date " style="-fx-border-color: #2C3E50;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="82.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="140.0" text="Amount Seats :" />
+                        <Label prefHeight="17.0" prefWidth="133.0" text="Available Seats :" />
+                        <Label prefHeight="17.0" prefWidth="170.0" text="Price :" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="39.0" prefHeight="33.0" prefWidth="240.0" spacing="10.0">
+                     <children>
+                        <TextField fx:id="amountSeats" prefHeight="29.0" prefWidth="140.0" promptText="Amount Seats " style="-fx-border-color: #2C3E50;" />
+                        <TextField fx:id="availableSeats" prefHeight="29.0" prefWidth="140.0" promptText="Available Seats " style="-fx-border-color: #2C3E50;" />
+                        <TextField fx:id="tourPrice" prefHeight="29.0" prefWidth="250.0" promptText="Price" style="-fx-border-color: #2C3E50;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="82.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                     <children>
+                        <Label prefHeight="17.0" prefWidth="269.0" text="Deposit Invoice Date :" />
+                        <Label prefHeight="17.0" prefWidth="170.0" text="Invoice Date :" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="111.0" prefHeight="33.0" prefWidth="240.0" spacing="20.0">
+                     <children>
+                        <DatePicker fx:id="depositIVDate" prefHeight="27.0" prefWidth="260.0" promptText="Deposit Invoice Date " style="-fx-border-color: #2C3E50;" />
+                        <DatePicker fx:id="invoiceDate" prefHeight="27.0" prefWidth="260.0" promptText="Invoice Date " style="-fx-border-color: #2C3E50;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="232.0" text="* Date of Birth:" />
+                  <Label prefHeight="17.0" prefWidth="206.0" text="* Passport Number:" />
+                  <Label prefHeight="17.0" prefWidth="232.0" text="* Expire Date:" />
+               </children>
+            </HBox>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="435.0" prefHeight="29.0" prefWidth="584.0" text="** Please check the accuracy and completeness of the information before add tour program." textFill="#c90000" />
+            <JFXButton fx:id="addTourProgram" buttonType="RAISED" layoutX="319.0" layoutY="490.0" onAction="#handleAddTourProgramBtn" prefHeight="30.0" prefWidth="163.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Add Tour Program" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

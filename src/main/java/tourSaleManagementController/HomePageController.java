@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 
@@ -20,8 +21,9 @@ public class HomePageController implements Initializable {
     @FXML private JFXButton tourCheckBtn;
     @FXML private JFXButton invoiceBtn;
     @FXML private JFXButton receiptBtn;
-    @FXML private JFXButton logoutBtn;
+    @FXML private Button logoutBtn;
     @FXML private Label loginNameLabel;
+    @FXML private JFXButton tourProgramBtn;
 
 
     @FXML
@@ -31,7 +33,7 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void handleLogoutBtn(ActionEvent event) throws IOException {
+    public void handleLogOutBtn(ActionEvent event) throws IOException {
         logoutBtn.getScene().getWindow().hide();
         DisplayGUIUtil.loadWindow(getClass().getResource("/loginPage.fxml"), "Log in");
     }
@@ -39,7 +41,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void handleCustomerManageBtn(ActionEvent event) throws IOException {
         customerManageBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/customerManagePage.fxml"), "Customer Management");
+        DisplayGUIUtil.loadWindow(getClass().getResource("/customerManagementPage.fxml"), "Customer Management");
     }
 
     @FXML
@@ -58,6 +60,12 @@ public class HomePageController implements Initializable {
     public void handleTourCheckBtn(ActionEvent event) throws IOException {
         tourCheckBtn.getScene().getWindow().hide();
         DisplayGUIUtil.loadWindow(getClass().getResource("/tourCheckPage.fxml"), "Tour Checking");
+    }
+
+    @FXML
+    public void handleTourProgramBtn(ActionEvent event) throws IOException {
+        tourProgramBtn.getScene().getWindow().hide();
+        DisplayGUIUtil.loadWindow(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
     }
 
     @Override

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.TourProgramManagementController">
+   <children>
+      <Pane layoutX="26.0" prefHeight="100.0" prefWidth="900.0" style="-fx-background-color: #2C3E50;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label graphicTextGap="10.0" layoutX="70.0" layoutY="35.0" text="Tour Program Management" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8-telegram_app.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="loginNameLabel" layoutX="577.0" layoutY="40.0" prefHeight="20.0" prefWidth="221.0" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Male_User_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
+            <JFXTabPane layoutX="50.0" layoutY="146.0" prefHeight="540.0" prefWidth="800.0" styleClass="tab-selected-line" stylesheets="@style.css">
+               <tabs>
+                  <Tab text="Tour Program Management">
+                     <content>
+                        <AnchorPane accessibleRole="BUTTON" focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox layoutX="41.0" layoutY="25.0" prefHeight="443.0" prefWidth="717.0" spacing="20.0">
+                                 <children>
+                                    <HBox prefHeight="29.0" prefWidth="676.0" spacing="20.0">
+                                       <children>
+                                          <Label maxHeight="1.7976931348623157E308" prefHeight="29.0" prefWidth="148.0" text="Search Tour Program :" />
+                                          <TextField fx:id="searchTourProgram" prefHeight="29.0" prefWidth="400.0" promptText="Search by ID, Name, Price" style="-fx-border-color: #2C3E50;" />
+                                          <JFXButton fx:id="clearSearchBtn" buttonType="RAISED" onAction="#handleClearSearchBtn" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #F4D03F; -fx-background-radius: 5;" text="Clear" textFill="#2c3e50">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                    <TableView fx:id="tourProgramTable" editable="true" prefHeight="344.0" prefWidth="717.0">
+                                       <columns>
+                                          <TableColumn fx:id="tourIDColumn" minWidth="200.0" prefWidth="200.0" text="Tour ID" />
+                                          <TableColumn fx:id="tourNameColumn" minWidth="350.0" prefWidth="350.0" text="Tour Name" />
+                                          <TableColumn fx:id="tourPriceColumn" minWidth="150.0" prefWidth="150.0" text="Price" />
+                                          <TableColumn fx:id="departureDateColumn" minWidth="120.0" prefWidth="120.0" text="Departure Date" />
+                                          <TableColumn fx:id="returnDateColumn" minWidth="120.0" prefWidth="120.0" text="Return Date" />
+                                          <TableColumn fx:id="depositPaidColumn" minWidth="150.0" prefWidth="150.0" text="Deposit Payment Date" />
+                                          <TableColumn fx:id="paidFinalColumn" minWidth="120.0" prefWidth="120.0" text="Payment Date" />
+                                          <TableColumn fx:id="amountSeatColumn" minWidth="120.0" prefWidth="100.0" text="Amount Seats" />
+                                          <TableColumn fx:id="availableSeatColumn" minWidth="120.0" prefWidth="100.0" text="Available Seats" />
+                                          <TableColumn fx:id="tourStatusColumn" minWidth="100.0" prefWidth="100.0" text="Status" />
+                                       </columns>
+                                    </TableView>
+                                    <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <JFXButton fx:id="createTourProgram" alignment="CENTER" buttonType="RAISED" onAction="#handleCreateTourProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Create" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="editTourProgram" alignment="CENTER" buttonType="RAISED" onAction="#handleEditTourProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Edit" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="updateToutProgram" alignment="CENTER" buttonType="RAISED" onAction="#handleUpdateToutProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Update" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                          <JFXButton fx:id="deleteTourProgram" alignment="CENTER" buttonType="RAISED" onAction="#handleDeleteTourProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Delete" textAlignment="RIGHT" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                          </JFXButton>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </Pane>
+      <JFXHamburger fx:id="menu" styleClass="jfx-hamburger-icon" stylesheets="@style.css" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="40.0" />
+      <JFXDrawer fx:id="drawerMenu" direction="RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
+   </children>
+</AnchorPane>

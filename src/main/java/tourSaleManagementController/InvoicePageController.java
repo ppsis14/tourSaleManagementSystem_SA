@@ -13,16 +13,15 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 import tourSaleManagementSystemUtil.FormatConverter;
-import tourSaleManagementSystemUtil.setTourSaleSystemDataUtil;
+import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import static tourSaleManagementSystemUtil.DisplayGUIUtil.*;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.ARREARS_INVOICE;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.CREATED;
-import static tourSaleManagementSystemUtil.setTourSaleSystemDataUtil.DEPOSIT_INVOICE;
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.createReport;
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
 public class InvoicePageController implements Initializable {
 
@@ -55,8 +54,8 @@ public class InvoicePageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
-        setTourSaleSystemDataUtil.setTourProgram(tourIDChoiceDI);
-        setTourSaleSystemDataUtil.setTourProgram(tourIDChoiceAI);
+        SetTourSaleSystemDataUtil.setTourProgram(tourIDChoiceDI);
+        SetTourSaleSystemDataUtil.setTourProgram(tourIDChoiceAI);
         currentDateInvoice.setText(FormatConverter.getLocalDateFormat("dd-MM-yyyy"));
         showTableView();
     }
@@ -66,29 +65,39 @@ public class InvoicePageController implements Initializable {
 
         Invoice selectInvoice = depositInvoiceTable.getSelectionModel().getSelectedItem();
         if(selectInvoice != null ) {
-            Alert alertCreateDepositInvoice = new Alert(Alert.AlertType.CONFIRMATION);
-            alertCreateDepositInvoice.setTitle("Confirmation Dialog");
-            alertCreateDepositInvoice.setHeaderText(null);
-            alertCreateDepositInvoice.setContentText("Do you want to create deposit invoice?");
-            Optional<ButtonType> createDepositInvoiceAction = alertCreateDepositInvoice.showAndWait();
-            if (createDepositInvoiceAction.get() == ButtonType.OK) {
-                // create deposit invoice
-                String invoiceName = selectInvoice.getReservationCode()+"_"+manageableDatabase.getFirstNameCustomer(selectInvoice.getCustomerID())+"_DepositInvoice";
-                createReport.createInvoice(invoiceName, "DEPOSIT INVOICE / ใบแจ้งหนี้-เงินมัดจำ",selectInvoice.getReservationCode());
-
-                Alert alertShowCreateDepositInvoice = new Alert(Alert.AlertType.INFORMATION);
-                alertShowCreateDepositInvoice.setTitle("Information Dialog");
-                alertShowCreateDepositInvoice.setHeaderText(null);
-                alertShowCreateDepositInvoice.setContentText("Creating invoice is successfully!");
-                Optional<ButtonType> showCreateDepositInvoiceAction = alertShowCreateDepositInvoice.showAndWait();
-                if (showCreateDepositInvoiceAction.get() == ButtonType.OK) {
-                    // update database and table code
-                    selectInvoice.setInvoiceStatus(CREATED);
-                    manageableDatabase.updateCreateInvoiceStatus(selectInvoice,DEPOSIT_INVOICE);
-                    showTableView();
-                }
+            if (selectInvoice != null && selectInvoice.getInvoiceStatus().equals("Created")){
+                Alert alertCheckCreateDepositInvoice = new Alert(Alert.AlertType.WARNING);
+                alertCheckCreateDepositInvoice.setTitle("Warning Dialog");
+                alertCheckCreateDepositInvoice.setContentText("Sorry, duplicate deposit invoices are not allowed.");
+                Optional<ButtonType> checkCreateDepositInvoiceAction = alertCheckCreateDepositInvoice.showAndWait();
 
             }
+            else {
+                Alert alertCreateDepositInvoice = new Alert(Alert.AlertType.CONFIRMATION);
+                alertCreateDepositInvoice.setTitle("Confirmation Dialog");
+                alertCreateDepositInvoice.setHeaderText(null);
+                alertCreateDepositInvoice.setContentText("Do you want to create deposit invoice?");
+                Optional<ButtonType> createDepositInvoiceAction = alertCreateDepositInvoice.showAndWait();
+                if (createDepositInvoiceAction.get() == ButtonType.OK) {
+                    // create deposit invoice
+                    String invoiceName = selectInvoice.getReservationCode()+"_"+manageableDatabase.getFirstNameCustomer(selectInvoice.getCustomerID())+"_DepositInvoice";
+                    createReport.createInvoice(invoiceName, "DEPOSIT INVOICE / ใบแจ้งหนี้-เงินมัดจำ",selectInvoice.getReservationCode());
+
+                    Alert alertShowCreateDepositInvoice = new Alert(Alert.AlertType.INFORMATION);
+                    alertShowCreateDepositInvoice.setTitle("Information Dialog");
+                    alertShowCreateDepositInvoice.setHeaderText(null);
+                    alertShowCreateDepositInvoice.setContentText("Creating invoice is successfully!");
+                    Optional<ButtonType> showCreateDepositInvoiceAction = alertShowCreateDepositInvoice.showAndWait();
+                    if (showCreateDepositInvoiceAction.get() == ButtonType.OK) {
+                        // update database and table code
+                        selectInvoice.setInvoiceStatus(CREATED);
+                        manageableDatabase.updateCreateInvoiceStatus(selectInvoice,DEPOSIT_INVOICE);
+                        showTableView();
+                    }
+
+                }
+            }
+
         }
 
     }
@@ -97,28 +106,38 @@ public class InvoicePageController implements Initializable {
 
         Invoice selectInvoice = arrearsInvoiceTable.getSelectionModel().getSelectedItem();
         if(selectInvoice != null ) {
-            Alert alertCreateArrearsInvoice = new Alert(Alert.AlertType.CONFIRMATION);
-            alertCreateArrearsInvoice.setTitle("Confirmation Dialog");
-            alertCreateArrearsInvoice.setHeaderText(null);
-            alertCreateArrearsInvoice.setContentText("Do you want to create invoice?");
-            Optional<ButtonType> createArrearsInvoiceAction = alertCreateArrearsInvoice.showAndWait();
-            if (createArrearsInvoiceAction.get() == ButtonType.OK) {
-                // create invoice
-                String invoiceName = selectInvoice.getReservationCode()+"_"+manageableDatabase.getFirstNameCustomer(selectInvoice.getCustomerID())+"_ArrearsInvoice";
-                createReport.createInvoice(invoiceName, "INVOICE / ใบแจ้งหนี้",selectInvoice.getReservationCode());
-                Alert alertShowCreateArrearsInvoice = new Alert(Alert.AlertType.INFORMATION);
-                alertShowCreateArrearsInvoice.setTitle("Information Dialog");
-                alertShowCreateArrearsInvoice.setHeaderText(null);
-                alertShowCreateArrearsInvoice.setContentText("Creating invoice is successfully!");
-                Optional<ButtonType> showCreateArrearsInvoiceAction = alertShowCreateArrearsInvoice.showAndWait();
-                if (showCreateArrearsInvoiceAction.get() == ButtonType.OK) {
-                    // update database and table code
-                    selectInvoice.setInvoiceStatus(CREATED);
-                    manageableDatabase.updateCreateInvoiceStatus(selectInvoice, ARREARS_INVOICE);
-                    showTableView();
-                }
+            if (selectInvoice != null && selectInvoice.getInvoiceStatus().equals("Created")){
+                Alert alertCheckCreateInvoice = new Alert(Alert.AlertType.WARNING);
+                alertCheckCreateInvoice.setTitle("Warning Dialog");
+                alertCheckCreateInvoice.setContentText("Sorry, duplicate invoices are not allowed.");
+                Optional<ButtonType> checkCreateInvoiceAction = alertCheckCreateInvoice.showAndWait();
 
             }
+            else {
+                Alert alertCreateArrearsInvoice = new Alert(Alert.AlertType.CONFIRMATION);
+                alertCreateArrearsInvoice.setTitle("Confirmation Dialog");
+                alertCreateArrearsInvoice.setHeaderText(null);
+                alertCreateArrearsInvoice.setContentText("Do you want to create invoice?");
+                Optional<ButtonType> createArrearsInvoiceAction = alertCreateArrearsInvoice.showAndWait();
+                if (createArrearsInvoiceAction.get() == ButtonType.OK) {
+                    // create invoice
+                    String invoiceName = selectInvoice.getReservationCode()+"_"+manageableDatabase.getFirstNameCustomer(selectInvoice.getCustomerID())+"_ArrearsInvoice";
+                    createReport.createInvoice(invoiceName, "INVOICE / ใบแจ้งหนี้",selectInvoice.getReservationCode());
+                    Alert alertShowCreateArrearsInvoice = new Alert(Alert.AlertType.INFORMATION);
+                    alertShowCreateArrearsInvoice.setTitle("Information Dialog");
+                    alertShowCreateArrearsInvoice.setHeaderText(null);
+                    alertShowCreateArrearsInvoice.setContentText("Creating invoice is successfully!");
+                    Optional<ButtonType> showCreateArrearsInvoiceAction = alertShowCreateArrearsInvoice.showAndWait();
+                    if (showCreateArrearsInvoiceAction.get() == ButtonType.OK) {
+                        // update database and table code
+                        selectInvoice.setInvoiceStatus(CREATED);
+                        manageableDatabase.updateCreateInvoiceStatus(selectInvoice, ARREARS_INVOICE);
+                        showTableView();
+                    }
+
+                }
+            }
+
         }
 
     }
