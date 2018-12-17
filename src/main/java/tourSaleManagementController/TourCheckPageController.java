@@ -174,7 +174,7 @@ public class TourCheckPageController implements Initializable {
 
                     //update last data
                     TourPackage tourPackage = manageableDatabase.getOneTourPackage(tourID);
-                    int availableSeat = tourPackage.getAvailable() + deleteReservationPayment.getAmountCustomer();
+                    int availableSeat = tourPackage.getAvailableSeat() + deleteReservationPayment.getAmountCustomer();
                     manageableDatabase.updateAvailableData(tourID,availableSeat);   //update seat in tour package
 
                     showDetailTourPackage();
@@ -211,8 +211,8 @@ public class TourCheckPageController implements Initializable {
         tourPrice.setText(String.format("%,.2f",Double.valueOf(tourPackage.getPrice())));
         departureDate.setText(tourPackage.getDepartureDate());
         returnDate.setText(tourPackage.getReturnDate());
-        amountCus.setText(String.valueOf(tourPackage.getAmountOfCustomer()));
-        availableSeat.setText(String.valueOf(tourPackage.getAvailable()));
+        amountCus.setText(String.valueOf(tourPackage.getAmountSeat()));
+        availableSeat.setText(String.valueOf(tourPackage.getAmountSeat()));
     }
 
     void setReservationListTable(){
@@ -279,7 +279,7 @@ public class TourCheckPageController implements Initializable {
                 NOT_CREATED
         );
 
-    return receipt;
+        return receipt;
     }
 
     protected class DisplayReservationCustomer{

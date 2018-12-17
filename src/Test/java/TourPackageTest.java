@@ -80,20 +80,20 @@ class TourPackageTest {
     @Test
     public void testGetterOfAmountOfCustomerAndAvailableSeat(){
         //Amount of the customer in each tour.
-        assertEquals(50,japanTour.getAmountOfCustomer());
-        assertEquals(70,indiaTour.getAmountOfCustomer());
-        assertEquals(100,koreaTour.getAmountOfCustomer());
+        assertEquals(50,japanTour.getAmountSeat());
+        assertEquals(70,indiaTour.getAmountSeat());
+        assertEquals(100,koreaTour.getAmountSeat());
         //Amount of the available seat in each tour.
-        assertEquals(50,japanTour.getAvailable());
-        assertEquals(70,indiaTour.getAvailable());
-        assertEquals(100,koreaTour.getAvailable());
+        assertEquals(50,japanTour.getAvailableSeat());
+        assertEquals(70,indiaTour.getAvailableSeat());
+        assertEquals(100,koreaTour.getAvailableSeat());
         //set the available seat
-        japanTour.setAvailable(10);
-        indiaTour.setAvailable(30);
-        koreaTour.setAvailable(3);
-        assertEquals(10,japanTour.getAvailable());
-        assertEquals(30,indiaTour.getAvailable());
-        assertEquals(3,koreaTour.getAvailable());
+        japanTour.setAvailableSeat(10);
+        indiaTour.setAvailableSeat(30);
+        koreaTour.setAvailableSeat(3);
+        assertEquals(10,japanTour.getAvailableSeat());
+        assertEquals(30,indiaTour.getAvailableSeat());
+        assertEquals(3,koreaTour.getAvailableSeat());
     }
     @Test
     public void testStatusOfTourPackage(){

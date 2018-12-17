@@ -57,6 +57,38 @@ public class SpringJDBC_DB implements ManageableDatabase {
         return employeeName;
     }
 
+    @Override
+    public void insertData(TourPackage tourPackage) {
+
+        String query = "insert into tour_package (Tour_ID,Tour_name, Price, Departure_date, Return_date, Deposit_date, Arrears_date ," +
+                "Amount_seat, Available_seat, Status ) " +
+                "values( ?, ? , ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        Object[] data = new Object[]{
+                tourPackage.getTourID(),tourPackage.getTourName(),tourPackage.getPrice(),
+                tourPackage.getDepartureDate(),tourPackage.getReturnDate(),tourPackage.getDepositDate(),
+                tourPackage.getArrearsDate(),tourPackage.getAmountSeat(),tourPackage.getAvailableSeat(),tourPackage.getStatus()};
+        jdbcTemplate.update(query, data);
+    }
+
+    @Override
+    public void updateData(TourPackage tourPackage) {
+        String updateQuery = "update tour_package set Tour_ID = ? ,Tour_name = ?, Price = ?, Departure_date = ?, Return_date = ?, Deposit_date = ?, Arrears_date = ?,Amount_seat = ?, Available_seat = ?, Status = ?" +
+                " where Tour_ID = ?";
+        Object[] data = new Object[]{
+                tourPackage.getTourID(),tourPackage.getTourName(),tourPackage.getPrice(),
+                tourPackage.getDepartureDate(),tourPackage.getReturnDate(),tourPackage.getDepositDate(),
+                tourPackage.getArrearsDate(),tourPackage.getAmountSeat(),tourPackage.getAvailableSeat(),tourPackage.getStatus(),
+                tourPackage.getTourID()};
+        jdbcTemplate.update(updateQuery, data);
+    }
+
+    @Override
+    public void deleteData(TourPackage tourPackage) {
+        String deleteQuery = "Delete From tour_package Where Tour_ID = ?";
+        jdbcTemplate.update(deleteQuery, tourPackage.getTourID());
+    }
+
 
     @Override
     public TourPackage getOneTourPackage(String tourID) {
@@ -95,7 +127,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
 
         String query = "Select * From tour_package Where Tour_ID = " +"'"+tourID+"'";
         TourPackage tourPackage = jdbcTemplate.queryForObject(query,new TourPackageRowMapper());
-        return tourPackage.getAvailable();
+        return tourPackage.getAvailableSeat();
     }
 
     @Override
@@ -578,8 +610,8 @@ public class SpringJDBC_DB implements ManageableDatabase {
                     rs.getString("Return_date"),
                     rs.getString("Deposit_date"),
                     rs.getString("Arrears_date"),
-                    rs.getInt("Amount"),
-                    rs.getInt("Available"),
+                    rs.getInt("Amount_seat"),
+                    rs.getInt("Available_seat"),
                     rs.getString("Status"));
 
             return tourPackage;

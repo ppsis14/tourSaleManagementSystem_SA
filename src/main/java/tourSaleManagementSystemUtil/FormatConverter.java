@@ -14,6 +14,15 @@ public class FormatConverter {
         LocalDate localDate = LocalDate.now();
         return  dtf.format(localDate);
     }
+    // tour id (JPN-5D4N-00001)
+    public static String generateTourID(String country, String durDays){
+        String lastTourID = manageableDatabase.getLastTourID();
+        String temp[] = lastTourID.split("-");
+        lastTourID = temp[2];
+        lastTourID = String.valueOf(Integer.parseInt(lastTourID)+1);
+        String tourID = country+"-"+durDays+"-"+String.format("%06d",Integer.valueOf(lastTourID));
+        return tourID;
+    }
 
     // reservation code (THA-3D2N-000001-000001)
     public static String generateReservationCode(String tourID){
@@ -25,16 +34,7 @@ public class FormatConverter {
         String currentReserveCode = tempTour[0]+"-"+tempTour[1]+"-"+tempTour[2]+"-"+String.format("%06d",Integer.valueOf(lastReserveCode));
         return currentReserveCode;
     }
-    // tour id
-//    public String generateTourID(String country, String durDays){
-//        String lastTourID = manageableDatabase.getLastTourID();
-//        String temp[] = lastTourID.split("-");
-//        lastTourID = temp[2];
-//        lastTourID = String.valueOf(Integer.parseInt(lastTourID)+1);
-//        String tourID = country+"-"+durDays+"-"+String.format("%06d",lastTourID);
-//        return tourID;
-//    }
-    // customer id
+
     public static String generateCustomerID(){
         String lastCustomerID = manageableDatabase.getLastCustomerID();
         lastCustomerID = lastCustomerID.substring(2);

@@ -11,6 +11,9 @@ public interface ManageableDatabase {
     boolean checkLogin(String username, String password);
     String getNameEmployee(String employeeID);
 
+    void insertData(TourPackage tourPackage);
+    void updateData(TourPackage tourPackage);
+    void deleteData(TourPackage tourPackage);
     TourPackage getOneTourPackage(String tourID);
     String getTourID(String tourName);
     int getTourPrice(String tourID);

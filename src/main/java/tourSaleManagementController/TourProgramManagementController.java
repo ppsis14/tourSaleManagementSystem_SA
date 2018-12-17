@@ -70,42 +70,46 @@ public class TourProgramManagementController implements Initializable {
     }
 
     @FXML
-    void handleCreateTourProgramBtn(ActionEvent event) {
-        createTourProgram.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/createTourProgram.fxml"), "Create Tour Program");
+    void handleCreateTourProgramBtn(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/createTourProgram.fxml"));
+        Parent parent = (Parent) loader.load();
+        Stage stage = new Stage(StageStyle.DECORATED);
+        stage.show();
+        stage.setScene(new Scene(parent));
+        stage.centerOnScreen();
 
     }
 
     @FXML
     void handleDeleteTourProgramBtn(ActionEvent event) {
-        Alert alertConfirmToDeleteTourProgram = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirmToDeleteTourProgram.setTitle("Confirmation Dialog");
-        alertConfirmToDeleteTourProgram.setHeaderText(null);
-        alertConfirmToDeleteTourProgram.setContentText("Do you want to delete this tour Program?");
-        Optional<ButtonType> action = alertConfirmToDeleteTourProgram.showAndWait();
-        if (action.get() == ButtonType.OK){
-            // code for delete reservation
-            TourPackage deleteTourProgram = tourProgramTable.getSelectionModel().getSelectedItem();  //select item for delete
-
-            /*if (deleteTourProgram != null) {   //when user select data
-
-                manageableDatabase.deleteData(deleteTourProgram);  //delete in database
+        TourPackage selectTourPackage = tourProgramTable.getSelectionModel().getSelectedItem(); //select item for delete
+        if(selectTourPackage != null) {
+            Alert alertConfirmToDeleteTourProgram = new Alert(Alert.AlertType.CONFIRMATION);
+            alertConfirmToDeleteTourProgram.setTitle("Confirmation Dialog");
+            alertConfirmToDeleteTourProgram.setHeaderText(null);
+            alertConfirmToDeleteTourProgram.setContentText("Do you want to delete this tour Program?");
+            Optional<ButtonType> action = alertConfirmToDeleteTourProgram.showAndWait();
+            if (action.get() == ButtonType.OK) {
+                // code for delete reservation
+                manageableDatabase.deleteData(selectTourPackage);   //delete tour package in DB
                 obListTourProgram.remove(tourProgramTable.getSelectionModel().getSelectedItem()); //delete on table view
-            }*/
+
+            }
         }
 
     }
 
     @FXML
     void handleEditTourProgramBtn(ActionEvent event) {
-        /*TourPackage editTourProgram = tourProgramTable.getSelectionModel().getSelectedItem();
+        TourPackage editTourProgram = tourProgramTable.getSelectionModel().getSelectedItem();
 
         if(editTourProgram != null) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/editTourProgram.fxml"));
                 Parent parent = (Parent) loader.load();
                 EditTourProgramController editTourProgramController = loader.getController();
-                editTourProgram.setTourProgram(editTourProgram);
+                editTourProgramController.setTourProgram(editTourProgram);
                 Stage stage = new Stage(StageStyle.DECORATED);
                 stage.show();
                 stage.setScene(new Scene(parent));
@@ -113,13 +117,13 @@ public class TourProgramManagementController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }*/
+        }
 
     }
 
     @FXML
     void handleUpdateToutProgramBtn(ActionEvent event) {
-        /*Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
+        Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
         alertShowInformationIsUpdate.setTitle("Confirmation Dialog");
         alertShowInformationIsUpdate.setHeaderText(null);
         alertShowInformationIsUpdate.setContentText("Customer Information is update!");
@@ -128,7 +132,7 @@ public class TourProgramManagementController implements Initializable {
             // code for delete reservation
             obListTourProgram = FXCollections.observableList(manageableDatabase.getAllTourPackage());
             this.showTableView(obListTourProgram);
-        }*/
+        }
 
     }
 
@@ -138,14 +142,14 @@ public class TourProgramManagementController implements Initializable {
 
         tourIDColumn.setCellValueFactory(new PropertyValueFactory<>("tourID"));
         tourNameColumn.setCellValueFactory(new PropertyValueFactory<>("tourName"));
-        tourPriceColumn.setCellValueFactory(new PropertyValueFactory<>("tourPrice"));
+        tourPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
         departureDateColumn.setCellValueFactory(new PropertyValueFactory<>("departureDate"));
         returnDateColumn.setCellValueFactory(new PropertyValueFactory<>("returnDate"));
-        depositPaidColumn.setCellValueFactory(new PropertyValueFactory<>("depositPaidDate"));
-        paidFinalColumn.setCellValueFactory(new PropertyValueFactory<>("paidFinalDate"));
+        depositPaidColumn.setCellValueFactory(new PropertyValueFactory<>("depositDate"));
+        paidFinalColumn.setCellValueFactory(new PropertyValueFactory<>("arrearsDate"));
         amountSeatColumn.setCellValueFactory(new PropertyValueFactory<>("amountSeat"));
         availableSeatColumn.setCellValueFactory(new PropertyValueFactory<>("availableSeat"));
-        tourStatusColumn.setCellValueFactory(new PropertyValueFactory<>("tourStatus"));
+        tourStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
         tourProgramTable.setItems(obListTourProgram);
     }

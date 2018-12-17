@@ -8,13 +8,13 @@ public class TourPackage {
     private  String returnDate;
     private  String depositDate;
     private  String arrearsDate;
-    private  int amountOfCustomer;
-    private  int available;
+    private  int amountSeat;
+    private  int availableSeat;
     private String status;
 
     public TourPackage(){}
 
-    public TourPackage(String tourID, String tourName, int price, String departureDate, String returnDate, String depositDate, String arrearsDate, int amountOfCustomer, int available, String status) {
+    public TourPackage(String tourID, String tourName, int price, String departureDate, String returnDate, String depositDate, String arrearsDate, int amountSeat, int availableSeat, String status) {
         this.tourID = tourID;
         this.tourName = tourName;
         this.price = price;
@@ -22,9 +22,17 @@ public class TourPackage {
         this.returnDate = returnDate;
         this.depositDate = depositDate;
         this.arrearsDate = arrearsDate;
-        this.amountOfCustomer = amountOfCustomer;
-        this.available = available;
+        this.amountSeat = amountSeat;
+        this.availableSeat = availableSeat;
         this.status = status;
+    }
+
+    public String getTourID() {
+        return tourID;
+    }
+
+    public void setTourID(String tourID) {
+        this.tourID = tourID;
     }
 
     public String getTourName() {
@@ -75,28 +83,20 @@ public class TourPackage {
         this.arrearsDate = arrearsDate;
     }
 
-    public int getAmountOfCustomer() {
-        return amountOfCustomer;
+    public int getAmountSeat() {
+        return amountSeat;
     }
 
-    public void setAmountOfCustomer(int amountOfCustomer) {
-        this.amountOfCustomer = amountOfCustomer;
+    public void setAmountSeat(int amountSeat) {
+        this.amountSeat = amountSeat;
     }
 
-    public int getAvailable() {
-        return available;
+    public int getAvailableSeat() {
+        return availableSeat;
     }
 
-    public void setAvailable(int available) {
-        this.available = available;
-    }
-
-    public String getTourID() {
-        return tourID;
-    }
-
-    public void setTourID(String tourID) {
-        this.tourID = tourID;
+    public void setAvailableSeat(int availableSeat) {
+        this.availableSeat = availableSeat;
     }
 
     public String getStatus() {

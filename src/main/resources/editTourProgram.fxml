@@ -90,13 +90,13 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                      <children>
-                        <Label fx:id="departureDate" prefHeight="17.0" prefWidth="271.0" text="Departure Date :" />
+                        <Label fx:id="departureDateLabel" prefHeight="17.0" prefWidth="271.0" text="Departure Date :" />
                         <Label prefHeight="17.0" prefWidth="170.0" text="Return Date :" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="39.0" prefHeight="33.0" prefWidth="240.0" spacing="20.0">
                      <children>
-                        <DatePicker fx:id="dateOfBirth1" prefHeight="27.0" prefWidth="260.0" promptText="Departure Date" style="-fx-border-color: #2C3E50;" />
+                        <DatePicker fx:id="departureDate" prefHeight="27.0" prefWidth="260.0" promptText="Departure Date" style="-fx-border-color: #2C3E50;" />
                         <DatePicker fx:id="returnDate" prefHeight="27.0" prefWidth="260.0" promptText="Return Date " style="-fx-border-color: #2C3E50;" />
                      </children>
                   </HBox>
