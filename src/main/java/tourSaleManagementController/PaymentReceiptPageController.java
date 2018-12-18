@@ -20,11 +20,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.createReport;
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
 public class PaymentReceiptPageController implements Initializable {
-
+    @FXML private Label loginNameLabel;
     @FXML private ComboBox<String> tourIDChoiceDR;
     @FXML private TableView<Receipt> depositReceiptTable;
     @FXML private TableColumn<Receipt, String> reservationCodeColumnDR;
@@ -55,6 +56,7 @@ public class PaymentReceiptPageController implements Initializable {
         SetTourSaleSystemDataUtil.setTourProgram(tourIDChoiceAR);
         currentDateReceipt.setText(FormatConverter.getLocalDateFormat("dd-MM-yyyy"));
         showTableView();
+        loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
 
     }
 

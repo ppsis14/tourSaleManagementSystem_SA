@@ -72,7 +72,7 @@ public class HomePageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
 
         // set user login
-        loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition()+" ]");
+        loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
 
     }
 

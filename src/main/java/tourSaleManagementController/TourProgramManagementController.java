@@ -100,6 +100,13 @@ public class TourProgramManagementController implements Initializable {
 
             }
         }
+        else {
+            Alert alertWarningBeforeDeleteTour = new Alert(Alert.AlertType.WARNING);
+            alertWarningBeforeDeleteTour.setTitle("Warning Dialog");
+            alertWarningBeforeDeleteTour.setHeaderText(null);
+            alertWarningBeforeDeleteTour.setContentText("Please select item before delete");
+            Optional<ButtonType> deleteTourAction = alertWarningBeforeDeleteTour.showAndWait();
+        }
 
     }
 
@@ -121,6 +128,13 @@ public class TourProgramManagementController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else {
+            Alert alertWarningBeforeEditTour = new Alert(Alert.AlertType.WARNING);
+            alertWarningBeforeEditTour.setTitle("Warning Dialog");
+            alertWarningBeforeEditTour.setHeaderText(null);
+            alertWarningBeforeEditTour.setContentText("Please select item before delete");
+            Optional<ButtonType> editTourAction = alertWarningBeforeEditTour.showAndWait();
         }
 
     }

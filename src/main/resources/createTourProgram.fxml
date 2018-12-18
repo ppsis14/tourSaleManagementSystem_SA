@@ -136,7 +136,12 @@
                </children>
             </HBox>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="435.0" prefHeight="29.0" prefWidth="584.0" text="** Please check the accuracy and completeness of the information before add tour program." textFill="#c90000" />
-            <JFXButton fx:id="addTourProgram" buttonType="RAISED" layoutX="319.0" layoutY="490.0" onAction="#handleAddTourProgramBtn" prefHeight="30.0" prefWidth="163.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Add Tour Program" textFill="WHITE">
+            <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="236.0" layoutY="489.0" onAction="#handleCancelBtn" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Cancel" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="addTourProgram" alignment="CENTER" buttonType="RAISED" layoutX="418.0" layoutY="489.0" onAction="#handleAddTourProgramBtn" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #2ECC71; -fx-background-radius: 5;" text="Add Tour Program" textAlignment="RIGHT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

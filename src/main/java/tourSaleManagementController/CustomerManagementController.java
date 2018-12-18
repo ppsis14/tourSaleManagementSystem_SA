@@ -26,10 +26,11 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
 public class CustomerManagementController implements Initializable {
-
+    @FXML private Label loginNameLabel;
     @FXML private TextField searchCustomer;
     @FXML private JFXButton clearSearchBtn;
     @FXML private TableView<Customer> customerTable;
@@ -52,7 +53,7 @@ public class CustomerManagementController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
-
+        loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
         showTableView(obListCustomer);  //show data on table view
 
         setSearchCustomer();
@@ -62,21 +63,30 @@ public class CustomerManagementController implements Initializable {
 
     @FXML
     void handleDeleteCustomerBtn(ActionEvent event) {
-        Alert alertConfirmToDeleteCustomer = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirmToDeleteCustomer.setTitle("Confirmation Dialog");
-        alertConfirmToDeleteCustomer.setHeaderText(null);
-        alertConfirmToDeleteCustomer.setContentText("Do you want to delete this customer?");
-        Optional<ButtonType> action = alertConfirmToDeleteCustomer.showAndWait();
-        if (action.get() == ButtonType.OK){
-            // code for delete reservation
-            Customer deleteCustomer = customerTable.getSelectionModel().getSelectedItem();  //select item for delete
+        Customer deleteCustomer = customerTable.getSelectionModel().getSelectedItem();  //select item for delete
+        if (deleteCustomer != null){
+            Alert alertConfirmToDeleteCustomer = new Alert(Alert.AlertType.CONFIRMATION);
+            alertConfirmToDeleteCustomer.setTitle("Confirmation Dialog");
+            alertConfirmToDeleteCustomer.setHeaderText(null);
+            alertConfirmToDeleteCustomer.setContentText("Do you want to delete this customer?");
+            Optional<ButtonType> action = alertConfirmToDeleteCustomer.showAndWait();
+            if (action.get() == ButtonType.OK){
+                // code for delete reservation
+                if (deleteCustomer != null) {   //when user select data
 
-            if (deleteCustomer != null) {   //when user select data
-
-                manageableDatabase.deleteData(deleteCustomer);  //delete in database
-                obListCustomer.remove(customerTable.getSelectionModel().getSelectedItem()); //delete on table view
+                    manageableDatabase.deleteData(deleteCustomer);  //delete in database
+                    obListCustomer.remove(customerTable.getSelectionModel().getSelectedItem()); //delete on table view
+                }
             }
         }
+        else {
+            Alert alertWarningBeforeDeleteCus = new Alert(Alert.AlertType.WARNING);
+            alertWarningBeforeDeleteCus.setTitle("Warning Dialog");
+            alertWarningBeforeDeleteCus.setHeaderText(null);
+            alertWarningBeforeDeleteCus.setContentText("Please select item before delete");
+            Optional<ButtonType> deleteCustomerAction = alertWarningBeforeDeleteCus.showAndWait();
+        }
+
     }
 
 
@@ -99,6 +109,13 @@ public class CustomerManagementController implements Initializable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+        else {
+            Alert alertWarningBeforeEdit = new Alert(Alert.AlertType.WARNING);
+            alertWarningBeforeEdit.setTitle("Warning Dialog");
+            alertWarningBeforeEdit.setHeaderText(null);
+            alertWarningBeforeEdit.setContentText("Please select item before edit");
+            Optional<ButtonType> editCustomerAction = alertWarningBeforeEdit.showAndWait();
         }
     }
 

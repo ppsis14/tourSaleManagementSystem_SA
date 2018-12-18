@@ -90,6 +90,7 @@ public class EditCustomerPageController implements Initializable {
             alertEditInformation.setTitle("Error Dialog");
             alertEditInformation.setHeaderText("Editing customer information is error");
             alertEditInformation.setContentText("Please completely fill out information follow (*)");
+            Optional<ButtonType> checkEditInformationAction = alertEditInformation.showAndWait();
         }
     }
     @FXML public void handleNotEatBeefCheckbox(ActionEvent event) { eatBeefY.setSelected(false); }

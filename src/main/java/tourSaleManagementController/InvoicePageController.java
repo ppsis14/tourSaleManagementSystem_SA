@@ -20,13 +20,13 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.createReport;
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
 public class InvoicePageController implements Initializable {
 
-    @FXML
-    private ComboBox<String> tourIDChoiceDI;
+    @FXML private ComboBox<String> tourIDChoiceDI;
     @FXML private JFXButton createDepositInvoiceBtn;
     @FXML private ComboBox<String> tourIDChoiceAI;
     @FXML private TableView<Invoice> depositInvoiceTable;
@@ -45,6 +45,7 @@ public class InvoicePageController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
     @FXML private Label currentDateInvoice;
+    @FXML private Label loginNameLabel;
 
 
     ObservableList<Invoice> obListInvoiceDI = FXCollections.observableArrayList();
@@ -57,6 +58,7 @@ public class InvoicePageController implements Initializable {
         SetTourSaleSystemDataUtil.setTourProgram(tourIDChoiceDI);
         SetTourSaleSystemDataUtil.setTourProgram(tourIDChoiceAI);
         currentDateInvoice.setText(FormatConverter.getLocalDateFormat("dd-MM-yyyy"));
+        loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
         showTableView();
     }
 

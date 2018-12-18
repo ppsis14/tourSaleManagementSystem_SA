@@ -20,6 +20,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
@@ -33,6 +34,7 @@ public class TourCheckPageController implements Initializable {
     @FXML private Label amountCus;
     @FXML private Label availableSeat;
     @FXML private Label showTourID;
+    @FXML private Label loginNameLabel;
     @FXML private TableView<ReservationPayment> paymentListTable;
     @FXML private TableColumn<ReservationPayment, String> reservationCodeColumnP;
     @FXML private TableColumn<ReservationPayment, String> nameColumnP;
@@ -59,6 +61,8 @@ public class TourCheckPageController implements Initializable {
         showTourID.setText(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
         showDetailTourPackage();
         setReservationListTable();
+        loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
+
     }
 
     @FXML

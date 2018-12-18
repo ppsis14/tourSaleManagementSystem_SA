@@ -33,6 +33,15 @@
                   <Font size="18.0" />
                </font>
             </Label>
+            <Label fx:id="loginNameLabel" layoutX="577.0" layoutY="40.0" prefHeight="20.0" prefWidth="221.0" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/icons8_Male_User_32px.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Label>
          </children></Pane>
       <JFXTabPane layoutX="32.0" layoutY="146.0" prefHeight="496.0" prefWidth="837.0" styleClass="tab-selected-line" stylesheets="@style.css">
          <tabs>

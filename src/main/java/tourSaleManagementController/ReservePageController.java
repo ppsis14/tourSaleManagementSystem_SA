@@ -74,7 +74,7 @@ public class ReservePageController implements Initializable {
     private Reservation reservationCustomer = new Reservation() ;
     private Customer customer = new Customer();
     private Invoice invoice = new Invoice();
-    private int orderReserv ;
+    private int orderReserve;
     ObservableList<Customer> obListCustomer = FXCollections.observableList(manageableDatabase.getAllCustomer());
 
     @Override
@@ -95,7 +95,7 @@ public class ReservePageController implements Initializable {
         searchCustomerBtn.setDisable(true);
         reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
         String tmpOrder[] = reserveCode.getText().split("-");
-        orderReserv = Integer.valueOf(tmpOrder[3]);
+        orderReserve = Integer.valueOf(tmpOrder[3]);
         loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
 
         setValidateOnKeyRelease();
@@ -123,7 +123,7 @@ public class ReservePageController implements Initializable {
     @FXML public void handleTourIDComboBox(ActionEvent e){
         String tourID = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
         String tmp[] = tourID.split("-");
-        tourID = tmp[0]+ "-" +tmp[1]+ "-" +tmp[2] + "-" + String.format("%06d", orderReserv);
+        tourID = tmp[0]+ "-" +tmp[1]+ "-" +tmp[2] + "-" + String.format("%06d", orderReserve);
         reserveCode.setText(tourID);
     }
 
@@ -206,7 +206,7 @@ public class ReservePageController implements Initializable {
                         searchCustomerBtn.setDisable(true);
                         reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
                         String tmpOrder[] = reserveCode.getText().split("-");
-                        orderReserv = Integer.valueOf(tmpOrder[3]);
+                        orderReserve = Integer.valueOf(tmpOrder[3]);
                         setUpValueReservationPage();
                     }
 
