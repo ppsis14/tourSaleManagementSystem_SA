@@ -8,7 +8,6 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -47,7 +46,13 @@
                            <children>
                               <VBox layoutX="60.0" layoutY="14.0" prefHeight="282.0" prefWidth="664.0" spacing="10.0">
                                  <children>
-                                    <Label text="* Name (TH)" />
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="131.0" text="* Title Name (TH):" />
+                                          <Label prefHeight="17.0" prefWidth="250.0" text="* First Name (TH):" />
+                                          <Label prefHeight="17.0" prefWidth="250.0" text="* Last Name (TH):" />
+                                       </children>
+                                    </HBox>
                                     <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                        <children>
                                           <ChoiceBox fx:id="titleNameTH" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
@@ -55,7 +60,13 @@
                                           <TextField fx:id="lastNameTH" prefHeight="27.0" prefWidth="253.0" promptText="Last name" style="-fx-border-color: #2C3E50;" />
                                        </children>
                                     </HBox>
-                                    <Label text="* Name (EN)" />
+                                    <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
+                                       <children>
+                                          <Label prefHeight="17.0" prefWidth="131.0" text="* Title Name (EN):" />
+                                          <Label prefHeight="17.0" prefWidth="250.0" text="* First Name (EN):" />
+                                          <Label prefHeight="17.0" prefWidth="250.0" text="* Last Name (EN):" />
+                                       </children>
+                                    </HBox>
                                     <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                        <children>
                                           <ChoiceBox fx:id="titleNameEN" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
@@ -81,7 +92,7 @@
                                        <children>
                                           <Label prefHeight="17.0" prefWidth="232.0" text="* Date of Birth:" />
                                           <Label prefHeight="17.0" prefWidth="206.0" text="* Passport Number:" />
-                                          <Label prefHeight="17.0" prefWidth="232.0" text="* Expire Date:" />
+                                          <Label prefHeight="17.0" prefWidth="232.0" text="* Passport Expire Date::" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
@@ -108,29 +119,29 @@
                                           <Label prefHeight="17.0" prefWidth="448.0" text="* Contact Address:" />
                                        </children>
                                     </HBox>
-                                    <TextArea fx:id="address" prefHeight="65.0" prefWidth="664.0" style="-fx-border-color: #2C3E50;" />
+                                    <TextField fx:id="address" alignment="TOP_LEFT" pickOnBounds="false" prefHeight="68.0" prefWidth="664.0" style="-fx-border-color: #2C3E50;" />
                                     <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                                        <children>
                                           <Label prefHeight="17.0" prefWidth="216.0" text="* Cell Phone:" />
-                                          <Label prefHeight="17.0" prefWidth="215.0" text="* Home Tel:" />
+                                          <Label prefHeight="17.0" prefWidth="215.0" text="Home Tel:" />
                                           <Label prefHeight="17.0" prefWidth="215.0" text="Fax:" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                        <children>
-                                          <TextField fx:id="cellphoneClient" prefHeight="29.0" prefWidth="232.0" promptText="Cell Phone" style="-fx-border-color: #2C3E50;" />
-                                          <TextField fx:id="homeTelClient" prefHeight="29.0" prefWidth="232.0" promptText="Home Tel" style="-fx-border-color: #2C3E50;" />
-                                          <TextField fx:id="homeFaxClient" prefHeight="29.0" prefWidth="232.0" promptText="Fax" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="phoneNum" prefHeight="29.0" prefWidth="232.0" promptText="Cell Phone" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="homeTelNum" prefHeight="29.0" prefWidth="232.0" promptText="Home Tel" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="faxNum" prefHeight="29.0" prefWidth="232.0" promptText="Fax" style="-fx-border-color: #2C3E50;" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                                        <children>
-                                          <Label prefHeight="17.0" prefWidth="233.0" text="* Email Address:" />
+                                          <Label prefHeight="17.0" prefWidth="233.0" text="Email Address:" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">
                                        <children>
-                                          <TextField fx:id="emailClient" prefHeight="29.0" prefWidth="232.0" promptText="Email Address" style="-fx-border-color: #2C3E50;" />
+                                          <TextField fx:id="email" prefHeight="29.0" prefWidth="232.0" promptText="Email Address" style="-fx-border-color: #2C3E50;" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -148,8 +159,8 @@
                                     <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0" />
                                     <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                                        <children>
-                                          <Label prefHeight="17.0" prefWidth="327.0" text="* Underlying disease:" />
-                                          <Label prefHeight="17.0" prefWidth="180.0" text="* Food allergy:" />
+                                          <Label prefHeight="17.0" prefWidth="327.0" text="Underlying disease:" />
+                                          <Label prefHeight="17.0" prefWidth="180.0" text="Food allergy:" />
                                        </children>
                                     </HBox>
                                     <HBox prefHeight="33.0" prefWidth="240.0" spacing="10.0">

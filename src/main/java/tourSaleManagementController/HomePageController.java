@@ -29,7 +29,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void handleInvoiceBtn(ActionEvent event) throws IOException {
         invoiceBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/invoicePage.fxml"), "Invoice");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/invoicePage.fxml"), "Invoice");
     }
 
     @FXML
@@ -41,31 +41,31 @@ public class HomePageController implements Initializable {
     @FXML
     public void handleCustomerManageBtn(ActionEvent event) throws IOException {
         customerManageBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/customerManagementPage.fxml"), "Customer Management");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/customerManagementPage.fxml"), "Customer Management");
     }
 
     @FXML
     public void handleReceiptBtn(ActionEvent event) throws IOException {
         receiptBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/paymentReceiptPage.fxml"), "Payment Receipt");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/paymentReceiptPage.fxml"), "Payment Receipt");
     }
 
     @FXML
     public void handleReserveBtn(ActionEvent event) throws IOException {
         reserveBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/reservationPage.fxml"), "Reservation");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/reservationPage.fxml"), "Reservation");
     }
 
     @FXML
     public void handleTourCheckBtn(ActionEvent event) throws IOException {
         tourCheckBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/tourCheckPage.fxml"), "Tour Checking");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourCheckPage.fxml"), "Tour Checking");
     }
 
     @FXML
     public void handleTourProgramBtn(ActionEvent event) throws IOException {
         tourProgramBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindow(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
     }
 
     @Override

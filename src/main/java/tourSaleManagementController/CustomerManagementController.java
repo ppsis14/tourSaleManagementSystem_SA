@@ -42,7 +42,7 @@ public class CustomerManagementController implements Initializable {
     @FXML private TableColumn<Customer, String> phoneNumberColumn;
     @FXML private TableColumn<Customer, String> addressColumn;
     @FXML private JFXButton editCustomerBtn;
-    @FXML private JFXButton updateCustomerBtn;
+    @FXML private JFXButton refreshCustomerBtn;
     @FXML private JFXButton deleteCustomerBtn;
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
@@ -86,6 +86,7 @@ public class CustomerManagementController implements Initializable {
         Customer editCustomer = customerTable.getSelectionModel().getSelectedItem();
 
         if(editCustomer != null) {
+            editCustomerBtn.getScene().getWindow().hide();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/editCustomer.fxml"));
                 Parent parent = (Parent) loader.load();
@@ -108,7 +109,7 @@ public class CustomerManagementController implements Initializable {
     }
 
     @FXML
-    void handleUpdateCustomerBtn(ActionEvent event) {
+    void handleRefreshCustomerBtn(ActionEvent event) {
         Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
         alertShowInformationIsUpdate.setTitle("Confirmation Dialog");
         alertShowInformationIsUpdate.setHeaderText(null);

@@ -47,10 +47,10 @@ public class TourProgramManagementController implements Initializable {
     @FXML private TableColumn<TourPackage, Integer> amountSeatColumn;
     @FXML private TableColumn<TourPackage, Integer> availableSeatColumn;
     @FXML private TableColumn<TourPackage, String> tourStatusColumn;
-    @FXML private JFXButton createTourProgram;
-    @FXML private JFXButton editTourProgram;
-    @FXML private JFXButton updateToutProgram;
-    @FXML private JFXButton deleteTourProgram;
+    @FXML private JFXButton createTourProgramBtn;
+    @FXML private JFXButton editTourProgramBtn;
+    @FXML private JFXButton refreshTourProgramBtn;
+    @FXML private JFXButton deleteTourProgramBtn;
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
 
@@ -71,7 +71,7 @@ public class TourProgramManagementController implements Initializable {
 
     @FXML
     void handleCreateTourProgramBtn(ActionEvent event) throws IOException {
-
+        createTourProgramBtn.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/createTourProgram.fxml"));
         Parent parent = (Parent) loader.load();
         Stage stage = new Stage(StageStyle.DECORATED);
@@ -105,6 +105,7 @@ public class TourProgramManagementController implements Initializable {
         TourPackage editTourProgram = tourProgramTable.getSelectionModel().getSelectedItem();
 
         if(editTourProgram != null) {
+            editTourProgramBtn.getScene().getWindow().hide();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/editTourProgram.fxml"));
                 Parent parent = (Parent) loader.load();
@@ -122,7 +123,7 @@ public class TourProgramManagementController implements Initializable {
     }
 
     @FXML
-    void handleUpdateToutProgramBtn(ActionEvent event) {
+    void handleRefreshTourProgramBtn(ActionEvent event) {
         Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
         alertShowInformationIsUpdate.setTitle("Confirmation Dialog");
         alertShowInformationIsUpdate.setHeaderText(null);

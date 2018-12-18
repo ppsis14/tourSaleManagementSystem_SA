@@ -46,7 +46,7 @@
                         <Font size="17.0" />
                      </font>
                   </Label>
-                  <Button fx:id="logoutBtn" layoutX="787.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleLogOutBtn" styleClass="logout-button" stylesheets="@style.css" text="Log Out" textFill="WHITE" />
+                  <Button fx:id="logoutBtn" layoutX="787.0" layoutY="47.0" mnemonicParsing="false" onAction="#handleLogOutBtn" styleClass="logout-button" stylesheets="@style.css" text="Log out" textFill="WHITE" />
                </children>
             </AnchorPane>
             <GridPane hgap="15.0" layoutX="148.0" layoutY="230.0" prefHeight="253.0" prefWidth="615.0" vgap="15.0" AnchorPane.leftAnchor="148.0" AnchorPane.topAnchor="300.0">
