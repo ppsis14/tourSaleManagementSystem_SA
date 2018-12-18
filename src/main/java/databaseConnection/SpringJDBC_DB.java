@@ -35,7 +35,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
 
     @Override
     public boolean checkLogin(String username ,String password){
-        /*String query = "Select * From employee Where Username = " + username + " and Password = " + password ;*/
+
         Employee employee = getEmployeeLogin(username, password);
         if (employee == null){
             System.out.println("employee is null");
@@ -628,7 +628,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
                     rs.getString("LastNameTH"),
                     rs.getString("TitleNameENG"),
                     rs.getString("FirstNameENG"),
-                    rs.getString("lastNameENG"),
+                    rs.getString("LastNameENG"),
                     rs.getString("Gender"),
                     rs.getString("Age"),
                     rs.getString("Occupation"),
