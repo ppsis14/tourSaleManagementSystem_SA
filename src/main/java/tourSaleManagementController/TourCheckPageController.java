@@ -34,7 +34,8 @@ public class TourCheckPageController implements Initializable {
     @FXML private Label amountCus;
     @FXML private Label availableSeat;
     @FXML private Label showTourID;
-    @FXML private Label loginNameLabel;
+    @FXML private Label depositPaymentDate;
+    @FXML private Label finalPaymentDate;
     @FXML private TableView<ReservationPayment> paymentListTable;
     @FXML private TableColumn<ReservationPayment, String> reservationCodeColumnP;
     @FXML private TableColumn<ReservationPayment, String> nameColumnP;
@@ -48,9 +49,9 @@ public class TourCheckPageController implements Initializable {
     @FXML private TableColumn<DisplayReservationCustomer, String> phoneNumCusColumnR;
     @FXML private JFXButton deleteReserveListBtn;
     @FXML private JFXButton confirmStatusBtn;
-    @FXML private JFXButton createReportBtn;
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
+    @FXML private Label loginNameLabel;
 
     ObservableList<DisplayReservationCustomer> reservationObList = FXCollections.observableArrayList();
     ObservableList<ReservationPayment> reservePaymentObList = FXCollections.observableArrayList();
@@ -63,7 +64,6 @@ public class TourCheckPageController implements Initializable {
         showDetailTourPackage();
         setReservationListTable();
         loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
-
     }
 
     @FXML
@@ -144,7 +144,6 @@ public class TourCheckPageController implements Initializable {
             alertConfirmToDeleteReservationList.setContentText("Do you want to delete this reservation?");
             Optional<ButtonType> action = alertConfirmToDeleteReservationList.showAndWait();
             if (action.get() == ButtonType.OK) {
-                //ReservationPayment deleteReservationPayment = paymentListTable.getSelectionModel().getSelectedItem();  //select item for delete
                 String tourID = deleteReservationPayment.getTourID();
                 if (deleteReservationPayment != null) {   //when user select data
 
@@ -197,23 +196,6 @@ public class TourCheckPageController implements Initializable {
         }
 
     }
-    @FXML
-    void handleCreateReportBtn(ActionEvent event) {
-        String[] options = {"Deposit Invoice Payment", "Reservation Payment Status"};
-        ChoiceDialog<String> dialog = new ChoiceDialog<String>("Deposit Invoice Payment", options);
-        dialog.setTitle("Confirmation Dialog");
-        dialog.setHeaderText("Confirmation of creating the report");
-        dialog.setContentText("Choose Report Type ");
-        Optional<String> result = dialog.showAndWait();
-        if (result.isPresent()) {
-            if (result.get().equals("Deposit Invoice Payment")) {
-
-
-            } else if (result.get().equals("Invoice Payment")) {
-
-            }
-        }
-    }
 
     @FXML
     void handleSelectTourIDCombobox(ActionEvent event){
@@ -230,8 +212,10 @@ public class TourCheckPageController implements Initializable {
         tourPrice.setText(String.format("%,.2f",Double.valueOf(tourPackage.getPrice())));
         departureDate.setText(tourPackage.getDepartureDate());
         returnDate.setText(tourPackage.getReturnDate());
+        depositPaymentDate.setText(tourPackage.getDepositDate());
+        finalPaymentDate.setText(tourPackage.getArrearsDate());
         amountCus.setText(String.valueOf(tourPackage.getAmountSeat()));
-        availableSeat.setText(String.valueOf(tourPackage.getAmountSeat()));
+        availableSeat.setText(String.valueOf(tourPackage.getAvailableSeat()));
     }
 
     void setReservationListTable(){
@@ -298,7 +282,7 @@ public class TourCheckPageController implements Initializable {
                 NOT_CREATED
         );
 
-        return receipt;
+    return receipt;
     }
 
     protected class DisplayReservationCustomer{
@@ -308,7 +292,6 @@ public class TourCheckPageController implements Initializable {
         private String ageCustomer;
         private String phoneNumCustomer;
 
-        public DisplayReservationCustomer(){}
         public DisplayReservationCustomer(String reservationCode, String customerName, String ageCustomer, String phoneNumCustomer) {
             this.reservationCode = reservationCode;
             this.customerName = customerName;
