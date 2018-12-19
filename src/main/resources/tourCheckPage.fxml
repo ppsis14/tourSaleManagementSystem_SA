@@ -51,7 +51,7 @@
                <children>
                   <HBox prefHeight="29.0" prefWidth="676.0" spacing="20.0">
                      <children>
-                        <Label maxHeight="1.7976931348623157E308" text="Tour Program :" />
+                        <Label maxHeight="1.7976931348623157E308" text="Tour Package :" />
                         <ComboBox fx:id="tourIDComboBox" onAction="#handleSelectTourIDCombobox" prefHeight="29.0" prefWidth="240.0" style="-fx-border-color: #2C3E50; -fx-background-color: #FFFFFF;" stylesheets="@style.css" />
                         <Label maxHeight="1.7976931348623157E308" text="Tour ID :" />
                         <Label fx:id="showTourID" alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="29.0" prefWidth="220.0" style="-fx-border-color: #2C3E50;" />
