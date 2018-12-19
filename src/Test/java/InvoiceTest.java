@@ -14,7 +14,7 @@ class InvoiceTest {
         //
         invoice = new Invoice("JPN-4D3N-000001-000001","JPN-4D3N-000001-000001-000001","JPN-4D3N-000001","Japan Exclusive Holidays",
                 "CS000008","Bussaba Tarue","EMP000004","Wipawadee Monkut",
-                100,35000,"Not created");
+                100,35000,"DEPOSIT_INVOICE","Not created");
     }
 
     @Test
@@ -41,7 +41,7 @@ class InvoiceTest {
     public void testPriceAndAmountOfCustomer(){
         assertEquals(35000,invoice.getTotalPrice());
         assertEquals(100,invoice.getAmountCustomer());
-        assertEquals("Not created", invoice.getInvoiceStatus());
+        assertEquals("Not created", invoice.getCreateStatus());
     }
 
 }

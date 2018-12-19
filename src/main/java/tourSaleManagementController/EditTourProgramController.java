@@ -44,9 +44,10 @@ public class EditTourProgramController implements Initializable {
     @FXML private JFXButton saveDataBtn;
 
     private TourPackage tourPackage = new TourPackage();
-
+    private String oldTourID ;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        oldTourID = tourPackage.getTourID();
         tourIDCode.setDisable(true);
         SetTourSaleSystemDataUtil.setStatusTourProgram(statusChoice);
         statusChoice.setValue(tourPackage.getStatus());
@@ -68,7 +69,7 @@ public class EditTourProgramController implements Initializable {
             Optional<ButtonType> action = alert.showAndWait();
             if (action.get() == ButtonType.OK){
                 setTourProgramFromGUI();
-                manageableDatabase.updateData(tourPackage);    //update data to database
+                manageableDatabase.updateData(tourPackage,oldTourID);    //update data to database
                 System.out.println("Update Successful");
 
                 Stage stage = (Stage) rootPane.getScene().getWindow();

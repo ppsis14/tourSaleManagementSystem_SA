@@ -15,7 +15,7 @@ class ReceiptTest {
         // int totalPrice, String receiptStatus)
         receipt = new Receipt("JPN-4D3N-000001-000001","JPN-4D3N-000001-000001-000001","JPN-4D3N-000001","Japan Exclusive Holidays",
                  "CS000008","Bussaba Tarue","EMP000004","Wipawadee Monkut",
-                100,35000,"Not created");
+                100,35000,"DEPOSIT_RECEIPT","Not created");
     }
 
     @Test
@@ -42,6 +42,6 @@ class ReceiptTest {
     public void testPriceAndAmountOfCustomer(){
         assertEquals(35000,receipt.getTotalPrice());
         assertEquals(100,receipt.getAmountCustomer());
-        assertEquals("Not created", receipt.getReceiptStatus());
+        assertEquals("Not created", receipt.getCreateStatus());
     }
 }

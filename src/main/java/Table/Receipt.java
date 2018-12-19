@@ -11,11 +11,12 @@ public class Receipt {
     private String employeeName;
     private int amountCustomer;
     private int totalPrice;
-    private String receiptStatus = "Not created";
+    private String receiptType;
+    private String createStatus = "Not created";
 
     public Receipt(){}
 
-    public Receipt(String reservationCode, String receiptNo, String tourID, String tourName, String customerID, String customerName, String employeeID, String employeeName, int amountCustomer, int totalPrice, String receiptStatus) {
+    public Receipt(String reservationCode, String receiptNo, String tourID, String tourName, String customerID, String customerName, String employeeID, String employeeName, int amountCustomer, int totalPrice, String receiptType, String createStatus) {
         this.reservationCode = reservationCode;
         this.receiptNo = receiptNo;
         this.tourID = tourID;
@@ -26,7 +27,8 @@ public class Receipt {
         this.employeeName = employeeName;
         this.amountCustomer = amountCustomer;
         this.totalPrice = totalPrice;
-        this.receiptStatus = receiptStatus;
+        this.receiptType = receiptType;
+        this.createStatus = createStatus;
     }
 
     public String getReservationCode() {
@@ -109,11 +111,19 @@ public class Receipt {
         this.totalPrice = totalPrice;
     }
 
-    public String getReceiptStatus() {
-        return receiptStatus;
+    public String getReceiptType() {
+        return receiptType;
     }
 
-    public void setReceiptStatus(String receiptStatus) {
-        this.receiptStatus = receiptStatus;
+    public void setReceiptType(String receiptType) {
+        this.receiptType = receiptType;
+    }
+
+    public String getCreateStatus() {
+        return createStatus;
+    }
+
+    public void setCreateStatus(String createStatus) {
+        this.createStatus = createStatus;
     }
 }

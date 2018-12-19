@@ -1,5 +1,6 @@
 package tourSaleManagementController;
 
+import Table.TourPackage;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
 public class HomePageController implements Initializable {
 

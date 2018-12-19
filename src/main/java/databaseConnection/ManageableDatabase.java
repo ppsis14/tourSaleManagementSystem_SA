@@ -12,9 +12,10 @@ public interface ManageableDatabase {
     String getNameEmployee(String employeeID);
 
     void insertData(TourPackage tourPackage);
-    void updateData(TourPackage tourPackage);
+    void updateData(TourPackage tourPackage,String tourID);
     void deleteData(TourPackage tourPackage);
     TourPackage getOneTourPackage(String tourID);
+    //String getLastTourID();
     String getTourID(String tourName);
     int getTourPrice(String tourID);
     int getAvailableByTourID(String tourID);
@@ -48,25 +49,20 @@ public interface ManageableDatabase {
 
     void insertData(Invoice invoice, String invoiceType);
     void updateData(Invoice invoice, String invoiceType);
-    void updateCreateInvoiceStatus(Invoice invoice, String invoiceType);
-    void deleteData(Invoice invoice, String invoiceType);
+    void updateCreateInvoiceStatus(Invoice invoice);
+    void deleteData(Invoice invoice);
     List<Invoice> getAllInvoice(String invoiceType);
     List<Invoice> getAllInvoiceInTourName(String invoiceType, String tourName);
-    Invoice getOneInvoice(String invoiceType, String reservationCode);
+    Invoice getOneInvoice(String invoiceType,String reservationCode);
     String getLastInvoiceNo(String invoiceType);
 
     void insertData(Receipt receipt, String receiptType);
     void updateData(Receipt receipt, String receiptType);
-    void updateCreateReceiptStatus(Receipt receipt, String receiptType);
-    void deleteData(Receipt receipt, String receiptType);
+    void updateCreateReceiptStatus(Receipt receipt);
+    void deleteData(Receipt receipt);
     List<Receipt> getAllReceipt(String receiptType);
     List<Receipt> getAllReceiptInTourName(String receiptType, String tourName);
-    Receipt getOneReceipt(String receiptType, String reservationCode);
+    Receipt getOneReceipt(String invoiceType,String reservationCode);
     String getLastReceiptNo(String receiptType);
-
-
-
-
-
 
 }

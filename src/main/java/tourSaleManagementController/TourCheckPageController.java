@@ -82,7 +82,7 @@ public class TourCheckPageController implements Initializable {
             if (result.isPresent()){
                 if (result.get().equals("Deposit Invoice Payment")) {
                     Invoice depositInvoice = manageableDatabase.getOneInvoice("invoice_deposit", selectReservationPayment.getReservationCode());
-                    if (depositInvoice != null && depositInvoice.getInvoiceStatus().equals("Created")){
+                    if (depositInvoice != null && depositInvoice.getCreateStatus().equals("Created")){
                         if(selectReservationPayment.getDepositStatus().equals(NOT_PAID)) {
                             selectReservationPayment.setDepositStatus(PAID);
                             manageableDatabase.updateStatusPayment(selectReservationPayment);                   //update status reservation payment
@@ -108,7 +108,7 @@ public class TourCheckPageController implements Initializable {
                 }
                 else if (result.get().equals("Invoice Payment")){
                     Invoice arrearsInvoice = manageableDatabase.getOneInvoice("invoice_arrears", selectReservationPayment.getReservationCode());
-                    if (arrearsInvoice != null && arrearsInvoice.getInvoiceStatus().equals("Created")){
+                    if (arrearsInvoice != null && arrearsInvoice.getCreateStatus().equals("Created")){
                         if (selectReservationPayment.getArrearsStatus().equals(NOT_PAID)) {
                             selectReservationPayment.setArrearsStatus(PAID);
                             manageableDatabase.updateStatusPayment(selectReservationPayment);                   //update status reservation payment
@@ -168,13 +168,13 @@ public class TourCheckPageController implements Initializable {
                     Receipt arrearsReceipt = manageableDatabase.getOneReceipt(ARREARS_RECEIPT,reserveCodeDelete);
 
                     if (depositInvoice != null)
-                        manageableDatabase.deleteData(depositInvoice,DEPOSIT_INVOICE);
+                        manageableDatabase.deleteData(depositInvoice);
                     if(arrearsInvoice != null)
-                        manageableDatabase.deleteData(arrearsInvoice,ARREARS_INVOICE);
+                        manageableDatabase.deleteData(arrearsInvoice);
                     if(depositReceipt != null)
-                        manageableDatabase.deleteData(depositReceipt,DEPOSIT_RECEIPT);
+                        manageableDatabase.deleteData(depositReceipt);
                     if(arrearsReceipt != null)
-                        manageableDatabase.deleteData(arrearsReceipt,ARREARS_RECEIPT);
+                        manageableDatabase.deleteData(arrearsReceipt);
 
                     //update last data
                     TourPackage tourPackage = manageableDatabase.getOneTourPackage(tourID);
@@ -226,10 +226,9 @@ public class TourCheckPageController implements Initializable {
 
         for (Reservation re:manageableDatabase.getAllReservationByTourID(tourID)) {
             Customer customer = manageableDatabase.getOneCustomer(re.getCustomerID());
-            reservationObList.add(new DisplayReservationCustomer(
+                reservationObList.add(new DisplayReservationCustomer(
                     re.getReservationCode(),
                     re.getCustomerName(),
-                    customer.getAge(),
                     customer.getCell_phone()));
         }
         //find data base for show on table view.
@@ -241,7 +240,6 @@ public class TourCheckPageController implements Initializable {
 
         reservationCodeColumnR.setCellValueFactory(new PropertyValueFactory<>("reservationCode"));
         nameColumnR.setCellValueFactory(new PropertyValueFactory<>("customerName"));
-        customerAgeColumnR.setCellValueFactory(new PropertyValueFactory<>("ageCustomer"));
         phoneNumCusColumnR.setCellValueFactory(new PropertyValueFactory<>("phoneNumCustomer"));
 
 
@@ -253,17 +251,17 @@ public class TourCheckPageController implements Initializable {
         ReservationPayment selectReservationPayment = paymentListTable.getSelectionModel().getSelectedItem();
         Invoice invoice = manageableDatabase.getOneInvoice(DEPOSIT_INVOICE,selectReservationPayment.getReservationCode());
         invoice.setInvoiceNo(FormatConverter.generateInvoiceNo(ARREARS_INVOICE,selectReservationPayment.getReservationCode()));
-        invoice.setInvoiceStatus(NOT_CREATED);
+        invoice.setInvoiceType(ARREARS_INVOICE);
+        invoice.setCreateStatus(NOT_CREATED);
         return invoice;
     }
 
 
     private Receipt createReceiptData(String receiptType){
-
         String invoiceType = null;
-        if(receiptType == DEPOSIT_RECEIPT)
+        if (receiptType.equalsIgnoreCase(DEPOSIT_RECEIPT))
             invoiceType = DEPOSIT_INVOICE;
-        else if(receiptType == ARREARS_RECEIPT)
+        else
             invoiceType = ARREARS_INVOICE;
 
         ReservationPayment selectReservationPayment = paymentListTable.getSelectionModel().getSelectedItem();
@@ -279,6 +277,7 @@ public class TourCheckPageController implements Initializable {
                 selectInvoice.getEmployeeName(),
                 selectInvoice.getAmountCustomer(),
                 selectInvoice.getTotalPrice(),
+                receiptType,
                 NOT_CREATED
         );
 
@@ -289,13 +288,11 @@ public class TourCheckPageController implements Initializable {
 
         private String reservationCode;
         private String customerName;
-        private String ageCustomer;
         private String phoneNumCustomer;
 
-        public DisplayReservationCustomer(String reservationCode, String customerName, String ageCustomer, String phoneNumCustomer) {
+        public DisplayReservationCustomer(String reservationCode, String customerName,String phoneNumCustomer) {
             this.reservationCode = reservationCode;
             this.customerName = customerName;
-            this.ageCustomer = ageCustomer;
             this.phoneNumCustomer = phoneNumCustomer;
         }
 
@@ -313,14 +310,6 @@ public class TourCheckPageController implements Initializable {
 
         public void setCustomerName(String customerName) {
             this.customerName = customerName;
-        }
-
-        public String getAgeCustomer() {
-            return ageCustomer;
-        }
-
-        public void setAgeCustomer(String ageCustomer) {
-            this.ageCustomer = ageCustomer;
         }
 
         public String getPhoneNumCustomer() {

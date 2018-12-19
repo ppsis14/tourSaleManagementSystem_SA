@@ -65,7 +65,7 @@ public class PaymentReceiptPageController implements Initializable {
 
         Receipt selectReceipt = depositReceiptTable.getSelectionModel().getSelectedItem();
         if(selectReceipt != null ) {
-            if (selectReceipt != null && selectReceipt.getReceiptStatus().equals("Created")){
+            if (selectReceipt != null && selectReceipt.getCreateStatus().equals("Created")){
                 Alert alertCheckCreateDepositReceipt = new Alert(Alert.AlertType.WARNING);
                 alertCheckCreateDepositReceipt.setTitle("Warning Dialog");
                 alertCheckCreateDepositReceipt.setContentText("Sorry, duplicate invoices are not allowed.");
@@ -89,8 +89,8 @@ public class PaymentReceiptPageController implements Initializable {
                     Optional<ButtonType> showCreateDepositReceiptAction = alertShowCreateDepositReceipt.showAndWait();
                     if (showCreateDepositReceiptAction.get() == ButtonType.OK) {
                         // update database and table code
-                        selectReceipt.setReceiptStatus(CREATED);
-                        manageableDatabase.updateCreateReceiptStatus(selectReceipt,DEPOSIT_RECEIPT);
+                        selectReceipt.setCreateStatus(CREATED);
+                        manageableDatabase.updateCreateReceiptStatus(selectReceipt);
                         showTableView();
                     }
                 }
@@ -102,7 +102,7 @@ public class PaymentReceiptPageController implements Initializable {
     void handleCreateArrearsReceiptBtn(ActionEvent event) {
         Receipt selectReceipt = arrearsReceiptTable.getSelectionModel().getSelectedItem();
         if(selectReceipt != null ) {
-            if (selectReceipt != null && selectReceipt.getReceiptStatus().equals("Created")){
+            if (selectReceipt != null && selectReceipt.getCreateStatus().equals("Created")){
                 Alert alertCheckCreateReceipt = new Alert(Alert.AlertType.WARNING);
                 alertCheckCreateReceipt.setTitle("Warning Dialog");
                 alertCheckCreateReceipt.setContentText("Sorry, duplicate invoices are not allowed.");
@@ -126,8 +126,8 @@ public class PaymentReceiptPageController implements Initializable {
                     Optional<ButtonType> showCreateArrearsReceiptAction = alertShowCreateArrearsReceipt.showAndWait();
                     if (showCreateArrearsReceiptAction.get() == ButtonType.OK) {
                         // update database and table code
-                        selectReceipt.setReceiptStatus(CREATED);
-                        manageableDatabase.updateCreateReceiptStatus(selectReceipt,ARREARS_RECEIPT);
+                        selectReceipt.setCreateStatus(CREATED);
+                        manageableDatabase.updateCreateReceiptStatus(selectReceipt);
                         showTableView();
                     }
 
@@ -161,13 +161,13 @@ public class PaymentReceiptPageController implements Initializable {
         receipt_no_ColumnDR.setCellValueFactory(new PropertyValueFactory<>("receiptNo"));
         amountCustomerColumnDR.setCellValueFactory(new PropertyValueFactory<>("amountCustomer"));
         employeeNameColumnDR.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
-        receiptStatusColumnDR.setCellValueFactory(new PropertyValueFactory<>("receiptStatus"));
+        receiptStatusColumnDR.setCellValueFactory(new PropertyValueFactory<>("createStatus"));
 
         reservationCodeColumnAR.setCellValueFactory(new PropertyValueFactory<>("reservationCode"));
         receipt_no_ColumnAR.setCellValueFactory(new PropertyValueFactory<>("receiptNo"));
         amountCustomerColumnAR.setCellValueFactory(new PropertyValueFactory<>("amountCustomer"));
         employeeNameColumnAR.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
-        receiptStatusColumnAR.setCellValueFactory(new PropertyValueFactory<>("receiptStatus"));
+        receiptStatusColumnAR.setCellValueFactory(new PropertyValueFactory<>("createStatus"));
 
         depositReceiptTable.setItems(obListReceiptDR);
         arrearsReceiptTable.setItems(obListReceiptAR);

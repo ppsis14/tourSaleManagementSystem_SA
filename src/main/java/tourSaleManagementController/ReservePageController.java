@@ -194,8 +194,8 @@ public class ReservePageController implements Initializable {
                         //insert reservation payment and deposit invoice to database
                         setReservationPaymentFromGUI();
                         setDepositInvoice();
-                        manageableDatabase.insertData(reservationPayment);
-                        manageableDatabase.insertData(invoice, DEPOSIT_INVOICE);
+                        manageableDatabase.insertData(reservationPayment); //inset reservationPayment to database
+                        manageableDatabase.insertData(invoice, DEPOSIT_INVOICE);    // insert deposit invoice
 
                         //update seat in tour package
                         manageableDatabase.updateAvailableData(tour_id,availableSeat-Integer.valueOf(customerNo.getText()));
@@ -247,7 +247,8 @@ public class ReservePageController implements Initializable {
         invoice.setEmployeeName(reservationPayment.getEmployeeName());
         invoice.setAmountCustomer(reservationPayment.getAmountCustomer());
         invoice.setTotalPrice(reservationPayment.getTotal_price()/2);
-        invoice.setInvoiceStatus(NOT_CREATED);
+        invoice.setInvoiceType(DEPOSIT_INVOICE);
+        invoice.setCreateStatus(NOT_CREATED);
 
     }
 
@@ -294,7 +295,6 @@ public class ReservePageController implements Initializable {
         customer.setFirstNameENG(firstNameEN.getText());
         customer.setLastNameENG(lastNameEN.getText());
         customer.setGender(genderChoice.getSelectionModel().getSelectedItem());
-        customer.setAge(age.getText());
         customer.setDateOfBirth(dateOfBirth.getEditor().getText());
         if (customer.getDateOfBirth().isEmpty()) customer.setDateOfBirth("dd-mm-yyyy");
         customer.setPassport_no(passportNo.getText());
@@ -334,7 +334,6 @@ public class ReservePageController implements Initializable {
             firstNameEN.setText(customer.getFirstNameENG());
             lastNameEN.setText(customer.getLastNameENG());
             genderChoice.setValue(customer.getGender());
-            age.setText(customer.getAge());
             String[] dateCut = customer.getDateOfBirth().split("-");
             dateOfBirth.setValue(LocalDate.of(Integer.valueOf(dateCut[2]), Integer.valueOf(dateCut[1]), Integer.valueOf(dateCut[0])));
             passportNo.setText(customer.getPassport_no());

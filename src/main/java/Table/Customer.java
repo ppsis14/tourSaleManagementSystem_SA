@@ -9,7 +9,6 @@ public class Customer {
     private String firstNameENG;
     private String lastNameENG;
     private String gender;
-    private String age;
     private String occupation;
     private String dateOfBirth;
     private String passport_no;
@@ -36,7 +35,6 @@ public class Customer {
         this.firstNameENG = null;
         this.lastNameENG = null;
         this.gender = "Female";
-        this.age = null;
         this.occupation = null;
         this.dateOfBirth = "dd-mm-yyyy";
         this.passport_no = null;
@@ -53,7 +51,7 @@ public class Customer {
         this.hearAboutUs = "Bangkokbizs News";
     }
 
-    public Customer(String customerID, String titleNameTH, String firstNameTH, String lastNameTH, String titleNameENG, String firstNameENG, String lastNameENG, String gender, String age, String occupation, String dateOfBirth, String passport_no, String exp_passport, String contactAddress, String cell_phone, String home_Tel, String fax, String email, String disease, String foodAllergy, String eatBeef, String moreDetail, String hearAboutUs) {
+    public Customer(String customerID, String titleNameTH, String firstNameTH, String lastNameTH, String titleNameENG, String firstNameENG, String lastNameENG, String gender, String occupation, String dateOfBirth, String passport_no, String exp_passport, String contactAddress, String cell_phone, String home_Tel, String fax, String email, String disease, String foodAllergy, String eatBeef, String moreDetail, String hearAboutUs) {
         this.customerID = customerID;
         this.titleNameTH = titleNameTH;
         this.firstNameTH = firstNameTH;
@@ -62,7 +60,6 @@ public class Customer {
         this.firstNameENG = firstNameENG;
         this.lastNameENG = lastNameENG;
         this.gender = gender;
-        this.age = age;
         this.occupation = occupation;
         this.dateOfBirth = dateOfBirth;
         this.passport_no = passport_no;
@@ -141,14 +138,6 @@ public class Customer {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
     }
 
     public String getOccupation() {
@@ -274,7 +263,6 @@ public class Customer {
                 ", firstNameENG='" + firstNameENG + '\'' +
                 ", lastNameENG='" + lastNameENG + '\'' +
                 ", gender='" + gender + '\'' +
-                ", age='" + age + '\'' +
                 ", occupation='" + occupation + '\'' +
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", passport_no='" + passport_no + '\'' +

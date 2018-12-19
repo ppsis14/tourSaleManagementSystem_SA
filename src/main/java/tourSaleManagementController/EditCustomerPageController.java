@@ -111,7 +111,6 @@ public class EditCustomerPageController implements Initializable {
         firstNameEN.setText(customer.getFirstNameENG());
         lastNameEN.setText(customer.getLastNameENG());
         genderChoice.setValue(customer.getGender());
-        age.setText(customer.getAge());
         String[] dateCut = customer.getDateOfBirth().split("-");
         dateOfBirth.setValue(LocalDate.of(Integer.valueOf(dateCut[2]), Integer.valueOf(dateCut[1]), Integer.valueOf(dateCut[0])));
         passportNo.setText(customer.getPassport_no());
@@ -149,7 +148,6 @@ public class EditCustomerPageController implements Initializable {
         customer.setFirstNameENG(firstNameEN.getText());
         customer.setLastNameENG(lastNameEN.getText());
         customer.setGender(genderChoice.getSelectionModel().getSelectedItem());
-        customer.setAge(age.getText());
         customer.setDateOfBirth(dateOfBirth.getEditor().getText());
         customer.setPassport_no(passportNo.getText());
         customer.setExp_passport(expPassportDate.getEditor().getText());

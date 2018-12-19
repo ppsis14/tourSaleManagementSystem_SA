@@ -67,7 +67,7 @@ public class InvoicePageController implements Initializable {
 
         Invoice selectInvoice = depositInvoiceTable.getSelectionModel().getSelectedItem();
         if(selectInvoice != null ) {
-            if (selectInvoice != null && selectInvoice.getInvoiceStatus().equals("Created")){
+            if (selectInvoice != null && selectInvoice.getCreateStatus().equals("Created")){
                 Alert alertCheckCreateDepositInvoice = new Alert(Alert.AlertType.WARNING);
                 alertCheckCreateDepositInvoice.setTitle("Warning Dialog");
                 alertCheckCreateDepositInvoice.setContentText("Sorry, duplicate deposit invoices are not allowed.");
@@ -92,8 +92,8 @@ public class InvoicePageController implements Initializable {
                     Optional<ButtonType> showCreateDepositInvoiceAction = alertShowCreateDepositInvoice.showAndWait();
                     if (showCreateDepositInvoiceAction.get() == ButtonType.OK) {
                         // update database and table code
-                        selectInvoice.setInvoiceStatus(CREATED);
-                        manageableDatabase.updateCreateInvoiceStatus(selectInvoice,DEPOSIT_INVOICE);
+                        selectInvoice.setCreateStatus(CREATED);
+                        manageableDatabase.updateCreateInvoiceStatus(selectInvoice);
                         showTableView();
                     }
 
@@ -108,7 +108,7 @@ public class InvoicePageController implements Initializable {
 
         Invoice selectInvoice = arrearsInvoiceTable.getSelectionModel().getSelectedItem();
         if(selectInvoice != null ) {
-            if (selectInvoice != null && selectInvoice.getInvoiceStatus().equals("Created")){
+            if (selectInvoice != null && selectInvoice.getCreateStatus().equals("Created")){
                 Alert alertCheckCreateInvoice = new Alert(Alert.AlertType.WARNING);
                 alertCheckCreateInvoice.setTitle("Warning Dialog");
                 alertCheckCreateInvoice.setContentText("Sorry, duplicate invoices are not allowed.");
@@ -132,8 +132,8 @@ public class InvoicePageController implements Initializable {
                     Optional<ButtonType> showCreateArrearsInvoiceAction = alertShowCreateArrearsInvoice.showAndWait();
                     if (showCreateArrearsInvoiceAction.get() == ButtonType.OK) {
                         // update database and table code
-                        selectInvoice.setInvoiceStatus(CREATED);
-                        manageableDatabase.updateCreateInvoiceStatus(selectInvoice, ARREARS_INVOICE);
+                        selectInvoice.setCreateStatus(CREATED);
+                        manageableDatabase.updateCreateInvoiceStatus(selectInvoice);
                         showTableView();
                     }
 
@@ -157,6 +157,7 @@ public class InvoicePageController implements Initializable {
 
     public void showTableView(){
 
+
         String tourNameDI = tourIDChoiceDI.getSelectionModel().getSelectedItem();
         String tourNameAI = tourIDChoiceDI.getSelectionModel().getSelectedItem();
         obListInvoiceDI = FXCollections.observableArrayList(manageableDatabase.getAllInvoiceInTourName(DEPOSIT_INVOICE,tourNameDI));
@@ -167,13 +168,13 @@ public class InvoicePageController implements Initializable {
         invoice_No_ColumnDI.setCellValueFactory(new PropertyValueFactory<>("invoiceNo"));
         amountColumnDI.setCellValueFactory(new PropertyValueFactory<>("amountCustomer"));
         employeeColumnDI.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
-        invoiceStatusColumnDI.setCellValueFactory(new PropertyValueFactory<>("invoiceStatus"));
+        invoiceStatusColumnDI.setCellValueFactory(new PropertyValueFactory<>("createStatus"));
 
         reservationCodeColumnAI.setCellValueFactory(new PropertyValueFactory<>("reservationCode"));
         invoice_No_ColumnAI.setCellValueFactory(new PropertyValueFactory<>("invoiceNo"));
         amountColumnAI.setCellValueFactory(new PropertyValueFactory<>("amountCustomer"));
         employeeColumnAI.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
-        invoiceStatusColumnAI.setCellValueFactory(new PropertyValueFactory<>("invoiceStatus"));
+        invoiceStatusColumnAI.setCellValueFactory(new PropertyValueFactory<>("createStatus"));
 
         depositInvoiceTable.setItems(obListInvoiceDI);
         arrearsInvoiceTable.setItems(obListInvoiceAI);

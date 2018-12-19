@@ -14,7 +14,7 @@ class CustomerTest {
     @BeforeEach
     public void setUp(){
         customer1 = new Customer();
-        customer2 = new Customer("CS000004","นางสาว","กมลชนก","อาจสมบัติ","Miss","Kamonchanok","Archsombat","Female","25","Flight attendant","23-01-1993","AA340098760","28-05-2020",
+        customer2 = new Customer("CS000004","นางสาว","กมลชนก","อาจสมบัติ","Miss","Kamonchanok","Archsombat","Female","Flight attendant","23-01-1993","AA340098760","28-05-2020",
                 "Bangkok, Thailand","0954600040","-","-","kamolchanok@gmail.com","-","chicken","yes","-","facebook");
     }
 
@@ -42,14 +42,7 @@ class CustomerTest {
         assertEquals("ธาดา มารารอง",customer1.getFirstNameTH()+" "+customer1.getLastNameTH());
         assertEquals("Thada Mararong",customer1.getFirstNameENG()+" "+customer1.getLastNameENG());
     }
-    @Test
-    public void testCustomerAge(){
-        assertEquals(null,customer1.getAge());
-        assertEquals("25",customer2.getAge());
-        //set the new age for the customer1
-        customer1.setAge("20");
-        assertEquals("20",customer1.getAge());
-    }
+
     @Test
     public void testCustomerDateOfBirth(){
         assertEquals("dd-mm-yyyy",customer1.getDateOfBirth());
