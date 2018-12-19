@@ -88,7 +88,7 @@ public class InvoicePageController implements Initializable {
                     Alert alertShowCreateDepositInvoice = new Alert(Alert.AlertType.INFORMATION);
                     alertShowCreateDepositInvoice.setTitle("Information Dialog");
                     alertShowCreateDepositInvoice.setHeaderText(null);
-                    alertShowCreateDepositInvoice.setContentText("Creating invoice is successfully!");
+                    alertShowCreateDepositInvoice.setContentText("Creating deposit invoice is successfully!");
                     Optional<ButtonType> showCreateDepositInvoiceAction = alertShowCreateDepositInvoice.showAndWait();
                     if (showCreateDepositInvoiceAction.get() == ButtonType.OK) {
                         // update database and table code

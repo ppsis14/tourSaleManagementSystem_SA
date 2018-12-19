@@ -21,7 +21,7 @@
    <children>
       <Pane layoutX="26.0" prefHeight="100.0" prefWidth="900.0" style="-fx-background-color: #2C3E50;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label graphicTextGap="10.0" layoutX="70.0" layoutY="35.0" text="Tour Program Management" textFill="WHITE">
+            <Label graphicTextGap="10.0" layoutX="70.0" layoutY="35.0" text="Tour Prackage Management" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -44,7 +44,7 @@
             </Label>
             <JFXTabPane layoutX="50.0" layoutY="146.0" prefHeight="540.0" prefWidth="800.0" styleClass="tab-selected-line" stylesheets="@style.css">
                <tabs>
-                  <Tab text="Tour Program Management">
+                  <Tab text="Tour Package Management">
                      <content>
                         <AnchorPane accessibleRole="BUTTON" focusTraversable="true" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>

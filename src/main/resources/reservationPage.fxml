@@ -35,7 +35,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="loginNameLabel" layoutX="577.0" layoutY="40.0" prefHeight="20.0" prefWidth="221.0" text="THIKAMPORN (SM))" textFill="WHITE">
+            <Label fx:id="loginNameLabel" layoutX="577.0" layoutY="40.0" prefHeight="20.0" prefWidth="221.0" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -49,7 +49,7 @@
       <Label layoutX="52.0" layoutY="119.0" prefHeight="17.0" prefWidth="118.0" text="Reservation Code :" />
       <Label layoutX="642.0" layoutY="119.0" prefHeight="17.0" prefWidth="100.0" text="Customer No." />
       <Label fx:id="customerNo" alignment="CENTER" contentDisplay="RIGHT" layoutX="748.0" layoutY="113.0" prefHeight="29.0" prefWidth="100.0" style="-fx-border-color: #2C3E50;" text="1" />
-      <Label layoutX="52.0" layoutY="165.0" prefHeight="17.0" prefWidth="92.0" text="Tour Program :" />
+      <Label layoutX="52.0" layoutY="165.0" prefHeight="17.0" prefWidth="92.0" text="Tour Package :" />
       <HBox alignment="CENTER_LEFT" layoutX="50.0" layoutY="206.0" prefHeight="29.0" prefWidth="800.0" spacing="10.0">
          <children>
             <Label prefHeight="17.0" prefWidth="129.0" text="Customer Status :" />

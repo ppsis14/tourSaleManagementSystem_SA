@@ -88,6 +88,12 @@
     -fx-background-color: #FFFFFF;
 }
 
+.combo-box-choice {
+    -fx-pref-width: 150;
+    -fx-border-color: #34495e;
+    -fx-background-color: #FFFFFF;
+}
+
 /** Size the combo-box drop down list. */
 .combo-box-popup > .list-view {
     -fx-pref-height: 100;
