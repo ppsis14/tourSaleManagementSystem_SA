@@ -48,6 +48,7 @@ public class TourCheckPageController implements Initializable {
     @FXML private TableColumn<DisplayReservationCustomer, String> phoneNumCusColumnR;
     @FXML private JFXButton deleteReserveListBtn;
     @FXML private JFXButton confirmStatusBtn;
+    @FXML private JFXButton createReportBtn;
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
 
@@ -196,9 +197,23 @@ public class TourCheckPageController implements Initializable {
         }
 
     }
-
     @FXML
-    void handleConfirmInvoiceStatusBtn(ActionEvent event){}
+    void handleCreateReportBtn(ActionEvent event) {
+        String[] options = {"Deposit Invoice Payment", "Reservation Payment Status"};
+        ChoiceDialog<String> dialog = new ChoiceDialog<String>("Deposit Invoice Payment", options);
+        dialog.setTitle("Confirmation Dialog");
+        dialog.setHeaderText("Confirmation of creating the report");
+        dialog.setContentText("Choose Report Type ");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()) {
+            if (result.get().equals("Deposit Invoice Payment")) {
+
+
+            } else if (result.get().equals("Invoice Payment")) {
+
+            }
+        }
+    }
 
     @FXML
     void handleSelectTourIDCombobox(ActionEvent event){

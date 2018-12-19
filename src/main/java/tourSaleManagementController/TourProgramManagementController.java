@@ -144,7 +144,7 @@ public class TourProgramManagementController implements Initializable {
         Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
         alertShowInformationIsUpdate.setTitle("Confirmation Dialog");
         alertShowInformationIsUpdate.setHeaderText(null);
-        alertShowInformationIsUpdate.setContentText("Customer Information is update!");
+        alertShowInformationIsUpdate.setContentText("Tour program information is update!");
         Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
         if (action.get() == ButtonType.OK){
             // code for delete reservation
