@@ -72,7 +72,7 @@ public class CreateTourProgramController implements Initializable {
                 manageableDatabase.insertData(tourPackage);
                 Stage stage = (Stage) rootPane.getScene().getWindow();
                 stage.close();
-                DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+                //DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
             }
         }
         else {

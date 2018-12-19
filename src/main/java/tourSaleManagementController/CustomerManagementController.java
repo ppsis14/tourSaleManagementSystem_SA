@@ -96,7 +96,7 @@ public class CustomerManagementController implements Initializable {
         Customer editCustomer = customerTable.getSelectionModel().getSelectedItem();
 
         if(editCustomer != null) {
-            editCustomerBtn.getScene().getWindow().hide();
+            //editCustomerBtn.getScene().getWindow().hide();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/editCustomer.fxml"));
                 Parent parent = (Parent) loader.load();

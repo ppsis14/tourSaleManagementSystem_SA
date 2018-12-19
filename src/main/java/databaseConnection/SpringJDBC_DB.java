@@ -76,10 +76,10 @@ public class SpringJDBC_DB implements ManageableDatabase {
         String updateQuery = "UPDATE tour_package SET Tour_name = ?, Price = ?, Departure_date = ?, Return_date = ?, Deposit_date = ?, Arrears_date = ?,Amount_seat = ?, Available_seat = ?, Status = ?" +
                 " WHERE Tour_ID = ?";
         Object[] data = new Object[]{
-                tourPackage.getTourID(),tourPackage.getTourName(),tourPackage.getPrice(),
+                tourPackage.getTourName(),tourPackage.getPrice(),
                 tourPackage.getDepartureDate(),tourPackage.getReturnDate(),tourPackage.getDepositDate(),
                 tourPackage.getArrearsDate(),tourPackage.getAmountSeat(),tourPackage.getAvailableSeat(),tourPackage.getStatus(),
-                TourID};
+                tourPackage.getTourID()};
         jdbcTemplate.update(updateQuery, data);
     }
 

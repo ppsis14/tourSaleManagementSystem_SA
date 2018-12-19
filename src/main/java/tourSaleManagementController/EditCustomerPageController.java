@@ -82,7 +82,7 @@ public class EditCustomerPageController implements Initializable {
 
                 Stage stage = (Stage) rootPane.getScene().getWindow();
                 stage.close();
-                DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/customerManagementPage.fxml"), "Customer Management");
+                //DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/customerManagementPage.fxml"), "Customer Management");
             }
         }
         else {

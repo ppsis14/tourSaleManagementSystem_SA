@@ -61,7 +61,6 @@ public class TourProgramManagementController implements Initializable {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
         loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
 
-
         showTableView(obListTourProgram);  //show data on table view
 
         setSearchCustomer();
@@ -74,7 +73,7 @@ public class TourProgramManagementController implements Initializable {
 
     @FXML
     void handleCreateTourProgramBtn(ActionEvent event) throws IOException {
-        createTourProgramBtn.getScene().getWindow().hide();
+        //createTourProgramBtn.getScene().getWindow().hide();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/createTourProgram.fxml"));
         Parent parent = (Parent) loader.load();
         Stage stage = new Stage(StageStyle.DECORATED);
@@ -115,7 +114,7 @@ public class TourProgramManagementController implements Initializable {
         TourPackage editTourProgram = tourProgramTable.getSelectionModel().getSelectedItem();
 
         if(editTourProgram != null) {
-            editTourProgramBtn.getScene().getWindow().hide();
+            //editTourProgramBtn.getScene().getWindow().hide();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/editTourProgram.fxml"));
                 Parent parent = (Parent) loader.load();

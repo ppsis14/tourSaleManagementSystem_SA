@@ -21,7 +21,7 @@
    <children>
       <Pane layoutX="26.0" prefHeight="100.0" prefWidth="900.0" style="-fx-background-color: #2C3E50;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label graphicTextGap="10.0" layoutX="70.0" layoutY="35.0" text="Tour Prackage Management" textFill="WHITE">
+            <Label graphicTextGap="10.0" layoutX="70.0" layoutY="35.0" text="Tour Package Management" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                      <image>

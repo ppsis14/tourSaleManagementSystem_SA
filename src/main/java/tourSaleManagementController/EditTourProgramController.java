@@ -48,13 +48,16 @@ public class EditTourProgramController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         oldTourID = tourPackage.getTourID();
-        tourIDCode.setDisable(true);
         SetTourSaleSystemDataUtil.setStatusTourProgram(statusChoice);
         statusChoice.setValue(tourPackage.getStatus());
         SetTourSaleSystemDataUtil.setDatePickerFormat(departureDate);
         SetTourSaleSystemDataUtil.setDatePickerFormat(returnDate);
         SetTourSaleSystemDataUtil.setDatePickerFormat(depositIVDate);
         SetTourSaleSystemDataUtil.setDatePickerFormat(invoiceDate);
+        tourIDCountry.setDisable(true);
+        tourIDDay.setDisable(true);
+        tourIDCode.setDisable(true);
+
         setValidateOnKeyRelease();
     }
 
@@ -74,7 +77,7 @@ public class EditTourProgramController implements Initializable {
 
                 Stage stage = (Stage) rootPane.getScene().getWindow();
                 stage.close();
-                DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+                //DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
             }
         }
         else {
