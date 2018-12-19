@@ -88,7 +88,7 @@ public class EditCustomerPageController implements Initializable {
         else {
             Alert alertEditInformation = new Alert(Alert.AlertType.ERROR);
             alertEditInformation.setTitle("Error Dialog");
-            alertEditInformation.setHeaderText("Editing customer information is error");
+            alertEditInformation.setHeaderText("Saving customer information is error");
             alertEditInformation.setContentText("Please completely fill out information follow (*)");
             Optional<ButtonType> checkEditInformationAction = alertEditInformation.showAndWait();
         }

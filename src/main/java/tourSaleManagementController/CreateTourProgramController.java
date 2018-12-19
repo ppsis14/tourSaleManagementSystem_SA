@@ -65,7 +65,7 @@ public class CreateTourProgramController implements Initializable {
             Alert alertConfirmToDeleteTourProgram = new Alert(Alert.AlertType.CONFIRMATION);
             alertConfirmToDeleteTourProgram.setTitle("Confirmation Dialog");
             alertConfirmToDeleteTourProgram.setHeaderText(null);
-            alertConfirmToDeleteTourProgram.setContentText("Do you want to delete this tour program?");
+            alertConfirmToDeleteTourProgram.setContentText("Do you want to add this tour program?");
             Optional<ButtonType> action = alertConfirmToDeleteTourProgram.showAndWait();
             if (action.get() == ButtonType.OK) {
                 setTourPackageFromGUI();

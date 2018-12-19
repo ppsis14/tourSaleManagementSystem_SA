@@ -1,7 +1,5 @@
 package tourSaleManagementController;
 
-import Table.Customer;
-import Table.Invoice;
 import Table.TourPackage;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
@@ -20,8 +18,6 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.converter.IntegerStringConverter;
-import sun.tracing.dtrace.DTraceProviderFactory;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 
 import java.io.IOException;
@@ -119,7 +115,7 @@ public class TourProgramManagementController implements Initializable {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/editTourProgram.fxml"));
                 Parent parent = (Parent) loader.load();
                 EditTourProgramController editTourProgramController = loader.getController();
-                editTourProgramController.setTourProgram(editTourProgram);
+                editTourProgramController.setTourPackage(editTourProgram);
                 Stage stage = new Stage(StageStyle.DECORATED);
                 stage.show();
                 stage.setScene(new Scene(parent));

@@ -215,7 +215,7 @@ public class ReservePageController implements Initializable {
             else{
                 //pop up warning
                 Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
-                alertShowInformationIsUpdate.setTitle("Confirmation Dialog");
+                alertShowInformationIsUpdate.setTitle("Information Dialog");
                 alertShowInformationIsUpdate.setHeaderText(null);
                 alertShowInformationIsUpdate.setContentText("Available seat are full.");
                 Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
