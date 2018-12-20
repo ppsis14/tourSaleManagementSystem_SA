@@ -1,6 +1,5 @@
 package tourSaleManagementController;
 
-import Table.Customer;
 import Table.TourPackage;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
@@ -13,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
-import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 
 import java.net.URL;
@@ -48,6 +46,8 @@ public class EditTourProgramController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         oldTourID = tourPackage.getTourID();
+        System.out.println("old tour id" + oldTourID);
+        //tourIDCode.setDisable(true);
         SetTourSaleSystemDataUtil.setStatusTourProgram(statusChoice);
         statusChoice.setValue(tourPackage.getStatus());
         SetTourSaleSystemDataUtil.setDatePickerFormat(departureDate);
@@ -57,27 +57,27 @@ public class EditTourProgramController implements Initializable {
         tourIDCountry.setDisable(true);
         tourIDDay.setDisable(true);
         tourIDCode.setDisable(true);
-
         setValidateOnKeyRelease();
     }
 
     @FXML
     void handleSaveDataBtn(ActionEvent event) {
         if (checkFillOutTourInformation()){
-            setTourProgramFromGUI();
+            setTourPackageFromGUI();
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation Dialog");
             alert.setHeaderText(null);
             alert.setContentText("Do you want to save?");
             Optional<ButtonType> action = alert.showAndWait();
             if (action.get() == ButtonType.OK){
-                setTourProgramFromGUI();
+                setTourPackageFromGUI();
+                System.out.println("old tour id" + oldTourID);
                 manageableDatabase.updateData(tourPackage,oldTourID);    //update data to database
                 System.out.println("Update Successful");
 
                 Stage stage = (Stage) rootPane.getScene().getWindow();
                 stage.close();
-                //DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+                DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
             }
         }
         else {
@@ -92,12 +92,13 @@ public class EditTourProgramController implements Initializable {
 
 
 
-    public void setTourProgram(TourPackage editTourPackage){
+    public void setTourPackage(TourPackage editTourPackage){
         this.tourPackage = editTourPackage;
         showDataForEditTourPackage();
     }
 
     public void showDataForEditTourPackage(){
+        System.out.println("tour id: " + tourPackage.getTourID());
         String[] tourID = tourPackage.getTourID().split("-");
         tourIDCountry.setText(tourID[0]);
         tourIDDay.setText(tourID[1]);
@@ -123,7 +124,7 @@ public class EditTourProgramController implements Initializable {
 
 
     }
-    public void setTourProgramFromGUI(){
+    public void setTourPackageFromGUI(){
         tourPackage.setTourID(tourIDCountry.getText()+"-"+tourIDDay.getText()+"-"+tourIDCode.getText());
         tourPackage.setTourName(tourName.getText());
         tourPackage.setPrice(Integer.valueOf(tourPrice.getText()));

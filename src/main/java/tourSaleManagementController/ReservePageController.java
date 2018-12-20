@@ -133,7 +133,76 @@ public class ReservePageController implements Initializable {
             String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
             int availableSeat = manageableDatabase.getAvailableByTourID(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
             if(availableSeat - Integer.valueOf(customerNo.getText()) >= 0) {
-                //pop up 1
+                //---------------------------------------------------------
+                // case show "Do you wnt to add another customer" -> ok = continue/ cancel = submit reservation pop up
+                Alert alertConfirmToAddCustomerMore = new Alert(Alert.AlertType.CONFIRMATION);
+                alertConfirmToAddCustomerMore.setTitle("Confirmation Dialog");
+                alertConfirmToAddCustomerMore.setHeaderText(null);
+                alertConfirmToAddCustomerMore.setContentText("Do you want to add another customer?");
+                Optional<ButtonType> addCustomerMoreAction = alertConfirmToAddCustomerMore.showAndWait();
+
+                if (addCustomerMoreAction.get() == ButtonType.OK) {
+                    customerNo.setText(String.valueOf(Integer.valueOf(customerNo.getText()) + 1));
+                    setCustomerFromGUI();
+                    if (newCustomer.isSelected()) {
+                        newCustomerID_List.add(customer.getCustomerID());
+                    }
+                    //add customer id to list
+                    customerList.add(customer);
+                    setReservationCustomerFromGUI();
+                    reserveCustomer_List.add(reservationCustomer);
+
+                    clearText();
+                    searchByCustomerName.clear();
+                    searchByCustomerName.setDisable(true);
+                    searchCustomerBtn.setDisable(true);
+                    customer = new Customer();
+                    reservationCustomer = new Reservation();
+
+
+                }
+                else if (addCustomerMoreAction.get() == ButtonType.CANCEL) {     //stop reserving another customer
+                    Alert alertConfirmReservation = new Alert(Alert.AlertType.CONFIRMATION);
+                    alertConfirmReservation.setTitle("Confirmation Dialog");
+                    alertConfirmReservation.setHeaderText(null);
+                    alertConfirmReservation.setContentText("Do you want to confirm this reservation?");
+                    Optional<ButtonType> confrimReservationAction = alertConfirmReservation.showAndWait();
+
+                    if (confrimReservationAction.get() == ButtonType.OK) { // if user want to add another customer
+                        //insert customer to database
+                        for (Customer customer : customerList) {
+                            if(newCustomerID_List.contains(customer.getCustomerID()))
+                                manageableDatabase.insertData(customer);    //new customer
+                            else
+                                manageableDatabase.updateData(customer);    //old customer
+                        }
+
+                        //insert reservation customer to database
+                        for (Reservation reservation: reserveCustomer_List) {
+                            manageableDatabase.insertData(reservation);
+                        }
+
+                        //insert reservation payment and deposit invoice to database
+                        setReservationPaymentFromGUI();
+                        setDepositInvoice();
+                        manageableDatabase.insertData(reservationPayment); //inset reservationPayment to database
+                        manageableDatabase.insertData(invoice, DEPOSIT_INVOICE);    // insert deposit invoice
+
+                        //update seat in tour package
+                        manageableDatabase.updateAvailableData(tour_id,availableSeat-Integer.valueOf(customerNo.getText()));
+
+                        //setup value of reservation page
+                        searchByCustomerName.clear();
+                        searchByCustomerName.setDisable(true);
+                        searchCustomerBtn.setDisable(true);
+                        reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
+                        String tmpOrder[] = reserveCode.getText().split("-");
+                        orderReserve = Integer.valueOf(tmpOrder[3]);
+                        setUpValueReservationPage();
+
+                    }
+                    //---------------------------------------------------------
+                /*//pop up 1
                 Alert alertConfirmToAddCustomerData = new Alert(Alert.AlertType.CONFIRMATION);
                 alertConfirmToAddCustomerData.setTitle("Confirmation Dialog");
                 alertConfirmToAddCustomerData.setHeaderText(null);
@@ -208,7 +277,7 @@ public class ReservePageController implements Initializable {
                         String tmpOrder[] = reserveCode.getText().split("-");
                         orderReserve = Integer.valueOf(tmpOrder[3]);
                         setUpValueReservationPage();
-                    }
+                    }*/
 
                 }
             }
