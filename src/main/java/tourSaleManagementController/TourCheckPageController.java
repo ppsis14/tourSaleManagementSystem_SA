@@ -52,6 +52,7 @@ public class TourCheckPageController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
     @FXML private Label loginNameLabel;
+    @FXML private JFXButton reportBtn;
 
     ObservableList<DisplayReservationCustomer> reservationObList = FXCollections.observableArrayList();
     ObservableList<ReservationPayment> reservePaymentObList = FXCollections.observableArrayList();
@@ -195,6 +196,12 @@ public class TourCheckPageController implements Initializable {
             Optional<ButtonType> deleteAction = alertWarningBeforeDelete.showAndWait();
         }
 
+    }
+
+    @FXML
+    void handleReportBtn(ActionEvent event) {
+        reportBtn.getScene().getWindow().hide();
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourReportPage.fxml"), "Tour Report");
     }
 
     @FXML

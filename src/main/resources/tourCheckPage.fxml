@@ -125,6 +125,11 @@
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>
                                                 </JFXButton>
+                                                <JFXButton fx:id="reportBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleReportBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Report" textAlignment="RIGHT" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
                                              </children>
                                           </HBox>
                                        </children>

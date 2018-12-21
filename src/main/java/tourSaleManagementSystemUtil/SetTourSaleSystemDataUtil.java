@@ -43,6 +43,13 @@ public class SetTourSaleSystemDataUtil {
         choiceBox.getItems().addAll(genderChoices);
     }
 
+    public static void setPaidStatus(ChoiceBox choiceBox){
+        ObservableList<String> paidStatusChoice = FXCollections.observableArrayList("None", "Paid", "Not paid");
+        choiceBox.getSelectionModel().selectFirst();
+        choiceBox.setValue("None");
+        choiceBox.getItems().addAll(paidStatusChoice);
+    }
+
     public static void setHearAboutUs(ComboBox comboBox){
         ObservableList<String> hereAboutUsChoices = FXCollections.observableArrayList("Bangkokbizs News", "Daily News", "Komchadluek", "Website", "E-News", "SMS", "TV Ads", "Others");
         comboBox.getSelectionModel().selectFirst();

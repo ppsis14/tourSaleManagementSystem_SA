@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
@@ -18,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.TourCheckPageController">
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.TourReportController">
    <children>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -28,7 +29,7 @@
                      <graphic>
                         <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@images/icons8_To_Do_24px.png" />
+                              <Image url="@images/icons8-survey_filled.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -52,40 +53,136 @@
                   <HBox prefHeight="29.0" prefWidth="676.0" spacing="20.0">
                      <children>
                         <Label maxHeight="1.7976931348623157E308" text="Tour Package :" />
-                        <ComboBox fx:id="tourIDComboBox" onAction="#handleSelectTourIDCombobox" prefHeight="29.0" prefWidth="240.0" style="-fx-border-color: #2C3E50; -fx-background-color: #FFFFFF;" stylesheets="@style.css" />
+                        <ComboBox fx:id="tourIDComboBox" onAction="#handleSelectTourID" prefHeight="29.0" prefWidth="240.0" style="-fx-border-color: #2C3E50; -fx-background-color: #FFFFFF;" stylesheets="@style.css" />
                         <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" maxHeight="1.7976931348623157E308" prefHeight="29.0" prefWidth="172.0" text="Date :" />
-                        <Label fx:id="currentDateInvoice" alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="29.0" prefWidth="120.0" style="-fx-border-color: #2C3E50;" />
+                        <Label fx:id="reportDate" alignment="CENTER" maxHeight="1.7976931348623157E308" prefHeight="29.0" prefWidth="120.0" style="-fx-border-color: #2C3E50;" />
       
                      </children>
                   </HBox>
                   <JFXTabPane prefHeight="498.0" prefWidth="772.0" styleClass="tab-selected-line" stylesheets="@style.css">
                      <tabs>
-                        <Tab text="Reservation Payment">
+                        <Tab text="Reservation Payment Report">
                            <content>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
                                  <children>
-                                    <VBox alignment="CENTER_LEFT" layoutY="10.0" prefHeight="457.0" prefWidth="770.0" spacing="20.0">
+                                    <VBox layoutY="20.0" prefHeight="444.0" prefWidth="770.0" spacing="15.0">
                                        <children>
-                                          <HBox alignment="CENTER_LEFT" prefHeight="161.0" prefWidth="770.0" spacing="20.0">
+                                          <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="770.0" spacing="20.0">
                                              <children>
                                                 <Label text="Deposit Payment :" />
-                                                <ComboBox fx:id="tourIDComboBox1" onAction="#handleSelectTourIDCombobox" prefHeight="27.0" prefWidth="165.0" style="-fx-border-color: #2C3E50; -fx-background-color: #FFFFFF;" styleClass="combo-box-choice" stylesheets="@style.css" />
+                                                <ChoiceBox fx:id="depositStatusChoice" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                                 <Label text="Arrears Payment :" />
-                                                <ComboBox fx:id="tourIDComboBox11" onAction="#handleSelectTourIDCombobox" prefHeight="27.0" prefWidth="165.0" style="-fx-border-color: #2C3E50; -fx-background-color: #FFFFFF;" styleClass="combo-box-choice" stylesheets="@style.css" />
+                                                <ChoiceBox fx:id="arrearsStatusChoice" layoutX="142.0" layoutY="10.0" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                              </children>
                                           </HBox>
-                                          <TableView fx:id="paymentListTable" editable="true" fixedCellSize="0.0" prefHeight="508.0" prefWidth="770.0">
+                                          <TableView fx:id="reservationPaymentTable" editable="true" prefHeight="276.0" prefWidth="770.0">
                                              <columns>
-                                                <TableColumn fx:id="reservationCodeColumnP" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
-                                                <TableColumn fx:id="nameColumnP" prefWidth="200.0" text="Name" />
-                                                <TableColumn fx:id="depositPaymentStatusColumnP" prefWidth="177.0" text="Deposit Payment Status" />
-                                                <TableColumn fx:id="arrearsPaymentStatusColumnP" prefWidth="164.0" text="Arrears Payment Status" />
-                                                <TableColumn fx:id="employeeName_ColumnP" prefWidth="200.0" text="Employee Name" />
+                                                <TableColumn fx:id="reservationCodeColumn" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
+                                                <TableColumn fx:id="customerNameColumn" minWidth="250.0" prefWidth="250.0" text="Cutomer Name" />
+                                                <TableColumn fx:id="cusPhoneNumColumn" minWidth="150.0" prefWidth="150.0" text="Phone No." />
+                                                <TableColumn fx:id="depositPaymentStatusColumn" minWidth="177.0" prefWidth="177.0" text="Deposit Payment Status" />
+                                                <TableColumn fx:id="arrearsPaymentStatusColumn" minWidth="164.0" prefWidth="164.0" text="Arrears Payment Status" />
+                                                <TableColumn fx:id="saleNameColumn" minWidth="250.0" prefWidth="250.0" text="SalepersonName" />
                                              </columns>
                                           </TableView>
-                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="437.0" prefHeight="161.0" prefWidth="770.0" spacing="20.0">
+                                          <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="770.0" spacing="20.0">
                                              <children>
-                                                <JFXButton fx:id="createReportBtn1" alignment="CENTER" buttonType="RAISED" onAction="#handleCreateReportBtn" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Create Report" textAlignment="RIGHT" textFill="WHITE">
+                                                <Label text="Total Reservation :" />
+                                                <Label fx:id="totalReservation" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" styleClass="date-label" stylesheets="@style.css" />
+                                                <Label layoutX="546.0" layoutY="20.0" text="Total Paid :" />
+                                                <Label fx:id="totalPaid" alignment="CENTER" layoutX="678.0" layoutY="14.0" prefHeight="30.0" prefWidth="80.0" styleClass="date-label" stylesheets="@style.css" />
+                                                <Label fx:id="totalNotPaid" layoutX="292.0" layoutY="20.0" text="Total Not paid :" />
+                                                <Label fx:id="quantity12" alignment="CENTER" layoutX="424.0" layoutY="14.0" prefHeight="30.0" prefWidth="80.0" styleClass="date-label" stylesheets="@style.css" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="346.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="770.0" spacing="20.0" />
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="437.0" prefHeight="30.0" prefWidth="770.0" spacing="20.0">
+                                             <children>
+                                                <JFXButton fx:id="createPaymentReportBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleCreatePaymentReportBtn" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Create Report" textAlignment="RIGHT" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Customer List Report">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox alignment="TOP_CENTER" layoutY="20.0" prefHeight="447.0" prefWidth="770.0" spacing="15.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="770.0" spacing="20.0">
+                                             <children>
+                                                <Label text="Quantity :" />
+                                                <Label fx:id="quantity" alignment="CENTER" prefHeight="30.0" prefWidth="102.0" styleClass="date-label" stylesheets="@style.css" />
+                                             </children>
+                                          </HBox>
+                                          <TableView fx:id="customerListTable" editable="true" fixedCellSize="0.0" prefHeight="315.0" prefWidth="770.0">
+                                             <columns>
+                                                <TableColumn fx:id="numberColumn" minWidth="60.0" prefWidth="60.0" text="No." />
+                                                <TableColumn fx:id="customerIDColumn" minWidth="250.0" prefWidth="250.0" text="Customer ID" />
+                                                <TableColumn fx:id="nameColumn" minWidth="250.0" prefWidth="250.0" text="Name" />
+                                                <TableColumn fx:id="ageColumn" minWidth="100.0" prefWidth="100.0" text="Age" />
+                                                <TableColumn fx:id="phoneNumColumn" prefWidth="200.0" text="Phone Number" />
+                                             </columns>
+                                          </TableView>
+                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="770.0" spacing="20.0" />
+                                          <HBox alignment="CENTER" prefHeight="30.0" prefWidth="770.0" spacing="20.0">
+                                             <children>
+                                                <JFXButton fx:id="customerListReportBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleCreateCustomerListReportBtn" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Create Report" textAlignment="RIGHT" textFill="WHITE">
+                                                   <font>
+                                                      <Font name="System Bold" size="14.0" />
+                                                   </font>
+                                                </JFXButton>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </Tab>
+                        <Tab text="Sale Report">
+                           <content>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox layoutY="20.0" prefHeight="444.0" prefWidth="770.0" spacing="15.0">
+                                       <children>
+                                          <HBox alignment="CENTER_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="770.0" spacing="20.0">
+                                             <children>
+                                                <Label text="Tour Package Price :" />
+                                                <Label fx:id="tourPrice" alignment="CENTER" prefHeight="30.0" prefWidth="178.0" styleClass="date-label" stylesheets="@style.css" />
+                                             </children>
+                                          </HBox>
+                                          <TableView fx:id="SaleTable" editable="true" prefHeight="258.0" prefWidth="770.0">
+                                             <columns>
+                                                <TableColumn fx:id="reservationSRCodeColumn" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
+                                                <TableColumn fx:id="customerNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Cutomer Name" />
+                                                <TableColumn fx:id="quantityColumn" minWidth="100.0" prefWidth="100.0" text="Quantity" />
+                                                <TableColumn fx:id="depositPaymentStatusSRColumn" minWidth="177.0" prefWidth="177.0" text="Deposit Payment Status" />
+                                                <TableColumn fx:id="arrearsPaymentStatusSRColumn" minWidth="164.0" prefWidth="164.0" text="Arrears Payment Status" />
+                                                <TableColumn fx:id="amount" minWidth="164.0" prefWidth="164.0" text="Amount" />
+                                                <TableColumn fx:id="saleNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Saleperson Name" />
+                                             </columns>
+                                          </TableView>
+                                          <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="770.0" spacing="20.0">
+                                             <children>
+                                                <Label text="Total Quantity :" />
+                                                <Label fx:id="totalQuantity" alignment="CENTER" prefHeight="30.0" prefWidth="87.0" styleClass="date-label" stylesheets="@style.css" />
+                                                <Label layoutX="492.0" layoutY="19.0" text="Total Amount :" />
+                                                <Label fx:id="totalAmount" alignment="CENTER" layoutX="602.0" layoutY="13.0" prefHeight="30.0" prefWidth="178.0" styleClass="date-label" stylesheets="@style.css" />
+                                             </children>
+                                          </HBox>
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="437.0" prefHeight="30.0" prefWidth="770.0" spacing="20.0" />
+                                          <HBox alignment="CENTER" layoutX="10.0" layoutY="427.0" prefHeight="30.0" prefWidth="770.0" spacing="20.0">
+                                             <children>
+                                                <JFXButton fx:id="createSaleReportBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleCreateSaleReportBtn" prefHeight="30.0" prefWidth="135.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Create Report" textAlignment="RIGHT" textFill="WHITE">
                                                    <font>
                                                       <Font name="System Bold" size="14.0" />
                                                    </font>

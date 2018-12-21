@@ -79,7 +79,11 @@
 {
     -fx-border-color: #34495e;
     -fx-background-color: #FFFFFF;
+}
 
+.date-label{
+    -fx-border-color:  #2C3E50;
+    -fx-pref-height: 29;
 }
 
 .combo-box {
