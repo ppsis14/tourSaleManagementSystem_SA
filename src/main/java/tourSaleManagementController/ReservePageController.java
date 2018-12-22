@@ -36,70 +36,38 @@ public class ReservePageController implements Initializable {
     private ChoiceBox<String> titleNameTH;
     @FXML
     private TextField firstNameTH;
-    @FXML
-    private TextField lastNameTH;
-    @FXML
-    private ChoiceBox<String> titleNameEN;
-    @FXML
-    private TextField firstNameEN;
-    @FXML
-    private TextField lastNameEN;
-    @FXML
-    private ChoiceBox<String> genderChoice;
-    @FXML
-    private TextField occupation;
-    @FXML
-    private DatePicker dateOfBirth;
-    @FXML
-    private TextField passportNo;
-    @FXML
-    private DatePicker expPassportDate;
-    @FXML
-    private TextField address;
-    @FXML
-    private TextField phoneNum;
-    @FXML
-    private TextField homeTelNum;
-    @FXML
-    private TextField faxNum;
-    @FXML
-    private TextField email;
-    @FXML
-    private TextField underlyingDisease;
-    @FXML
-    private TextField foodAllergy;
-    @FXML
-    private JFXCheckBox eatBeefY;
-    @FXML
-    private JFXCheckBox eatBeefN;
-    @FXML
-    private TextField moreDetail;
-    @FXML
-    private ComboBox<String> hearAboutUsChoices;
-    @FXML
-    private JFXHamburger menu;
-    @FXML
-    private JFXDrawer drawerMenu;
-    @FXML
-    private JFXButton addCustomerBtn;
-    @FXML
-    private JFXButton submitBtn;
-    @FXML
-    private Label reserveCode;
-    @FXML
-    private Label customerNo;
-    @FXML
-    private ComboBox<String> tourIDComboBox;
-    @FXML
-    private JFXCheckBox oldCustomer;
-    @FXML
-    private JFXCheckBox newCustomer;
-    @FXML
-    private TextField searchByCustomerName;
-    @FXML
-    private Button searchCustomerBtn;
-    @FXML
-    private Label loginNameLabel;
+    @FXML private TextField lastNameTH;
+    @FXML private ChoiceBox<String> titleNameEN;
+    @FXML private TextField firstNameEN;
+    @FXML private TextField lastNameEN;
+    @FXML private ChoiceBox<String> genderChoice;
+    @FXML private TextField occupation;
+    @FXML private DatePicker dateOfBirth;
+    @FXML private TextField passportNo;
+    @FXML private DatePicker expPassportDate;
+    @FXML private TextField address;
+    @FXML private TextField phoneNum;
+    @FXML private TextField homeTelNum;
+    @FXML private TextField faxNum;
+    @FXML private TextField email;
+    @FXML private TextField underlyingDisease;
+    @FXML private TextField foodAllergy;
+    @FXML private JFXCheckBox eatBeefY;
+    @FXML private JFXCheckBox eatBeefN;
+    @FXML private TextField moreDetail;
+    @FXML private ComboBox<String> hearAboutUsChoices;
+    @FXML private JFXHamburger menu;
+    @FXML private JFXDrawer drawerMenu;
+    @FXML private JFXButton addCustomerBtn;
+    @FXML private JFXButton submitBtn;
+    @FXML private Label reserveCode;
+    @FXML private Label customerNo;
+    @FXML private ComboBox<String> tourIDComboBox;
+    @FXML private JFXCheckBox oldCustomer;
+    @FXML private JFXCheckBox newCustomer;
+    @FXML private TextField searchByCustomerName;
+    @FXML private Button searchCustomerBtn;
+    @FXML private Label loginNameLabel;
 
     private ArrayList<String> newCustomerID_List = new ArrayList<>();
     private ArrayList<Reservation> reserveCustomer_List = new ArrayList<>();
