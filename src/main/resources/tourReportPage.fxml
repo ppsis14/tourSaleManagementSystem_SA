@@ -165,9 +165,8 @@
                                                 <TableColumn fx:id="reservationSRCodeColumn" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
                                                 <TableColumn fx:id="customerNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Cutomer Name" />
                                                 <TableColumn fx:id="quantityColumn" minWidth="100.0" prefWidth="100.0" text="Quantity" />
-                                                <TableColumn fx:id="depositPaymentStatusSRColumn" minWidth="177.0" prefWidth="177.0" text="Deposit Payment Status" />
-                                                <TableColumn fx:id="arrearsPaymentStatusSRColumn" minWidth="164.0" prefWidth="164.0" text="Arrears Payment Status" />
-                                                <TableColumn fx:id="amount" minWidth="164.0" prefWidth="164.0" text="Amount" />
+                                                <TableColumn fx:id="expectedAmount" minWidth="164.0" prefWidth="164.0" text="Expected Amount" />
+                                                <TableColumn fx:id="receivedAmount" minWidth="164.0" prefWidth="164.0" text="Received Amount" />
                                                 <TableColumn fx:id="saleNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Saleperson Name" />
                                              </columns>
                                           </TableView>

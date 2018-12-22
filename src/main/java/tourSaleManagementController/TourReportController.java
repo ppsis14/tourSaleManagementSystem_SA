@@ -48,9 +48,8 @@ public class TourReportController implements Initializable {
     @FXML private TableColumn<?, ?> reservationSRCodeColumn;
     @FXML private TableColumn<?, ?> customerNameSRColumn;
     @FXML private TableColumn<?, ?> quantityColumn;
-    @FXML private TableColumn<?, ?> depositPaymentStatusSRColumn;
-    @FXML private TableColumn<?, ?> arrearsPaymentStatusSRColumn;
-    @FXML private TableColumn<?, ?> amount;
+    @FXML private TableColumn<?, ?> expectedAmount;
+    @FXML private TableColumn<?, ?> receivedAmount;
     @FXML private TableColumn<?, ?> saleNameSRColumn;
     @FXML private Label totalQuantity;
     @FXML private Label totalAmount;
