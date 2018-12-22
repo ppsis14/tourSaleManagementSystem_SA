@@ -78,7 +78,7 @@
                                           <TableView fx:id="reservationPaymentTable" editable="true" prefHeight="276.0" prefWidth="770.0">
                                              <columns>
                                                 <TableColumn fx:id="reservationCodeColumn" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
-                                                <TableColumn fx:id="customerNameColumn" minWidth="250.0" prefWidth="250.0" text="Cutomer Name" />
+                                                <TableColumn fx:id="customerNameColumn" minWidth="250.0" prefWidth="250.0" text="Customer Name" />
                                                 <TableColumn fx:id="cusPhoneNumColumn" minWidth="150.0" prefWidth="150.0" text="Phone No." />
                                                 <TableColumn fx:id="depositPaymentStatusColumn" minWidth="177.0" prefWidth="177.0" text="Deposit Payment Status" />
                                                 <TableColumn fx:id="arrearsPaymentStatusColumn" minWidth="164.0" prefWidth="164.0" text="Arrears Payment Status" />
@@ -163,7 +163,7 @@
                                           <TableView fx:id="SaleTable" editable="true" prefHeight="258.0" prefWidth="770.0">
                                              <columns>
                                                 <TableColumn fx:id="reservationSRCodeColumn" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
-                                                <TableColumn fx:id="customerNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Cutomer Name" />
+                                                <TableColumn fx:id="customerNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Customer Name" />
                                                 <TableColumn fx:id="quantityColumn" minWidth="100.0" prefWidth="100.0" text="Quantity" />
                                                 <TableColumn fx:id="expectedAmount" minWidth="164.0" prefWidth="164.0" text="Expected Amount" />
                                                 <TableColumn fx:id="receivedAmount" minWidth="164.0" prefWidth="164.0" text="Received Amount" />
