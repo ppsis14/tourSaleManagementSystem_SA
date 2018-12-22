@@ -447,6 +447,7 @@ public class EditCustomerPageController implements Initializable {
             return false;
         }
     }
+
     private boolean validatePassportNo(){
         Pattern pattern = Pattern.compile("^[A-Z0-9]+$");
         Matcher matcher = pattern.matcher(passportNo.getText());
