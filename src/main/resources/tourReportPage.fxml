@@ -77,10 +77,10 @@
                                           </HBox>
                                           <TableView fx:id="reservationPaymentTable" editable="true" prefHeight="276.0" prefWidth="770.0">
                                              <columns>
-                                                <TableColumn fx:id="reservationCodeColumn" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
-                                                <TableColumn fx:id="customerNameColumn" minWidth="250.0" prefWidth="250.0" text="Customer Name" />
+                                                <TableColumn fx:id="reservationCodeColumn" minWidth="210.0" prefWidth="210.0" text="Reservation Code" />
+                                                <TableColumn fx:id="customerNameColumn" minWidth="300.0" prefWidth="300.0" text="Customer Name" />
                                                 <TableColumn fx:id="cusPhoneNumColumn" minWidth="150.0" prefWidth="150.0" text="Phone No." />
-                                                <TableColumn fx:id="depositPaymentStatusColumn" minWidth="177.0" prefWidth="177.0" text="Deposit Payment Status" />
+                                                <TableColumn fx:id="depositPaymentStatusColumn" minWidth="170.0" prefWidth="170.0" text="Deposit Payment Status" />
                                                 <TableColumn fx:id="arrearsPaymentStatusColumn" minWidth="164.0" prefWidth="164.0" text="Arrears Payment Status" />
                                                 <TableColumn fx:id="saleNameColumn" minWidth="250.0" prefWidth="250.0" text="SalepersonName" />
                                              </columns>
@@ -126,10 +126,10 @@
                                           <TableView fx:id="customerListTable" editable="true" fixedCellSize="0.0" prefHeight="315.0" prefWidth="770.0">
                                              <columns>
                                                 <TableColumn fx:id="numberColumn" minWidth="60.0" prefWidth="60.0" text="No." />
-                                                <TableColumn fx:id="customerIDColumn" minWidth="250.0" prefWidth="250.0" text="Customer ID" />
-                                                <TableColumn fx:id="nameColumn" minWidth="250.0" prefWidth="250.0" text="Name" />
+                                                <TableColumn fx:id="customerIDColumn" minWidth="150.0" prefWidth="150.0" text="Customer ID" />
+                                                <TableColumn fx:id="nameColumn" minWidth="300.0" prefWidth="300.0" text="Name" />
                                                 <TableColumn fx:id="ageColumn" minWidth="100.0" prefWidth="100.0" text="Age" />
-                                                <TableColumn fx:id="phoneNumColumn" prefWidth="200.0" text="Phone Number" />
+                                                <TableColumn fx:id="phoneNumColumn" minWidth="160.0" prefWidth="160.0" text="Phone No." />
                                              </columns>
                                           </TableView>
                                           <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="22.0" prefWidth="770.0" spacing="20.0" />
@@ -162,11 +162,11 @@
                                           </HBox>
                                           <TableView fx:id="SaleTable" editable="true" prefHeight="258.0" prefWidth="770.0">
                                              <columns>
-                                                <TableColumn fx:id="reservationSRCodeColumn" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
-                                                <TableColumn fx:id="customerNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Customer Name" />
-                                                <TableColumn fx:id="quantityColumn" minWidth="100.0" prefWidth="100.0" text="Quantity" />
-                                                <TableColumn fx:id="expectedAmount" minWidth="164.0" prefWidth="164.0" text="Expected Amount" />
-                                                <TableColumn fx:id="receivedAmount" minWidth="164.0" prefWidth="164.0" text="Received Amount" />
+                                                <TableColumn fx:id="reservationSRCodeColumn" minWidth="210.0" prefWidth="210.0" text="Reservation Code" />
+                                                <TableColumn fx:id="customerNameSRColumn" minWidth="300.0" prefWidth="300.0" text="Customer Name" />
+                                                <TableColumn fx:id="quantityColumn" minWidth="70.0" prefWidth="70.0" text="Quantity" />
+                                                <TableColumn fx:id="expectedAmount" minWidth="135.0" prefWidth="135.0" text="Expected Amount" />
+                                                <TableColumn fx:id="receivedAmount" minWidth="140.0" prefWidth="140.0" text="Received Amount" />
                                                 <TableColumn fx:id="saleNameSRColumn" minWidth="250.0" prefWidth="250.0" text="Saleperson Name" />
                                              </columns>
                                           </TableView>

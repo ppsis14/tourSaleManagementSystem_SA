@@ -61,9 +61,9 @@
                               </HBox>
                               <TableView fx:id="depositInvoiceTable" editable="true" fixedCellSize="0.0" prefHeight="320.0" prefWidth="772.0">
                                  <columns>
-                                    <TableColumn fx:id="reservationCodeColumnDI" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
+                                    <TableColumn fx:id="reservationCodeColumnDI" minWidth="210.0" prefWidth="210.0" text="Reservation Code" />
                                     <TableColumn fx:id="invoice_No_ColumnDI" minWidth="230.0" prefWidth="230.0" text="Deposit Invoice No." />
-                                    <TableColumn fx:id="amountColumnDI" prefWidth="110.0" text="Amount" />
+                                    <TableColumn fx:id="amountColumnDI" minWidth="90.0" prefWidth="90.0" text="Quantity" />
                                     <TableColumn fx:id="employeeColumnDI" minWidth="200.0" prefWidth="200.0" text="Employee Name" />
                                     <TableColumn fx:id="invoiceStatusColumnDI" prefWidth="163.0" text="Deposit Invoice Status" />
                                  </columns>
@@ -97,9 +97,9 @@
                               </HBox>
                               <TableView fx:id="arrearsInvoiceTable" editable="true" fixedCellSize="0.0" prefHeight="320.0" prefWidth="772.0">
                                  <columns>
-                                    <TableColumn fx:id="reservationCodeColumnAI" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
+                                    <TableColumn fx:id="reservationCodeColumnAI" minWidth="210.0" prefWidth="210.0" text="Reservation Code" />
                                     <TableColumn fx:id="invoice_No_ColumnAI" minWidth="230.0" prefWidth="230.0" text="Invoice No." />
-                                    <TableColumn fx:id="amountColumnAI" prefWidth="110.0" text="Amount" />
+                                    <TableColumn fx:id="amountColumnAI" minWidth="90.0" prefWidth="90.0" text="Quantity" />
                                     <TableColumn fx:id="employeeColumnAI" minWidth="200.0" prefWidth="200.0" text="Employee Name" />
                                     <TableColumn fx:id="invoiceStatusColumnAI" prefWidth="163.0" text="Invoice Status" />
                                  </columns>
