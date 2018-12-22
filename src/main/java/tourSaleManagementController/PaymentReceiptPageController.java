@@ -68,7 +68,7 @@ public class PaymentReceiptPageController implements Initializable {
             if (selectReceipt != null && selectReceipt.getCreateStatus().equals("Created")){
                 Alert alertCheckCreateDepositReceipt = new Alert(Alert.AlertType.WARNING);
                 alertCheckCreateDepositReceipt.setTitle("Warning Dialog");
-                alertCheckCreateDepositReceipt.setContentText("Sorry, duplicate invoices are not allowed.");
+                alertCheckCreateDepositReceipt.setContentText("Sorry, duplicate receipt are not allowed.");
                 Optional<ButtonType> checkCreateDepositReceiptAction = alertCheckCreateDepositReceipt.showAndWait();
 
             }
@@ -105,7 +105,7 @@ public class PaymentReceiptPageController implements Initializable {
             if (selectReceipt != null && selectReceipt.getCreateStatus().equals("Created")){
                 Alert alertCheckCreateReceipt = new Alert(Alert.AlertType.WARNING);
                 alertCheckCreateReceipt.setTitle("Warning Dialog");
-                alertCheckCreateReceipt.setContentText("Sorry, duplicate invoices are not allowed.");
+                alertCheckCreateReceipt.setContentText("Sorry, duplicate receipt are not allowed.");
                 Optional<ButtonType> checkCreateReceiptAction = alertCheckCreateReceipt.showAndWait();
             }
             else {

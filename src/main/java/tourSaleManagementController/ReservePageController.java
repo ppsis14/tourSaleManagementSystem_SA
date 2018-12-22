@@ -39,7 +39,6 @@ public class ReservePageController implements Initializable {
     @FXML private TextField firstNameEN;
     @FXML private TextField lastNameEN;
     @FXML private ChoiceBox<String> genderChoice;
-    @FXML private TextField age;
     @FXML private TextField occupation;
     @FXML private DatePicker dateOfBirth;
     @FXML private TextField passportNo;
@@ -456,7 +455,6 @@ public class ReservePageController implements Initializable {
         lastNameEN.clear();
         genderChoice.getSelectionModel().clearSelection();
         genderChoice.setValue("Female");
-        age.clear();
         dateOfBirth.getEditor().clear();
         passportNo.clear();
         expPassportDate.getEditor().clear();
@@ -600,18 +598,6 @@ public class ReservePageController implements Initializable {
                     lastNameEN.setStyle("-fx-border-color: #27AE60");
                 }else{
                     lastNameEN.setStyle("-fx-border-color: #922B21");
-                }
-            }
-        });
-
-        age.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateAge()){
-                    age.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    age.setStyle("-fx-border-color: #922B21");
                 }
             }
         });
@@ -791,16 +777,6 @@ public class ReservePageController implements Initializable {
             return false;
         }
     }
-    private boolean validateAge(){
-        Pattern pattern = Pattern.compile("^[0-9]+$");
-        Matcher matcher = pattern.matcher(age.getText());
-        if (matcher.find() && matcher.group().equals(age.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
     private boolean validateOccupation(){
         Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-z]|[-])+$");
         Matcher matcher = pattern.matcher(occupation.getText());
@@ -913,8 +889,6 @@ public class ReservePageController implements Initializable {
         else {lastNameEN.setStyle("-fx-border-color: #2C3E50");}
         if (address.getText().isEmpty()){address.setStyle("-fx-border-color: #C0392B");count++;}
         else {address.setStyle("-fx-border-color: #2C3E50");}
-        if (age.getText().isEmpty()){age.setStyle("-fx-border-color: #C0392B");count++;}
-        else {age.setStyle("-fx-border-color: #2C3E50");}
         if (dateOfBirth.getEditor().getText().isEmpty()){dateOfBirth.setStyle("-fx-border-color: #C0392B");count++;}
         else {dateOfBirth.setStyle("-fx-border-color: #2C3E50");}
         if (passportNo.getText().isEmpty()){passportNo.setStyle("-fx-border-color: #C0392B");count++;}

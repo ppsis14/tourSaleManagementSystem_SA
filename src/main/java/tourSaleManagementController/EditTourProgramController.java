@@ -77,7 +77,7 @@ public class EditTourProgramController implements Initializable {
 
                 Stage stage = (Stage) rootPane.getScene().getWindow();
                 stage.close();
-                DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+               // DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
             }
         }
         else {
