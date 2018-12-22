@@ -65,7 +65,7 @@
                                        <columns>
                                           <TableColumn fx:id="tourIDColumn" minWidth="200.0" prefWidth="200.0" text="Tour ID" />
                                           <TableColumn fx:id="tourNameColumn" minWidth="350.0" prefWidth="350.0" text="Tour Name" />
-                                          <TableColumn fx:id="tourPriceColumn" minWidth="150.0" prefWidth="150.0" text="Price" />
+                                          <TableColumn fx:id="tourPriceColumn" minWidth="170.0" prefWidth="150.0" text="Price" />
                                           <TableColumn fx:id="departureDateColumn" minWidth="120.0" prefWidth="120.0" text="Departure Date" />
                                           <TableColumn fx:id="returnDateColumn" minWidth="120.0" prefWidth="120.0" text="Return Date" />
                                           <TableColumn fx:id="depositPaidColumn" minWidth="150.0" prefWidth="150.0" text="Deposit Payment Date" />

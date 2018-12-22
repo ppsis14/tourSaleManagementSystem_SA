@@ -175,6 +175,8 @@ public class ReservePageController implements Initializable {
         alertConfirmToSubmitCustomerData.setTitle("Confirmation Dialog");
         alertConfirmToSubmitCustomerData.setHeaderText(null);
         alertConfirmToSubmitCustomerData.setContentText("Submit reservation customer successfully!");
+        Optional<ButtonType> action = alertConfirmToSubmitCustomerData.showAndWait();
+
         clearText();
 
         //setup value of reservation page

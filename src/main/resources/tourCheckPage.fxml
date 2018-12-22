@@ -145,7 +145,7 @@
                                     <TableView fx:id="reservationListTable" editable="true" fixedCellSize="0.0" layoutY="6.0" prefHeight="296.0" prefWidth="770.0">
                                        <columns>
                                           <TableColumn fx:id="reservationCodeColumnR" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
-                                          <TableColumn fx:id="nameColumnR" minWidth="300.0" prefWidth="140.0" text="Name" />
+                                          <TableColumn fx:id="nameColumnR" minWidth="250.0" prefWidth="140.0" text="Name" />
                                           <TableColumn fx:id="customerAgeColumnR" minWidth="100.0" prefWidth="100.0" text="Age" />
                                           <TableColumn fx:id="phoneNumCusColumnR" prefWidth="191.0" text="Phone Number" />
                                        </columns>

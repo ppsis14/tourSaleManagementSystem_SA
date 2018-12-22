@@ -63,7 +63,7 @@
                                  <columns>
                                     <TableColumn fx:id="reservationCodeColumnDR" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
                                     <TableColumn fx:id="receipt_no_ColumnDR" minWidth="230.0" prefWidth="230.0" text="Deposit Receipt No." />
-                                    <TableColumn fx:id="amountCustomerColumnDR" prefWidth="153.0" text="Amount" />
+                                    <TableColumn fx:id="amountCustomerColumnDR" prefWidth="110.0" text="Amount" />
                                     <TableColumn fx:id="employeeNameColumnDR" minWidth="200.0" prefWidth="200.0" text="Employee Name" />
                                     <TableColumn fx:id="receiptStatusColumnDR" prefWidth="163.0" text="Deposit Receipt Status" />
                                  </columns>
@@ -99,7 +99,7 @@
                                  <columns>
                                     <TableColumn fx:id="reservationCodeColumnAR" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
                                     <TableColumn fx:id="receipt_no_ColumnAR" minWidth="239.0" prefWidth="230.0" text="Receipt No." />
-                                    <TableColumn fx:id="amountCustomerColumnAR" prefWidth="153.0" text="Amount" />
+                                    <TableColumn fx:id="amountCustomerColumnAR" prefWidth="110.0" text="Amount" />
                                     <TableColumn fx:id="employeeNameColumnAR" minWidth="200.0" prefWidth="200.0" text="Employee Name" />
                                     <TableColumn fx:id="receiptStatusColumnAR" prefWidth="163.0" text="Receipt Status" />
                                  </columns>
