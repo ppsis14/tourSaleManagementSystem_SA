@@ -58,7 +58,7 @@ public class ToolBarController {
     @FXML
     private void loadTourProgramWindow(ActionEvent event){
         tourProgramWindow.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourPackageManagementPage.fxml"), "Tour Program Management");
 
     }
 }

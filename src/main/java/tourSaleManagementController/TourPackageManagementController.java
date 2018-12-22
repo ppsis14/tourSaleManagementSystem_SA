@@ -29,11 +29,11 @@ import java.util.function.Predicate;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
-public class TourProgramManagementController implements Initializable {
+public class TourPackageManagementController implements Initializable {
     @FXML private Label loginNameLabel;
-    @FXML private TextField searchTourProgram;
+    @FXML private TextField searchTourPackage;
     @FXML private JFXButton clearSearchBtn;
-    @FXML private TableView<TourPackage> tourProgramTable;
+    @FXML private TableView<TourPackage> tourPackageTable;
     @FXML private TableColumn<TourPackage, String> tourIDColumn;
     @FXML private TableColumn<TourPackage, String> tourNameColumn;
     @FXML private TableColumn<TourPackage, Integer> tourPriceColumn;
@@ -51,26 +51,26 @@ public class TourProgramManagementController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
 
-    ObservableList<TourPackage> obListTourProgram = FXCollections.observableList(manageableDatabase.getAllTourPackage());
+    ObservableList<TourPackage> obListTourPackage = FXCollections.observableList(manageableDatabase.getAllTourPackage());
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
         loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
 
-        showTableView(obListTourProgram);  //show data on table view
+        showTableView(obListTourPackage);  //show data on table view
 
         setSearchCustomer();
     }
 
     @FXML
     void handleClearSearchBtn(ActionEvent event) {
-        searchTourProgram.clear();
+        searchTourPackage.clear();
     }
 
     @FXML
-    void handleCreateTourProgramBtn(ActionEvent event) throws IOException {
+    void handleCreateTourPackageBtn(ActionEvent event) throws IOException {
         //createTourProgramBtn.getScene().getWindow().hide();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/createTourProgram.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/createTourPackage.fxml"));
         Parent parent = (Parent) loader.load();
         Stage stage = new Stage(StageStyle.DECORATED);
         stage.show();
@@ -80,18 +80,18 @@ public class TourProgramManagementController implements Initializable {
     }
 
     @FXML
-    void handleDeleteTourProgramBtn(ActionEvent event) {
-        TourPackage selectTourPackage = tourProgramTable.getSelectionModel().getSelectedItem(); //select item for delete
+    void handleDeleteTourPackageBtn(ActionEvent event) {
+        TourPackage selectTourPackage = tourPackageTable.getSelectionModel().getSelectedItem(); //select item for delete
         if(selectTourPackage != null) {
             Alert alertConfirmToDeleteTourProgram = new Alert(Alert.AlertType.CONFIRMATION);
             alertConfirmToDeleteTourProgram.setTitle("Confirmation Dialog");
             alertConfirmToDeleteTourProgram.setHeaderText(null);
-            alertConfirmToDeleteTourProgram.setContentText("Do you want to delete this tour Program?");
+            alertConfirmToDeleteTourProgram.setContentText("Do you want to delete this tour Package?");
             Optional<ButtonType> action = alertConfirmToDeleteTourProgram.showAndWait();
             if (action.get() == ButtonType.OK) {
                 // code for delete reservation
                 manageableDatabase.deleteData(selectTourPackage);   //delete tour package in DB
-                obListTourProgram.remove(tourProgramTable.getSelectionModel().getSelectedItem()); //delete on table view
+                obListTourPackage.remove(tourPackageTable.getSelectionModel().getSelectedItem()); //delete on table view
 
             }
         }
@@ -106,15 +106,15 @@ public class TourProgramManagementController implements Initializable {
     }
 
     @FXML
-    void handleEditTourProgramBtn(ActionEvent event) {
-        TourPackage editTourProgram = tourProgramTable.getSelectionModel().getSelectedItem();
+    void handleEditTourPackageBtn(ActionEvent event) {
+        TourPackage editTourProgram = tourPackageTable.getSelectionModel().getSelectedItem();
 
         if(editTourProgram != null) {
             //editTourProgramBtn.getScene().getWindow().hide();
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/editTourProgram.fxml"));
                 Parent parent = (Parent) loader.load();
-                EditTourProgramController editTourProgramController = loader.getController();
+                EditTourPackageController editTourProgramController = loader.getController();
                 editTourProgramController.setTourPackage(editTourProgram);
                 Stage stage = new Stage(StageStyle.DECORATED);
                 stage.show();
@@ -135,24 +135,22 @@ public class TourProgramManagementController implements Initializable {
     }
 
     @FXML
-    void handleRefreshTourProgramBtn(ActionEvent event) {
+    void handleRefreshTourPackageBtn(ActionEvent event) {
         Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
         alertShowInformationIsUpdate.setTitle("Confirmation Dialog");
         alertShowInformationIsUpdate.setHeaderText(null);
-        alertShowInformationIsUpdate.setContentText("Tour program information is update!");
+        alertShowInformationIsUpdate.setContentText("Tour package information is update");
         Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
         if (action.get() == ButtonType.OK){
             // code for delete reservation
-            obListTourProgram = FXCollections.observableList(manageableDatabase.getAllTourPackage());
-            this.showTableView(obListTourProgram);
+            obListTourPackage = FXCollections.observableList(manageableDatabase.getAllTourPackage());
+            this.showTableView(obListTourPackage);
         }
 
     }
 
     public void showTableView(ObservableList<TourPackage> obListTourProgram){
-
         //find data base for show on table view.
-
         tourIDColumn.setCellValueFactory(new PropertyValueFactory<>("tourID"));
         tourNameColumn.setCellValueFactory(new PropertyValueFactory<>("tourName"));
         tourPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -164,13 +162,13 @@ public class TourProgramManagementController implements Initializable {
         availableSeatColumn.setCellValueFactory(new PropertyValueFactory<>("availableSeat"));
         tourStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
 
-        tourProgramTable.setItems(obListTourProgram);
+        tourPackageTable.setItems(obListTourProgram);
     }
 
     public void setSearchCustomer(){
-        FilteredList<TourPackage> filteredData = new FilteredList<>(obListTourProgram, e -> true);
-        searchTourProgram.setOnKeyPressed(event -> {
-            searchTourProgram.textProperty().addListener((observable, oldValue, newValue) -> {
+        FilteredList<TourPackage> filteredData = new FilteredList<>(obListTourPackage, e -> true);
+        searchTourPackage.setOnKeyPressed(event -> {
+            searchTourPackage.textProperty().addListener((observable, oldValue, newValue) -> {
                 filteredData.setPredicate((Predicate<? super TourPackage>) tourPackage -> {
                     if (newValue == null || newValue.isEmpty()){
                         return true;
@@ -190,8 +188,8 @@ public class TourProgramManagementController implements Initializable {
                 });
             });
             SortedList<TourPackage> sortData = new SortedList<>(filteredData);
-            sortData.comparatorProperty().bind(tourProgramTable.comparatorProperty());
-            tourProgramTable.setItems(sortData);
+            sortData.comparatorProperty().bind(tourPackageTable.comparatorProperty());
+            tourPackageTable.setItems(sortData);
         });
     }
 

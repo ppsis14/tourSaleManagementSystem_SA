@@ -194,7 +194,6 @@ public class ReservePageController implements Initializable {
     void handleAddCustomerBtn(ActionEvent event) {
 
         if (checkFillOutInformation()) {
-
             String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
             int availableSeat = manageableDatabase.getAvailableByTourID(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
 
@@ -252,19 +251,25 @@ public class ReservePageController implements Initializable {
                 } else if (saveCustomerInfoAction.get() == ButtonType.CANCEL) {
                     // back to edit customer information
                 }
+            } else {
+                //pop up warning
+                Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
+                alertShowInformationIsUpdate.setTitle("Information Dialog");
+                alertShowInformationIsUpdate.setHeaderText(null);
+                alertShowInformationIsUpdate.setContentText("Available seat are full.");
+                Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
+                setUpValueReservationPage();
+                if (action.get() == ButtonType.OK) {
+                    setUpValueReservationPage();
+                }
             }
 
         } else {
-            //pop up warning
-            Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
-            alertShowInformationIsUpdate.setTitle("Information Dialog");
-            alertShowInformationIsUpdate.setHeaderText(null);
-            alertShowInformationIsUpdate.setContentText("Available seat are full.");
-            Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
-            setUpValueReservationPage();
-            if (action.get() == ButtonType.OK) {
-                setUpValueReservationPage();
-            }
+            Alert alertFillOutInformationError = new Alert(Alert.AlertType.ERROR);
+            alertFillOutInformationError.setTitle("Error Dialog");
+            alertFillOutInformationError.setHeaderText("Saving customer information is error!");
+            alertFillOutInformationError.setContentText("Please completely fill out information follow (*)");
+            Optional<ButtonType> checkFillOutInformationAction = alertFillOutInformationError.showAndWait();
 
         }
     }

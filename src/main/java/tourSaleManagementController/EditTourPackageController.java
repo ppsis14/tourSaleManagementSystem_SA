@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
-public class EditTourProgramController implements Initializable {
+public class EditTourPackageController implements Initializable {
     @FXML private StackPane rootPane;
     @FXML private AnchorPane anchorPane;
     @FXML private TextField tourIDCountry;
@@ -77,13 +77,13 @@ public class EditTourProgramController implements Initializable {
 
                 Stage stage = (Stage) rootPane.getScene().getWindow();
                 stage.close();
-               // DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+               // DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourPackageManagementPage.fxml"), "Tour Program Management");
             }
         }
         else {
             Alert alertSaveTourInformation = new Alert(Alert.AlertType.ERROR);
             alertSaveTourInformation.setTitle("Error Dialog");
-            alertSaveTourInformation.setHeaderText("Saving tour program is error");
+            alertSaveTourInformation.setHeaderText("Saving tour package is error");
             alertSaveTourInformation.setContentText("Please completely fill out information follow (*)");
             Optional<ButtonType> checkSaveTourAction = alertSaveTourInformation.showAndWait();
         }

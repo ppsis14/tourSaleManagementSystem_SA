@@ -1,6 +1,5 @@
 package tourSaleManagementController;
 
-import Table.TourPackage;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,14 +7,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
-import tourSaleManagementSystemUtil.FormatConverter;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
-import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
 public class HomePageController implements Initializable {
 
@@ -68,7 +65,7 @@ public class HomePageController implements Initializable {
     @FXML
     public void handleTourProgramBtn(ActionEvent event) throws IOException {
         tourProgramBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourProgramManagementPage.fxml"), "Tour Program Management");
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourPackageManagementPage.fxml"), "Tour Program Management");
     }
 
     @Override

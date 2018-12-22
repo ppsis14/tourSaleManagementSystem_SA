@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
-public class CreateTourProgramController implements Initializable {
+public class CreateTourPackageController implements Initializable {
     @FXML private StackPane rootPane;
     @FXML private AnchorPane anchorPane;
     @FXML private TextField tourIDCountry;
@@ -39,7 +39,7 @@ public class CreateTourProgramController implements Initializable {
     @FXML private TextField tourPrice;
     @FXML private DatePicker depositIVDate;
     @FXML private DatePicker invoiceDate;
-    @FXML private JFXButton addTourProgram;
+    @FXML private JFXButton addTourPackage;
     @FXML private JFXButton cancelBtn;
 
 
@@ -60,13 +60,13 @@ public class CreateTourProgramController implements Initializable {
     }
 
     @FXML
-    void handleAddTourProgramBtn(ActionEvent event) {
+    void handleAddTourPackageBtn(ActionEvent event) {
         if (checkFillOutTourInformation()){
-            Alert alertConfirmToDeleteTourProgram = new Alert(Alert.AlertType.CONFIRMATION);
-            alertConfirmToDeleteTourProgram.setTitle("Confirmation Dialog");
-            alertConfirmToDeleteTourProgram.setHeaderText(null);
-            alertConfirmToDeleteTourProgram.setContentText("Do you want to add this tour program?");
-            Optional<ButtonType> action = alertConfirmToDeleteTourProgram.showAndWait();
+            Alert alertConfirmToDeleteTourPackage = new Alert(Alert.AlertType.CONFIRMATION);
+            alertConfirmToDeleteTourPackage.setTitle("Confirmation Dialog");
+            alertConfirmToDeleteTourPackage.setHeaderText(null);
+            alertConfirmToDeleteTourPackage.setContentText("Do you want to add this tour package?");
+            Optional<ButtonType> action = alertConfirmToDeleteTourPackage.showAndWait();
             if (action.get() == ButtonType.OK) {
                 setTourPackageFromGUI();
                 manageableDatabase.insertData(tourPackage);
@@ -86,11 +86,11 @@ public class CreateTourProgramController implements Initializable {
 
     @FXML
     void handleCancelBtn(ActionEvent event) {
-        Alert alertConfirmToDeleteTourProgram = new Alert(Alert.AlertType.CONFIRMATION);
-        alertConfirmToDeleteTourProgram.setTitle("Confirmation Dialog");
-        alertConfirmToDeleteTourProgram.setHeaderText(null);
-        alertConfirmToDeleteTourProgram.setContentText("Do you want to cancel creating tour program?");
-        Optional<ButtonType> action = alertConfirmToDeleteTourProgram.showAndWait();
+        Alert alertConfirmToDeleteTourPackage = new Alert(Alert.AlertType.CONFIRMATION);
+        alertConfirmToDeleteTourPackage.setTitle("Confirmation Dialog");
+        alertConfirmToDeleteTourPackage.setHeaderText(null);
+        alertConfirmToDeleteTourPackage.setContentText("Do you want to cancel creating tour package?");
+        Optional<ButtonType> action = alertConfirmToDeleteTourPackage.showAndWait();
         if (action.get() == ButtonType.OK) {
             Stage stage = (Stage) rootPane.getScene().getWindow();
             stage.close();

@@ -32,7 +32,6 @@ public class EditCustomerPageController implements Initializable {
     @FXML private TextField firstNameEN;
     @FXML private TextField lastNameEN;
     @FXML private ChoiceBox<String> genderChoice;
-    @FXML private TextField age;
     @FXML private TextField occupation;
     @FXML private DatePicker dateOfBirth;
     @FXML private TextField passportNo;
@@ -88,7 +87,7 @@ public class EditCustomerPageController implements Initializable {
         else {
             Alert alertEditInformation = new Alert(Alert.AlertType.ERROR);
             alertEditInformation.setTitle("Error Dialog");
-            alertEditInformation.setHeaderText("Saving customer information is error");
+            alertEditInformation.setHeaderText("Saving customer information is error!");
             alertEditInformation.setContentText("Please completely fill out information follow (*)");
             Optional<ButtonType> checkEditInformationAction = alertEditInformation.showAndWait();
         }

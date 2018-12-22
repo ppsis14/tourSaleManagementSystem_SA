@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.TourProgramManagementController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.TourPackageManagementController">
    <children>
       <Pane layoutX="26.0" prefHeight="100.0" prefWidth="900.0" style="-fx-background-color: #2C3E50;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -52,8 +52,8 @@
                                  <children>
                                     <HBox prefHeight="29.0" prefWidth="676.0" spacing="20.0">
                                        <children>
-                                          <Label maxHeight="1.7976931348623157E308" prefHeight="29.0" prefWidth="148.0" text="Search Tour Program :" />
-                                          <TextField fx:id="searchTourProgram" prefHeight="29.0" prefWidth="400.0" promptText="Search by ID, Name, Price" style="-fx-border-color: #2C3E50;" />
+                                          <Label maxHeight="1.7976931348623157E308" prefHeight="29.0" prefWidth="148.0" text="Search Tour Package :" />
+                                          <TextField fx:id="searchTourPackage" prefHeight="29.0" prefWidth="400.0" promptText="Search by ID, Name, Price" style="-fx-border-color: #2C3E50;" />
                                           <JFXButton fx:id="clearSearchBtn" buttonType="RAISED" onAction="#handleClearSearchBtn" prefHeight="30.0" prefWidth="105.0" style="-fx-background-color: #F4D03F; -fx-background-radius: 5;" text="Clear" textFill="#2c3e50">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
@@ -61,7 +61,7 @@
                                           </JFXButton>
                                        </children>
                                     </HBox>
-                                    <TableView fx:id="tourProgramTable" editable="true" prefHeight="344.0" prefWidth="717.0">
+                                    <TableView fx:id="tourPackageTable" editable="true" prefHeight="344.0" prefWidth="717.0">
                                        <columns>
                                           <TableColumn fx:id="tourIDColumn" minWidth="200.0" prefWidth="200.0" text="Tour ID" />
                                           <TableColumn fx:id="tourNameColumn" minWidth="350.0" prefWidth="350.0" text="Tour Name" />
@@ -77,22 +77,22 @@
                                     </TableView>
                                     <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
                                        <children>
-                                          <JFXButton fx:id="createTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleCreateTourProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Create" textAlignment="RIGHT" textFill="WHITE">
+                                          <JFXButton fx:id="createTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleCreateTourPackageBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Create" textAlignment="RIGHT" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="editTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleEditTourProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Edit" textAlignment="RIGHT" textFill="WHITE">
+                                          <JFXButton fx:id="editTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleEditTourPackageBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Edit" textAlignment="RIGHT" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="refreshTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleRefreshTourProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Refresh" textAlignment="RIGHT" textFill="WHITE">
+                                          <JFXButton fx:id="refreshTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleRefreshTourPackageBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Refresh" textAlignment="RIGHT" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
                                           </JFXButton>
-                                          <JFXButton fx:id="deleteTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleDeleteTourProgramBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Delete" textAlignment="RIGHT" textFill="WHITE">
+                                          <JFXButton fx:id="deleteTourProgramBtn" alignment="CENTER" buttonType="RAISED" onAction="#handleDeleteTourPackageBtn" prefHeight="30.0" prefWidth="115.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Delete" textAlignment="RIGHT" textFill="WHITE">
                                              <font>
                                                 <Font name="System Bold" size="14.0" />
                                              </font>
