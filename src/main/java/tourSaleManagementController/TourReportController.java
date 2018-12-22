@@ -23,6 +23,7 @@ import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -73,12 +74,16 @@ public class TourReportController implements Initializable {
 
     ReportCreator reportCreator;
     String tourName;
-    String depositComboBox = "None";
-    String arrearsComboBox = "None";
+    String depositComboBox;
+    String arrearsComboBox;
 
     ObservableList<ReservationPaymentReport> obListReservationPaymentReport = FXCollections.observableArrayList() ;
     ObservableList<ReservationCustomerReport> obListReservationCustomerReport = FXCollections.observableArrayList();
     ObservableList<SaleReport> obListSaleReport = FXCollections.observableArrayList();
+
+    List<ReservationPaymentReport> reservationPaymentReportList = new ArrayList<>();
+    List<ReservationCustomerReport> customerReportList = new ArrayList<>();
+    List<SaleReport> saleReportList = new ArrayList<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -113,35 +118,25 @@ public class TourReportController implements Initializable {
 
     @FXML
     void handleSelectTourID(ActionEvent event) {
-        obListReservationPaymentReport = FXCollections.observableArrayList();
-        obListReservationCustomerReport = FXCollections.observableArrayList();
-        obListSaleReport = FXCollections.observableArrayList();
+
         tourName = tourIDComboBox.getSelectionModel().getSelectedItem();
         setShowTableView();
 
     }
     @FXML
     void handleSelectDeposit(ActionEvent event) {
+
         depositComboBox=depositStatusChoice.getSelectionModel().getSelectedItem();
         arrearsComboBox=arrearsStatusChoice.getSelectionModel().getSelectedItem();
-
-        obListReservationPaymentReport = FXCollections.observableArrayList();
-        obListReservationCustomerReport = FXCollections.observableArrayList();
-        obListSaleReport = FXCollections.observableArrayList();
-
-        //setShowTableView();
+        setShowTableView();
 
     }
     @FXML
     void handleSelectArrears(ActionEvent event) {
+
         depositComboBox=depositStatusChoice.getSelectionModel().getSelectedItem();
         arrearsComboBox=arrearsStatusChoice.getSelectionModel().getSelectedItem();
-
-        obListReservationPaymentReport = FXCollections.observableArrayList();
-        obListReservationCustomerReport = FXCollections.observableArrayList();
-        obListSaleReport = FXCollections.observableArrayList();
-
-        //setShowTableView();
+        setShowTableView();
 
     }
 
@@ -152,103 +147,117 @@ public class TourReportController implements Initializable {
         int totalPaid_ = 0;
         int totalNotPaid_ = 0 ;
 
-        System.out.println(depositComboBox);
-        System.out.println(arrearsComboBox);
+        if(depositComboBox != null && arrearsComboBox != null) {
 
-        String tour_id = manageableDatabase.getTourID(tourName);
-        List<ReservationPayment> reservationPayment = manageableDatabase.getAllReservationPaymentByTourID(tour_id);
+            String tour_id = manageableDatabase.getTourID(tourName);
+            List<ReservationPayment> reservationPayment = manageableDatabase.getAllReservationPaymentByTourID(tour_id);
 
-        for (ReservationPayment re : reservationPayment) {
-            Customer customer = manageableDatabase.getOneCustomer(re.getCustomerID());
-            ReservationPaymentReport reservationPaymentReport = new ReservationPaymentReport(
-                    re.getReservationCode(),
-                    re.getCustomerName(),
-                    customer.getCell_phone(),
-                    re.getDepositStatus(),
-                    re.getArrearsStatus(),
-                    re.getEmployeeName()
-            );
+            for (ReservationPayment re : reservationPayment) {
+                Customer customer = manageableDatabase.getOneCustomer(re.getCustomerID());
+                ReservationPaymentReport reservationPaymentReport = new ReservationPaymentReport(
+                        re.getReservationCode(),
+                        re.getCustomerName(),
+                        customer.getCell_phone(),
+                        re.getDepositStatus(),
+                        re.getArrearsStatus(),
+                        re.getEmployeeName()
+                );
 
-            if (depositComboBox == "None" && arrearsComboBox == "None") {
 
-                if((re.getDepositStatus().equals(PAID)&& (re.getArrearsStatus().equals(PAID)))) {
-                    totalPaid_++;
-                }
-                else
-                    totalNotPaid_++;
+                if (depositComboBox == "None" && arrearsComboBox == "None") {
 
-                totalReservation_++;
-                obListReservationPaymentReport.add(reservationPaymentReport);
+                    if ((re.getDepositStatus().equals(PAID) && (re.getArrearsStatus().equals(PAID)))) {
+                        totalPaid_++;
+                    } else
+                        totalNotPaid_++;
 
-            } else if (depositComboBox.equals(PAID)&& arrearsComboBox == "None"){
-
-                if (re.getDepositStatus().equals(PAID) && re.getArrearsStatus().equals(PAID)) {
-                    totalPaid_++;
-                }
-                else
-                    totalNotPaid_++;
-
-                totalReservation_++;
-                obListReservationPaymentReport.add(reservationPaymentReport);
-
-            } else if (depositComboBox.equals(NOT_PAID) && arrearsComboBox.equals("None")) {
-
-                if (re.getDepositStatus().equals(NOT_PAID )|| re.getArrearsStatus().equals(NOT_PAID)) {
-                    totalNotPaid_++;
                     totalReservation_++;
                     obListReservationPaymentReport.add(reservationPaymentReport);
-                }
+                    //add reservation payment report to list for print pdf
+                    reservationPaymentReportList.add(reservationPaymentReport);
 
-            } else if (depositComboBox.equals("None") && arrearsComboBox .equals(PAID)) {
+                } else if (depositComboBox.equals(PAID) && arrearsComboBox == "None") {
 
-                if (re.getArrearsStatus().equals(PAID) && re.getArrearsStatus().equals(PAID)) {
-                    totalPaid_++;
-                }
-                else
-                    totalNotPaid_++;
+                    if (re.getDepositStatus().equals(PAID) ) {
 
-                totalReservation_++;
-                obListReservationPaymentReport.add(reservationPaymentReport);
+                        totalReservation_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
 
-            }else if (depositComboBox.equals("None") && arrearsComboBox.equals(NOT_PAID)){
+                        if (re.getArrearsStatus().equals(PAID))
+                            totalPaid_++;
+                        else
+                            totalNotPaid_++;
+                    }
 
-                if (re.getDepositStatus().equals(NOT_PAID) || re.getArrearsStatus().equals(NOT_PAID)){
-                    totalNotPaid_++;
-                    totalReservation_++;
-                    obListReservationPaymentReport.add(reservationPaymentReport);
-                }
+                } else if (depositComboBox.equals(NOT_PAID) && arrearsComboBox.equals("None")) {
 
-            }else if (depositComboBox.equals(PAID) && arrearsComboBox.equals(PAID)) {
-                if (re.getDepositStatus().equals(PAID) && re.getArrearsStatus().equals(PAID)) {
-                    totalReservation_++;
-                    totalPaid_++;
-                    obListReservationPaymentReport.add(reservationPaymentReport);
-                }
-            }else if (depositComboBox.equals(PAID) && arrearsComboBox.equals(NOT_PAID)) {
-                if (re.getDepositStatus().equals(PAID )&& re.getArrearsStatus().equals(NOT_PAID)) {
-                    totalReservation_++;
-                    totalNotPaid_++;
-                    obListReservationPaymentReport.add(reservationPaymentReport);
+                    if (re.getDepositStatus().equals(NOT_PAID)) {
+                        totalNotPaid_++;
+                        totalReservation_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
+                    }
 
-                }
-            }else if (depositComboBox.equals(NOT_PAID)&& arrearsComboBox.equals(NOT_PAID)) {
-                if (re.getDepositStatus() .equals( NOT_PAID )&& re.getArrearsStatus().equals( NOT_PAID)) {
-                    totalReservation_++;
-                    totalNotPaid_++;
-                    obListReservationPaymentReport.add(reservationPaymentReport);
-                }
-            }else if (depositComboBox .equals( NOT_PAID )&& arrearsComboBox .equals( PAID )) {
-                if (re.getDepositStatus() .equals( NOT_PAID) && re.getArrearsStatus() .equals( PAID)) {
-                    totalReservation_++;
-                    totalNotPaid_++;
-                    obListReservationPaymentReport.add(reservationPaymentReport);
+                } else if (depositComboBox.equals("None") && arrearsComboBox.equals(PAID)) {
 
+                    if (re.getArrearsStatus().equals(PAID) ) {
+
+                        totalReservation_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
+
+                        if (re.getArrearsStatus().equals(PAID))
+                            totalPaid_++;
+                        else
+                            totalNotPaid_++;
+                    }
+
+                } else if (depositComboBox.equals("None") && arrearsComboBox.equals(NOT_PAID)) {
+
+                    if (re.getDepositStatus().equals(NOT_PAID) || re.getArrearsStatus().equals(NOT_PAID)) {
+                        totalNotPaid_++;
+                        totalReservation_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
+                    }
+
+                } else if (depositComboBox.equals(PAID) && arrearsComboBox.equals(PAID)) {
+                    if (re.getDepositStatus().equals(PAID) && re.getArrearsStatus().equals(PAID)) {
+                        totalReservation_++;
+                        totalPaid_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
+                    }
+                } else if (depositComboBox.equals(PAID) && arrearsComboBox.equals(NOT_PAID)) {
+                    if (re.getDepositStatus().equals(PAID) && re.getArrearsStatus().equals(NOT_PAID)) {
+                        totalReservation_++;
+                        totalNotPaid_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
+
+                    }
+                } else if (depositComboBox.equals(NOT_PAID) && arrearsComboBox.equals(NOT_PAID)) {
+                    if (re.getDepositStatus().equals(NOT_PAID) && re.getArrearsStatus().equals(NOT_PAID)) {
+                        totalReservation_++;
+                        totalNotPaid_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
+                    }
+                } else if (depositComboBox.equals(NOT_PAID) && arrearsComboBox.equals(PAID)) {
+                    if (re.getDepositStatus().equals(NOT_PAID) && re.getArrearsStatus().equals(PAID)) {
+                        totalReservation_++;
+                        totalNotPaid_++;
+                        obListReservationPaymentReport.add(reservationPaymentReport);
+                        reservationPaymentReportList.add(reservationPaymentReport);
+
+                    }
                 }
             }
+            totalReservation.setText(String.valueOf(totalReservation_));
+            totalPaid.setText(String.valueOf(totalPaid_));
+            totalNotPaid.setText(String.valueOf(totalNotPaid_));
         }
-        totalReservation.setText(String.valueOf(totalReservation_));
-        totalPaid.setText(String.valueOf(totalPaid_));
-        totalNotPaid.setText(String.valueOf(totalNotPaid_));
     }
 
     protected void setReservationCustomerReport(){
@@ -267,6 +276,8 @@ public class TourReportController implements Initializable {
                     FormatConverter.CalculateAge(customer.getCustomerID()),
                     customer.getCell_phone());
             obListReservationCustomerReport.add(reservationCustomerReport);
+            //add reservation customer to list for print pdf.
+            customerReportList.add(reservationCustomerReport);
         }
 
         quantity.setText(String.valueOf(number));
@@ -292,6 +303,8 @@ public class TourReportController implements Initializable {
                         String.format("%,.2f",Double.valueOf(re.getTotal_price())/2),
                         re.getEmployeeName());
                 obListSaleReport.add(saleReport);
+                //add sale report to list for print pdf.
+                saleReportList.add(saleReport);
 
                 quantity += re.getAmountCustomer();
                 expected += Double.valueOf(re.getTotal_price());
@@ -306,6 +319,7 @@ public class TourReportController implements Initializable {
                         String.format("%,.2f",Double.valueOf(re.getTotal_price())),
                         re.getEmployeeName());
                 obListSaleReport.add(saleReport);
+                saleReportList.add(saleReport);
 
                 quantity += re.getAmountCustomer();
                 expected += Double.valueOf(re.getTotal_price());
@@ -322,6 +336,14 @@ public class TourReportController implements Initializable {
     }
 
     protected void setShowTableView(){
+
+        obListReservationPaymentReport = FXCollections.observableArrayList();
+        obListReservationCustomerReport = FXCollections.observableArrayList();
+        obListSaleReport = FXCollections.observableArrayList();
+
+        reservationPaymentReportList = new ArrayList<>();
+        customerReportList = new ArrayList<>();
+        saleReportList = new ArrayList<>();
 
         setReservationPaymentReport();
         setReservationCustomerReport();
@@ -365,6 +387,7 @@ public class TourReportController implements Initializable {
         private String arrearsPaymentStatus;
         private String saleName;
 
+        ReservationPaymentReport(){}
         public ReservationPaymentReport(String reservationCode, String customerName, String phoneNum, String depositPaymentStatus, String arrearsPaymentStatus, String saleName) {
             this.reservationCode = reservationCode;
             this.customerName = customerName;
@@ -430,6 +453,7 @@ public class TourReportController implements Initializable {
         private int age;
         private String phoneNum;
 
+        public ReservationCustomerReport(){}
         public ReservationCustomerReport(int number, String customerID, String customerName, int age, String phoneNum) {
             this.number = number;
             this.customerID = customerID;
@@ -487,6 +511,7 @@ public class TourReportController implements Initializable {
         private String receivedAmount;
         private String saleName;
 
+        public SaleReport(){}
         public SaleReport(String reservationCode, String customerName, int quantity, String expectedAmount, String receivedAmount, String saleName) {
             this.reservationCode = reservationCode;
             this.customerName = customerName;
