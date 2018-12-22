@@ -32,45 +32,80 @@ import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.NOT_PAID;
 
 public class ReservePageController implements Initializable {
 
-    @FXML private ChoiceBox<String> titleNameTH;
-    @FXML private TextField firstNameTH;
-    @FXML private TextField lastNameTH;
-    @FXML private ChoiceBox<String> titleNameEN;
-    @FXML private TextField firstNameEN;
-    @FXML private TextField lastNameEN;
-    @FXML private ChoiceBox<String> genderChoice;
-    @FXML private TextField occupation;
-    @FXML private DatePicker dateOfBirth;
-    @FXML private TextField passportNo;
-    @FXML private DatePicker expPassportDate;
-    @FXML private TextField address;
-    @FXML private TextField phoneNum;
-    @FXML private TextField homeTelNum;
-    @FXML private TextField faxNum;
-    @FXML private TextField email;
-    @FXML private TextField underlyingDisease;
-    @FXML private TextField foodAllergy;
-    @FXML private JFXCheckBox eatBeefY;
-    @FXML private JFXCheckBox eatBeefN;
-    @FXML private TextField moreDetail;
-    @FXML private ComboBox<String> hearAboutUsChoices;
-    @FXML private JFXHamburger menu;
-    @FXML private JFXDrawer drawerMenu;
-    @FXML private JFXButton addCustomerBtn;
-    @FXML private Label reserveCode;
-    @FXML private Label customerNo;
-    @FXML private ComboBox<String> tourIDComboBox;
-    @FXML private JFXCheckBox oldCustomer;
-    @FXML private JFXCheckBox newCustomer;
-    @FXML private TextField searchByCustomerName;
-    @FXML private Button searchCustomerBtn;
-    @FXML private Label loginNameLabel;
+    @FXML
+    private ChoiceBox<String> titleNameTH;
+    @FXML
+    private TextField firstNameTH;
+    @FXML
+    private TextField lastNameTH;
+    @FXML
+    private ChoiceBox<String> titleNameEN;
+    @FXML
+    private TextField firstNameEN;
+    @FXML
+    private TextField lastNameEN;
+    @FXML
+    private ChoiceBox<String> genderChoice;
+    @FXML
+    private TextField occupation;
+    @FXML
+    private DatePicker dateOfBirth;
+    @FXML
+    private TextField passportNo;
+    @FXML
+    private DatePicker expPassportDate;
+    @FXML
+    private TextField address;
+    @FXML
+    private TextField phoneNum;
+    @FXML
+    private TextField homeTelNum;
+    @FXML
+    private TextField faxNum;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField underlyingDisease;
+    @FXML
+    private TextField foodAllergy;
+    @FXML
+    private JFXCheckBox eatBeefY;
+    @FXML
+    private JFXCheckBox eatBeefN;
+    @FXML
+    private TextField moreDetail;
+    @FXML
+    private ComboBox<String> hearAboutUsChoices;
+    @FXML
+    private JFXHamburger menu;
+    @FXML
+    private JFXDrawer drawerMenu;
+    @FXML
+    private JFXButton addCustomerBtn;
+    @FXML
+    private JFXButton submitBtn;
+    @FXML
+    private Label reserveCode;
+    @FXML
+    private Label customerNo;
+    @FXML
+    private ComboBox<String> tourIDComboBox;
+    @FXML
+    private JFXCheckBox oldCustomer;
+    @FXML
+    private JFXCheckBox newCustomer;
+    @FXML
+    private TextField searchByCustomerName;
+    @FXML
+    private Button searchCustomerBtn;
+    @FXML
+    private Label loginNameLabel;
 
     private ArrayList<String> newCustomerID_List = new ArrayList<>();
     private ArrayList<Reservation> reserveCustomer_List = new ArrayList<>();
     private ArrayList<Customer> customerList = new ArrayList<>();
     private ReservationPayment reservationPayment = new ReservationPayment();
-    private Reservation reservationCustomer = new Reservation() ;
+    private Reservation reservationCustomer = new Reservation();
     private Customer customer = new Customer();
     private Invoice invoice = new Invoice();
     private int orderReserve;
@@ -95,15 +130,23 @@ public class ReservePageController implements Initializable {
         reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
         String tmpOrder[] = reserveCode.getText().split("-");
         orderReserve = Integer.valueOf(tmpOrder[3]);
-        loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
+        loginNameLabel.setText(loginEmployee.getFirstName() + " " + loginEmployee.getLastName() + " [ " + loginEmployee.getPosition().toUpperCase() + " ]");
 
         setValidateOnKeyRelease();
     }
 
-    @FXML public void handleNotEatBeefCheckbox(ActionEvent event) { eatBeefY.setSelected(false); }
-    @FXML public void handleEatBeefCheckbox(ActionEvent event) { eatBeefN.setSelected(false); }
+    @FXML
+    public void handleNotEatBeefCheckbox(ActionEvent event) {
+        eatBeefY.setSelected(false);
+    }
 
-    @FXML public void handleNewCustomerCheckbox(ActionEvent event) {
+    @FXML
+    public void handleEatBeefCheckbox(ActionEvent event) {
+        eatBeefN.setSelected(false);
+    }
+
+    @FXML
+    public void handleNewCustomerCheckbox(ActionEvent event) {
         oldCustomer.setSelected(false);
         newCustomer.setSelected(true);
         clearText();
@@ -112,36 +155,54 @@ public class ReservePageController implements Initializable {
         searchCustomerBtn.setDisable(true);
 
     }
-    @FXML public void handleOldCustomerCheckbox(ActionEvent event) {
+
+    @FXML
+    public void handleOldCustomerCheckbox(ActionEvent event) {
         newCustomer.setSelected(false);
         oldCustomer.setSelected(true);
         searchByCustomerName.setDisable(false);
         searchCustomerBtn.setDisable(false);
         setSearchCustomer();
     }
-    @FXML public void handleTourIDComboBox(ActionEvent e){
+
+    @FXML
+    public void handleTourIDComboBox(ActionEvent e) {
         String tourID = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
         String tmp[] = tourID.split("-");
-        tourID = tmp[0]+ "-" +tmp[1]+ "-" +tmp[2] + "-" + String.format("%06d", orderReserve);
+        tourID = tmp[0] + "-" + tmp[1] + "-" + tmp[2] + "-" + String.format("%06d", orderReserve);
         reserveCode.setText(tourID);
     }
 
     @FXML
+    void handleSubmitBtn(ActionEvent event) {
+
+    }
+
+    @FXML
     void handleAddCustomerBtn(ActionEvent event) {
-        if (checkFillOutInformation()){
+        if (checkFillOutInformation()) {
             String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
             int availableSeat = manageableDatabase.getAvailableByTourID(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
-            if(availableSeat - Integer.valueOf(customerNo.getText()) >= 0) {
+            if (availableSeat - Integer.valueOf(customerNo.getText()) >= 0) {
                 //---------------------------------------------------------
                 // case show "Do you wnt to add another customer" -> ok = continue/ cancel = submit reservation pop up
-                Alert alertConfirmToAddCustomerMore = new Alert(Alert.AlertType.CONFIRMATION);
-                alertConfirmToAddCustomerMore.setTitle("Confirmation Dialog");
-                alertConfirmToAddCustomerMore.setHeaderText(null);
-                alertConfirmToAddCustomerMore.setContentText("Do you want to add another customer?");
-                Optional<ButtonType> addCustomerMoreAction = alertConfirmToAddCustomerMore.showAndWait();
+                Alert alertSaveCustomerInformation = new Alert(Alert.AlertType.CONFIRMATION);
+                alertSaveCustomerInformation.setTitle("Confirmation Dialog");
+                alertSaveCustomerInformation.setHeaderText(null);
+                alertSaveCustomerInformation.setContentText("Do you want to save this customer information?");
+                Optional<ButtonType> saveCustomerInfoAction = alertSaveCustomerInformation.showAndWait();
 
-                if (addCustomerMoreAction.get() == ButtonType.OK) {
-                    customerNo.setText(String.valueOf(Integer.valueOf(customerNo.getText()) + 1));
+                if (saveCustomerInfoAction.get() == ButtonType.OK) {
+                    Alert alertAddMoreCustomer = new Alert(Alert.AlertType.CONFIRMATION);
+                    alertAddMoreCustomer.setTitle("Confirmation Dialog");
+                    alertAddMoreCustomer.setHeaderText(null);
+                    alertAddMoreCustomer.setContentText("Do you want to add another customer?");
+                    Optional<ButtonType> addMoreCustomerAction = alertAddMoreCustomer.showAndWait();
+                    if (addMoreCustomerAction.get() == ButtonType.OK) {
+
+
+                    }
+                   /* customerNo.setText(String.valueOf(Integer.valueOf(customerNo.getText()) + 1));
                     setCustomerFromGUI();
                     if (newCustomer.isSelected()) {
                         newCustomerID_List.add(customer.getCustomerID());
@@ -156,51 +217,46 @@ public class ReservePageController implements Initializable {
                     searchByCustomerName.setDisable(true);
                     searchCustomerBtn.setDisable(true);
                     customer = new Customer();
-                    reservationCustomer = new Reservation();
-
-
-                }
-                else if (addCustomerMoreAction.get() == ButtonType.CANCEL) {     //stop reserving another customer
-                    Alert alertConfirmReservation = new Alert(Alert.AlertType.CONFIRMATION);
-                    alertConfirmReservation.setTitle("Confirmation Dialog");
-                    alertConfirmReservation.setHeaderText(null);
-                    alertConfirmReservation.setContentText("Do you want to confirm this reservation?");
-                    Optional<ButtonType> confrimReservationAction = alertConfirmReservation.showAndWait();
-
-                    if (confrimReservationAction.get() == ButtonType.OK) { // if user want to add another customer
-                        //insert customer to database
-                        for (Customer customer : customerList) {
-                            if(newCustomerID_List.contains(customer.getCustomerID()))
-                                manageableDatabase.insertData(customer);    //new customer
-                            else
-                                manageableDatabase.updateData(customer);    //old customer
-                        }
-
-                        //insert reservation customer to database
-                        for (Reservation reservation: reserveCustomer_List) {
-                            manageableDatabase.insertData(reservation);
-                        }
-
-                        //insert reservation payment and deposit invoice to database
-                        setReservationPaymentFromGUI();
-                        setDepositInvoice();
-                        manageableDatabase.insertData(reservationPayment); //inset reservationPayment to database
-                        manageableDatabase.insertData(invoice, DEPOSIT_INVOICE);    // insert deposit invoice
-
-                        //update seat in tour package
-                        manageableDatabase.updateAvailableData(tour_id,availableSeat-Integer.valueOf(customerNo.getText()));
-
-                        //setup value of reservation page
-                        searchByCustomerName.clear();
-                        searchByCustomerName.setDisable(true);
-                        searchCustomerBtn.setDisable(true);
-                        reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
-                        String tmpOrder[] = reserveCode.getText().split("-");
-                        orderReserve = Integer.valueOf(tmpOrder[3]);
-                        setUpValueReservationPage();
+                    reservationCustomer = new Reservation();*/
+                    else if (addMoreCustomerAction.get() == ButtonType.CANCEL) {
 
                     }
-                    //---------------------------------------------------------
+
+                } else if (saveCustomerInfoAction.get() == ButtonType.CANCEL) {     //stop reserving another customer
+                    //insert customer to database
+                    for (Customer customer : customerList) {
+                        if (newCustomerID_List.contains(customer.getCustomerID()))
+                            manageableDatabase.insertData(customer);    //new customer
+                        else
+                            manageableDatabase.updateData(customer);    //old customer
+                    }
+
+                    //insert reservation customer to database
+                    for (Reservation reservation : reserveCustomer_List) {
+                        manageableDatabase.insertData(reservation);
+                    }
+
+                    //insert reservation payment and deposit invoice to database
+                    setReservationPaymentFromGUI();
+                    setDepositInvoice();
+                    manageableDatabase.insertData(reservationPayment); //inset reservationPayment to database
+                    manageableDatabase.insertData(invoice, DEPOSIT_INVOICE);    // insert deposit invoice
+
+                    //update seat in tour package
+                    manageableDatabase.updateAvailableData(tour_id, availableSeat - Integer.valueOf(customerNo.getText()));
+
+                    //setup value of reservation page
+                    searchByCustomerName.clear();
+                    searchByCustomerName.setDisable(true);
+                    searchCustomerBtn.setDisable(true);
+                    reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
+                    String tmpOrder[] = reserveCode.getText().split("-");
+                    orderReserve = Integer.valueOf(tmpOrder[3]);
+                    setUpValueReservationPage();
+
+                }
+
+                //---------------------------------------------------------
                 /*//pop up 1
                 Alert alertConfirmToAddCustomerData = new Alert(Alert.AlertType.CONFIRMATION);
                 alertConfirmToAddCustomerData.setTitle("Confirmation Dialog");
@@ -227,11 +283,11 @@ public class ReservePageController implements Initializable {
                     reservationCustomer = new Reservation();
 
                     //pop up 2
-                    Alert alertConfirmToAddCustomerMore = new Alert(Alert.AlertType.CONFIRMATION);
-                    alertConfirmToAddCustomerMore.setTitle("Confirmation Dialog");
-                    alertConfirmToAddCustomerMore.setHeaderText(null);
-                    alertConfirmToAddCustomerMore.setContentText("Do you want to add another customer?");
-                    Optional<ButtonType> addCustomerMoreAction = alertConfirmToAddCustomerMore.showAndWait();
+                    Alert alertSaveCustomerInformation = new Alert(Alert.AlertType.CONFIRMATION);
+                    alertSaveCustomerInformation.setTitle("Confirmation Dialog");
+                    alertSaveCustomerInformation.setHeaderText(null);
+                    alertSaveCustomerInformation.setContentText("Do you want to add another customer?");
+                    Optional<ButtonType> addCustomerMoreAction = alertSaveCustomerInformation.showAndWait();
 
                     if (addCustomerMoreAction.get() == ButtonType.OK) { // if user want to add another customer
 
@@ -278,30 +334,23 @@ public class ReservePageController implements Initializable {
                         setUpValueReservationPage();
                     }*/
 
-                }
             }
-            else{
-                //pop up warning
-                Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
-                alertShowInformationIsUpdate.setTitle("Information Dialog");
-                alertShowInformationIsUpdate.setHeaderText(null);
-                alertShowInformationIsUpdate.setContentText("Available seat are full.");
-                Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
+        } else {
+            //pop up warning
+            Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
+            alertShowInformationIsUpdate.setTitle("Information Dialog");
+            alertShowInformationIsUpdate.setHeaderText(null);
+            alertShowInformationIsUpdate.setContentText("Available seat are full.");
+            Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
+            setUpValueReservationPage();
+            if (action.get() == ButtonType.OK) {
                 setUpValueReservationPage();
-                if (action.get() == ButtonType.OK){
-                    setUpValueReservationPage();
-                }
-
             }
-        }
-        else {
-            Alert alertCheckFillOutInformation = new Alert(Alert.AlertType.ERROR);
-            alertCheckFillOutInformation.setTitle("Error Dialog");
-            alertCheckFillOutInformation.setHeaderText("Addition customer to reservation is error");
-            alertCheckFillOutInformation.setContentText("Please completely fill out information follow (*)");
-            Optional<ButtonType> checkFillOutAction = alertCheckFillOutInformation.showAndWait();
+
         }
     }
+
+
 
 
     public void setDepositInvoice(){
