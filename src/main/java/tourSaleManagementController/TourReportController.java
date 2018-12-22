@@ -3,6 +3,10 @@ package tourSaleManagementController;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
+import createReport.CustomerListReport;
+import createReport.ReportCreator;
+import createReport.ReservationPaymentReport;
+import createReport.SaleReport;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -57,19 +61,23 @@ public class TourReportController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
 
+    ReportCreator reportCreator;
     @FXML
     void handleCreateCustomerListReportBtn(ActionEvent event) {
-
+        reportCreator = new CustomerListReport();
+        reportCreator.createReport();
     }
 
     @FXML
     void handleCreatePaymentReportBtn(ActionEvent event) {
-
+        reportCreator = new ReservationPaymentReport();
+        reportCreator.createReport();
     }
 
     @FXML
     void handleCreateSaleReportBtn(ActionEvent event) {
-
+        reportCreator = new SaleReport();
+        reportCreator.createReport();
     }
 
     @FXML

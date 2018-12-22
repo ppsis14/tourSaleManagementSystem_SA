@@ -13,7 +13,7 @@ public class ToolBarController {
     @FXML private JFXButton invoiceWindow;
     @FXML private JFXButton receiptWindow;
     @FXML private JFXButton logoutWindow;
-    @FXML private JFXButton tourProgramWindow;
+    @FXML private JFXButton tourPackageWindow;
 
     @FXML
     private void loadHomeWindow(ActionEvent event) {
@@ -56,9 +56,9 @@ public class ToolBarController {
     }
 
     @FXML
-    private void loadTourProgramWindow(ActionEvent event){
-        tourProgramWindow.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourPackageManagementPage.fxml"), "Tour Program Management");
+    private void loadTourPackageWindow(ActionEvent event){
+        tourPackageWindow.getScene().getWindow().hide();
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourPackageManagementPage.fxml"), "Tour Package Management");
 
     }
 }

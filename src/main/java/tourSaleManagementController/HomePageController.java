@@ -23,7 +23,7 @@ public class HomePageController implements Initializable {
     @FXML private JFXButton receiptBtn;
     @FXML private Button logoutBtn;
     @FXML private Label loginNameLabel;
-    @FXML private JFXButton tourProgramBtn;
+    @FXML private JFXButton tourPackageBtn;
 
 
     @FXML
@@ -63,9 +63,9 @@ public class HomePageController implements Initializable {
     }
 
     @FXML
-    public void handleTourProgramBtn(ActionEvent event) throws IOException {
-        tourProgramBtn.getScene().getWindow().hide();
-        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourPackageManagementPage.fxml"), "Tour Program Management");
+    public void handleTourPackageBtn(ActionEvent event) throws IOException {
+        tourPackageBtn.getScene().getWindow().hide();
+        DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/tourPackageManagementPage.fxml"), "Tour Package Management");
     }
 
     @Override

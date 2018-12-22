@@ -96,7 +96,7 @@
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="invoiceBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleInvoiceBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Invioce" textFill="WHITE" GridPane.columnIndex="2">
+                  <JFXButton fx:id="invoiceBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleInvoiceBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Invoice" textFill="WHITE" GridPane.columnIndex="2">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -108,7 +108,7 @@
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="tourProgramBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleTourProgramBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Tour Package" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                  <JFXButton fx:id="tourPackageBtn" contentDisplay="TOP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#handleTourPackageBtn" prefHeight="130.0" prefWidth="201.0" style="-fx-background-color: #2C3E50;" styleClass="jfx-button" stylesheets="@style.css" text="Tour Package" textFill="WHITE" GridPane.columnIndex="2" GridPane.rowIndex="1">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
