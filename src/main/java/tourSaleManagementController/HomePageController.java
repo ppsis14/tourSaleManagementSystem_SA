@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
+import tourSaleManagementSystemUtil.FormatConverter;
 
 import java.io.IOException;
 import java.net.URL;
@@ -75,8 +76,6 @@ public class HomePageController implements Initializable {
 
         // set user login
         loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
-
     }
-
 
 }
