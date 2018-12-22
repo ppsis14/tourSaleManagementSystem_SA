@@ -32,10 +32,8 @@ import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.NOT_PAID;
 
 public class ReservePageController implements Initializable {
 
-    @FXML
-    private ChoiceBox<String> titleNameTH;
-    @FXML
-    private TextField firstNameTH;
+    @FXML private ChoiceBox<String> titleNameTH;
+    @FXML private TextField firstNameTH;
     @FXML private TextField lastNameTH;
     @FXML private ChoiceBox<String> titleNameEN;
     @FXML private TextField firstNameEN;
@@ -62,6 +60,7 @@ public class ReservePageController implements Initializable {
     @FXML private JFXButton submitBtn;
     @FXML private Label reserveCode;
     @FXML private Label customerNo;
+    @FXML private Label reservedSeats;
     @FXML private ComboBox<String> tourIDComboBox;
     @FXML private JFXCheckBox oldCustomer;
     @FXML private JFXCheckBox newCustomer;

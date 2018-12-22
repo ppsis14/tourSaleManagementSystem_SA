@@ -246,6 +246,6 @@
          </font>
       </JFXButton>
       <Label layoutX="642.0" layoutY="160.0" prefHeight="17.0" prefWidth="100.0" text="Reserved Seats :" />
-      <Label fx:id="customerNo1" alignment="CENTER" contentDisplay="RIGHT" layoutX="748.0" layoutY="154.0" prefHeight="29.0" prefWidth="100.0" style="-fx-border-color: #2C3E50;" />
+      <Label fx:id="reservedSeats" alignment="CENTER" contentDisplay="RIGHT" layoutX="748.0" layoutY="154.0" prefHeight="29.0" prefWidth="100.0" style="-fx-border-color: #2C3E50;" />
    </children>
 </AnchorPane>
