@@ -134,8 +134,9 @@ public class SpringJDBC_DB implements ManageableDatabase {
     @Override
     public int getTourPrice(String tourID) {
 
-        String query = "SELECT * FROM tour_package WHERE Tour_ID = "+"'"+tourID+"'";
-        TourPackage tourPackage = jdbcTemplate.queryForObject(query,new TourPackageRowMapper());
+        String query = "SELECT * FROM tour_package WHERE Tour_ID = ?";
+        Object[] data = new Object[]{tourID};
+        TourPackage tourPackage = jdbcTemplate.queryForObject(query,data,new TourPackageRowMapper());
 
         return tourPackage.getPrice();
     }

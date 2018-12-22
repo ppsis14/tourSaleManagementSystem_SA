@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.TourReportController">
+<StackPane fx:id="rootPane" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tourSaleManagementController.TourReportController">
    <children>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" style="-fx-background-color: #ffffff;">
          <children>
@@ -70,9 +70,9 @@
                                           <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="770.0" spacing="20.0">
                                              <children>
                                                 <Label text="Deposit Payment :" />
-                                                <ChoiceBox fx:id="depositStatusChoice" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
+                                                <ChoiceBox fx:id="depositStatusChoice" onAction="#handleSelectDeposit" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                                 <Label text="Arrears Payment :" />
-                                                <ChoiceBox fx:id="arrearsStatusChoice" layoutX="142.0" layoutY="10.0" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
+                                                <ChoiceBox fx:id="arrearsStatusChoice" onAction="#handleSelectArrears" layoutX="142.0" layoutY="10.0" prefHeight="29.0" prefWidth="130.0" style="-fx-border-color: #2C3E50; -fx-background-color: WHITE;" />
                                              </children>
                                           </HBox>
                                           <TableView fx:id="reservationPaymentTable" editable="true" prefHeight="276.0" prefWidth="770.0">
@@ -91,8 +91,8 @@
                                                 <Label fx:id="totalReservation" alignment="CENTER" prefHeight="30.0" prefWidth="80.0" styleClass="date-label" stylesheets="@style.css" />
                                                 <Label layoutX="546.0" layoutY="20.0" text="Total Paid :" />
                                                 <Label fx:id="totalPaid" alignment="CENTER" layoutX="678.0" layoutY="14.0" prefHeight="30.0" prefWidth="80.0" styleClass="date-label" stylesheets="@style.css" />
-                                                <Label fx:id="totalNotPaid" layoutX="292.0" layoutY="20.0" text="Total Not paid :" />
-                                                <Label fx:id="quantity12" alignment="CENTER" layoutX="424.0" layoutY="14.0" prefHeight="30.0" prefWidth="80.0" styleClass="date-label" stylesheets="@style.css" />
+                                                <Label  layoutX="292.0" layoutY="20.0" text="Total Not paid :" />
+                                                <Label fx:id="totalNotPaid" alignment="CENTER" layoutX="424.0" layoutY="14.0" prefHeight="30.0" prefWidth="80.0" styleClass="date-label" stylesheets="@style.css" />
                                              </children>
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="346.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="770.0" spacing="20.0" />
