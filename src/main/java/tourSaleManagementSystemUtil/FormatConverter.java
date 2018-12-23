@@ -2,10 +2,13 @@ package tourSaleManagementSystemUtil;
 
 import Table.Customer;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.TimeZone;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
@@ -17,6 +20,18 @@ public class FormatConverter {
         LocalDate localDate = LocalDate.now();
         return dtf.format(localDate);
     }
+
+    //time
+    public static String getLocalTimeFormat() {
+
+        //"hh" in pattern is for 12 hour time format and "aa" is for AM/PM
+        SimpleDateFormat dateTimeInGMT = new SimpleDateFormat("hh:mm aa");
+        //Setting the time zone
+        dateTimeInGMT.setTimeZone(TimeZone.getTimeZone("GMT+7"));
+        return dateTimeInGMT.format(new Date());
+
+    }
+
 
     // tour id (JPN-5D4N-00001)
     public static String generateTourID(String country, String durDays) {

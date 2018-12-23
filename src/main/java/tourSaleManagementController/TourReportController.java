@@ -7,9 +7,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import createReport.CustomerListReport;
-import createReport.ReportCreator;
-import createReport.ReservationPaymentReport;
-import createReport.SaleReport;
+import createReport.ReservationPaymentListReport;
+import createReport.SaleListReport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +24,7 @@ import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
@@ -72,7 +72,6 @@ public class TourReportController implements Initializable {
     @FXML private JFXHamburger menu;
     @FXML private JFXDrawer drawerMenu;
 
-    ReportCreator reportCreator;
     String tourName;
     String depositComboBox;
     String arrearsComboBox;
@@ -96,24 +95,43 @@ public class TourReportController implements Initializable {
         tourName = tourIDComboBox.getSelectionModel().getSelectedItem();
         depositComboBox = "None";
         arrearsComboBox = "None";
+
         setShowTableView();
     }
     @FXML
     void handleCreateCustomerListReportBtn(ActionEvent event) {
-        reportCreator = new CustomerListReport();
-        reportCreator.createReport();
+        CustomerListReport customerListReport = new CustomerListReport();
+        customerListReport.createCustomerListReport(tourName,customerReportList);
+
+        Alert alertShowCreateReport = new Alert(Alert.AlertType.INFORMATION);
+        alertShowCreateReport.setTitle("Information Dialog");
+        alertShowCreateReport.setHeaderText(null);
+        alertShowCreateReport.setContentText("Creating customer report is successfully!");
+        Optional<ButtonType> showCreateArrearsInvoiceAction = alertShowCreateReport.showAndWait();
     }
 
     @FXML
     void handleCreatePaymentReportBtn(ActionEvent event) {
-        //reportCreator = new ReservationPaymentReport();
-        reportCreator.createReport();
+        ReservationPaymentListReport paymentListReport = new ReservationPaymentListReport();
+        paymentListReport.createReservationPaymentReport(tourName,reservationPaymentReportList);
+
+        Alert alertShowCreateReport = new Alert(Alert.AlertType.INFORMATION);
+        alertShowCreateReport.setTitle("Information Dialog");
+        alertShowCreateReport.setHeaderText(null);
+        alertShowCreateReport.setContentText("Creating reservation payment report is successfully!");
+        Optional<ButtonType> showCreateArrearsInvoiceAction = alertShowCreateReport.showAndWait();
     }
 
     @FXML
     void handleCreateSaleReportBtn(ActionEvent event) {
-        //reportCreator = new SaleReport();
-        reportCreator.createReport();
+        SaleListReport saleListReport = new SaleListReport();
+        saleListReport.createSaleReport(tourName,saleReportList);
+
+        Alert alertShowCreateReport = new Alert(Alert.AlertType.INFORMATION);
+        alertShowCreateReport.setTitle("Information Dialog");
+        alertShowCreateReport.setHeaderText(null);
+        alertShowCreateReport.setContentText("Creating sales report is successfully!");
+        Optional<ButtonType> showCreateArrearsInvoiceAction = alertShowCreateReport.showAndWait();
     }
 
     @FXML
@@ -379,7 +397,7 @@ public class TourReportController implements Initializable {
     }
 
 
-    protected class ReservationPaymentReport{
+    public class ReservationPaymentReport{
         private String reservationCode;
         private String customerName;
         private String phoneNum;
@@ -446,7 +464,7 @@ public class TourReportController implements Initializable {
         }
     }
 
-    protected class ReservationCustomerReport{
+    public class ReservationCustomerReport{
         private int number;
         private String customerID;
         private String customerName;
@@ -503,7 +521,7 @@ public class TourReportController implements Initializable {
         }
     }
 
-    protected class SaleReport {
+    public class SaleReport {
         private String reservationCode;
         private String customerName;
         private int quantity;

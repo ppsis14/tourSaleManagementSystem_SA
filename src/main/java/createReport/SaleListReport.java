@@ -5,15 +5,27 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import tourSaleManagementController.TourReportController;
+import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.PdfUtil;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
-public class SaleReport implements ReportCreator {
-    @Override
-    public void createReport() {
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
+
+public class SaleListReport {
+    private static List<TourReportController.SaleReport> saleReports;
+
+    public void createSaleReport(String tourName, List<TourReportController.SaleReport> saleReportList) {
+
+        saleReports = saleReportList;
+        String tourID = manageableDatabase.getTourID(tourName);
+        String saleName = loginEmployee.getTitleName()+ " " + loginEmployee.getFirstName()+" "+loginEmployee.getLastName();
+
         Document document = new Document();
         document.setPageSize(PageSize.A4.rotate());
         try {
@@ -23,10 +35,10 @@ public class SaleReport implements ReportCreator {
             Font angsanaNewFont16Bold = new Font(BaseFont.createFont("fonts/Angsa.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 16, Font.BOLD, BaseColor.BLACK);
             Font angsanaNewFont14 = new Font(BaseFont.createFont("fonts/Angsa.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 14, Font.NORMAL, BaseColor.BLACK);
 
-            PdfWriter.getInstance(document, new FileOutputStream("./Sale-Report.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("./Tour-Report/Sale-Report.pdf"));
             document.open();
             PdfPTable compDetailTable = new PdfPTable(2);
-            Paragraph titleName = new Paragraph("รายงานแสดงยอดขายของแพ็คเกจทัวร์ JAPAN NEW YEAR EXCLUSIVE (JPN-4D3N-000004)", angsanaNewFont18);
+            Paragraph titleName = new Paragraph("รายงานแสดงยอดขายของแพ็คเกจทัวร์ "+tourName+ " ( "+tourID+" )", angsanaNewFont18);
             titleName.setAlignment(Paragraph.ALIGN_CENTER);
             document.add(titleName);
             PdfPTable tableOut = new PdfPTable(2);
@@ -58,19 +70,25 @@ public class SaleReport implements ReportCreator {
         }
     }
 
+
+
+
     private static void buildNestedTablesHeader(PdfPTable outerTable, Font font) throws IOException, DocumentException {
+        String saleName = loginEmployee.getFirstName()+" "+loginEmployee.getLastName();
+        String dueDate = FormatConverter.getLocalDateFormat("dd-MM-yyyy");
+
         PdfPTable printByTable = new PdfPTable(1);
         printByTable.setTotalWidth(150f);
         printByTable.setLockedWidth(true);
         printByTable.setHorizontalAlignment(Element.ALIGN_LEFT);
-        printByTable.addCell(PdfUtil.createCell("ผู้พิมพ์รายงาน  :  ฑิฆัมพร สิมอุด", font, 0f, 1, Element.ALIGN_LEFT));
+        printByTable.addCell(PdfUtil.createCell("ผู้พิมพ์รายงาน  :  "+saleName, font, 0f, 1, Element.ALIGN_LEFT));
         outerTable.addCell(printByTable);
         PdfPTable printDateTable = new PdfPTable(2);
         printDateTable.setTotalWidth(200f);
         printDateTable.setLockedWidth(true);
         printDateTable.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        printDateTable.addCell(PdfUtil.createCell("พิมพ์วันที่  :  22/12/2018", font, 0f, 1, Element.ALIGN_RIGHT));
-        printDateTable.addCell(PdfUtil.createCell("เวลา  :  08.45 น.", font, 0f, 1, Element.ALIGN_RIGHT));
+        printDateTable.addCell(PdfUtil.createCell("พิมพ์วันที่  :  "+dueDate, font, 0f, 1, Element.ALIGN_RIGHT));
+        printDateTable.addCell(PdfUtil.createCell("เวลา  :  "+FormatConverter.getLocalTimeFormat(), font, 0f, 1, Element.ALIGN_RIGHT));
         outerTable.addCell(printDateTable);
     }
 
@@ -88,20 +106,28 @@ public class SaleReport implements ReportCreator {
         bodyTable.addCell(PdfUtil.createCell("Expected Amount\nยอดเงินที่คาดว่าจะได้รับ", font, 0.5f, 1, Element.ALIGN_CENTER));
         bodyTable.addCell(PdfUtil.createCell("Received Amount\nยอดเงินที่ได้รับ", font, 0.5f, 1, Element.ALIGN_CENTER));
         bodyTable.addCell(PdfUtil.createCell("Sale Name\nชื่อพนักงานขาย", font, 0.5f, 1, Element.ALIGN_CENTER));
-        for (int i = 0; i < 30; i++ ){
 
-            bodyTable.addCell(PdfUtil.createCell("GER-5D4N-000001-000001", font, 0.5f, 1, Element.ALIGN_CENTER));
-            bodyTable.addCell(PdfUtil.createCell("นางสาวฑิฆัมพร สิมอุด", font, 0.5f, 1, Element.ALIGN_LEFT));
-            bodyTable.addCell(PdfUtil.createCell(String.valueOf(++i), font, 0.5f, 1, Element.ALIGN_CENTER));
-            totalQuantity += i;
-            bodyTable.addCell(PdfUtil.createCell(String.valueOf(12000.0*i), font, 0.5f, 1, Element.ALIGN_RIGHT));
-            bodyTable.addCell(PdfUtil.createCell(String.valueOf(12000.0*i), font, 0.5f, 1, Element.ALIGN_RIGHT));
-            bodyTable.addCell(PdfUtil.createCell("วิภาวดี ม่อนคุต", font, 0.5f, 1, Element.ALIGN_LEFT));
-            totalReceivedAmount += (12000.0*i);
+        for (int i = 0; i < saleReports.size() ; i++ ){
+
+            bodyTable.addCell(PdfUtil.createCell(saleReports.get(i).getReservationCode(), font, 0.5f, 1, Element.ALIGN_CENTER));
+            bodyTable.addCell(PdfUtil.createCell(saleReports.get(i).getCustomerName(), font, 0.5f, 1, Element.ALIGN_LEFT));
+            bodyTable.addCell(PdfUtil.createCell(String.valueOf(saleReports.get(i).getQuantity()), font, 0.5f, 1, Element.ALIGN_CENTER));
+            totalQuantity += saleReports.get(i).getQuantity(); // increase quantity
+            bodyTable.addCell(PdfUtil.createCell(saleReports.get(i).getExpectedAmount(), font, 0.5f, 1, Element.ALIGN_RIGHT));
+            bodyTable.addCell(PdfUtil.createCell(saleReports.get(i).getReceivedAmount(), font, 0.5f, 1, Element.ALIGN_RIGHT));
+            bodyTable.addCell(PdfUtil.createCell(saleReports.get(i).getSaleName(), font, 0.5f, 1, Element.ALIGN_LEFT));
+
+            String[] tmp = saleReports.get(i).getExpectedAmount().split(",");
+            String[] tmp2 = saleReports.get(i).getReceivedAmount().split(",");
+            String expected = tmp[0]+tmp[1];
+            String received = tmp2[0]+tmp2[1];
+            totalExpectedAmount += Double.valueOf(expected);
+            totalReceivedAmount += Double.valueOf(received);
         }
+
         bodyTable.addCell(PdfUtil.createCell("รวม", font, 0.5f, 2, Element.ALIGN_CENTER));
-        bodyTable.addCell(PdfUtil.createCell(String.valueOf(totalQuantity), font, 0.5f, 1, Element.ALIGN_CENTER));
-        bodyTable.addCell(PdfUtil.createCell(String.valueOf(12000.0*totalQuantity), font, 0.5f, 1, Element.ALIGN_RIGHT));
+        bodyTable.addCell(PdfUtil.createCell(String.valueOf( totalQuantity ), font, 0.5f, 1, Element.ALIGN_CENTER));
+        bodyTable.addCell(PdfUtil.createCell(String.valueOf(totalExpectedAmount), font, 0.5f, 1, Element.ALIGN_RIGHT));
         bodyTable.addCell(PdfUtil.createCell(String.valueOf(totalReceivedAmount), font, 0.5f, 1, Element.ALIGN_RIGHT));
         bodyTable.addCell(PdfUtil.createCell("บาท", font, 0.5f, 1, Element.ALIGN_LEFT));
         outerTable.addCell(bodyTable);

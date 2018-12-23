@@ -5,15 +5,27 @@ import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import tourSaleManagementController.TourReportController;
+import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.PdfUtil;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
-public class ReservationPaymentReport implements ReportCreator {
-    @Override
-    public void createReport() {
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
+import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
+
+public class ReservationPaymentListReport {
+    private static List<TourReportController.ReservationPaymentReport> reservationPaymentReports;
+
+    public void createReservationPaymentReport(String tourName, List<TourReportController.ReservationPaymentReport> reservationPaymentReportList) {
+
+        reservationPaymentReports = reservationPaymentReportList;
+        String tourID = manageableDatabase.getTourID(tourName);
+        String saleName = loginEmployee.getTitleName()+ " " + loginEmployee.getFirstName()+" "+loginEmployee.getLastName();
+
         Document document = new Document();
         document.setPageSize(PageSize.A4.rotate());
         try {
@@ -23,10 +35,10 @@ public class ReservationPaymentReport implements ReportCreator {
             Font angsanaNewFont16Bold = new Font(BaseFont.createFont("fonts/Angsa.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 16, Font.BOLD, BaseColor.BLACK);
             Font angsanaNewFont14 = new Font(BaseFont.createFont("fonts/Angsa.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED), 14, Font.NORMAL, BaseColor.BLACK);
 
-            PdfWriter.getInstance(document, new FileOutputStream("./Reservation-Payment-Report.pdf"));
+            PdfWriter.getInstance(document, new FileOutputStream("./Tour-Report/Reservation-Payment-Report.pdf"));
             document.open();
             PdfPTable compDetailTable = new PdfPTable(2);
-            Paragraph titleName = new Paragraph("รายงานแสดงสถานะการชำระเงินลูกค้าของแพ็คเกจทัวร์ JAPAN NEW YEAR EXCLUSIVE (JPN-4D3N-000004)", angsanaNewFont18);
+            Paragraph titleName = new Paragraph("รายงานแสดงสถานะการชำระเงินลูกค้าของแพ็คเกจทัวร์ "+tourName+ " ( "+tourID+" )", angsanaNewFont18);
             titleName.setAlignment(Paragraph.ALIGN_CENTER);
             document.add(titleName);
             PdfPTable tableOut = new PdfPTable(2);
@@ -59,18 +71,22 @@ public class ReservationPaymentReport implements ReportCreator {
     }
 
     private static void buildNestedTablesHeader(PdfPTable outerTable, Font font) throws IOException, DocumentException {
+        String saleName = loginEmployee.getFirstName()+" "+loginEmployee.getLastName();
+        String dueDate = FormatConverter.getLocalDateFormat("dd-MM-yyyy");
+        String currentTime = FormatConverter.getLocalTimeFormat();
+
         PdfPTable printByTable = new PdfPTable(1);
         printByTable.setTotalWidth(150f);
         printByTable.setLockedWidth(true);
         printByTable.setHorizontalAlignment(Element.ALIGN_LEFT);
-        printByTable.addCell(PdfUtil.createCell("ผู้พิมพ์รายงาน  :  ฑิฆัมพร สิมอุด", font, 0f, 1, Element.ALIGN_LEFT));
+        printByTable.addCell(PdfUtil.createCell("ผู้พิมพ์รายงาน  :  "+saleName, font, 0f, 1, Element.ALIGN_LEFT));
         outerTable.addCell(printByTable);
         PdfPTable printDateTable = new PdfPTable(2);
         printDateTable.setTotalWidth(200f);
         printDateTable.setLockedWidth(true);
         printDateTable.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        printDateTable.addCell(PdfUtil.createCell("พิมพ์วันที่  :  22/12/2018", font, 0f, 1, Element.ALIGN_RIGHT));
-        printDateTable.addCell(PdfUtil.createCell("เวลา  :  08.45 น.", font, 0f, 1, Element.ALIGN_RIGHT));
+        printDateTable.addCell(PdfUtil.createCell("พิมพ์วันที่  :  "+dueDate , font, 0f, 1, Element.ALIGN_RIGHT));
+        printDateTable.addCell(PdfUtil.createCell("เวลา  :  "+currentTime , font, 0f, 1, Element.ALIGN_RIGHT));
         outerTable.addCell(printDateTable);
     }
 
@@ -85,16 +101,17 @@ public class ReservationPaymentReport implements ReportCreator {
         bodyTable.addCell(PdfUtil.createCell("Deposit Payment Status\nสถานะการชำระเงินค่ามัดจำ", font, 0.5f, 1, Element.ALIGN_CENTER));
         bodyTable.addCell(PdfUtil.createCell("Arrears Payment Status\nสถานะการชำระเงินส่วนที่เหลือ", font, 0.5f, 1, Element.ALIGN_CENTER));
         bodyTable.addCell(PdfUtil.createCell("Sale Name\nชื่อพนักงานขาย", font, 0.5f, 1, Element.ALIGN_CENTER));
-        for (int i = 0; i < 15; i++ ){
-            bodyTable.addCell(PdfUtil.createCell("GER-5D4N-000001-000001", font, 0.5f, 1, Element.ALIGN_CENTER));
-            bodyTable.addCell(PdfUtil.createCell("นางสาวฑิฆัมพร สิมอุด", font, 0.5f, 1, Element.ALIGN_LEFT));
-            bodyTable.addCell(PdfUtil.createCell("0927606499", font, 0.5f, 1, Element.ALIGN_CENTER));
-            bodyTable.addCell(PdfUtil.createCell("ชำระแล้ว", font, 0.5f, 1, Element.ALIGN_CENTER));
-            bodyTable.addCell(PdfUtil.createCell("ชำระแล้ว", font, 0.5f, 1, Element.ALIGN_CENTER));
-            bodyTable.addCell(PdfUtil.createCell("วิภาวดี ม่อนคุต", font, 0.5f, 1, Element.ALIGN_LEFT));
+        for (int i = 0; i < reservationPaymentReports.size(); i++ ){
+            bodyTable.addCell(PdfUtil.createCell(reservationPaymentReports.get(i).getReservationCode(), font, 0.5f, 1, Element.ALIGN_CENTER));
+            bodyTable.addCell(PdfUtil.createCell(reservationPaymentReports.get(i).getCustomerName(), font, 0.5f, 1, Element.ALIGN_LEFT));
+            bodyTable.addCell(PdfUtil.createCell(reservationPaymentReports.get(i).getPhoneNum(), font, 0.5f, 1, Element.ALIGN_CENTER));
+            bodyTable.addCell(PdfUtil.createCell(reservationPaymentReports.get(i).getDepositPaymentStatus(), font, 0.5f, 1, Element.ALIGN_CENTER));
+            bodyTable.addCell(PdfUtil.createCell(reservationPaymentReports.get(i).getArrearsPaymentStatus(), font, 0.5f, 1, Element.ALIGN_CENTER));
+            bodyTable.addCell(PdfUtil.createCell(reservationPaymentReports.get(i).getSaleName(), font, 0.5f, 1, Element.ALIGN_LEFT));
 
         }
         outerTable.addCell(bodyTable);
 
     }
+
 }
