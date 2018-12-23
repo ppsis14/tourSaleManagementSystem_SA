@@ -79,17 +79,17 @@ public class CustomerListReport{
         String dueDate = FormatConverter.getLocalDateFormat("dd-MM-yyyy");
 
         PdfPTable printByTable = new PdfPTable(1);
-        printByTable.setTotalWidth(150f);
+        printByTable.setTotalWidth(200f);
         printByTable.setLockedWidth(true);
         printByTable.setHorizontalAlignment(Element.ALIGN_LEFT);
-        printByTable.addCell(PdfUtil.createCell("ผู้พิมพ์รายงาน  :  " + saleName, font, 0f, 1, Element.ALIGN_LEFT));
+        printByTable.addCell(PdfUtil.createCell("ผู้พิมพ์รายงาน/Printed By  :  " + saleName, font, 0f, 1, Element.ALIGN_LEFT));
         outerTable.addCell(printByTable);
         PdfPTable printDateTable = new PdfPTable(2);
-        printDateTable.setTotalWidth(200f);
+        printDateTable.setTotalWidth(300f);
         printDateTable.setLockedWidth(true);
         printDateTable.setHorizontalAlignment(Element.ALIGN_RIGHT);
-        printDateTable.addCell(PdfUtil.createCell("พิมพ์วันที่  :  "+ dueDate, font, 0f, 1, Element.ALIGN_RIGHT));
-        printDateTable.addCell(PdfUtil.createCell("เวลา  :  "+FormatConverter.getLocalTimeFormat(), font, 0f, 1, Element.ALIGN_RIGHT));
+        printDateTable.addCell(PdfUtil.createCell("วันที่พิมพ์/Printed Date  :  "+ dueDate, font, 0f, 1, Element.ALIGN_RIGHT));
+        printDateTable.addCell(PdfUtil.createCell("เวลา/Time  :  "+FormatConverter.getLocalTimeFormat(), font, 0f, 1, Element.ALIGN_RIGHT));
         outerTable.addCell(printDateTable);
     }
 
