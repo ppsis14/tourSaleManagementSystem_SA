@@ -45,7 +45,7 @@ public class TourCheckPageController implements Initializable {
     @FXML private TableView<DisplayReservationCustomer> reservationListTable;
     @FXML private TableColumn<DisplayReservationCustomer, String> reservationCodeColumnR;
     @FXML private TableColumn<DisplayReservationCustomer, String> nameColumnR;
-    @FXML private TableColumn<DisplayReservationCustomer, String> customerAgeColumnR;
+    @FXML private TableColumn<DisplayReservationCustomer, Integer> customerAgeColumnR;
     @FXML private TableColumn<DisplayReservationCustomer, String> phoneNumCusColumnR;
     @FXML private JFXButton deleteReserveListBtn;
     @FXML private JFXButton confirmStatusBtn;
@@ -236,6 +236,7 @@ public class TourCheckPageController implements Initializable {
                 reservationObList.add(new DisplayReservationCustomer(
                     re.getReservationCode(),
                     re.getCustomerName(),
+                    FormatConverter.CalculateAge(customer.getCustomerID()),
                     customer.getCell_phone()));
         }
         //find data base for show on table view.
@@ -247,6 +248,7 @@ public class TourCheckPageController implements Initializable {
 
         reservationCodeColumnR.setCellValueFactory(new PropertyValueFactory<>("reservationCode"));
         nameColumnR.setCellValueFactory(new PropertyValueFactory<>("customerName"));
+        customerAgeColumnR.setCellValueFactory(new PropertyValueFactory<>("age"));
         phoneNumCusColumnR.setCellValueFactory(new PropertyValueFactory<>("phoneNumCustomer"));
 
 
@@ -295,11 +297,13 @@ public class TourCheckPageController implements Initializable {
 
         private String reservationCode;
         private String customerName;
+        private int age;
         private String phoneNumCustomer;
 
-        public DisplayReservationCustomer(String reservationCode, String customerName,String phoneNumCustomer) {
+        public DisplayReservationCustomer(String reservationCode, String customerName, int age, String phoneNumCustomer) {
             this.reservationCode = reservationCode;
             this.customerName = customerName;
+            this.age = age;
             this.phoneNumCustomer = phoneNumCustomer;
         }
 
@@ -317,6 +321,14 @@ public class TourCheckPageController implements Initializable {
 
         public void setCustomerName(String customerName) {
             this.customerName = customerName;
+        }
+
+        public int getAge() {
+            return age;
+        }
+
+        public void setAge(int age) {
+            this.age = age;
         }
 
         public String getPhoneNumCustomer() {

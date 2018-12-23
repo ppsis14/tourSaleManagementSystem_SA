@@ -139,6 +139,8 @@ public class ReservePageController implements Initializable {
         String tourID = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
         String tmp[] = tourID.split("-");
         tourID = tmp[0] + "-" + tmp[1] + "-" + tmp[2] + "-" + String.format("%06d", orderReserve);
+
+        reservedSeats.setText(getAmountReservationSeatLabel());
         reserveCode.setText(tourID);
     }
 
