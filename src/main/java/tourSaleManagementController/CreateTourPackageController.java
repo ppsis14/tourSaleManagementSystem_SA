@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -16,6 +17,9 @@ import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -112,8 +116,13 @@ public class CreateTourPackageController implements Initializable {
     }
 
     public Boolean checkFillOutTourInformation() {
-
         if (validateFieldsIsEmpty()){
+            return false;
+        }
+        else if(validateFieldsDateIsCorrect() == true){
+            return true;
+        }
+        else if(validateFieldsDateIsCorrect() == false) {
             return false;
         }
         else return true;
@@ -182,6 +191,124 @@ public class CreateTourPackageController implements Initializable {
 
             }
         });
+//
+//        departureDate.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if(validateDepartureDate() == true) {
+//                    departureDate.setStyle("-fx-border-color: #27AE60");
+//                    returnDate.setStyle("-fx-border-color: #27AE60");
+//                }
+//                else {
+//                    departureDate.setStyle("-fx-border-color: #922B21");
+//                    returnDate.setStyle("-fx-border-color: #922B21");
+//                }
+//            }
+//        });
+//
+//        departureDate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//
+//                if(validateDepartureDate() == true) {
+//                    departureDate.setStyle("-fx-border-color: #27AE60");
+//                    returnDate.setStyle("-fx-border-color: #27AE60");
+//                }
+//                else {
+//                    departureDate.setStyle("-fx-border-color: #922B21");
+//                    returnDate.setStyle("-fx-border-color: #922B21");
+//                }
+//            }
+//        });
+//
+//        returnDate.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if(validateDepartureDate() == true) {
+//                    returnDate.setStyle("-fx-border-color: #27AE60");
+//                    departureDate.setStyle("-fx-border-color: #27AE60");
+//                }
+//                else {
+//                    returnDate.setStyle("-fx-border-color: #922B21");
+//                    departureDate.setStyle("-fx-border-color: #922B21");
+//                }
+//            }
+//        });
+//
+//        returnDate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//
+//                if(validateDepartureDate() == true) {
+//                    returnDate.setStyle("-fx-border-color: #27AE60");
+//                    departureDate.setStyle("-fx-border-color: #27AE60");
+//                }
+//                else{
+//                    returnDate.setStyle("-fx-border-color: #922B21");
+//                    departureDate.setStyle("-fx-border-color: #922B21");
+//
+//                }
+//            }
+//        });
+//
+//        depositIVDate.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if(validateDepositInvoiceDate() == true) {
+//                    depositIVDate.setStyle("-fx-border-color: #27AE60");
+//                    invoiceDate.setStyle("-fx-border-color: #27AE60");
+//                }
+//                else {
+//                    depositIVDate.setStyle("-fx-border-color: #922B21");
+//                    invoiceDate.setStyle("-fx-border-color: #922B21");
+//                }
+//            }
+//        });
+//
+//        depositIVDate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//
+//                if(validateDepositInvoiceDate() == true) {
+//                    depositIVDate.setStyle("-fx-border-color: #27AE60");
+//                    invoiceDate.setStyle("-fx-border-color: #27AE60");
+//
+//                }
+//                else {
+//                    depositIVDate.setStyle("-fx-border-color: #922B21");
+//                    invoiceDate.setStyle("-fx-border-color: #922B21");
+//                }
+//
+//            }
+//        });
+//
+//        invoiceDate.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if(validateDepositInvoiceDate() == true) {
+//                    depositIVDate.setStyle("-fx-border-color: #27AE60");
+//                    invoiceDate.setStyle("-fx-border-color: #27AE60");
+//                }
+//                else {
+//                    depositIVDate.setStyle("-fx-border-color: #922B21");
+//                    invoiceDate.setStyle("-fx-border-color: #922B21");
+//                }
+//            }
+//        });
+//        invoiceDate.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//
+//                if(validateDepositInvoiceDate() == true) {
+//                    depositIVDate.setStyle("-fx-border-color: #27AE60");
+//                    invoiceDate.setStyle("-fx-border-color: #27AE60");
+//                }
+//                else {
+//                    depositIVDate.setStyle("-fx-border-color: #922B21");
+//                    invoiceDate.setStyle("-fx-border-color: #922B21");
+//                }
+//            }
+//        });
 
         amountSeats.setOnKeyReleased(new EventHandler<KeyEvent>(){
 
@@ -288,6 +415,61 @@ public class CreateTourPackageController implements Initializable {
         }
     }
 
+
+    private boolean validateDepartureDate(){
+
+        String departureDate_ = departureDate.getEditor().getText();
+        String returnDate_ = returnDate.getEditor().getText();
+
+        if(departureDate_ != null && returnDate_ != null){
+            try {
+
+                Date today = new SimpleDateFormat("dd-MM-yyyy").parse(FormatConverter.getLocalDateFormat("dd-MM-yyyy"));
+                Date departureDate = new SimpleDateFormat("dd-MM-yyyy").parse(departureDate_);
+                Date returnDate = new SimpleDateFormat("dd-MM-yyyy").parse(returnDate_);
+
+                if ((departureDate.compareTo(returnDate) < 0) ) {
+                    //before or equals today
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            } catch (ParseException e) {
+
+                //handle exception
+            }
+        }
+
+        return false;
+    }
+    private boolean validateDepositInvoiceDate(){
+
+        String depositInvoiceDate_ = depositIVDate.getEditor().getText();
+        String arrearsInvoiceDate_ = invoiceDate.getEditor().getText();
+
+        if(depositInvoiceDate_ != null && arrearsInvoiceDate_ != null) {
+            try {
+
+                Date today = new SimpleDateFormat("dd-MM-yyyy").parse(FormatConverter.getLocalDateFormat("dd-MM-yyyy"));
+                Date depositDate = new SimpleDateFormat("dd-MM-yyyy").parse(depositInvoiceDate_);
+                Date arrearsDate = new SimpleDateFormat("dd-MM-yyyy").parse(arrearsInvoiceDate_);
+
+                if ((depositDate.compareTo(arrearsDate)) < 0) {
+                    //before or equals today
+                    return true;
+                }
+                else
+                    return false;
+
+            } catch (ParseException e) {
+                //handle exception
+            }
+        }
+        return false;
+
+    }
+
     private boolean validateFieldsIsEmpty(){
         int count=0;
         if (tourIDCountry.getText().isEmpty()){tourIDCountry.setStyle("-fx-border-color: #C0392B");count++;}
@@ -317,5 +499,14 @@ public class CreateTourPackageController implements Initializable {
         else{
             return false;
         }
+    }
+
+    private boolean validateFieldsDateIsCorrect(){
+
+        if( validateDepartureDate() == true && validateDepositInvoiceDate() == true ){
+            return true;
+        }
+        return false;
+
     }
 }

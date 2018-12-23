@@ -9,13 +9,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -169,6 +173,12 @@ public class EditCustomerPageController implements Initializable {
         if (validateFieldsIsEmpty()){
             return false;
         }
+        else if (validateDateOfBirthIsCorrect() == true){
+            return true;
+        }
+        else if(validateDateOfBirthIsCorrect() == false){
+            return false;
+        }
         else return true;
     }
 
@@ -260,12 +270,27 @@ public class EditCustomerPageController implements Initializable {
             }
         });
 
-        dateOfBirth.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                dateOfBirth.setStyle("-fx-border-color: #2C3E50");
-            }
-        });
+//        dateOfBirth.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//            @Override
+//            public void handle(KeyEvent event) {
+//                if(validateDateOfBirth() == true)
+//                    dateOfBirth.setStyle("-fx-border-color: #27AE60");
+//                else
+//                    dateOfBirth.setStyle("-fx-border-color: #922B21");
+//            }
+//        });
+//
+//        dateOfBirth.setOnMouseClicked(new EventHandler<MouseEvent>() {
+//            @Override
+//            public void handle(MouseEvent event) {
+//
+//                if(validateDateOfBirth() == true)
+//                    dateOfBirth.setStyle("-fx-border-color: #27AE60");
+//                else
+//                    dateOfBirth.setStyle("-fx-border-color: #922B21");
+//
+//            }
+//        });
 
         passportNo.setOnKeyReleased(new EventHandler<KeyEvent>(){
 
@@ -468,7 +493,7 @@ public class EditCustomerPageController implements Initializable {
         }
     }
     private boolean validatePhoneNum(){
-        Pattern p = Pattern.compile("[0-9][0-9]{9}|[-]+");
+        Pattern p = Pattern.compile("[0-9][0-9]{9}");
         Matcher m = p.matcher(phoneNum.getText());
         if(m.find() && m.group().equals(phoneNum.getText())){
             return true;
@@ -477,7 +502,7 @@ public class EditCustomerPageController implements Initializable {
         }
     }
     private boolean validateHomeTelNum(){
-        Pattern p = Pattern.compile("[0-9][0-9]{8}|[-]+");
+        Pattern p = Pattern.compile("[0-9][0-9]{8}");
         Matcher m = p.matcher(homeTelNum.getText());
         if(m.find() && m.group().equals(homeTelNum.getText())){
             return true;
@@ -487,7 +512,7 @@ public class EditCustomerPageController implements Initializable {
         }
     }
     private boolean validateFaxNum(){
-        Pattern p = Pattern.compile("[0-9][0-9]{8}|[-]+");
+        Pattern p = Pattern.compile("[0-9][0-9]{8}");
         Matcher m = p.matcher(faxNum.getText());
         if(m.find() && m.group().equals(faxNum.getText())){
             return true;
@@ -537,6 +562,24 @@ public class EditCustomerPageController implements Initializable {
         }
     }
 
+    private boolean validateDateOfBirth(){
+
+        String dateOfBirth_ = dateOfBirth.getEditor().getText();
+        Date today = new Date();
+        try {
+            Date dobDate = new SimpleDateFormat("dd-MM-yyyy").parse(dateOfBirth_);
+
+            if (dobDate.compareTo(today) <= 0) {
+                //before or equals today
+                return true;
+            }
+
+        } catch (ParseException e) {
+            //handle exception
+        }
+        return false;
+    }
+
     private boolean validateFieldsIsEmpty(){
         int count=0;
         if (firstNameTH.getText().isEmpty()){firstNameTH.setStyle("-fx-border-color: #C0392B");count++;}
@@ -566,4 +609,13 @@ public class EditCustomerPageController implements Initializable {
             return false;
         }
     }
+
+    private boolean validateDateOfBirthIsCorrect() {
+
+        if(validateDateOfBirth() == true)
+            return true;
+        else
+            return false;
+    }
+
 }
