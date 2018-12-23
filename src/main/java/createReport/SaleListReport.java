@@ -127,8 +127,8 @@ public class SaleListReport {
 
         bodyTable.addCell(PdfUtil.createCell("รวม", font, 0.5f, 2, Element.ALIGN_CENTER));
         bodyTable.addCell(PdfUtil.createCell(String.valueOf( totalQuantity ), font, 0.5f, 1, Element.ALIGN_CENTER));
-        bodyTable.addCell(PdfUtil.createCell(String.valueOf(totalExpectedAmount), font, 0.5f, 1, Element.ALIGN_RIGHT));
-        bodyTable.addCell(PdfUtil.createCell(String.valueOf(totalReceivedAmount), font, 0.5f, 1, Element.ALIGN_RIGHT));
+        bodyTable.addCell(PdfUtil.createCell(String.format("%,.2f",totalExpectedAmount), font, 0.5f, 1, Element.ALIGN_RIGHT));
+        bodyTable.addCell(PdfUtil.createCell(String.format("%,.2f",totalReceivedAmount), font, 0.5f, 1, Element.ALIGN_RIGHT));
         bodyTable.addCell(PdfUtil.createCell("บาท", font, 0.5f, 1, Element.ALIGN_LEFT));
         outerTable.addCell(bodyTable);
 
