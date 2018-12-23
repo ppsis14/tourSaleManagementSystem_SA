@@ -369,8 +369,8 @@ public class ReservePageController implements Initializable {
                 newCustomer.setSelected(false);
                 oldCustomer.setSelected(true);
                 searchByCustomerName.clear();
-                searchByCustomerName.setDisable(true);
-                searchCustomerBtn.setDisable(true);
+                //searchByCustomerName.setDisable(true);
+                //searchCustomerBtn.setDisable(true);
                 //information
                 titleNameTH.setValue(customer.getTitleNameTH());
                 firstNameTH.setText(customer.getFirstNameTH());
