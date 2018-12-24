@@ -79,14 +79,13 @@ public class CreateTourPackageController implements Initializable {
         tourPackage.setTourID(tourIDCountry.getText()+"-"+tourIDDay.getText()+"-"+tourIDCode.getText());
         tourPackage.setStatus(statusChoice.getSelectionModel().getSelectedItem());
         tourPackage.setTourName(tourName.getText());
-        tourPackage.setPrice(Integer.valueOf(tourPrice.getText()));
+        tourPackage.setPrice(Double.valueOf(tourPrice.getText()));
         tourPackage.setDepartureDate(departureDate.getEditor().getText());
         tourPackage.setReturnDate(returnDate.getEditor().getText());
         tourPackage.setDepositDate(depositInvoiceDate.getEditor().getText());
         tourPackage.setArrearsDate(invoiceDate.getEditor().getText());
         tourPackage.setAmountSeat(Integer.valueOf(amountSeats.getText()));
         tourPackage.setAvailableSeat(Integer.valueOf(availableSeats.getText()));
-
     }
 
     public void checkFillOutTourInformation() {
@@ -234,7 +233,7 @@ public class CreateTourPackageController implements Initializable {
     private boolean validateAmountSeat(){
         Pattern pattern = Pattern.compile("^[1-9][0-9]?$");
         Matcher matcher = pattern.matcher(amountSeats.getText());
-        if (matcher.find() && matcher.group().equals(amountSeats.getText()) && Double.valueOf(amountSeats.getText()) >= 0){
+        if (matcher.find() && matcher.group().equals(amountSeats.getText()) && Integer.valueOf(amountSeats.getText()) >= 0){
             return true;
         }
         else {
@@ -256,7 +255,7 @@ public class CreateTourPackageController implements Initializable {
     private boolean validatePrice(){
         Pattern pattern = Pattern.compile("[1-9][0-9]+(.[0-9]*)?");
         Matcher matcher = pattern.matcher(tourPrice.getText());
-        if (matcher.find() && matcher.group().equals(tourPrice.getText()) && Integer.valueOf(availableSeats.getText()) >= 0){
+        if (matcher.find() && matcher.group().equals(tourPrice.getText()) && Double.valueOf(tourPrice.getText()) >= 0){
             return true;
         }
         else {
@@ -305,9 +304,12 @@ public class CreateTourPackageController implements Initializable {
             Date depositIVDate = new SimpleDateFormat("dd-MM-yyyy").parse(depositIV);
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (depositIVDate.compareTo(departDate) < 0 && depositIVDate.compareTo(today) > 0) {
-                status = true;
+                if (daysBetween(depositIVDate, departDate) == 20){
+                    System.out.println("deposit > today and < depart");
+                    status = true;
+                }
             }
-            else status = false;
+            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -325,13 +327,21 @@ public class CreateTourPackageController implements Initializable {
             Date depositIVDate = new SimpleDateFormat("dd-MM-yyyy").parse(depositIV);
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (finalIVDate.compareTo(departDate) < 0 && finalIVDate.compareTo(depositIVDate) > 0 && finalIVDate.compareTo(today) > 0) {
-                status = true;
+                if (daysBetween(finalIVDate, departDate) == 10){
+                    System.out.println("final < depart, > deposit > today");
+                    status = true;
+                }
             }
-            else status = false;
+            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return status;
+    }
+
+    private static long daysBetween(Date one, Date two) {
+        long difference = (one.getTime()-two.getTime())/86400000;
+        return Math.abs(difference);
     }
 
     private boolean validateFieldsIsEmpty(){

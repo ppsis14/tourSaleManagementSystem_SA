@@ -286,7 +286,7 @@ public class EditTourPackageController implements Initializable {
     private boolean validatePrice(){
         Pattern pattern = Pattern.compile("[1-9][0-9]+(.[0-9]*)?");
         Matcher matcher = pattern.matcher(tourPrice.getText());
-        if (matcher.find() && matcher.group().equals(tourPrice.getText()) && Double.valueOf(amountSeats.getText()) >= 0){
+        if (matcher.find() && matcher.group().equals(tourPrice.getText()) && Double.valueOf(tourPrice.getText()) >= 0){
             return true;
         }
         else {
@@ -301,9 +301,10 @@ public class EditTourPackageController implements Initializable {
         try {
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (departDate.compareTo(today) > 0) {
+                System.out.println("Depart > today");
                 status = true;
             }
-            else status = false;
+            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -318,9 +319,10 @@ public class EditTourPackageController implements Initializable {
             Date arriveDate = new SimpleDateFormat("dd-MM-yyyy").parse(arrive);
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (arriveDate.compareTo(departDate) > 0) {
+                System.out.println("arrive > depart");
                 status = true;
             }
-            else status = false;
+            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -335,9 +337,12 @@ public class EditTourPackageController implements Initializable {
             Date depositIVDate = new SimpleDateFormat("dd-MM-yyyy").parse(depositIV);
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (depositIVDate.compareTo(departDate) < 0 && depositIVDate.compareTo(today) > 0) {
-                status = true;
+                if (daysBetween(depositIVDate, departDate) == 20){
+                    System.out.println("deposit > today and < depart");
+                    status = true;
+                }
             }
-            else status = false;
+            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -355,14 +360,23 @@ public class EditTourPackageController implements Initializable {
             Date depositIVDate = new SimpleDateFormat("dd-MM-yyyy").parse(depositIV);
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (finalIVDate.compareTo(departDate) < 0 && finalIVDate.compareTo(depositIVDate) > 0 && finalIVDate.compareTo(today) > 0) {
-                status = true;
+                if (daysBetween(finalIVDate, departDate) == 10){
+                    System.out.println("final < depart, > deposit > today");
+                    status = true;
+                }
             }
-            else status = false;
+            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
         return status;
     }
+
+    private static long daysBetween(Date one, Date two) {
+        long difference = (one.getTime()-two.getTime())/86400000;
+        return Math.abs(difference);
+    }
+
 
     private boolean validateFieldsIsEmpty(){
         int count=0;
