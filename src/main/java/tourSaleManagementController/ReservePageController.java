@@ -77,12 +77,30 @@ public class ReservePageController implements Initializable {
     private Customer customer = new Customer();
     private Invoice invoice = new Invoice();
     private int orderReserve;
-    ObservableList<Customer> obListCustomer = FXCollections.observableList(manageableDatabase.getAllCustomer());
+    private int reserveCodeGUI;
+    List<Customer> customerListInDB = manageableDatabase.getAllCustomer();
+    HashMap<String,String> tourID_And_Name;
+    HashMap<Integer,String> indexOfTourIDComboBox = new HashMap<>();
     private int countErr = 0;
+    private String tourID ;
+    private int availableSeat;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
+        tourID_And_Name = manageableDatabase.getAllTourID_Name_AreOpen();
+
+        int i = 0;
+        for (String s: manageableDatabase.getAllTourID_AreOpen()) {
+            indexOfTourIDComboBox.put(i,s);
+            i++;
+
+        }
+
+        SetTourSaleSystemDataUtil.setTourProgram(tourIDComboBox);
+        tourID = indexOfTourIDComboBox.get(tourIDComboBox.getSelectionModel().getSelectedIndex());
+        availableSeat = manageableDatabase.getAvailableByTourID(tourID);
+
         SetTourSaleSystemDataUtil.setTitleNameTH(titleNameTH);
         SetTourSaleSystemDataUtil.setTitleNameEN(titleNameEN);
         SetTourSaleSystemDataUtil.setGender(genderChoice);
@@ -90,7 +108,7 @@ public class ReservePageController implements Initializable {
         newCustomer.setSelected(true);
         oldCustomer.setSelected(false);
         clearText();
-        SetTourSaleSystemDataUtil.setTourProgram(tourIDComboBox);
+
         SetTourSaleSystemDataUtil.setDatePickerFormat(dateOfBirth);
         SetTourSaleSystemDataUtil.setDatePickerFormat(expPassportDate);
         searchByCustomerName.clear();
@@ -102,6 +120,9 @@ public class ReservePageController implements Initializable {
         loginNameLabel.setText(loginEmployee.getFirstName() + " " + loginEmployee.getLastName() + " [ " + loginEmployee.getPosition().toUpperCase() + " ]");
         submitBtn.setDisable(true);
         reservedSeats.setText(getAmountReservationSeatLabel());
+
+
+
         //setValidateOnEventHandler();
         System.out.println("countErr : " + countErr);
     }
@@ -138,19 +159,21 @@ public class ReservePageController implements Initializable {
 
     @FXML
     public void handleTourIDComboBox(ActionEvent e) {
-        String tourID = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
-        String tmp[] = tourID.split("-");
-        tourID = tmp[0] + "-" + tmp[1] + "-" + tmp[2] + "-" + String.format("%06d", orderReserve);
 
-        reservedSeats.setText(getAmountReservationSeatLabel());
-        reserveCode.setText(tourID);
+        tourID = indexOfTourIDComboBox.get(tourIDComboBox.getSelectionModel().getSelectedIndex());
+
+        availableSeat = manageableDatabase.getAvailableByTourID(tourID);
+
+        //orderReserve Display GUI (Order reserve ห้ามเปลี่ยน แต่ ชื่อทัวร์เปลี่ยนได้)
+            String tmp[] = tourID.split("-");
+            String reserveCodeGUI = tmp[0] + "-" + tmp[1] + "-" + tmp[2] + "-" + String.format("%06d", orderReserve);
+            reserveCode.setText(reserveCodeGUI);
+            reservedSeats.setText(getAmountReservationSeatLabel());
+
     }
 
     @FXML
     void handleSubmitBtn(ActionEvent event) {
-
-        String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
-        int availableSeat = manageableDatabase.getAvailableByTourID(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
 
         //insert customer to database
         for (Customer customer : customerList) {
@@ -172,7 +195,7 @@ public class ReservePageController implements Initializable {
         manageableDatabase.insertData(invoice, DEPOSIT_INVOICE);    // insert deposit invoice
 
         //update seat in tour package
-        manageableDatabase.updateAvailableData(tour_id,availableSeat-Integer.valueOf(customerNo.getText()));
+        manageableDatabase.updateAvailableData(tourID,availableSeat-Integer.valueOf(customerNo.getText()));
 
         //pop up warning
         Alert alertConfirmToSubmitCustomerData = new Alert(Alert.AlertType.INFORMATION);
@@ -198,9 +221,8 @@ public class ReservePageController implements Initializable {
     void handleAddCustomerBtn(ActionEvent event) {
         System.out.println("countErr : " + countErr);
         countErr = 0;
-        /*if (checkFillOutInformation()) {
-            String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
-            int availableSeat = manageableDatabase.getAvailableByTourID(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
+
+        if (checkFillOutInformation()) {
 
             if (availableSeat - Integer.valueOf(customerNo.getText()) >= 0) {
                 //---------------------------------------------------------
@@ -230,11 +252,11 @@ public class ReservePageController implements Initializable {
                     Optional<ButtonType> addMoreCustomerAction = alertAddMoreCustomer.showAndWait();
                     if (addMoreCustomerAction.get() == ButtonType.OK) {
 
-                        // add count amount customer
+                        // add count amount customer GUI
                         customerNo.setText(String.valueOf(Integer.valueOf(customerNo.getText()) + 1));
-                        //set reserv seat
-                        String[] reservText = reservedSeats.getText().split(" / ");
-                        reservedSeats.setText(String.valueOf( Integer.valueOf(reservText[0]) + 1 ) + " / " + reservText[1]);
+                        //set reserve seat GUI
+                        String[] reserveText = reservedSeats.getText().split(" / ");
+                        reservedSeats.setText(String.valueOf( Integer.valueOf(reserveText[0]) + 1 ) + " / " + reserveText[1]);
 
                     }
 
@@ -247,6 +269,7 @@ public class ReservePageController implements Initializable {
 
                     //After choose btn OK/CANCEL
                     clearText();
+                    tourIDComboBox.setDisable(true);
                     searchByCustomerName.clear();
                     searchByCustomerName.setDisable(true);
                     searchCustomerBtn.setDisable(true);
@@ -276,7 +299,7 @@ public class ReservePageController implements Initializable {
             alertFillOutInformationError.setContentText("Please completely fill out information follow (*)");
             Optional<ButtonType> checkFillOutInformationAction = alertFillOutInformationError.showAndWait();
 
-        }*/
+        }
     }
 
     public void setDepositInvoice(){
@@ -369,8 +392,7 @@ public class ReservePageController implements Initializable {
                 newCustomer.setSelected(false);
                 oldCustomer.setSelected(true);
                 searchByCustomerName.clear();
-                //searchByCustomerName.setDisable(true);
-                //searchCustomerBtn.setDisable(true);
+
                 //information
                 titleNameTH.setValue(customer.getTitleNameTH());
                 firstNameTH.setText(customer.getFirstNameTH());
@@ -480,21 +502,19 @@ public class ReservePageController implements Initializable {
 
     public void setSearchCustomer(){
 
-            List<Customer> customerListSearch = manageableDatabase.getAllCustomer();
-            List<String> searchList = new ArrayList<>();
-            for (Customer c : customerListSearch) {
-                searchList.add("[ID : " + c.getCustomerID() + "] " + c.getFirstNameTH() + " " + c.getLastNameTH());
-                System.out.println("[ID : " + c.getCustomerID() + "] " + c.getFirstNameTH() + " " + c.getLastNameTH());
-            }
-            TextFields.bindAutoCompletion(searchByCustomerName, searchList);
+        List<String> searchList = new ArrayList<>();
+        for (Customer c : customerListInDB) {
+            searchList.add("[ID : " + c.getCustomerID() + "] " + c.getFirstNameTH() + " " + c.getLastNameTH());
+            System.out.println("[ID : " + c.getCustomerID() + "] " + c.getFirstNameTH() + " " + c.getLastNameTH());
+        }
+        TextFields.bindAutoCompletion(searchByCustomerName, searchList);
 
 
     }
 
     public String getAmountReservationSeatLabel(){
 
-        String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
-        TourPackage tourPackage = manageableDatabase.getOneTourPackage(tour_id);
+        TourPackage tourPackage = manageableDatabase.getOneTourPackage(tourID);
         String amountReservationSeatLabel = String.valueOf(tourPackage.getAmountSeat()-tourPackage.getAvailableSeat()) + " / " + String.valueOf(tourPackage.getAmountSeat());
         return amountReservationSeatLabel;
     }

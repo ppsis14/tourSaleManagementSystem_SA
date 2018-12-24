@@ -7,7 +7,10 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
@@ -92,7 +95,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
 
     @Override
     public TourPackage getOneTourPackage(String tourID) {
-        String query = "Select * From tour_package Where Tour_ID = "+"'"+tourID+"'";
+        String query = "SELECT * FROM tour_package WHERE Tour_ID = "+"'"+tourID+"'";
         TourPackage tourPackage = jdbcTemplate.queryForObject(query,new TourPackageRowMapper());
 
         return tourPackage;
@@ -119,10 +122,11 @@ public class SpringJDBC_DB implements ManageableDatabase {
     @Override
     public String getTourID(String tourName) {
         String tourID = null;
-        String query = "SELECT * FROM tour_package WHERE Tour_name = "+"'"+tourName+"'";
+        String query = "SELECT Tour_ID FROM tour_package WHERE Tour_name = ?";
         try {
-            TourPackage tourPackage = jdbcTemplate.queryForObject(query,new TourPackageRowMapper());
-            tourID = tourPackage.getTourID();
+            Object[] data = new Object[]{tourName};
+            tourID = jdbcTemplate.queryForObject(query,data,String.class);
+
             return tourID;
         }
         catch (EmptyResultDataAccessException e){
@@ -143,10 +147,10 @@ public class SpringJDBC_DB implements ManageableDatabase {
 
     @Override
     public int getAvailableByTourID(String tourID) {
-
-        String query = "SELECT * FROM tour_package WHERE Tour_ID = " +"'"+tourID+"'";
-        TourPackage tourPackage = jdbcTemplate.queryForObject(query,new TourPackageRowMapper());
-        return tourPackage.getAvailableSeat();
+        int available_seat = 0;
+        String query = "SELECT Available_seat FROM tour_package WHERE Tour_ID = " +"'"+tourID+"'";
+        available_seat = jdbcTemplate.queryForObject(query,Integer.class);
+        return available_seat;
     }
 
     @Override
@@ -182,6 +186,42 @@ public class SpringJDBC_DB implements ManageableDatabase {
         List<TourPackage> tourPackageList = jdbcTemplate.query(query , new TourPackageRowMapper());
 
         return tourPackageList;
+    }
+
+    @Override
+    public List<String> getAllTourPackageNameAreOpen() {
+        List<String> tourPackageNames;
+        String query = "SELECT Tour_name FROM tour_package WHERE Status ='open'";
+        tourPackageNames = jdbcTemplate.queryForList(query,String.class);
+
+        return tourPackageNames;
+
+    }
+
+    @Override
+    public List<String> getAllTourID_AreOpen() {
+        List<String> tourPackageIDs;
+        String query = "SELECT Tour_ID FROM tour_package WHERE Status ='open'";
+        tourPackageIDs = jdbcTemplate.queryForList(query,String.class);
+
+        return tourPackageIDs;
+    }
+
+    @Override
+    public HashMap<String,String> getAllTourID_Name_AreOpen() {
+        HashMap<String,String> tourPackageID_Names;
+        String query = "SELECT Tour_ID,Tour_name FROM tour_package WHERE Status ='open'";
+
+        tourPackageID_Names = jdbcTemplate.query(query, (ResultSet rs) -> {
+            HashMap<String,String> results = new HashMap<>();
+            while (rs.next()) {
+                results.put(rs.getString("Tour_ID"), rs.getString("Tour_name"));
+            }
+            return results;
+        });
+
+        return tourPackageID_Names;
+
     }
 
     @Override

@@ -1,6 +1,7 @@
 package tourSaleManagementController;
 
 import Table.Receipt;
+import Table.TourPackage;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
@@ -16,6 +17,7 @@ import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
 
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -49,14 +51,17 @@ public class PaymentReceiptPageController implements Initializable {
     ObservableList<Receipt> obListReceiptDR = FXCollections.observableArrayList();
     ObservableList<Receipt> obListReceiptAR = FXCollections.observableArrayList();
 
+    List<TourPackage> tourPackageList = manageableDatabase.getAllTourPackage();
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
         SetTourSaleSystemDataUtil.setTourProgram(tourIDChoiceDR);
         SetTourSaleSystemDataUtil.setTourProgram(tourIDChoiceAR);
         currentDateReceipt.setText(FormatConverter.getLocalDateFormat("dd-MM-yyyy"));
-        showTableView();
         loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
+        showTableView();
+
 
     }
 

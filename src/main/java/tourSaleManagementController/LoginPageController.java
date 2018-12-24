@@ -31,20 +31,27 @@ public class LoginPageController implements Initializable {
     @FXML private Label showErrorLogin;
     @FXML private AnchorPane root;
 
-    public void login() {
-        if (username.getText().isEmpty() || password.getText().isEmpty()){
+    public void checkValidateLogin() {
+
+        if (username.getText().isEmpty() || password.getText().isEmpty()){ // username or password is empty.
+
             showErrorLogin.setText("Username or Password is not correct");
             username.clear();
             password.clear();
+
         }
-        else if(manageableDatabase.checkLogin(username.getText(),password.getText())){
+        else if(manageableDatabase.checkLogin(username.getText(),password.getText())){ // username and password is not empty.
+
+            //set up employee
             loginEmployee = manageableDatabase.getEmployeeLogin(username.getText(),password.getText());
-            //load windows
+
+            //load home page
             loginButton.getScene().getWindow().hide();
             DisplayGUIUtil.loadWindow(getClass().getResource("/homePage.fxml"), "Home");
 
         }
         else {
+            //show warning
             showErrorLogin.setText("Username or Password is not correct");
             username.clear();
             password.clear();
@@ -64,12 +71,12 @@ public class LoginPageController implements Initializable {
 
     @FXML
     public void handleLoginButton(ActionEvent event) throws IOException, SQLException {
-        login();
+        checkValidateLogin();
     }
     @FXML
     public void handleWhenPressEnterButton(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
-            login();
+            checkValidateLogin();
         }
 
     }

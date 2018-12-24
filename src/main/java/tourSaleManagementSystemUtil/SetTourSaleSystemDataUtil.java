@@ -9,7 +9,9 @@ import javafx.scene.control.DatePicker;
 import javafx.util.StringConverter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
@@ -60,13 +62,9 @@ public class SetTourSaleSystemDataUtil {
 
     public static void setTourProgram(ComboBox comboBox){
 
-        List<TourPackage> tourPackageList = manageableDatabase.getAllTourPackage();
-        ObservableList<String> tourNameList = FXCollections.observableArrayList();
+        List<String> tourPackageNameList = manageableDatabase.getAllTourPackageNameAreOpen();
+        ObservableList<String> tourNameList = FXCollections.observableArrayList(tourPackageNameList);
 
-        for (TourPackage tourPackage: tourPackageList) {
-            if(tourPackage.getStatus().equalsIgnoreCase("open"))
-                tourNameList.add(tourPackage.getTourName());
-        }
         comboBox.getSelectionModel().selectFirst();
         comboBox.setValue(tourNameList.get(0));
         comboBox.getItems().addAll(tourNameList);

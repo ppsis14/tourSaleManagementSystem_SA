@@ -52,6 +52,7 @@ public class TourPackageManagementController implements Initializable {
     @FXML private JFXDrawer drawerMenu;
 
     ObservableList<TourPackage> obListTourPackage = FXCollections.observableList(manageableDatabase.getAllTourPackage());
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));

@@ -2,7 +2,9 @@ package databaseConnection;
 
 import Table.*;
 
+import java.util.HashMap;
 import java.util.List;
+
 
 public interface ManageableDatabase {
 
@@ -15,13 +17,16 @@ public interface ManageableDatabase {
     void updateData(TourPackage tourPackage,String tourID);
     void deleteData(TourPackage tourPackage);
     TourPackage getOneTourPackage(String tourID);
-    //String getLastTourID();
     String getTourID(String tourName);
     int getTourPrice(String tourID);
     int getAvailableByTourID(String tourID);
     String getLastTourID();
     List<TourPackage> getAllTourPackage();
+    List<String> getAllTourPackageNameAreOpen();
+    List<String> getAllTourID_AreOpen();
+    HashMap<String, String> getAllTourID_Name_AreOpen();
     void updateAvailableData(String tourID, int availableSeat);
+
 
     void insertData(Customer customer);
     void updateData(Customer customer);
