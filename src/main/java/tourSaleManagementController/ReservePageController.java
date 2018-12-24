@@ -28,9 +28,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.*;
-import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.DEPOSIT_INVOICE;
-import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.NOT_CREATED;
-import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.NOT_PAID;
+import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
 
 
 public class ReservePageController implements Initializable {
@@ -80,6 +78,7 @@ public class ReservePageController implements Initializable {
     private Invoice invoice = new Invoice();
     private int orderReserve;
     ObservableList<Customer> obListCustomer = FXCollections.observableList(manageableDatabase.getAllCustomer());
+    private int countErr = 0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,8 +102,8 @@ public class ReservePageController implements Initializable {
         loginNameLabel.setText(loginEmployee.getFirstName() + " " + loginEmployee.getLastName() + " [ " + loginEmployee.getPosition().toUpperCase() + " ]");
         submitBtn.setDisable(true);
         reservedSeats.setText(getAmountReservationSeatLabel());
-
-        setValidateOnKeyRelease();
+        //setValidateOnEventHandler();
+        System.out.println("countErr : " + countErr);
     }
 
     @FXML
@@ -191,14 +190,15 @@ public class ReservePageController implements Initializable {
         reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
         String tmpOrder[] = reserveCode.getText().split("-");
         orderReserve = Integer.valueOf(tmpOrder[3]);
-        setUpValueReservationPage();
+        //setUpValueReservationPage();
         addCustomerBtn.setDisable(false);
     }
 
     @FXML
     void handleAddCustomerBtn(ActionEvent event) {
-
-        if (checkFillOutInformation()) {
+        System.out.println("countErr : " + countErr);
+        countErr = 0;
+        /*if (checkFillOutInformation()) {
             String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
             int availableSeat = manageableDatabase.getAvailableByTourID(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
 
@@ -276,11 +276,8 @@ public class ReservePageController implements Initializable {
             alertFillOutInformationError.setContentText("Please completely fill out information follow (*)");
             Optional<ButtonType> checkFillOutInformationAction = alertFillOutInformationError.showAndWait();
 
-        }
+        }*/
     }
-
-
-
 
     public void setDepositInvoice(){
         invoice.setReservationCode(reservationPayment.getReservationCode());
@@ -506,17 +503,14 @@ public class ReservePageController implements Initializable {
         if (validateFieldsIsEmpty()){
             return false;
         }
-        else if (validateDateOfBirthIsCorrect() == true){
+        else{
+            //System.out.println("countErr: " + countErr);;
             return true;
         }
-        else if(validateDateOfBirthIsCorrect() == false){
-            return false;
-        }
-        else return true;
     }
 
-    public void setValidateOnKeyRelease(){
-        occupation.setOnAction(new EventHandler<ActionEvent>() {
+    public void setValidateOnEventHandler(){
+        /*occupation.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 occupation.setStyle("-fx-border-color: #2C3E50");
@@ -553,6 +547,7 @@ public class ReservePageController implements Initializable {
                 occupation.setStyle("-fx-border-color: #2C3E50");
             }
         });
+*/
         firstNameTH.setOnKeyReleased(new EventHandler<KeyEvent>(){
 
             @Override
@@ -561,6 +556,8 @@ public class ReservePageController implements Initializable {
                     firstNameTH.setStyle("-fx-border-color: #27AE60");
                 }else{
                     firstNameTH.setStyle("-fx-border-color: #922B21");
+                    System.out.println("cnt th");
+                    countErr++;
                 }
 
             }
@@ -574,6 +571,8 @@ public class ReservePageController implements Initializable {
                     lastNameTH.setStyle("-fx-border-color: #27AE60");
                 }else{
                     lastNameTH.setStyle("-fx-border-color: #922B21");
+                    System.out.println("cnt lnameth");
+                    countErr++;
                 }
             }
         });
@@ -586,42 +585,31 @@ public class ReservePageController implements Initializable {
                     firstNameEN.setStyle("-fx-border-color: #27AE60");
                 }else{
                     firstNameEN.setStyle("-fx-border-color: #922B21");
+                    System.out.println("cnt en");
+                    countErr++;
                 }
             }
         });
 
         lastNameEN.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
+            boolean status = false;
             @Override
             public void handle(KeyEvent event) {
                 if(validateLastNameEN()){
                     lastNameEN.setStyle("-fx-border-color: #27AE60");
+                    System.out.println("true");
+                    //status = true;
                 }else{
                     lastNameEN.setStyle("-fx-border-color: #922B21");
+                    System.out.println("false");
+
                 }
+                /*if (status == false) {
+                    System.out.println("false");
+                    countErr++;
+                }*/
             }
         });
-//
-//        dateOfBirth.setOnKeyReleased(new EventHandler<KeyEvent>() {
-//            @Override
-//            public void handle(KeyEvent event) {
-//                if(validateDateOfBirth() == true)
-//                    dateOfBirth.setStyle("-fx-border-color: #27AE60");
-//                else
-//                    dateOfBirth.setStyle("-fx-border-color: #922B21");
-//            }
-//        });
-//        dateOfBirth.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent event) {
-//
-//                if(validateDateOfBirth() == true)
-//                    dateOfBirth.setStyle("-fx-border-color: #27AE60");
-//                else
-//                    dateOfBirth.setStyle("-fx-border-color: #922B21");
-//
-//            }
-//        });
 
         passportNo.setOnKeyReleased(new EventHandler<KeyEvent>(){
 
@@ -631,6 +619,7 @@ public class ReservePageController implements Initializable {
                     passportNo.setStyle("-fx-border-color: #27AE60");
                 }else{
                     passportNo.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -639,6 +628,7 @@ public class ReservePageController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 expPassportDate.setStyle("-fx-border-color: #2C3E50");
+                countErr++;
             }
         });
 
@@ -650,6 +640,7 @@ public class ReservePageController implements Initializable {
                     address.setStyle("-fx-border-color: #27AE60");
                 }else{
                     address.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -662,6 +653,7 @@ public class ReservePageController implements Initializable {
                     phoneNum.setStyle("-fx-border-color: #27AE60");
                 }else{
                     phoneNum.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -674,6 +666,7 @@ public class ReservePageController implements Initializable {
                     homeTelNum.setStyle("-fx-border-color: #27AE60");
                 }else{
                     homeTelNum.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -686,6 +679,7 @@ public class ReservePageController implements Initializable {
                     faxNum.setStyle("-fx-border-color: #27AE60");
                 }else{
                     faxNum.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -698,6 +692,7 @@ public class ReservePageController implements Initializable {
                     underlyingDisease.setStyle("-fx-border-color: #27AE60");
                 }else{
                     underlyingDisease.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -710,6 +705,7 @@ public class ReservePageController implements Initializable {
                     foodAllergy.setStyle("-fx-border-color: #27AE60");
                 }else{
                     foodAllergy.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -722,6 +718,7 @@ public class ReservePageController implements Initializable {
                     moreDetail.setStyle("-fx-border-color: #27AE60");
                 }else{
                     moreDetail.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -733,6 +730,7 @@ public class ReservePageController implements Initializable {
                     occupation.setStyle("-fx-border-color: #27AE60");
                 }else{
                     occupation.setStyle("-fx-border-color: #922B21");
+                    countErr++;
                 }
             }
         });
@@ -745,172 +743,158 @@ public class ReservePageController implements Initializable {
                     email.setStyle("-fx-border-color: #27AE60");
                 }else{
                     email.setStyle("-fx-border-color: #922B21");
+                    countErr++;
+                }
+            }
+        });
+
+        dateOfBirth.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (validateDateOfBirth()) dateOfBirth.setStyle("-fx-border-color: #27AE60");
+                else {
+                    dateOfBirth.setStyle("-fx-border-color: #922B21");
+                    countErr++;
+                }
+                if (!expPassportDate.getEditor().getText().equals("")) {
+                    compareDOBAndExp();
+                }
+            }
+        });
+
+        expPassportDate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (!dateOfBirth.getEditor().getText().equals("")) {
+                    compareDOBAndExp();
                 }
             }
         });
 
     }
-
+    private void compareDOBAndExp(){
+        if (validateDateExpPassport()) expPassportDate.setStyle("-fx-border-color: #27AE60");
+        else { expPassportDate.setStyle("-fx-border-color: #922B21");countErr++;}
+    }
     private boolean validateFirstNameTH(){
         Pattern pattern = Pattern.compile("^[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]+$");
         Matcher matcher = pattern.matcher(firstNameTH.getText());
-        if (matcher.find() && matcher.group().equals(firstNameTH.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(firstNameTH.getText())) return true;
+        else return false;
     }
     private boolean validateLastNameTH(){
         Pattern pattern = Pattern.compile("^[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]+$");
         Matcher matcher = pattern.matcher(lastNameTH.getText());
-        if (matcher.find() && matcher.group().equals(lastNameTH.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(lastNameTH.getText()))return true;
+        else return false;
     }
     private boolean validateFirstNameEN(){
         Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
         Matcher matcher = pattern.matcher(firstNameEN.getText());
-        if (matcher.find() && matcher.group().equals(firstNameEN.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(firstNameEN.getText()))return true;
+        else return false;
     }
     private boolean validateLastNameEN(){
         Pattern pattern = Pattern.compile("^[a-zA-Z]+$");
         Matcher matcher = pattern.matcher(lastNameEN.getText());
-        if (matcher.find() && matcher.group().equals(lastNameEN.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(lastNameEN.getText()))return true;
+        return false;
     }
     private boolean validateOccupation(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-z]|[-])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-z]|[-]|[ ])+$");
         Matcher matcher = pattern.matcher(occupation.getText());
-        if (matcher.find() && matcher.group().equals(occupation.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(occupation.getText()))return true;
+        else return false;
 
     }
 
-    private boolean validateDateOfBirth(){
-
+    private boolean validateDateOfBirth() {
+        boolean status = false;
         String dateOfBirth_ = dateOfBirth.getEditor().getText();
         Date today = new Date();
+        Date dobDate = null;
+        try {
+            dobDate = new SimpleDateFormat("dd-MM-yyyy").parse(dateOfBirth_);
+            if (dobDate.compareTo(today) < 0) {
+                //before or equals today
+                status = true;
+            }
+            else status = false;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    private boolean validateDateExpPassport()  {
+        boolean status = false;
+        String passportDate = expPassportDate.getEditor().getText();
+        String dateOfBirth_ = dateOfBirth.getEditor().getText();
         try {
             Date dobDate = new SimpleDateFormat("dd-MM-yyyy").parse(dateOfBirth_);
-
-            if (dobDate.compareTo(today) <= 0) {
-                //before or equals today
-               return true;
-            }
-
-        } catch (ParseException e) {
-            //handle exception
+            Date expDate = new SimpleDateFormat("dd-MM-yyyy").parse(passportDate);
+            if (dobDate.compareTo(expDate) < 0) status = true;
         }
-        return false;
+        catch (ParseException e){ e.printStackTrace();}
+        return status;
     }
 
 
     private boolean validatePassportNo(){
         Pattern pattern = Pattern.compile("^[A-Z0-9]+$");
         Matcher matcher = pattern.matcher(passportNo.getText());
-        if (matcher.find() && matcher.group().equals(passportNo.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(passportNo.getText()))return true;
+        else return false;
     }
 
     private boolean validateAddress(){
         Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z]|[ ]|[0-9])+$");
         Matcher matcher = pattern.matcher(address.getText());
-        if (matcher.find() && matcher.group().equals(address.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(address.getText()))return true;
+        else return false;
     }
     private boolean validatePhoneNum(){
         Pattern p = Pattern.compile("[0-9][0-9]{9}");
         Matcher m = p.matcher(phoneNum.getText());
-        if(m.find() && m.group().equals(phoneNum.getText())){
-            return true;
-        }else{
-            return false;
-        }
+        if(m.find() && m.group().equals(phoneNum.getText())) return true;
+        else return false;
     }
     private boolean validateHomeTelNum(){
         Pattern p = Pattern.compile("[0-9][0-9]{8}");
         Matcher m = p.matcher(homeTelNum.getText());
-        if(m.find() && m.group().equals(homeTelNum.getText())){
-            return true;
-        }else{
-
-            return false;
-        }
+        if(m.find() && m.group().equals(homeTelNum.getText())) return true;
+        else return false;
     }
     private boolean validateFaxNum(){
         Pattern p = Pattern.compile("[0-9][0-9]{8}");
         Matcher m = p.matcher(faxNum.getText());
-        if(m.find() && m.group().equals(faxNum.getText())){
-            return true;
-        }else{
-
-            return false;
-        }
-    }private boolean validateEmail(){
+        if(m.find() && m.group().equals(faxNum.getText())) return true;
+        else return false;
+    }
+    private boolean validateEmail(){
         Pattern pattern = Pattern.compile("[a-zA-Z0-9._\\-]+@[a-zA-Z0-9]+[.][a-zA-Z.]+");
         Matcher matcher = pattern.matcher(email.getText());
-        if(matcher.find() && matcher.group().equals(email.getText())){
-            return true;
-        }else{
-
-            return false;
-        }
+        if(matcher.find() && matcher.group().equals(email.getText())) return true;
+        else return false;
     }
     private boolean validateUnderDisease(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ -])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ ]|[-])+$");
         Matcher matcher = pattern.matcher(underlyingDisease.getText());
-        if (matcher.find() && matcher.group().equals(underlyingDisease.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(underlyingDisease.getText())) return true;
+        else return false;
     }
     private boolean validateFoodAllergy(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z]|[ -])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ ]|[-])+$");
         Matcher matcher = pattern.matcher(foodAllergy.getText());
-        if (matcher.find() && matcher.group().equals(foodAllergy.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(foodAllergy.getText())) return true;
+        else return false;
     }
 
     private boolean validateMoreDetail(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ -])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ ]|[-])+$");
         Matcher matcher = pattern.matcher(moreDetail.getText());
-        if (matcher.find() && matcher.group().equals(moreDetail.getText())){
-            return true;
-        }
-        else {
-            return false;
-        }
+        if (matcher.find() && matcher.group().equals(moreDetail.getText())) return true;
+        else return false;
     }
 
     private boolean validateFieldsIsEmpty(){
@@ -943,11 +927,7 @@ public class ReservePageController implements Initializable {
         }
     }
 
-    private boolean validateDateOfBirthIsCorrect() {
-
-        if(validateDateOfBirth() == true)
-            return true;
-        else
-            return false;
+    private void allFeildIsAccurency(){
+        return;
     }
 }
