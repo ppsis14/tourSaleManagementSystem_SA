@@ -131,6 +131,7 @@ public class ReservePageController implements Initializable {
     public void handleOldCustomerCheckbox(ActionEvent event) {
         newCustomer.setSelected(false);
         oldCustomer.setSelected(true);
+        clearText();
         searchByCustomerName.setDisable(false);
         searchCustomerBtn.setDisable(false);
         setSearchCustomer();
@@ -199,85 +200,6 @@ public class ReservePageController implements Initializable {
         System.out.println("countErr : " + countErr);
         countErr = 0;
         checkFillOutInformation();
-            /*
-            String tour_id = manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem());
-            int availableSeat = manageableDatabase.getAvailableByTourID(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem()));
-
-            if (availableSeat - Integer.valueOf(customerNo.getText()) >= 0) {
-                //---------------------------------------------------------
-                // case show "Do you want to save this customer information?" -> ok = continue/ cancel = add another customer
-                Alert alertSaveCustomerInformation = new Alert(Alert.AlertType.CONFIRMATION);
-                alertSaveCustomerInformation.setTitle("Confirmation Dialog");
-                alertSaveCustomerInformation.setHeaderText(null);
-                alertSaveCustomerInformation.setContentText("Do you want to save this customer information?");
-                Optional<ButtonType> saveCustomerInfoAction = alertSaveCustomerInformation.showAndWait();
-
-                if (saveCustomerInfoAction.get() == ButtonType.OK) {
-
-                    setCustomerFromGUI();
-                    //add new customer to list for check
-                    if (newCustomer.isSelected()) {
-                        newCustomerID_List.add(customer.getCustomerID());
-                    }
-                    //add customer id to list
-                    customerList.add(customer);
-                    setReservationCustomerFromGUI();
-                    reserveCustomer_List.add(reservationCustomer);
-
-                    Alert alertAddMoreCustomer = new Alert(Alert.AlertType.CONFIRMATION);
-                    alertAddMoreCustomer.setTitle("Confirmation Dialog");
-                    alertAddMoreCustomer.setHeaderText(null);
-                    alertAddMoreCustomer.setContentText("Do you want to add another customer?");
-                    Optional<ButtonType> addMoreCustomerAction = alertAddMoreCustomer.showAndWait();
-                    if (addMoreCustomerAction.get() == ButtonType.OK) {
-
-                        // add count amount customer
-                        customerNo.setText(String.valueOf(Integer.valueOf(customerNo.getText()) + 1));
-                        //set reserv seat
-                        String[] reservText = reservedSeats.getText().split(" / ");
-                        reservedSeats.setText(String.valueOf( Integer.valueOf(reservText[0]) + 1 ) + " / " + reservText[1]);
-
-                    }
-
-                    else if (addMoreCustomerAction.get() == ButtonType.CANCEL) {
-                        //disable btn -----> after press submit
-                        addCustomerBtn.setDisable(true);
-                        submitBtn.setDisable(false);
-
-                    }
-
-                    //After choose btn OK/CANCEL
-                    clearText();
-                    searchByCustomerName.clear();
-                    searchByCustomerName.setDisable(true);
-                    searchCustomerBtn.setDisable(true);
-                    customer = new Customer();
-                    reservationCustomer = new Reservation();
-
-                } else if (saveCustomerInfoAction.get() == ButtonType.CANCEL) {
-                    // back to edit customer information
-                }
-            } else {
-                //pop up warning
-                Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
-                alertShowInformationIsUpdate.setTitle("Information Dialog");
-                alertShowInformationIsUpdate.setHeaderText(null);
-                alertShowInformationIsUpdate.setContentText("Available seat are full.");
-                Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
-                setUpValueReservationPage();
-                if (action.get() == ButtonType.OK) {
-                    setUpValueReservationPage();
-                }
-            }
-
-        } else {
-            Alert alertFillOutInformationError = new Alert(Alert.AlertType.ERROR);
-            alertFillOutInformationError.setTitle("Error Dialog");
-            alertFillOutInformationError.setHeaderText("Saving customer information is error!");
-            alertFillOutInformationError.setContentText("Please completely fill out information follow (*)");
-            Optional<ButtonType> checkFillOutInformationAction = alertFillOutInformationError.showAndWait();
-
-        }*/
     }
 
     public void setDepositInvoice(){
@@ -419,13 +341,9 @@ public class ReservePageController implements Initializable {
         catch (RuntimeException e){
                 System.err.println("Not found customer.");
         }
-
     }
 
     public void clearText(){
-        newCustomer.setSelected(true);
-        oldCustomer.setSelected(false);
-
         //information
         titleNameTH.getSelectionModel().clearSelection();
         titleNameTH.setValue("นางสาว");
@@ -457,7 +375,6 @@ public class ReservePageController implements Initializable {
         hearAboutUsChoices.setValue("Bangkokbizs News");
         searchByCustomerName.setDisable(false);
         searchCustomerBtn.setDisable(false);
-
     }
 
     void setUpValueReservationPage(){
@@ -794,55 +711,6 @@ public class ReservePageController implements Initializable {
             countErr++;
         }
 
-        if(validateHomeTelNum()){
-            homeTelNum.setStyle("-fx-border-color: #27AE60");
-        }else{
-            homeTelNum.setStyle("-fx-border-color: #922B21");
-            countErr++;
-        }
-
-        if(validateFaxNum()){
-            faxNum.setStyle("-fx-border-color: #27AE60");
-        }else{
-            faxNum.setStyle("-fx-border-color: #922B21");
-            countErr++;
-        }
-
-        if(validateUnderDisease()){
-            underlyingDisease.setStyle("-fx-border-color: #27AE60");
-        }else{
-            underlyingDisease.setStyle("-fx-border-color: #922B21");
-            countErr++;
-        }
-
-        if(validateFoodAllergy()){
-            foodAllergy.setStyle("-fx-border-color: #27AE60");
-        }else{
-            foodAllergy.setStyle("-fx-border-color: #922B21");
-            countErr++;
-        }
-
-        if(validateMoreDetail()){
-            moreDetail.setStyle("-fx-border-color: #27AE60");
-        }else{
-            moreDetail.setStyle("-fx-border-color: #922B21");
-            countErr++;
-        }
-
-        if (validateOccupation()){
-            occupation.setStyle("-fx-border-color: #27AE60");
-        }else{
-            occupation.setStyle("-fx-border-color: #922B21");
-            countErr++;
-        }
-
-        if(validateEmail()){
-            email.setStyle("-fx-border-color: #27AE60");
-        }else{
-            email.setStyle("-fx-border-color: #922B21");
-            countErr++;
-        }
-
         if (validateDateOfBirth()) dateOfBirth.setStyle("-fx-border-color: #27AE60");
         else {
             dateOfBirth.setStyle("-fx-border-color: #922B21");
@@ -853,6 +721,69 @@ public class ReservePageController implements Initializable {
         }
         if (!dateOfBirth.getEditor().getText().equals("")) {
             compareDOBAndExp();
+        }
+
+        if (!homeTelNum.getText().isEmpty()){
+            if(validateHomeTelNum()){
+                homeTelNum.setStyle("-fx-border-color: #27AE60");
+            }else{
+                homeTelNum.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!faxNum.getText().isEmpty()){
+            if(validateFaxNum()){
+                faxNum.setStyle("-fx-border-color: #27AE60");
+            }else{
+                faxNum.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if(!underlyingDisease.getText().isEmpty()){
+            if(validateUnderDisease()){
+                underlyingDisease.setStyle("-fx-border-color: #27AE60");
+            }else{
+                underlyingDisease.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!foodAllergy.getText().isEmpty()){
+            if(validateFoodAllergy()){
+                foodAllergy.setStyle("-fx-border-color: #27AE60");
+            }else{
+                foodAllergy.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!moreDetail.getText().isEmpty()){
+            if(validateMoreDetail()){
+                moreDetail.setStyle("-fx-border-color: #27AE60");
+            }else{
+                moreDetail.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!occupation.getText().isEmpty()){
+            if (validateOccupation()){
+                occupation.setStyle("-fx-border-color: #27AE60");
+            }else{
+                occupation.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!email.getText().isEmpty()){
+            if(validateEmail()){
+                email.setStyle("-fx-border-color: #27AE60");
+            }else{
+                email.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
         }
 
         if (countErr == 0) return true;
