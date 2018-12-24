@@ -63,8 +63,8 @@ public class EditTourPackageController implements Initializable {
 
     @FXML
     void handleSaveDataBtn(ActionEvent event) {
-        checkFillOutTourInformation();
         countErr = 0;
+        checkFillOutTourInformation();
     }
 
     public void setTourPackage(TourPackage editTourPackage){
@@ -102,7 +102,7 @@ public class EditTourPackageController implements Initializable {
     public void setTourPackageFromGUI(){
         tourPackage.setTourID(tourIDCountry.getText()+"-"+tourIDDay.getText()+"-"+tourIDCode.getText());
         tourPackage.setTourName(tourName.getText());
-        tourPackage.setPrice(Integer.valueOf(tourPrice.getText()));
+        tourPackage.setPrice(Double.valueOf(tourPrice.getText()));
         tourPackage.setDepartureDate(departureDate.getEditor().getText());
         tourPackage.setReturnDate(returnDate.getEditor().getText());
         tourPackage.setDepositDate(depositInvoiceDate.getEditor().getText());
@@ -116,17 +116,18 @@ public class EditTourPackageController implements Initializable {
         if (validateFieldsIsEmpty()){
             Alert alertCheckFillOutTourInformation = new Alert(Alert.AlertType.ERROR);
             alertCheckFillOutTourInformation.setTitle("Error Dialog");
-            alertCheckFillOutTourInformation.setHeaderText("Addition tour program is error");
+            alertCheckFillOutTourInformation.setHeaderText("Saving tour package is error");
             alertCheckFillOutTourInformation.setContentText("Please completely fill out information follow (*)");
             Optional<ButtonType> checkFillOutTourAction = alertCheckFillOutTourInformation.showAndWait();
         }
         else if (!allFieldIsAccuracy()){
             Alert alertFillOutPatternError = new Alert(Alert.AlertType.ERROR);
             alertFillOutPatternError.setTitle("Error Dialog");
-            alertFillOutPatternError.setHeaderText("Saving customer information is error!");
+            alertFillOutPatternError.setHeaderText("Saving tour package is error!");
             alertFillOutPatternError.setContentText("Some fields are not yet accurate, please fill form again");
             Optional<ButtonType> checkPatternErrorAction = alertFillOutPatternError.showAndWait();
-            if (checkPatternErrorAction.get() == ButtonType.OK){ countErr = 0; }
+            if (checkPatternErrorAction.get() == ButtonType.OK){
+                System.out.println("countRee : " + countErr); countErr = 0; }
         }
         else{
             setTourPackageFromGUI();
@@ -166,25 +167,30 @@ public class EditTourPackageController implements Initializable {
             tourName.setStyle("-fx-border-color: #27AE60");
         }else{
             tourName.setStyle("-fx-border-color: #922B21");
+            countErr++;
         }
 
         if(validateAmountSeat()){
             amountSeats.setStyle("-fx-border-color: #27AE60");
         }else{
             amountSeats.setStyle("-fx-border-color: #922B21");
+            countErr++;
         }
 
         if(validateAvailableSeat()){
             availableSeats.setStyle("-fx-border-color: #27AE60");
         }else{
             availableSeats.setStyle("-fx-border-color: #922B21");
+            countErr++;
         }
 
         if(validatePrice()){
             tourPrice.setStyle("-fx-border-color: #27AE60");
         }else{
             tourPrice.setStyle("-fx-border-color: #922B21");
+            countErr++;
         }
+
         if (validateDepartureDate()) departureDate.setStyle("-fx-border-color: #27AE60");
         else {
             departureDate.setStyle("-fx-border-color: #922B21");
@@ -202,7 +208,7 @@ public class EditTourPackageController implements Initializable {
         }
 
         if (countErr == 0) return true;
-        return false;
+        else return false;
 
     }
 
@@ -245,9 +251,9 @@ public class EditTourPackageController implements Initializable {
     }
 
     private boolean validateTourName(){
-        Pattern pattern = Pattern.compile("[A-Z0-9 ]+$");
-        Matcher matcher = pattern.matcher(tourIDCountry.getText());
-        if (matcher.find() && matcher.group().equals(tourIDCountry.getText())){
+        Pattern pattern = Pattern.compile("^[A-Z0-9 ]+$");
+        Matcher matcher = pattern.matcher(tourName.getText());
+        if (matcher.find() && matcher.group().equals(tourName.getText())){
             return true;
         }
         else {
@@ -278,9 +284,9 @@ public class EditTourPackageController implements Initializable {
     }
 
     private boolean validatePrice(){
-        Pattern pattern = Pattern.compile("[1-9][0-9]+");
+        Pattern pattern = Pattern.compile("[1-9][0-9]+(.[0-9]*)?");
         Matcher matcher = pattern.matcher(tourPrice.getText());
-        if (matcher.find() && matcher.group().equals(tourPrice.getText()) && Integer.valueOf(availableSeats.getText()) >= 0){
+        if (matcher.find() && matcher.group().equals(tourPrice.getText()) && Double.valueOf(amountSeats.getText()) >= 0){
             return true;
         }
         else {

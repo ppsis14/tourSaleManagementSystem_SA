@@ -57,9 +57,7 @@ public class TourPackageManagementController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         DisplayGUIUtil.initDrawerToolBar(drawerMenu, menu, getClass().getResource("/hamburgerMenu.fxml"));
         loginNameLabel.setText(loginEmployee.getFirstName()+" "+loginEmployee.getLastName()+" [ "+loginEmployee.getPosition().toUpperCase()+" ]");
-
         showTableView(obListTourPackage);  //show data on table view
-
         setSearchCustomer();
     }
 
@@ -87,7 +85,7 @@ public class TourPackageManagementController implements Initializable {
             Alert alertConfirmToDeleteTourProgram = new Alert(Alert.AlertType.CONFIRMATION);
             alertConfirmToDeleteTourProgram.setTitle("Confirmation Dialog");
             alertConfirmToDeleteTourProgram.setHeaderText(null);
-            alertConfirmToDeleteTourProgram.setContentText("Do you want to delete this tour Package?");
+            alertConfirmToDeleteTourProgram.setContentText("Do you want to delete this tour package?");
             Optional<ButtonType> action = alertConfirmToDeleteTourProgram.showAndWait();
             if (action.get() == ButtonType.OK) {
                 // code for delete reservation
@@ -113,7 +111,7 @@ public class TourPackageManagementController implements Initializable {
         if(editTourProgram != null) {
             //editTourProgramBtn.getScene().getWindow().hide();
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/editTourProgram.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/editTourPackage.fxml"));
                 Parent parent = (Parent) loader.load();
                 EditTourPackageController editTourProgramController = loader.getController();
                 editTourProgramController.setTourPackage(editTourProgram);

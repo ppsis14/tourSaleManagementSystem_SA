@@ -93,14 +93,14 @@ public class CreateTourPackageController implements Initializable {
         if (validateFieldsIsEmpty()){
             Alert alertCheckFillOutTourInformation = new Alert(Alert.AlertType.ERROR);
             alertCheckFillOutTourInformation.setTitle("Error Dialog");
-            alertCheckFillOutTourInformation.setHeaderText("Addition tour program is error");
+            alertCheckFillOutTourInformation.setHeaderText("Addition tour package is error");
             alertCheckFillOutTourInformation.setContentText("Please completely fill out information follow (*)");
             Optional<ButtonType> checkFillOutTourAction = alertCheckFillOutTourInformation.showAndWait();
         }
         else if (!allFieldIsAccuracy()){
             Alert alertFillOutPatternError = new Alert(Alert.AlertType.ERROR);
             alertFillOutPatternError.setTitle("Error Dialog");
-            alertFillOutPatternError.setHeaderText("Saving customer information is error!");
+            alertFillOutPatternError.setHeaderText("Adding tour package is error!");
             alertFillOutPatternError.setContentText("Some fields are not yet accurate, please fill form again");
             Optional<ButtonType> checkPatternErrorAction = alertFillOutPatternError.showAndWait();
             if (checkPatternErrorAction.get() == ButtonType.OK){ countErr = 0; }
@@ -139,18 +139,21 @@ public class CreateTourPackageController implements Initializable {
             tourName.setStyle("-fx-border-color: #27AE60");
         }else{
             tourName.setStyle("-fx-border-color: #922B21");
+            countErr++;
         }
 
         if(validateAmountSeat()){
             amountSeats.setStyle("-fx-border-color: #27AE60");
         }else{
             amountSeats.setStyle("-fx-border-color: #922B21");
+            countErr++;
         }
 
         if(validateAvailableSeat()){
             availableSeats.setStyle("-fx-border-color: #27AE60");
         }else{
             availableSeats.setStyle("-fx-border-color: #922B21");
+            countErr++;
         }
 
         if(validatePrice()){
@@ -175,7 +178,7 @@ public class CreateTourPackageController implements Initializable {
         }
 
         if (countErr == 0) return true;
-        return false;
+        else return false;
 
     }
 
@@ -218,9 +221,9 @@ public class CreateTourPackageController implements Initializable {
     }
 
     private boolean validateTourName(){
-        Pattern pattern = Pattern.compile("[A-Z0-9 ]+$");
-        Matcher matcher = pattern.matcher(tourIDCountry.getText());
-        if (matcher.find() && matcher.group().equals(tourIDCountry.getText())){
+        Pattern pattern = Pattern.compile("^[A-Z0-9 ]+$");
+        Matcher matcher = pattern.matcher(tourName.getText());
+        if (matcher.find() && matcher.group().equals(tourName.getText())){
             return true;
         }
         else {
@@ -231,7 +234,7 @@ public class CreateTourPackageController implements Initializable {
     private boolean validateAmountSeat(){
         Pattern pattern = Pattern.compile("^[1-9][0-9]?$");
         Matcher matcher = pattern.matcher(amountSeats.getText());
-        if (matcher.find() && matcher.group().equals(amountSeats.getText()) && Integer.valueOf(amountSeats.getText()) >= 0){
+        if (matcher.find() && matcher.group().equals(amountSeats.getText()) && Double.valueOf(amountSeats.getText()) >= 0){
             return true;
         }
         else {
@@ -251,7 +254,7 @@ public class CreateTourPackageController implements Initializable {
     }
 
     private boolean validatePrice(){
-        Pattern pattern = Pattern.compile("[1-9][0-9]+");
+        Pattern pattern = Pattern.compile("[1-9][0-9]+(.[0-9]*)?");
         Matcher matcher = pattern.matcher(tourPrice.getText());
         if (matcher.find() && matcher.group().equals(tourPrice.getText()) && Integer.valueOf(availableSeats.getText()) >= 0){
             return true;
