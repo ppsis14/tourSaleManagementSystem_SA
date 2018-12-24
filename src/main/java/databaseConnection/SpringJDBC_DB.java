@@ -136,7 +136,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
     }
 
     @Override
-    public int getTourPrice(String tourID) {
+    public Double getTourPrice(String tourID) {
 
         String query = "SELECT * FROM tour_package WHERE Tour_ID = ?";
         Object[] data = new Object[]{tourID};
@@ -699,7 +699,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
             TourPackage tourPackage = new TourPackage(
                     rs.getString("Tour_ID"),
                     rs.getString("Tour_name"),
-                    rs.getInt("Price"),
+                    rs.getDouble("Price"),
                     rs.getString("Departure_date"),
                     rs.getString("Return_date"),
                     rs.getString("Deposit_date"),
@@ -770,7 +770,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
                     rs.getString("Employee_ID"),
                     rs.getString("Employee_name"),
                     rs.getInt("Amount_customer"),
-                    rs.getInt("Total_price"),
+                    rs.getDouble("Total_price"),
                     rs.getString("Deposit_status"),
                     rs.getString("Arrears_status")
             );
@@ -791,7 +791,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
                     rs.getString("Employee_ID"),
                     rs.getString("Employee_name"),
                     rs.getInt("Amount_customer"),
-                    rs.getInt("Total_price"),
+                    rs.getDouble("Total_price"),
                     rs.getString("Invoice_type"),
                     rs.getString("Create_status"));
             return invoice;
@@ -810,7 +810,7 @@ public class SpringJDBC_DB implements ManageableDatabase {
                     rs.getString("Employee_ID"),
                     rs.getString("Employee_name"),
                     rs.getInt("Amount_customer"),
-                    rs.getInt("Total_price"),
+                    rs.getDouble("Total_price"),
                     rs.getString("Receipt_type"),
                     rs.getString("Create_status"));
             return receipt;

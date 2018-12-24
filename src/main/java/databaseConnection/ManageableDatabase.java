@@ -18,7 +18,7 @@ public interface ManageableDatabase {
     void deleteData(TourPackage tourPackage);
     TourPackage getOneTourPackage(String tourID);
     String getTourID(String tourName);
-    int getTourPrice(String tourID);
+    Double getTourPrice(String tourID);
     int getAvailableByTourID(String tourID);
     String getLastTourID();
     List<TourPackage> getAllTourPackage();

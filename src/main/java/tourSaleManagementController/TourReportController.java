@@ -349,7 +349,7 @@ public class TourReportController implements Initializable {
         totalAmount.setText(String.format("%,.2f Baht",received));
         tourName = tourIDComboBox.getSelectionModel().getSelectedItem();
         String tourID = manageableDatabase.getTourID(tourName);
-        int tourPrice_ = manageableDatabase.getTourPrice(tourID);
+        Double tourPrice_ = manageableDatabase.getTourPrice(tourID);
         tourPrice.setText(String.format("%,.2f Baht",Double.valueOf(tourPrice_)));
     }
 

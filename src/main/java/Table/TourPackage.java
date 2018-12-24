@@ -3,7 +3,7 @@ package Table;
 public class TourPackage {
     private  String tourID;
     private  String tourName;
-    private  int price;
+    private  double price;
     private  String departureDate;
     private  String returnDate;
     private  String depositDate;
@@ -14,7 +14,7 @@ public class TourPackage {
 
     public TourPackage(){}
 
-    public TourPackage(String tourID, String tourName, int price, String departureDate, String returnDate, String depositDate, String arrearsDate, int amountSeat, int availableSeat, String status) {
+    public TourPackage(String tourID, String tourName, double price, String departureDate, String returnDate, String depositDate, String arrearsDate, int amountSeat, int availableSeat, String status) {
         this.tourID = tourID;
         this.tourName = tourName;
         this.price = price;
@@ -43,11 +43,11 @@ public class TourPackage {
         this.tourName = tourName;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 

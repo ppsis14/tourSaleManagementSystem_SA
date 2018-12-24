@@ -11,7 +11,7 @@ public class Invoice {
     private String employeeID;
     private String employeeName;
     private int amountCustomer;
-    private int totalPrice;
+    private Double totalPrice;
     private String invoiceType;
     private String createStatus = "Not created";
 
@@ -20,7 +20,7 @@ public class Invoice {
 
     }
 
-    public Invoice(String reservationCode, String invoiceNo, String tourID, String tourName, String customerID, String customerName, String employeeID, String employeeName, int amountCustomer, int totalPrice, String invoiceType, String createStatus) {
+    public Invoice(String reservationCode, String invoiceNo, String tourID, String tourName, String customerID, String customerName, String employeeID, String employeeName, int amountCustomer, Double totalPrice, String invoiceType, String createStatus) {
         this.reservationCode = reservationCode;
         this.invoiceNo = invoiceNo;
         this.tourID = tourID;
@@ -107,11 +107,11 @@ public class Invoice {
         this.amountCustomer = amountCustomer;
     }
 
-    public int getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 

@@ -10,13 +10,13 @@ public class Receipt {
     private String employeeID;
     private String employeeName;
     private int amountCustomer;
-    private int totalPrice;
+    private Double totalPrice;
     private String receiptType;
     private String createStatus = "Not created";
 
     public Receipt(){}
 
-    public Receipt(String reservationCode, String receiptNo, String tourID, String tourName, String customerID, String customerName, String employeeID, String employeeName, int amountCustomer, int totalPrice, String receiptType, String createStatus) {
+    public Receipt(String reservationCode, String receiptNo, String tourID, String tourName, String customerID, String customerName, String employeeID, String employeeName, int amountCustomer, Double totalPrice, String receiptType, String createStatus) {
         this.reservationCode = reservationCode;
         this.receiptNo = receiptNo;
         this.tourID = tourID;
@@ -103,11 +103,11 @@ public class Receipt {
         this.amountCustomer = amountCustomer;
     }
 
-    public int getTotalPrice() {
+    public Double getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
     }
 
