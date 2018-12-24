@@ -1,6 +1,7 @@
 package tourSaleManagementController;
 
 import Table.Customer;
+import Table.Reservation;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.event.ActionEvent;
@@ -65,37 +66,11 @@ public class EditCustomerPageController implements Initializable {
         SetTourSaleSystemDataUtil.setHearAboutUs(hearAboutUsChoices);
         SetTourSaleSystemDataUtil.setDatePickerFormat(dateOfBirth);
         SetTourSaleSystemDataUtil.setDatePickerFormat(expPassportDate);
-        setValidateOnEventHandler();
     }
     @FXML
     void handleSaveDataBtn(ActionEvent event) {
-        if (checkFillOutInformation()){
-            setCustomerFromGUI();
-            manageableDatabase.updateData(customer);
-
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Do you want to save?");
-            Optional<ButtonType> action = alert.showAndWait();
-            if (action.get() == ButtonType.OK){
-
-                setCustomerFromGUI();
-                manageableDatabase.updateData(customer);    //update data to database
-                System.out.println("Update Successful");
-
-                Stage stage = (Stage) rootPane.getScene().getWindow();
-                stage.close();
-                //DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/customerManagementPage.fxml"), "Customer Management");
-            }
-        }
-        else {
-            Alert alertEditInformation = new Alert(Alert.AlertType.ERROR);
-            alertEditInformation.setTitle("Error Dialog");
-            alertEditInformation.setHeaderText("Saving customer information is error!");
-            alertEditInformation.setContentText("Please completely fill out information follow (*)");
-            Optional<ButtonType> checkEditInformationAction = alertEditInformation.showAndWait();
-        }
+        countErr = 0;
+        checkFillOutInformation();
     }
     @FXML public void handleNotEatBeefCheckbox(ActionEvent event) { eatBeefY.setSelected(false); }
     @FXML public void handleEatBeefCheckbox(ActionEvent event) { eatBeefN.setSelected(false); }
@@ -170,269 +145,44 @@ public class EditCustomerPageController implements Initializable {
         customer.setHearAboutUs(hearAboutUsChoices.getSelectionModel().getSelectedItem());
     }
 
-    public Boolean checkFillOutInformation() {
+    public void checkFillOutInformation() {
         if (validateFieldsIsEmpty()){
-            return false;
+            Alert alertFillOutInformationError = new Alert(Alert.AlertType.ERROR);
+            alertFillOutInformationError.setTitle("Error Dialog");
+            alertFillOutInformationError.setHeaderText("Saving customer information is error!");
+            alertFillOutInformationError.setContentText("Please completely fill out information follow (*)");
+            Optional<ButtonType> checkFillOutInformationAction = alertFillOutInformationError.showAndWait();
+        }
+        else if (!allFieldIsAccuracy()){
+            Alert alertFillOutPatternError = new Alert(Alert.AlertType.ERROR);
+            alertFillOutPatternError.setTitle("Error Dialog");
+            alertFillOutPatternError.setHeaderText("Saving customer information is error!");
+            alertFillOutPatternError.setContentText("Some fields are not yet accurate, please fill form again");
+            Optional<ButtonType> checkPatternErrorAction = alertFillOutPatternError.showAndWait();
+            if (checkPatternErrorAction.get() == ButtonType.OK){ countErr = 0; }
         }
         else{
-            //System.out.println("countErr: " + countErr);;
-            return true;
+            setCustomerFromGUI();
+            manageableDatabase.updateData(customer);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Do you want to save?");
+            Optional<ButtonType> action = alert.showAndWait();
+            if (action.get() == ButtonType.OK){
+
+                setCustomerFromGUI();
+                manageableDatabase.updateData(customer);    //update data to database
+                System.out.println("Update Successful");
+
+                Stage stage = (Stage) rootPane.getScene().getWindow();
+                stage.close();
+                //DisplayGUIUtil.loadWindowWithSetSize(getClass().getResource("/customerManagementPage.fxml"), "Customer Management");
+            }
         }
     }
 
-    public void setValidateOnEventHandler(){
-        /*occupation.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                occupation.setStyle("-fx-border-color: #2C3E50");
-            }
-        });
-
-        homeTelNum.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                occupation.setStyle("-fx-border-color: #2C3E50");
-            }
-        });
-        faxNum.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                occupation.setStyle("-fx-border-color: #2C3E50");
-            }
-        });
-        underlyingDisease.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                occupation.setStyle("-fx-border-color: #2C3E50");
-            }
-        });
-        foodAllergy.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                occupation.setStyle("-fx-border-color: #2C3E50");
-            }
-        });
-        moreDetail.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                occupation.setStyle("-fx-border-color: #2C3E50");
-            }
-        });
-*/
-        firstNameTH.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateFirstNameTH()){
-                    firstNameTH.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    firstNameTH.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-
-            }
-        });
-
-        lastNameTH.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateLastNameTH()){
-                    lastNameTH.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    lastNameTH.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        firstNameEN.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateFirstNameEN()){
-                    firstNameEN.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    firstNameEN.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        lastNameEN.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateLastNameEN()){
-                    lastNameEN.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    lastNameEN.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        passportNo.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validatePassportNo()){
-                    passportNo.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    passportNo.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        expPassportDate.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                expPassportDate.setStyle("-fx-border-color: #2C3E50");
-                countErr++;
-            }
-        });
-
-        address.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateAddress()){
-                    address.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    address.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        phoneNum.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validatePhoneNum()){
-                    phoneNum.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    phoneNum.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        homeTelNum.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateHomeTelNum()){
-                    homeTelNum.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    homeTelNum.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        faxNum.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateFaxNum()){
-                    faxNum.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    faxNum.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        underlyingDisease.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateUnderDisease()){
-                    underlyingDisease.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    underlyingDisease.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        foodAllergy.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateFoodAllergy()){
-                    foodAllergy.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    foodAllergy.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        moreDetail.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateMoreDetail()){
-                    moreDetail.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    moreDetail.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        occupation.setOnKeyReleased(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (validateOccupation()){
-                    occupation.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    occupation.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        email.setOnKeyReleased(new EventHandler<KeyEvent>(){
-
-            @Override
-            public void handle(KeyEvent event) {
-                if(validateEmail()){
-                    email.setStyle("-fx-border-color: #27AE60");
-                }else{
-                    email.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-            }
-        });
-
-        dateOfBirth.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (validateDateOfBirth()) dateOfBirth.setStyle("-fx-border-color: #27AE60");
-                else {
-                    dateOfBirth.setStyle("-fx-border-color: #922B21");
-                    countErr++;
-                }
-                if (!expPassportDate.getEditor().getText().equals("")) {
-                    compareDOBAndExp();
-                }
-            }
-        });
-
-        expPassportDate.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if (!dateOfBirth.getEditor().getText().equals("")) {
-                    compareDOBAndExp();
-                }
-            }
-        });
-
-    }
     private void compareDOBAndExp(){
         if (validateDateExpPassport()) expPassportDate.setStyle("-fx-border-color: #27AE60");
         else { expPassportDate.setStyle("-fx-border-color: #922B21");countErr++;}
@@ -558,8 +308,6 @@ public class EditCustomerPageController implements Initializable {
         else return false;
     }
 
-
-
     private boolean validateFieldsIsEmpty(){
         int count=0;
         if (firstNameTH.getText().isEmpty()){firstNameTH.setStyle("-fx-border-color: #C0392B");count++;}
@@ -589,5 +337,132 @@ public class EditCustomerPageController implements Initializable {
             return false;
         }
     }
+    private boolean allFieldIsAccuracy(){
+        if(validateFirstNameTH()){
+            firstNameTH.setStyle("-fx-border-color: #27AE60");
+        }else{
+            firstNameTH.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
 
+        if(validateLastNameTH()){
+            lastNameTH.setStyle("-fx-border-color: #27AE60");
+        }else{
+            lastNameTH.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
+
+        if(validateFirstNameEN()){
+            firstNameEN.setStyle("-fx-border-color: #27AE60");
+        }else{
+            firstNameEN.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
+
+        if(validateLastNameEN()){
+            lastNameEN.setStyle("-fx-border-color: #27AE60");
+        }else{
+            lastNameEN.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
+
+        if(validatePassportNo()){
+            passportNo.setStyle("-fx-border-color: #27AE60");
+        }else{
+            passportNo.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
+
+        if(validateAddress()){
+            address.setStyle("-fx-border-color: #27AE60");
+        }else{
+            address.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
+
+        if(validatePhoneNum()){
+            phoneNum.setStyle("-fx-border-color: #27AE60");
+        }else{
+            phoneNum.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
+
+        if (validateDateOfBirth()) dateOfBirth.setStyle("-fx-border-color: #27AE60");
+        else {
+            dateOfBirth.setStyle("-fx-border-color: #922B21");
+            countErr++;
+        }
+        if (!expPassportDate.getEditor().getText().equals("")) {
+            compareDOBAndExp();
+        }
+        if (!dateOfBirth.getEditor().getText().equals("")) {
+            compareDOBAndExp();
+        }
+
+        if (!homeTelNum.getText().isEmpty()){
+            if(validateHomeTelNum()){
+                homeTelNum.setStyle("-fx-border-color: #27AE60");
+            }else{
+                homeTelNum.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!faxNum.getText().isEmpty()){
+            if(validateFaxNum()){
+                faxNum.setStyle("-fx-border-color: #27AE60");
+            }else{
+                faxNum.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if(!underlyingDisease.getText().isEmpty()){
+            if(validateUnderDisease()){
+                underlyingDisease.setStyle("-fx-border-color: #27AE60");
+            }else{
+                underlyingDisease.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!foodAllergy.getText().isEmpty()){
+            if(validateFoodAllergy()){
+                foodAllergy.setStyle("-fx-border-color: #27AE60");
+            }else{
+                foodAllergy.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!moreDetail.getText().isEmpty()){
+            if(validateMoreDetail()){
+                moreDetail.setStyle("-fx-border-color: #27AE60");
+            }else{
+                moreDetail.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!occupation.getText().isEmpty()){
+            if (validateOccupation()){
+                occupation.setStyle("-fx-border-color: #27AE60");
+            }else{
+                occupation.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (!email.getText().isEmpty()){
+            if(validateEmail()){
+                email.setStyle("-fx-border-color: #27AE60");
+            }else{
+                email.setStyle("-fx-border-color: #922B21");
+                countErr++;
+            }
+        }
+
+        if (countErr == 0) return true;
+        return false;
+    }
 }

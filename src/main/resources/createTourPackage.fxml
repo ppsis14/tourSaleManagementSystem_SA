@@ -38,9 +38,9 @@
                <children>
                   <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="117.0" text="Tour ID :" />
+                        <Label prefHeight="17.0" prefWidth="117.0" text="* Tour ID :" />
                         <Label prefHeight="17.0" prefWidth="284.0" text="ex. JPN-4D3N-000004" textFill="WHITE" />
-                        <Label prefHeight="17.0" prefWidth="142.0" text="Status :" />
+                        <Label prefHeight="17.0" prefWidth="142.0" text="* Status :" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" prefHeight="33.0" prefWidth="240.0" spacing="5.0">
@@ -80,7 +80,7 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="170.0" text="Tour Name :" />
+                        <Label prefHeight="17.0" prefWidth="170.0" text="* Tour Name :" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="39.0" maxWidth="1.7976931348623157E308" prefHeight="33.0" prefWidth="240.0" spacing="5.0">
@@ -90,8 +90,8 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="10.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                      <children>
-                        <Label fx:id="departureDateLabel" prefHeight="17.0" prefWidth="271.0" text="Departure Date :" />
-                        <Label prefHeight="17.0" prefWidth="170.0" text="Return Date :" />
+                        <Label fx:id="departureDateLabel" prefHeight="17.0" prefWidth="271.0" text="* Departure Date :" />
+                        <Label prefHeight="17.0" prefWidth="170.0" text="* Return Date :" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="39.0" prefHeight="33.0" prefWidth="240.0" spacing="20.0">
@@ -102,9 +102,9 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="82.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="140.0" text="Amount Seats :" />
-                        <Label prefHeight="17.0" prefWidth="133.0" text="Available Seats :" />
-                        <Label prefHeight="17.0" prefWidth="170.0" text="Price :" />
+                        <Label prefHeight="17.0" prefWidth="140.0" text="* Amount Seats :" />
+                        <Label prefHeight="17.0" prefWidth="133.0" text="* Available Seats :" />
+                        <Label prefHeight="17.0" prefWidth="170.0" text="* Price :" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="39.0" prefHeight="33.0" prefWidth="240.0" spacing="10.0">
@@ -116,25 +116,18 @@
                   </HBox>
                   <HBox layoutX="10.0" layoutY="82.0" prefHeight="19.0" prefWidth="664.0" spacing="10.0">
                      <children>
-                        <Label prefHeight="17.0" prefWidth="269.0" text="Deposit Invoice Date :" />
-                        <Label prefHeight="17.0" prefWidth="170.0" text="Invoice Date :" />
+                        <Label prefHeight="17.0" prefWidth="269.0" text="* Deposit Invoice Date :" />
+                        <Label prefHeight="17.0" prefWidth="170.0" text="* Invoice Date :" />
                      </children>
                   </HBox>
                   <HBox layoutX="10.0" layoutY="111.0" prefHeight="33.0" prefWidth="240.0" spacing="20.0">
                      <children>
-                        <DatePicker fx:id="depositIVDate" prefHeight="27.0" prefWidth="260.0" promptText="Deposit Invoice Date " style="-fx-border-color: #2C3E50;" />
+                        <DatePicker fx:id="depositInvoiceDate" prefHeight="27.0" prefWidth="260.0" promptText="Deposit Invoice Date " style="-fx-border-color: #2C3E50;" />
                         <DatePicker fx:id="invoiceDate" prefHeight="27.0" prefWidth="260.0" promptText="Invoice Date " style="-fx-border-color: #2C3E50;" />
                      </children>
                   </HBox>
                </children>
             </VBox>
-            <HBox prefHeight="19.0" prefWidth="664.0" spacing="10.0">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="232.0" text="* Date of Birth:" />
-                  <Label prefHeight="17.0" prefWidth="206.0" text="* Passport Number:" />
-                  <Label prefHeight="17.0" prefWidth="232.0" text="* Expire Date:" />
-               </children>
-            </HBox>
             <Label alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="435.0" prefHeight="29.0" prefWidth="584.0" text="** Please check the accuracy and completeness of the information before add tour package." textFill="#c90000" />
             <JFXButton fx:id="cancelBtn" buttonType="RAISED" layoutX="236.0" layoutY="489.0" onAction="#handleCancelBtn" prefHeight="30.0" prefWidth="155.0" style="-fx-background-color: #2980b9; -fx-background-radius: 5;" text="Cancel" textFill="WHITE">
                <font>
