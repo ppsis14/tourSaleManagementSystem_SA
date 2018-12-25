@@ -107,7 +107,7 @@
                                           <TableView fx:id="paymentListTable" editable="true" fixedCellSize="0.0" prefHeight="258.0" prefWidth="770.0">
                                              <columns>
                                                 <TableColumn fx:id="reservationCodeColumnP" minWidth="230.0" prefWidth="230.0" text="Reservation Code" />
-                                                <TableColumn fx:id="nameColumnP" prefWidth="200.0" text="Name" />
+                                                <TableColumn fx:id="nameColumnP" prefWidth="300.0" text="Name" />
                                                 <TableColumn fx:id="depositPaymentStatusColumnP" prefWidth="177.0" text="Deposit Payment Status" />
                                                 <TableColumn fx:id="arrearsPaymentStatusColumnP" prefWidth="164.0" text="Arrears Payment Status" />
                                                 <TableColumn fx:id="employeeName_ColumnP" prefWidth="200.0" text="Employee Name" />

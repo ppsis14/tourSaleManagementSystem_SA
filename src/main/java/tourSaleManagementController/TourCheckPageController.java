@@ -12,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
@@ -20,6 +22,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static java.lang.String.format;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 import static tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil.*;
@@ -216,7 +219,7 @@ public class TourCheckPageController implements Initializable {
         TourPackage tourPackage = manageableDatabase.getOneTourPackage(tourID);
 
         tourName.setText(tourPackage.getTourName());
-        tourPrice.setText(String.format("%,.2f",Double.valueOf(tourPackage.getPrice())));
+        tourPrice.setText(format("%,.2f",Double.valueOf(tourPackage.getPrice())));
         departureDate.setText(tourPackage.getDepartureDate());
         returnDate.setText(tourPackage.getReturnDate());
         depositPaymentDate.setText(tourPackage.getDepositDate());
@@ -243,7 +246,41 @@ public class TourCheckPageController implements Initializable {
         reservationCodeColumnP.setCellValueFactory(new PropertyValueFactory<>("reservationCode"));
         nameColumnP.setCellValueFactory(new PropertyValueFactory<>("customerName"));
         depositPaymentStatusColumnP.setCellValueFactory(new PropertyValueFactory<>("depositStatus"));
+        depositPaymentStatusColumnP.setCellFactory(new Callback<TableColumn<ReservationPayment, String>, TableCell<ReservationPayment, String>>() {
+            @Override
+            public TableCell<ReservationPayment, String> call(TableColumn<ReservationPayment, String> param) {
+                return new TableCell<ReservationPayment, String>(){
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty){
+                            setText(format((item)));
+                            if (item.equals("Not paid")) setTextFill(Color.RED);
+                            else if (item.equals("Paid")) setTextFill(Color.GREEN);
+
+                        }else setText(null);
+                    }
+                };
+            }
+        });
         arrearsPaymentStatusColumnP.setCellValueFactory(new PropertyValueFactory<>("arrearsStatus"));
+        arrearsPaymentStatusColumnP.setCellFactory(new Callback<TableColumn<ReservationPayment, String>, TableCell<ReservationPayment, String>>() {
+            @Override
+            public TableCell<ReservationPayment, String> call(TableColumn<ReservationPayment, String> param) {
+                return new TableCell<ReservationPayment, String>(){
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty){
+                            setText(format((item)));
+                            if (item.equals("Not paid")) setTextFill(Color.RED);
+                            else if (item.equals("Paid")) setTextFill(Color.GREEN);
+
+                        }else setText(null);
+                    }
+                };
+            }
+        });
         employeeName_ColumnP.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
 
         reservationCodeColumnR.setCellValueFactory(new PropertyValueFactory<>("reservationCode"));

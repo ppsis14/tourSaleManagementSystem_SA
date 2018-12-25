@@ -1,5 +1,6 @@
 package tourSaleManagementController;
 
+import Table.Invoice;
 import Table.Receipt;
 import Table.TourPackage;
 import com.jfoenix.controls.JFXButton;
@@ -12,6 +13,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 import tourSaleManagementSystemUtil.FormatConverter;
 import tourSaleManagementSystemUtil.SetTourSaleSystemDataUtil;
@@ -21,6 +24,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import static java.lang.String.format;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.createReport;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
@@ -167,12 +171,46 @@ public class PaymentReceiptPageController implements Initializable {
         amountCustomerColumnDR.setCellValueFactory(new PropertyValueFactory<>("amountCustomer"));
         employeeNameColumnDR.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
         receiptStatusColumnDR.setCellValueFactory(new PropertyValueFactory<>("createStatus"));
+        receiptStatusColumnDR.setCellFactory(new Callback<TableColumn<Receipt, String>, TableCell<Receipt, String>>() {
+            @Override
+            public TableCell<Receipt, String> call(TableColumn<Receipt, String> param) {
+                return new TableCell<Receipt, String>(){
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty){
+                            setText(format((item)));
+                            if (item.equals("Not created")) setTextFill(Color.RED);
+                            else if (item.equals("Created")) setTextFill(Color.GREEN);
+
+                        }else setText(null);
+                    }
+                };
+            }
+        });
 
         reservationCodeColumnAR.setCellValueFactory(new PropertyValueFactory<>("reservationCode"));
         receipt_no_ColumnAR.setCellValueFactory(new PropertyValueFactory<>("receiptNo"));
         amountCustomerColumnAR.setCellValueFactory(new PropertyValueFactory<>("amountCustomer"));
         employeeNameColumnAR.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
         receiptStatusColumnAR.setCellValueFactory(new PropertyValueFactory<>("createStatus"));
+        receiptStatusColumnAR.setCellFactory(new Callback<TableColumn<Receipt, String>, TableCell<Receipt, String>>() {
+            @Override
+            public TableCell<Receipt, String> call(TableColumn<Receipt, String> param) {
+                return new TableCell<Receipt, String>(){
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty){
+                            setText(format((item)));
+                            if (item.equals("Not created")) setTextFill(Color.RED);
+                            else if (item.equals("Created")) setTextFill(Color.GREEN);
+
+                        }else setText(null);
+                    }
+                };
+            }
+        });
 
         depositReceiptTable.setItems(obListReceiptDR);
         arrearsReceiptTable.setItems(obListReceiptAR);

@@ -186,7 +186,7 @@ public class ReportPDF implements CreateReport {
             signatureTable.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             signatureTable.addCell(createCell(saleName, angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             signatureTable.addCell(createCell("...............................", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
-            signatureTable.addCell(createCell("...............................", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
+            signatureTable.addCell(createCell(customerName, angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             signatureTable.addCell(createCell("Sales By", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             signatureTable.addCell(createCell("Account By", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             signatureTable.addCell(createCell("Approved By\n(For Customer)", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
@@ -376,11 +376,11 @@ public class ReportPDF implements CreateReport {
             signatureTable.setHorizontalAlignment(Element.ALIGN_CENTER);
             signatureTable.getDefaultCell().setHorizontalAlignment(Element.ALIGN_CENTER);
             signatureTable.addCell(createCell(saleName, angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
-            signatureTable.addCell(createCell("...............................", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
+            signatureTable.addCell(createCell(" ", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             signatureTable.addCell(createCell("...............................", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             signatureTable.addCell(createCell("Sales By", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
+            signatureTable.addCell(createCell(" ", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             signatureTable.addCell(createCell("Account By", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
-            signatureTable.addCell(createCell("Approved By\n(For Customer)", angsanaNewFont14, 0f, 1, Element.ALIGN_CENTER));
             document.add(signatureTable);
 
         } catch (DocumentException e) {

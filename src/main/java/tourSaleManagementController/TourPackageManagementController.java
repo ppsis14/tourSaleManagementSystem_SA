@@ -16,8 +16,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import tourSaleManagementSystemUtil.DisplayGUIUtil;
 
 import java.io.IOException;
@@ -26,6 +28,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
+import static java.lang.String.format;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.loginEmployee;
 import static tourSaleManagementSystemUtil.DisplayGUIUtil.manageableDatabase;
 
@@ -160,6 +163,23 @@ public class TourPackageManagementController implements Initializable {
         amountSeatColumn.setCellValueFactory(new PropertyValueFactory<>("amountSeat"));
         availableSeatColumn.setCellValueFactory(new PropertyValueFactory<>("availableSeat"));
         tourStatusColumn.setCellValueFactory(new PropertyValueFactory<>("status"));
+        tourStatusColumn.setCellFactory(new Callback<TableColumn<TourPackage, String>, TableCell<TourPackage, String>>() {
+            @Override
+            public TableCell<TourPackage, String> call(TableColumn<TourPackage, String> param) {
+                return new TableCell<TourPackage, String>(){
+                    @Override
+                    protected void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty){
+                            setText(format((item)));
+                            if (item.equals("close")) setTextFill(Color.RED);
+                            else if (item.equals("open")) setTextFill(Color.GREEN);
+
+                        }else setText(null);
+                    }
+                };
+            }
+        });
 
         tourPackageTable.setItems(obListTourProgram);
     }

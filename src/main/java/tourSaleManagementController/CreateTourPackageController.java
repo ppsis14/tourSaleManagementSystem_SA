@@ -270,7 +270,7 @@ public class CreateTourPackageController implements Initializable {
         try {
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (departDate.compareTo(today) > 0) {
-                status = true;
+                if (daysBetween(departDate, today) >= 30) status = true;
             }
             else status = false;
         } catch (ParseException e) {

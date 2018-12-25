@@ -301,10 +301,11 @@ public class EditTourPackageController implements Initializable {
         try {
             Date departDate = new SimpleDateFormat("dd-MM-yyyy").parse(departure);
             if (departDate.compareTo(today) > 0) {
-                System.out.println("Depart > today");
-                status = true;
+                if (daysBetween(departDate, today) >= 30){
+                    System.out.println("Depart > today");
+                    status = true;
+                }
             }
-            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -322,7 +323,6 @@ public class EditTourPackageController implements Initializable {
                 System.out.println("arrive > depart");
                 status = true;
             }
-            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -342,7 +342,6 @@ public class EditTourPackageController implements Initializable {
                     status = true;
                 }
             }
-            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -365,7 +364,6 @@ public class EditTourPackageController implements Initializable {
                     status = true;
                 }
             }
-            //else status = false;
         } catch (ParseException e) {
             e.printStackTrace();
         }
