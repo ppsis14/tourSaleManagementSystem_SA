@@ -163,7 +163,7 @@ public class InvoicePageController implements Initializable {
 
 
         String tourNameDI = tourIDChoiceDI.getSelectionModel().getSelectedItem();
-        String tourNameAI = tourIDChoiceDI.getSelectionModel().getSelectedItem();
+        String tourNameAI = tourIDChoiceAI.getSelectionModel().getSelectedItem();
         obListInvoiceDI = FXCollections.observableArrayList(manageableDatabase.getAllInvoiceInTourName(DEPOSIT_INVOICE,tourNameDI));
         obListInvoiceAI = FXCollections.observableArrayList(manageableDatabase.getAllInvoiceInTourName(ARREARS_INVOICE,tourNameAI));
 

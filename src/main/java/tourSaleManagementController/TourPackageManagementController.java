@@ -138,15 +138,18 @@ public class TourPackageManagementController implements Initializable {
 
     @FXML
     void handleRefreshTourPackageBtn(ActionEvent event) {
+
+        // code for delete reservation
+        obListTourPackage = FXCollections.observableList(manageableDatabase.getAllTourPackage());
+        this.showTableView(obListTourPackage);
+
         Alert alertShowInformationIsUpdate = new Alert(Alert.AlertType.INFORMATION);
         alertShowInformationIsUpdate.setTitle("Confirmation Dialog");
         alertShowInformationIsUpdate.setHeaderText(null);
         alertShowInformationIsUpdate.setContentText("Tour package information is update");
         Optional<ButtonType> action = alertShowInformationIsUpdate.showAndWait();
         if (action.get() == ButtonType.OK){
-            // code for delete reservation
-            obListTourPackage = FXCollections.observableList(manageableDatabase.getAllTourPackage());
-            this.showTableView(obListTourPackage);
+
         }
 
     }
