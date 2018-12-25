@@ -146,6 +146,13 @@ public class TourReportController implements Initializable {
 
         depositComboBox=depositStatusChoice.getSelectionModel().getSelectedItem();
         arrearsComboBox=arrearsStatusChoice.getSelectionModel().getSelectedItem();
+
+        if(depositStatusChoice.getSelectionModel().getSelectedItem() ==  NOT_PAID){
+            arrearsStatusChoice.setDisable(true);
+        }
+        else
+            arrearsStatusChoice.setDisable(false);
+
         setShowTableView();
 
     }
@@ -362,6 +369,10 @@ public class TourReportController implements Initializable {
         reservationPaymentReportList = new ArrayList<>();
         customerReportList = new ArrayList<>();
         saleReportList = new ArrayList<>();
+
+        if(depositStatusChoice.getSelectionModel().getSelectedItem() ==  NOT_PAID){
+            arrearsStatusChoice.setDisable(true);
+        }
 
         setReservationPaymentReport();
         setReservationCustomerReport();
