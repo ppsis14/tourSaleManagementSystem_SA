@@ -207,15 +207,20 @@ public class ReservePageController implements Initializable {
 
         clearText();
 
+
         //setup value of reservation page
+        newCustomer.setSelected(true);
+        oldCustomer.setSelected(false);
         searchByCustomerName.clear();
         searchByCustomerName.setDisable(true);
         searchCustomerBtn.setDisable(true);
         reserveCode.setText(FormatConverter.generateReservationCode(manageableDatabase.getTourID(tourIDComboBox.getSelectionModel().getSelectedItem())));
         String tmpOrder[] = reserveCode.getText().split("-");
         orderReserve = Integer.valueOf(tmpOrder[3]);
+        customerNo.setText("1");
         //setUpValueReservationPage();
         addCustomerBtn.setDisable(false);
+        tourIDComboBox.setDisable(false);
     }
 
     @FXML
@@ -366,6 +371,7 @@ public class ReservePageController implements Initializable {
     }
 
     public void clearText(){
+
         //information
         titleNameTH.getSelectionModel().clearSelection();
         titleNameTH.setValue("นางสาว");
@@ -395,8 +401,7 @@ public class ReservePageController implements Initializable {
         moreDetail.clear();
         hearAboutUsChoices.getSelectionModel().clearSelection();
         hearAboutUsChoices.setValue("Bangkokbizs News");
-        searchByCustomerName.setDisable(false);
-        searchCustomerBtn.setDisable(false);
+
     }
 
     void setUpValueReservationPage(){
@@ -504,6 +509,9 @@ public class ReservePageController implements Initializable {
                     searchByCustomerName.clear();
                     searchByCustomerName.setDisable(true);
                     searchCustomerBtn.setDisable(true);
+                    newCustomer.setSelected(true);
+                    oldCustomer.setSelected(false);
+                    tourIDComboBox.setDisable(true);
                     customer = new Customer();
                     reservationCustomer = new Reservation();
 
@@ -531,13 +539,13 @@ public class ReservePageController implements Initializable {
         else { expPassportDate.setStyle("-fx-border-color: #922B21");countErr++;}
     }
     private boolean validateFirstNameTH(){
-        Pattern pattern = Pattern.compile("^[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]+$");
+        Pattern pattern = Pattern.compile("^[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦู]+$");
         Matcher matcher = pattern.matcher(firstNameTH.getText());
         if (matcher.find() && matcher.group().equals(firstNameTH.getText())) return true;
         else return false;
     }
     private boolean validateLastNameTH(){
-        Pattern pattern = Pattern.compile("^[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]+$");
+        Pattern pattern = Pattern.compile("^[ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦู]+$");
         Matcher matcher = pattern.matcher(lastNameTH.getText());
         if (matcher.find() && matcher.group().equals(lastNameTH.getText()))return true;
         else return false;
@@ -555,7 +563,7 @@ public class ReservePageController implements Initializable {
         return false;
     }
     private boolean validateOccupation(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-z]|[-]|[ ])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦู]|[a-zA-z]|[-]|[ ])+$");
         Matcher matcher = pattern.matcher(occupation.getText());
         if (matcher.find() && matcher.group().equals(occupation.getText()))return true;
         else return false;
@@ -602,7 +610,7 @@ public class ReservePageController implements Initializable {
     }
 
     private boolean validateAddress(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z]|[ ]|[0-9])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦู]|[a-zA-Z]|[ ]|[0-9])+$");
         Matcher matcher = pattern.matcher(address.getText());
         if (matcher.find() && matcher.group().equals(address.getText()))return true;
         else return false;
@@ -632,20 +640,20 @@ public class ReservePageController implements Initializable {
         else return false;
     }
     private boolean validateUnderDisease(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ ]|[-])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦู]|[a-zA-Z0-9]|[ ]|[-])+$");
         Matcher matcher = pattern.matcher(underlyingDisease.getText());
         if (matcher.find() && matcher.group().equals(underlyingDisease.getText())) return true;
         else return false;
     }
     private boolean validateFoodAllergy(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ ]|[-])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦู]|[a-zA-Z0-9]|[ ]|[-])+$");
         Matcher matcher = pattern.matcher(foodAllergy.getText());
         if (matcher.find() && matcher.group().equals(foodAllergy.getText())) return true;
         else return false;
     }
 
     private boolean validateMoreDetail(){
-        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦ]|[a-zA-Z0-9]|[ ]|[-])+$");
+        Pattern pattern = Pattern.compile("([ๅภถุึคตจขชๆไำพะัีรนยบลฃฟหกดเ้่าสวงผปแอิืทมใฝฎฑธํ๊ณฯญฐฅฤฆฏโฌ็๋ษศซฉฮฺ์ฒฬฦู]|[a-zA-Z0-9]|[ ]|[-])+$");
         Matcher matcher = pattern.matcher(moreDetail.getText());
         if (matcher.find() && matcher.group().equals(moreDetail.getText())) return true;
         else return false;
